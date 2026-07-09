@@ -1,3 +1,5 @@
+"use client";
+
 import { useErrorModal, useSuccessModal } from "@/contexts/modals/FeedbackContext";
 import styles from "../ui.module.css";
 

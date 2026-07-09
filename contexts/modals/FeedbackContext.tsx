@@ -1,3 +1,5 @@
+"use client";
+
 import { childrenNode, ErrorModalType, SuccessModalType } from "@/types/contexts"
 import { createContext, useContext, useState } from "react"
 
