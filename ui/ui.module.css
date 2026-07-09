@@ -1,0 +1,17 @@
+.feedback_modal {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.8);
+    inset: 0;
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+}
+
+.feedback_modal .success {
+    border: 1.5px solid green;
+    padding: 2rem;
+}
+
+.feedback_modal .error {
+    border: 1.5px solid red;
+    padding: 2rem;
+}
