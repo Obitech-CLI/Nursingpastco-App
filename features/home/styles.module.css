@@ -5,6 +5,17 @@
     object-fit: cover;
 }
 
+.hero > span {
+    position: absolute;
+    right: 2rem;
+    top: 4.5rem;
+    background-color: white;
+    padding: 0.5rem;
+    text-transform: capitalize;
+    border-radius: 5px;
+    box-shadow: 0px 0px 4px black;
+}
+
 .hero {
     padding: 1rem 0.5rem 0;
     background-color: #f59e71;
@@ -15,13 +26,14 @@
     flex-direction: column;
     margin: -0.3rem 1rem 1.5rem;
     gap: 0.5rem;
-    background-color: white;
+    border: 2px solid white;
     font-size: 1.7rem;
     padding: 1rem;
     font-family: serif;
     text-transform: capitalize;
     border-radius: 5px;
-    box-shadow: 0px 0px 3px black;
+    box-shadow: 0px 0px 5px black;
+    color: #002b4c;
 }
 
 section.offers {

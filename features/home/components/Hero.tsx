@@ -6,6 +6,7 @@ import hero from "@/public/hero.png";
 function Hero() {
     return (
         <div className={styles.hero}>
+            <span>nursingpastco</span>
             <Image
             src={hero}
             alt=""
