@@ -13,7 +13,7 @@ function Hero() {
             className={styles.image}
             />
             <div>
-                all african nursing examination past questions
+                study for your nursing level exams with confidence
             </div>
         </div>
     )

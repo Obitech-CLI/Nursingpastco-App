@@ -6,8 +6,8 @@ import styles from "../styles.module.css";
 function Offers() {
     return (
         <section className={styles.offers}>
-            <h2>all african nursing</h2>
-
+            <em>we <span>offer</span></em>
+            <span>all african nursing</span>
             <div>
                 <div>
                     <span><Files size={25} color="red"/></span>
