@@ -12,7 +12,7 @@ function Hero() {
             className={styles.image}
             />
             <div>
-                study for your nursing level exams with confidence
+                study for your level exams nursing with confidence.
             </div>
         </div>
     )
