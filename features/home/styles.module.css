@@ -1,10 +1,10 @@
 .hero .image {
     width: 100%;
-    height: fit-content;
-    padding: 1rem 1rem 0;
+    height: max-content;
     position: relative;
     box-shadow: 0px 0px 3px black;
-    border-radius: 10px;
+    border-radius: 5px;
+    object-fit: cover;
 }
 
 .hero {
@@ -17,24 +17,21 @@
 .hero span {
     position: absolute;
     text-transform: uppercase;
-    left: 50%;
-    top: 4rem;
-    font-size: 2.5rem;
+    right: 4rem;
+    top: 5rem;
+    font-size: 2rem;
     font-family: serif;
-    transform: translateX(-50%);
-    color: #f59e71;;
+    color: #002b4c;
 }
 
 .hero > div {
-    background-color: #002b4c;
-    margin: -0.2rem 0 1rem;
+    color: #002b4c;
     border-radius: 10px;
     font-size: 2rem;
     padding: 1rem 0.5rem;
     text-transform: capitalize;
     text-align: center;
     font-family: serif;
-    color: white;
 }
 
 section.offers {
@@ -63,7 +60,7 @@ section.offers h4 > span {
 section.offers > div {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 section.offers > div > div {
