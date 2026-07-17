@@ -1,12 +1,12 @@
 "use client";
 
-import { LibraryBig, Files, PenBox } from "lucide-react";
+import { LibraryBig, Files, PenBox, ClipboardList } from "lucide-react";
 import styles from "../styles.module.css";
 
 function Offers() {
     return (
         <section className={styles.offers}>
-            <em>we <span>offer</span></em>
+            <h4>we <span>offer</span></h4>
             <span>all african nursing</span>
             <div>
                 <div>
