@@ -2,16 +2,7 @@
     width: 100%;
     height: max-content;
     position: relative;
-    box-shadow: 0px 0px 3px black;
-    border-radius: 5px;
     object-fit: cover;
-}
-
-.hero {
-    padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
 }
 
 .hero span {
@@ -24,14 +15,23 @@
     color: #002b4c;
 }
 
+.hero {
+    padding: 1rem 0.5rem 0;
+    background-color: #f59e71;
+}
+
 .hero > div {
     color: #002b4c;
-    border-radius: 10px;
     font-size: 2rem;
-    padding: 1rem 0.5rem;
+    padding: 1rem;
+    border-radius: 5px;
+    margin: -0.3rem 1rem 1rem;
     text-transform: capitalize;
-    text-align: center;
+    text-align: left;
     font-family: serif;
+    background-color: white;
+    font-weight: bolder;
+    width: fit-content;
 }
 
 section.offers {
