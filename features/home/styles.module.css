@@ -21,7 +21,7 @@
     font-family: serif;
     text-transform: capitalize;
     border-radius: 5px;
-    box-shadow: 1px 1px black;
+    box-shadow: 0px 0px 3px black;
 }
 
 section.offers {
@@ -71,4 +71,5 @@ section.offers > div > div span {
 
 section.offers > div > div h3 {
     text-transform: capitalize;
+    color: green;
 }
