@@ -1,11 +1,10 @@
 "use server";
 
-import { InstituitionType } from "@/types/types";
-import { error } from "console";
+import { InstituitionDataTypes } from "@/types/types";
 import { supabase } from "../supabase/supabase";
 
 const AddInstituition = 
-async ({instituition_name, instituition_abbr, instituition_logo}:InstituitionType) =>
+async ({instituition_name, instituition_abbr, instituition_logo}:InstituitionDataTypes) =>
 {
     const file = instituition_logo;
 
