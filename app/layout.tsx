@@ -1,5 +1,6 @@
 import { ErrorModal, SuccessModal } from "@/ui/modals/Feedback";
 import "./globals.css";
+import "./admin/manage/manage.css";
 import { ErrorModalProvider, SuccessModalProvider } from "@/contexts/modals/FeedbackContext";
 
 export default function RootLayout({children}: Readonly<{

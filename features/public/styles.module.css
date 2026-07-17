@@ -1,0 +1,46 @@
+.level_modal {
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    inset: 0;
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.level_modal ul {
+    background-color: white;
+    list-style-type: none;
+    padding: 1rem;
+}
+
+.instituitions {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.instituitions .instituition {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.instituitions .instituition > h2 {
+    text-transform: uppercase;
+}
+
+.instituitions .instituition > img {
+    border-radius: 50%;
+}
+
+.instituitions .instituition > h3 {
+    text-transform: capitalize;
+}
