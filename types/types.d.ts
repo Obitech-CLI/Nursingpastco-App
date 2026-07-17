@@ -1,5 +1,5 @@
 export interface InstituitionDataTypes {
-    id: number;
+    id?: number;
     instituition_name: string;
     instituition_abbr: string;
     instituition_logo: url;
