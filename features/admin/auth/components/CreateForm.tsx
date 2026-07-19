@@ -3,6 +3,7 @@
 import { CreateAdminType } from "@/types/admin";
 import { SetStateAction } from "react";
 import { ClipLoader } from "react-spinners";
+import { User, Mail, Lock } from "lucide-react";
 
 type FormDataProps = {
     formData: CreateAdminType;
@@ -20,22 +21,22 @@ function CreateForm({formData, setFormData, onSubmit, loading}:FormDataProps) {
 
     return (
         <form onSubmit={onSubmit}>
-            <label>firstname
+            <label><User />
                 <input type="text" value={formData.firstname}
                 name="firstname" onChange={HandleFormChange}/>
             </label>
 
-            <label>lastname
+            <label><User />
                 <input type="text" value={formData.lastname}
                 name="lastname" onChange={HandleFormChange}/>
             </label>
 
-            <label>email address
+            <label><Mail />
                 <input type="email" value={formData.email}
                 name="email" onChange={HandleFormChange}/>
             </label>
 
-            <label>password
+            <label><Lock />
                 <input type="password" value={formData.password}
                 name="password" onChange={HandleFormChange}/>
             </label>

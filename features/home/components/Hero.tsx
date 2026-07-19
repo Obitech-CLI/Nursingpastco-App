@@ -2,11 +2,11 @@
 import Image from "next/image";
 import styles from "../styles.module.css";
 import hero from "@/public/hero.png";
+import Link from "next/link";
 
 function Hero() {
     return (
         <div className={styles.hero}>
-            <span>nursingpastco</span>
             <Image
             src={hero}
             alt=""
@@ -15,6 +15,7 @@ function Hero() {
             <div>
                 study for your nursing level exams with confidence.
             </div>
+            <Link href="/">login</Link>
         </div>
     )
 }

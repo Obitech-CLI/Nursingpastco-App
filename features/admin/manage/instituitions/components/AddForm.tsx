@@ -3,6 +3,7 @@
 import { SetStateAction } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "../../styles.module.css";
+import { Image } from "lucide-react";
 
 interface FormDataTypes {
     instituition_name: string,
@@ -29,8 +30,6 @@ function AddForm(
 
     return (
         <form onSubmit={onSubmit} className={styles.add}>
-            <fieldset>
-                <legend>add</legend>
                 <label>instituition name
                     <input type="text" value={formData.instituition_name}
                     name="instituition_name" onChange={HandleFormChange} />
@@ -54,7 +53,6 @@ function AddForm(
                 <button type="submit">
                     {!loading ? "add instituition" : <ClipLoader size={20} />}
                 </button>
-            </fieldset>
         </form>
     )
 }

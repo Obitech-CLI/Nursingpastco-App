@@ -1,6 +1,7 @@
 "use client";
 
 import { LoginAdminType } from "@/types/admin";
+import { Lock, Mail } from "lucide-react";
 import { SetStateAction } from "react";
 import { ClipLoader } from "react-spinners";
 
@@ -20,12 +21,12 @@ function LoginForm({formData, setFormData, onSubmit, loading}:FormDataProps) {
 
     return (
         <form onSubmit={onSubmit}>
-            <label>email address
+            <label><Mail />
                 <input type="email" value={formData.email}
                 name="email" onChange={HandleFormChange}/>
             </label>
 
-            <label>password
+            <label><Lock/>
                 <input type="password" value={formData.password}
                 name="password" onChange={HandleFormChange}/>
             </label>
