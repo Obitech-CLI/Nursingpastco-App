@@ -18,12 +18,12 @@ function Offers() {
                 <div>
                     <h3><span><LibraryBig size={35} color="green"/></span>textbooks</h3>
                     <p>we suggest, recommend and provide adequate study materials.</p>
-                    <Link href="/">textbooks</Link>
+                    <Link href="/">nursing textbooks</Link>
                 </div>
                 <div>
                     <h3><span><PenBox size={35} color="blue"/></span>contents</h3>
                     <p>we post updated content about nursing related events like jobs, certifications etc.</p>
-                    <Link href="/">contents</Link>
+                    <Link href="/">nursing contents</Link>
                 </div>
             </div>
         </section>
