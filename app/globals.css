@@ -6,9 +6,27 @@
     margin: 0;
 }
 
+header {
+    background-color:  #c0ebff;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+footer {
+    padding: 1rem;
+}
+
+footer p {
+    text-align: right;
+}
+
 main {
     display: flex;
     flex-direction: column;
+    gap: 2rem;
 }
 
 form {
@@ -32,7 +50,7 @@ legend {
     padding: 0 0.5rem;
 }
 
-button {
+form > button {
     border: none;
     height: 40px;
     width: 150px;
