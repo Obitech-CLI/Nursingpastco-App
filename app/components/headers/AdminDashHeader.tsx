@@ -1,9 +1,27 @@
 "use client";
 
+import { useTheme } from "next-themes";
+import Image from "next/image";
+import DarkLogo from "@/public/DarkLogo.png";
+import WhiteLogo from "@/public/WhiteLogo.png";
+import { AppTheme } from "@/ui/Theme";
+
 function AdminDashHeader() {
+
+    const { theme } = useTheme();
     return (
         <header>
-        nursingpastco app
+        <div className="logo">
+            {theme !== "dark" ? (
+                <Image src={DarkLogo} alt="" width={70} height={70} style={{objectFit: "contain"}}/>
+            ) : (
+                <Image src={WhiteLogo} alt="" width={70} height={70} style={{objectFit: "contain"}}/>
+            )}
+            nursingpastco
+        </div>
+        <div className="navs">
+            <AppTheme />
+        </div>
         </header>
     )
 }

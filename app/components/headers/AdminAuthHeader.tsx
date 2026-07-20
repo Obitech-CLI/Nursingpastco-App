@@ -13,9 +13,9 @@ function AdminAuthHeader() {
         <header>
         <div className="logo">
             {theme !== "dark" ? (
-                <Image src={DarkLogo} alt="" width={60} height={60} style={{objectFit: "contain"}}/>
+                <Image src={DarkLogo} alt="" width={70} height={70} style={{objectFit: "contain"}}/>
             ) : (
-                <Image src={WhiteLogo} alt="" width={60} height={60} style={{objectFit: "contain"}}/>
+                <Image src={WhiteLogo} alt="" width={70} height={70} style={{objectFit: "contain"}}/>
             )}
                  nursingpastco
                 </div>

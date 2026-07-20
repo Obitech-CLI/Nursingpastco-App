@@ -4,16 +4,47 @@
     inset: 0;
     backdrop-filter: blur(10px);
     padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.feedback_modal button {
+    padding: 0.8rem 2rem;
+    border-radius: 50px;
+    border: none;
+    background-color: #002b4c;
+    color: white;
+    text-transform: capitalize;
 }
 
 .feedback_modal .success {
     border: 1.5px solid green;
     padding: 2rem;
+    width: 80%;
+    border-radius: 10px;
+    color: green;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-transform: capitalize;
 }
 
 .feedback_modal .error {
     border: 1.5px solid red;
     padding: 2rem;
+    width: 80%;
+    border-radius: 10px;
+    color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-transform: capitalize;
 }
 
 .home_header_nav > button {

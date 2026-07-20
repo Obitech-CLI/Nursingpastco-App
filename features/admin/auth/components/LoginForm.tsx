@@ -1,9 +1,9 @@
 "use client";
 
 import { LoginAdminType } from "@/types/admin";
-import { Lock, Mail } from "lucide-react";
+import { LinkIcon, Lock, Mail } from "lucide-react";
 import Link from "next/link";
-import { SetStateAction } from "react";
+import { SetStateAction, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "../style.module.css";
 
@@ -21,19 +21,34 @@ function LoginForm({formData, setFormData, onSubmit, loading}:FormDataProps) {
         setFormData(prev => ({...prev, [e.target.name]:e.target.value}));
     }
 
+    const [focusInput, setFocusInput] = useState({
+        email: false,
+        password: false,
+    });
+
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className={styles.auth}>
             <h2>sign in</h2>
             <h3>welcome admin</h3>
 
-            <label><Mail />
+            <label><Mail size={35}/>
                 <input type="email" value={formData.email}
-                name="email" onChange={HandleFormChange} placeholder="enter your email..."/>
+                name="email" onChange={HandleFormChange} onFocus={() => {
+                    setFocusInput(prev => ({...prev, email: true}))
+                }}/>
+                <span style={{
+                    top: focusInput.email ? "-0.7rem" : ""
+                }}>{focusInput.email ? "enter your email" : "email"}</span>
             </label>
 
-            <label><Lock/>
+            <label><Lock size={35}/>
                 <input type="password" value={formData.password}
-                name="password" onChange={HandleFormChange} placeholder="enter your password..."/>
+                name="password" onChange={HandleFormChange} onFocus={() => {
+                    setFocusInput(prev => ({...prev, password: true}))
+                }}/>
+                <span style={{
+                    top: focusInput.password ? "-0.7rem" : ""
+                }}>{focusInput.password ? "enter your password" : "password"}</span>
             </label>
 
             <button type="submit" disabled={loading}>
@@ -42,7 +57,7 @@ function LoginForm({formData, setFormData, onSubmit, loading}:FormDataProps) {
 
             <div className={styles.link}>
                 <h4>don't have an account?</h4>
-                <Link href="/admin/create">create account</Link>
+                <Link href="/admin/create">create account<LinkIcon/></Link>
             </div>
         </form>
     )

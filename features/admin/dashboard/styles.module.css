@@ -9,14 +9,32 @@
 }
 
 .manage_nav > nav a {
-    background-color: lightskyblue;
+    border: 2px solid #002b4c;
     text-decoration: none;
-    padding: 2rem;
+    padding: 1.5rem;
     text-transform: capitalize;
     border-radius: 50px;
-    color: black;
+    color: #002b4c;
     display: flex;
     align-items: center;
     gap: 1rem;
-    box-shadow: 0px 0px 3px black;
+}
+
+.card {
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    gap: 1rem;
+}
+
+.card > .image {
+    height: 70px;
+    width: 70px;
+    border: var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-size: 40px;
 }

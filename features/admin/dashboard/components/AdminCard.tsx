@@ -4,6 +4,7 @@ import { UseFetch } from "@/hooks/useFetch";
 import { CreateAdminType } from "@/types/admin";
 import { LogoutAdminButton } from "@/ui/logouts/LogoutAdmin";
 import { useEffect, useState } from "react";
+import styles from '../styles.module.css';
 
 function AdminCard() {
 
@@ -23,15 +24,16 @@ function AdminCard() {
     }, []);
 
     return (
-        <div>
-            <div>{admin?.firstname.slice(0, 1)} 
+        <div className={styles.card}>
+            <div className={styles.image}>
+                {admin?.firstname.slice(0, 1)} 
                 {admin?.lastname.slice(0, 1)}
             </div>
             
             <div>
                 <h2>{admin?.firstname ?? "loading...."} {admin?.lastname ?? "loading..."}</h2>
             </div>
-            <LogoutAdminButton />
+            {/*<LogoutAdminButton />*/}
         </div>
     )
 }
