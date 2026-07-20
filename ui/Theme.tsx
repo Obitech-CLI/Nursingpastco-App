@@ -24,18 +24,18 @@ function AppTheme() {
                     setTheme("light");
                     HandleShowTheme(!showTheme);
                 }} style={{
-                border: theme === "light" ? "2px solid #002b4c" : ""
+                backgroundColor: theme === "light" ? "#002b4c" : ""
                 }}>
-                    <i className="bi bi-brightness-high-fill"></i>light
+                    <Sun size={20}/>light
                 </button>
 
                 <button onClick={() => {
                     setTheme("dark");
                     HandleShowTheme(!showTheme);
                 }} style={{
-                border: theme === "dark" ? "2px solid #002b4c" : ""
+                backgroundColor: theme === "dark" ? "#002b4c" : ""
                 }}>
-                    <i className="bi bi-moon-stars-fill"></i>dark
+                    <Moon size={20}/>dark
                 </button>
             </div>
         )}

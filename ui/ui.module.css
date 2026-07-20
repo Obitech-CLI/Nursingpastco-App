@@ -48,7 +48,7 @@
 .select_theme {
     position: absolute;
     z-index: 10;
-    background-color: var(--bg-color);
+    background-color: var(--nav-bg);
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -58,8 +58,12 @@
 }
 
 .select_theme > button {
-    padding: 0.3rem 1rem;
+    padding: 0.4rem 1rem;
     border-radius: 5px;
     color: #002b4c;
     text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: white;
 }
