@@ -24,8 +24,8 @@
 }
 
 .home_header_nav > nav {
-    position: absolute;
-    height: 89dvh;
+    position: fixed;
+    height: 90dvh;
     background-color: white;
     right: 0.5rem;
     z-index: 5;
@@ -35,7 +35,7 @@
     top: 3rem;
     display: flex;
     flex-direction: column;
-    width: 60%;
+    width: 70%;
     gap: 0.5rem;
 }
 
@@ -43,7 +43,7 @@
     text-decoration: none;
     border: 1.5px solid #002b4c;
     padding: 1rem;
-    border-radius: 5px;
+    border-radius: 50px;
     text-transform: capitalize;
     color: #002b4c;
 }
