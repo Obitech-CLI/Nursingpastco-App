@@ -6,6 +6,21 @@
     margin: 0;
 }
 
+:root {
+  --bg-color: white;
+  --bg-txt-color: black;
+}
+
+[data-theme="dark"] {
+  --bg-color: rgba(0, 0, 0, 0.8);
+  --bg-txt-color: white;
+}
+
+body, html {
+    background-color: var(--bg-color);
+    color: var(--bg-txt-color);
+}
+
 header {
     padding: 0 0.5rem;
     display: flex;
@@ -18,6 +33,17 @@ header .logo {
     display: flex;
     align-items: center;
     text-transform: capitalize;
+    gap: 0.5rem;
+}
+
+header .navs button {
+    border: none;
+    background-color: transparent;
+}
+
+header .navs {
+    display: flex;
+    align-items: center;
     gap: 0.5rem;
 }
 
