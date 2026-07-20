@@ -7,11 +7,18 @@
 }
 
 header {
-    padding: 0.5rem;
+    padding: 0 0.5rem;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+    gap: 0.5rem;
 }
 
 footer {
