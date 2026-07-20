@@ -36,14 +36,12 @@ function LoginAdmin() {
     }
 
     return (
-        <>
         <LoginForm
         formData={formData}
         setFormData={setFormData}
         onSubmit={HandleFormSubmit}
         loading={PostLoginForm.loading}
         />
-        </>
     )
 }
 

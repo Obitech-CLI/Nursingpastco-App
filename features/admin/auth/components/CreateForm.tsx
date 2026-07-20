@@ -4,6 +4,8 @@ import { CreateAdminType } from "@/types/admin";
 import { SetStateAction } from "react";
 import { ClipLoader } from "react-spinners";
 import { User, Mail, Lock } from "lucide-react";
+import styles from "../style.module.css";
+import Link from "next/link";
 
 type FormDataProps = {
     formData: CreateAdminType;
@@ -21,6 +23,8 @@ function CreateForm({formData, setFormData, onSubmit, loading}:FormDataProps) {
 
     return (
         <form onSubmit={onSubmit}>
+            <h2>sign up</h2>
+            <h3>become an admin</h3>
             <label><User />
                 <input type="text" value={formData.firstname}
                 name="firstname" onChange={HandleFormChange}/>
@@ -44,6 +48,11 @@ function CreateForm({formData, setFormData, onSubmit, loading}:FormDataProps) {
             <button type="submit" disabled={loading}>
                 {!loading ? "create" : <ClipLoader size={20} />}
             </button>
+
+            <div className={styles.link}>
+                <h4>already't have an account?</h4>
+                <Link href="/admin/login">login instead</Link>
+            </div>
         </form>
     )
 }

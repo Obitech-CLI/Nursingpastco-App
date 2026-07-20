@@ -39,14 +39,12 @@ function CreateAdmin() {
     }
 
     return (
-        <>
         <CreateForm
         formData={formData}
         setFormData={setFormData}
         onSubmit={HandleFormSubmit}
         loading={PostCreateForm.loading}
         />
-        </>
     )
 }
 
