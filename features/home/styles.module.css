@@ -90,7 +90,7 @@ section.offers > div a {
     text-decoration: none;
     padding: 0.8rem 2rem;
     text-transform: capitalize;
-    color: black;
+    color: var(--bg-txt-color);
     align-self: left;
     border-radius: 50px;
     width: 100%;

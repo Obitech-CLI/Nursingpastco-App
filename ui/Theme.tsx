@@ -20,17 +20,23 @@ function AppTheme() {
         {showTheme && (
             <div className={styles.select_theme}>
 
-                <div onClick={() => setTheme("light")} style={{
-                backgroundColor: theme === "light" ? "royalblue" : ""
+                <button onClick={() => {
+                    setTheme("light");
+                    HandleShowTheme(!showTheme);
+                }} style={{
+                border: theme === "light" ? "2px solid #002b4c" : ""
                 }}>
                     <i className="bi bi-brightness-high-fill"></i>light
-                </div>
+                </button>
 
-                <div onClick={() => setTheme("dark")} style={{
-                backgroundColor: theme === "dark" ? "royalblue" : ""
+                <button onClick={() => {
+                    setTheme("dark");
+                    HandleShowTheme(!showTheme);
+                }} style={{
+                border: theme === "dark" ? "2px solid #002b4c" : ""
                 }}>
                     <i className="bi bi-moon-stars-fill"></i>dark
-                </div>
+                </button>
             </div>
         )}
         </div>

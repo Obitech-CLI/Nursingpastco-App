@@ -2,7 +2,7 @@ import { ErrorModal, SuccessModal } from "@/ui/modals/Feedback";
 import "./globals.css";
 import "./admin/manage/manage.css";
 import { ErrorModalProvider, SuccessModalProvider } from "@/contexts/modals/FeedbackContext";
-import { AppThemeProvider } from "@/contexts/modals/ThemeProvider";
+import { AppThemeProvider } from "@/contexts/ThemeProvider";
 
 export default function RootLayout({children}: Readonly<{
   children: React.ReactNode;

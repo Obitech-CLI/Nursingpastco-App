@@ -9,11 +9,15 @@
 :root {
   --bg-color: white;
   --bg-txt-color: black;
+  --box-shadow: 0px 0px 2px black;
+  --nav-bg: white;
 }
 
 [data-theme="dark"] {
   --bg-color: rgba(0, 0, 0, 0.8);
   --bg-txt-color: white;
+  --box-shadow: 0px 0px 2px white;
+  --nav-bg: black;
 }
 
 body, html {

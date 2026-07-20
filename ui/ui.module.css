@@ -26,10 +26,10 @@
 .home_header_nav > nav {
     position: fixed;
     height: 100dvh;
-    background-color: white;
+    background-color: var(--nav-bg);
     z-index: 5;
     inset: 0;
-    padding: 1rem;
+    padding: 2rem 1rem;
     display: flex;
     flex-direction: column;
     width: 70%;
@@ -38,9 +38,28 @@
 
 .home_header_nav > nav a {
     text-decoration: none;
-    border: 1.5px solid #002b4c;
+    border: 2px solid #002b4c;
     padding: 1rem;
     border-radius: 50px;
     text-transform: capitalize;
     color: #002b4c;
+}
+
+.select_theme {
+    position: absolute;
+    z-index: 10;
+    background-color: var(--bg-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-radius: 5px;
+    right: 1rem;
+}
+
+.select_theme > button {
+    padding: 0.3rem 1rem;
+    border-radius: 5px;
+    color: #002b4c;
+    text-transform: capitalize;
 }
