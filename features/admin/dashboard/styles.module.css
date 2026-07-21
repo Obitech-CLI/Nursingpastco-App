@@ -9,15 +9,19 @@
 }
 
 .manage_nav > nav a {
-    border: 2px solid #002b4c;
+    border: 1.5px solid rgb(49, 127, 49);
     text-decoration: none;
     padding: 1.5rem;
     text-transform: capitalize;
     border-radius: 50px;
-    color: #002b4c;
+    color: rgb(49, 127, 49);
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+.manage_nav > nav .icon {
+    color: var(--bg-txt-color);
 }
 
 .card {

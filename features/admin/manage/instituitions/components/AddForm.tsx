@@ -2,7 +2,7 @@
 
 import { SetStateAction, useState } from "react";
 import { ClipLoader } from "react-spinners";
-import styles from "../../styles.module.css";
+import styles from "../styles.module.css";
 import { Check, Image, Pen, } from "lucide-react";
 
 interface FormDataTypes {
@@ -67,9 +67,7 @@ function AddForm(
                             setLogo(e.target.files?.[0] ?? null)
                         }
                     }}/>
-                    <span style={{
-                        color: logo ? "green" : ""
-                    }}>{logo ? "logo selected" : "select a logo"} {logo ? <Check/> : null}</span>
+                    <span>{logo ? "logo selected" : "select a logo"} {logo ? <Check color="green"/> : null}</span>
                 </label>
 
                 <button type="submit">

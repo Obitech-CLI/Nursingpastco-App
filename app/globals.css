@@ -60,7 +60,7 @@ header .navs {
 }
 
 footer {
-    padding: 1rem;
+    padding: 1.5rem 1rem 1.5rem;
 }
 
 footer p {
@@ -124,4 +124,5 @@ h1 {
     text-transform: capitalize;
     font-family: serif;
     padding: 1rem 1rem 0;
+    color: rgb(49, 127, 49);
 }

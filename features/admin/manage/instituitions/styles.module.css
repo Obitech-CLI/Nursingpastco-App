@@ -1,0 +1,97 @@
+form.add > label > span {
+    position: absolute;
+    left: 3rem;
+    background-color: var(--bg-color);
+    padding: 0 0.3rem;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+form.add input[type="file"] {
+    display: none;
+}
+
+.modify {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.retry {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: var(--border);
+    gap: 1rem;
+    padding: 2rem;
+    border-radius: 50px;
+    text-transform: capitalize;
+}
+
+.modify h2 {
+    padding: 0 1rem;
+}
+
+.retry > button {
+    border: none;
+    padding: 0.5rem 1.5rem;
+    color: white;
+    background-color: #002b4c;
+    border-radius: 50px;
+    text-transform: capitalize;
+}
+
+.spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: var(--border);
+    padding: 2rem;
+    border-radius: 50px;
+}
+
+.instituitions {
+    display: flex;
+    overflow: auto;
+    align-items: center;
+    scrollbar-width: none;
+    gap: 3rem;
+    padding: 1rem 1rem 0;
+}
+
+.instituitions > .instituition > div {
+    min-width: max-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-transform: capitalize;
+}
+
+.instituitions .instituition .btns {
+    display: flex;
+    flex-direction: row;
+    padding: 0.5rem;
+    gap: 1rem;
+}
+
+.instituitions .instituition .btns > button {
+    border: none;
+    background-color: transparent;
+}
+
+.instituitions > .instituition img {
+    border-radius: 50%;
+}
+
+.instituitions > .instituition span {
+    text-transform: uppercase;
+}
+
+.spinner .icon {
+    color: var(--bg-txt-color);
+}

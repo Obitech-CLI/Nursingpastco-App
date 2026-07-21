@@ -3,7 +3,6 @@
 import { SetStateAction, useRef, useState } from "react"
 import { AddForm } from "./AddForm"
 import { UsePost } from "@/hooks/usePost";
-import styles from "../../styles.module.css";
 
 type Props = {
     setReload: React.Dispatch<SetStateAction<number>>

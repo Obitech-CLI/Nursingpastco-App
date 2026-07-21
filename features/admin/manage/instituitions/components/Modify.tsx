@@ -5,6 +5,9 @@ import { InstituitionDataTypes } from "@/types/types";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
+import styles from "../styles.module.css";
+import { Edit3Icon, X } from "lucide-react";
+import { useTheme } from "next-themes";
 
 type Props = {
     reload: number;
@@ -14,13 +17,11 @@ function ModifyInstituitions({reload}:Props) {
 
     const [instituitions, setInstituitions] = useState<InstituitionDataTypes []>([]);
 
-    const fetctInstituitions = UseFetch();
-
-    const loading = fetctInstituitions.loading;
+    const FetchInstituitions = UseFetch();
 
     const HandleFetch = async () =>
     {
-        const res = await fetctInstituitions.Fetch("/instituitions");
+        const res = await FetchInstituitions.Fetch("/instituitions");
 
         if (!res) return;
 
@@ -31,33 +32,68 @@ function ModifyInstituitions({reload}:Props) {
         HandleFetch();
     }, [reload]);
 
-    return (
-        <div>
-            <h2>instituitions</h2>
+    const { theme } = useTheme();
 
-            {!loading ? (
+    return (
+        <div className={styles.modify}>
+            <h2>modify instituitions</h2>
+
+            {!FetchInstituitions.loading ? (
             <>
             {instituitions.length > 0 ? (
-                <div>
+                <div className={styles.instituitions}>
                     {instituitions.map(instituition => (
-                        <div key={instituition.id}>
-                            {instituition.instituition_name}
-                            <div>
+                        <div className={styles.instituition} key={instituition.id}>
+
+                        <div>
+                            <h4>{instituition.instituition_name}</h4>
+                            <div className={styles.logo}>
                                 <Image 
                                 alt="" 
                                 src={instituition.instituition_logo} 
-                                height={100} 
-                                width={100}
+                                height={130} 
+                                width={130}
                                 />
                             </div>
-                            {instituition.instituition_abbr}
+                            <span>{instituition.instituition_abbr}</span>
+                        </div>
+
+                        <div className={styles.btns}>
+                            <button>
+                                <Edit3Icon color="navy" size={30}/>
+                            </button>
+
+                            <button>
+                                <X color="red" size={30}/>
+                            </button>
+                        </div>
+
                         </div>
                     ))}
                 </div>
-            ) : (<p>no instituitions found</p>)}
+            ) : (
+                <>
+                {!FetchInstituitions.loading && !FetchInstituitions.error ? (
+                    <p className={styles.notfound}>no instituitions found</p>
+                ) : (
+                    <div className={styles.retry}>
+                        <p>{FetchInstituitions.error}</p>
+                        <button onClick={HandleFetch}>
+                            retry
+                        </button>
+                    </div>
+                )}
+                </>
+            )}
             </>
             ) : (
-              <ClipLoader size={50} cssOverride={{ borderWidth: "5px" }} />
+                <div className={styles.spinner}>
+                    <ClipLoader 
+                    size={50} 
+                    cssOverride={{ borderWidth: "2px" }}
+                    color={theme !== "dark" ? "black" : "white"}
+                    />
+                </div>
             )}
         </div>
     )

@@ -7,7 +7,7 @@ function Footer() {
 
     return (
         <footer>
-            <p>&copy; nursingpastco app {year}</p>
+            <p>&copy; nursingpastco {year}</p>
         </footer>
     )
 }
