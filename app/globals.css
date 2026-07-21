@@ -35,6 +35,11 @@ header {
     justify-content: space-between;
 }
 
+header button {
+    border: none;
+    background-color: transparent;
+}
+
 header .logo {
     display: flex;
     align-items: center;
@@ -65,7 +70,7 @@ footer p {
 main {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
 }
 
 form {

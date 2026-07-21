@@ -54,18 +54,15 @@ function AddInstituition({setReload}:Props) {
     }
 
     return (
-        <>
-        <h2>add instituition</h2>
-        
         <AddForm
         formData={formData}
         setFormData={setFormData}
         setLogo={setLogo}
+        logo={logo}
         onSubmit={HandleFormSubmit}
         loading={PostData.loading}
         fileRef={fileRef}
         />
-        </>
     )
 }
 

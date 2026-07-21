@@ -1,0 +1,14 @@
+form.add > label > span {
+    position: absolute;
+    left: 3rem;
+    background-color: var(--bg-color);
+    padding: 0 0.3rem;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+form.add input[type="file"] {
+    display: none;
+}

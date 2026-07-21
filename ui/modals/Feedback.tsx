@@ -2,6 +2,7 @@
 
 import { useErrorModal, useSuccessModal } from "@/contexts/modals/FeedbackContext";
 import styles from "../ui.module.css";
+import { BadgeCheck, CircleAlert, CircleCheck, CircleX } from "lucide-react";
 
 function SuccessModal() {
 
@@ -18,6 +19,7 @@ function SuccessModal() {
             <div className={styles.feedback_modal}>
                 <div className={styles.success}>
                     <h3>{successMessage}</h3>
+                    <CircleCheck size={40}/>
                     <button onClick={dismissModal}>ok</button>
                 </div>
             </div>
@@ -41,6 +43,7 @@ function ErrorModal() {
             <div className={styles.feedback_modal}>
                 <div className={styles.error}>
                     <h3>{errorMessage}</h3>
+                    <CircleAlert size={40}/>
                     <button onClick={dismissModal}>ok</button>
                 </div>
             </div>

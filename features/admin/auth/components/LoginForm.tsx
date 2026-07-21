@@ -52,7 +52,7 @@ function LoginForm({formData, setFormData, onSubmit, loading}:FormDataProps) {
             </label>
 
             <button type="submit" disabled={loading}>
-                {!loading ? "login" : <ClipLoader size={20}/> }
+                {!loading ? "login" : <ClipLoader size={20} color="white"/> }
             </button>
 
             <div className={styles.link}>

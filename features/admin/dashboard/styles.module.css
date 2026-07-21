@@ -23,7 +23,7 @@
 .card {
     display: flex;
     align-items: center;
-    padding: 0 2rem;
+    padding: 0 1rem;
     gap: 1rem;
 }
 

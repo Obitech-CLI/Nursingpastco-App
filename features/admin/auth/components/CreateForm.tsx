@@ -73,7 +73,7 @@ function CreateForm({formData, setFormData, onSubmit, loading}:FormDataProps) {
             </label>
 
             <button type="submit" disabled={loading}>
-                {!loading ? "create" : <ClipLoader size={20} />}
+                {!loading ? "create" : <ClipLoader size={20} color="white"/>}
             </button>
 
             <div className={styles.link}>
