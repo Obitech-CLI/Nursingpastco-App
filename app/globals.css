@@ -12,14 +12,22 @@
   --box-shadow: 0px 0px 2px black;
   --nav-bg: black;
   --border: 1.5px solid black;
+  --primary-color: rgb(49, 127, 49);
+  --secondary-color: #002b4c;
+  --modal: rgba(225, 225, 225, 0.5);
+  --input-span: black;
+  --input-span-txt: white;
 }
 
 [data-theme="dark"] {
-  --bg-color: black;
+  --bg-color: rgba(0, 0, 0, 0.1);
   --bg-txt-color: white;
   --box-shadow: 0px 0px 2px white;
   --nav-bg: black;
   --border: 1.5px solid white;
+  --modal: rgba(0, 0, 0, 0.5);
+  --input-span: white;
+  --input-span-txt: black;
 }
 
 body, html {

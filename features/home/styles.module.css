@@ -15,7 +15,7 @@
     background-color: transparent;
 }
 
-.hero a {
+.hero button {
     padding: 1rem 2rem;
     width: 50%;
     background-color: #002b4c;
@@ -26,6 +26,7 @@
     text-decoration: none;
     border-radius: 50px;
     text-transform: capitalize;
+    border: none;
 }
 
 .hero > div {
@@ -89,7 +90,7 @@ section.offers > div a {
     text-decoration: none;
     padding: 0.8rem 2rem;
     text-transform: capitalize;
-    color: rgb(49, 127, 49);
+    color: var(--bg-text-color);
     align-self: left;
     border-radius: 50px;
     width: 70%;
@@ -104,7 +105,7 @@ section.offers p {
 
 section.offers > div > div h3 {
     text-transform: capitalize;
-    color: #002b4c;
+    color: var(--secondary-color);
     display: flex;
     align-items: center;
     gap: 0.5rem;

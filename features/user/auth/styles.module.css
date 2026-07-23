@@ -1,0 +1,44 @@
+.auth {
+    width: 100%;
+}
+
+.auth input {
+    padding: 1rem;
+}
+
+.auth > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+    margin-left: 1rem;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+.auth div > button {
+    border: 1.5px solid var(--primary-color);
+    text-transform: capitalize;
+    background-color: transparent;
+    padding: 0.4rem 2rem;
+    width: max-content;
+    border-radius: 50px;
+}
+
+.auth h3 {
+    text-transform: capitalize;
+}
+
+.auth input {
+    padding: 0.7rem;
+}
+
+.auth label > span {
+    position: absolute;
+    left: 2.5rem;
+    background-color: var(--input-span);
+    border-radius: 5px;
+    padding: 0.1rem 0.5rem 0.2rem;
+    text-transform: capitalize;
+    color: var(--input-span-txt);
+}

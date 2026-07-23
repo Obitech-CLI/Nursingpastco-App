@@ -1,10 +1,15 @@
 "use client";
+
 import Image from "next/image";
 import styles from "../styles.module.css";
 import hero from "@/public/hero.png";
-import Link from "next/link";
+import { UseAuthProvider } from "@/contexts/user/AuthFormProvider";
 
 function Hero() {
+
+    const { showLoginForm, setShowLoginForm } = UseAuthProvider();
+
+    console.log(showLoginForm)
     return (
         <div className={styles.hero}>
             <Image
@@ -15,7 +20,10 @@ function Hero() {
             <div>
                 study for your nursing level exams with confidence.
             </div>
-            <Link href="/">login</Link>
+
+            <button onClick={() => setShowLoginForm(true)}>
+                login
+            </button>
         </div>
     )
 }
