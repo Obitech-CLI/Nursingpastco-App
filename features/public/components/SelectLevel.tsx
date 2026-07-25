@@ -3,6 +3,7 @@
 import { SetStateAction } from "react";
 import styles from "../styles.module.css";
 import { LevelOptions } from "@/ui/AppContent";
+import { X } from "lucide-react";
 
 type Props = {
     setSelectedLevel: React.Dispatch<SetStateAction<string>>;
@@ -17,7 +18,7 @@ function SelectLevel({setSelectedLevel, setSelectedInstituition, HandleSelection
                 setSelectedInstituition("");
                 setSelectedLevel("")
             }}>
-                close
+                <X />
             </button>
             <ul>
                 {LevelOptions.length > 0 && (

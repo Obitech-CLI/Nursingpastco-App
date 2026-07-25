@@ -11,10 +11,10 @@
 .link a {
     text-decoration: none;
     width: 100%;
-    border: 1.5px solid #002b4c;
+    border: 1.5px solid var(--primary-color);
     padding: 1rem;
     border-radius: 20px;
-    color: #002b4c;
+    color: var(--bg-txt-color);
     display: flex;
     align-items: center;
     gap: 1rem;

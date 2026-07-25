@@ -10,7 +10,7 @@
   --bg-color: white;
   --bg-txt-color: black;
   --box-shadow: 0px 0px 2px black;
-  --nav-bg: black;
+  --nav-bg: white;
   --border: 1.5px solid black;
   --primary-color: rgb(49, 127, 49);
   --secondary-color: #002b4c;
@@ -131,6 +131,9 @@ input {
 h1 {
     text-transform: capitalize;
     font-family: serif;
-    padding: 1rem 1rem 0;
     color: rgb(49, 127, 49);
+}
+
+.auth > h1 {
+    margin: 0 1rem;
 }

@@ -33,6 +33,9 @@ function SelectInstituition({setSelectedInstituition}:Props) {
 
     return (
         <>
+        <div>
+        
+        </div>
         {!FetchInstituitions.loading ? (
         <>
         {!FetchInstituitions.error && instituitions.length > 0 ? (
@@ -47,7 +50,7 @@ function SelectInstituition({setSelectedInstituition}:Props) {
                     width={150}
                     height={150}
                     />
-                    <h3>{instituition.instituition_name}</h3>
+                    <h4>{instituition.instituition_name}</h4>
                     
                     <button type="button" onClick={() => {
                         setSelectedInstituition(instituition.instituition_name);

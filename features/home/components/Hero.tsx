@@ -4,12 +4,20 @@ import Image from "next/image";
 import styles from "../styles.module.css";
 import hero from "@/public/hero.png";
 import { UseAuthProvider } from "@/contexts/user/AuthFormProvider";
+import { useEffect } from "react";
 
 function Hero() {
 
-    const { showLoginForm, setShowLoginForm } = UseAuthProvider();
+    const { showLoginForm, showCreateForm, setShowLoginForm } = UseAuthProvider();
 
-    console.log(showLoginForm)
+    useEffect(() => {
+        document.body.style.overflow = showLoginForm || showCreateForm ? "hidden" : "auto";
+    
+        return () => {
+                document.body.style.overflow = "auto";
+            }
+    }, [showLoginForm, showCreateForm])
+
     return (
         <div className={styles.hero}>
             <Image

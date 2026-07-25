@@ -24,7 +24,8 @@ function AppTheme() {
                     setTheme("light");
                     HandleShowTheme(!showTheme);
                 }} style={{
-                backgroundColor: theme === "light" ? "#002b4c" : ""
+                backgroundColor: theme === "light" ? "#002b4c" : "",
+                color: theme !== "light" ? "white" : ""
                 }}>
                     <Sun size={20}/>light
                 </button>
@@ -33,7 +34,8 @@ function AppTheme() {
                     setTheme("dark");
                     HandleShowTheme(!showTheme);
                 }} style={{
-                backgroundColor: theme === "dark" ? "#002b4c" : ""
+                backgroundColor: theme === "dark" ? "#002b4c" : "",
+                color: theme !== "dark" ? "black" : ""
                 }}>
                     <Moon size={20}/>dark
                 </button>
