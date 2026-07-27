@@ -5,6 +5,8 @@ import { InstituitionDataTypes } from "@/types/types";
 import { LevelOptions } from "@/ui/AppContent";
 import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
+import styles from "../styles.module.css";
+import { ArrowBigDown, ArrowBigUp, ChevronDown, ChevronUp, Rotate3D, RotateCcw, RotateCcwKey, RotateCw } from "lucide-react";
 
 interface FormDataTypes {
     instituition: string;
@@ -26,6 +28,8 @@ function AddForm({formData, setFormData, onSubmit, loading}:Props) {
     const [showInstituitions, setShowInstituitions] = useState(false);
     const [showLevels, setShowLevels] = useState(false);
 
+    const [focusInput, setFocusInput] = useState(false);
+
     const fetctInstituitions = UseFetch();
 
     const [reloadInstituitions, setReloadInstituitions] = useState(0);
@@ -45,22 +49,27 @@ function AddForm({formData, setFormData, onSubmit, loading}:Props) {
     }, [reloadInstituitions])
 
     return (
-        <form onSubmit={onSubmit}>
-            <fieldset>
-                <legend>add</legend>
+        <form onSubmit={onSubmit} className={styles.add}>
+            <h2>add course</h2>
 
-                <label onClick={() => setShowInstituitions(!showInstituitions)}>
-                {!formData.instituition ? "select instituition" : formData.instituition}
+            <label onClick={() => setShowInstituitions(!showInstituitions)} className={styles.instituitions}>
+            {!formData.instituition ? "select instituition" : formData.instituition}
 
-                {instituitions.length === 0 && !fetctInstituitions.loading ? (
-                    <button onClick={() => {
-                        setReloadInstituitions(prev => prev + 1);
+            {instituitions.length === 0 && !fetctInstituitions.loading ? (
+                <button type="button" onClick={() => {
+                    setReloadInstituitions(prev => prev + 1);
                     }}>
-                        {!fetctInstituitions.loading ? "reload" : <ClipLoader size={15}/>}
+                    {!fetctInstituitions.loading ? <RotateCw size={20}/> : <ClipLoader size={15}/>}
                     </button>
-                ) : (null)}
+            ) : (null)}
 
-                {showInstituitions && (
+            {instituitions.length > 0 && (
+                <>
+                {showInstituitions ? <ChevronUp /> : <ChevronDown />}
+                </>
+            )}
+
+            {showInstituitions && (
                 <>
                 {instituitions && instituitions.length > 0 ? (
                     <ul>
@@ -74,20 +83,29 @@ function AddForm({formData, setFormData, onSubmit, loading}:Props) {
                     </ul>
                 ) : (null)}
                 </>
-                )}
-                </label>
+            )}
+            </label>
 
-                <label>course
-                    <input type="text" value={formData.course} 
-                    onChange={(e) => {
-                        setFormData(prev => ({...prev, course: e.target.value}));
-                    }} />
-                </label>
+            <label className={styles.course}>
+                <span style={{
+                    top: focusInput ? "-1rem" : ""
+                }}>{focusInput ? "enter course" : "course"}</span>
+                <input type="text" value={formData.course} 
+                onChange={(e) => {
+                    setFormData(prev => ({...prev, course: e.target.value}));
+                }}
+                onFocus={() => {
+                    setFocusInput(true);
+                }}
+                />
+            </label>
 
-                <label onClick={() => setShowLevels(!showLevels)}>
-                    {!formData.level ? "select level" : formData.level}
+            <label onClick={() => setShowLevels(!showLevels)} className={styles.levels}>
+                {!formData.level ? "select level" : formData.level}
 
-                    {showLevels && (
+                {showLevels ? <ChevronUp /> : <ChevronDown />}
+
+                {showLevels && (
                     <>
                     {LevelOptions.length > 0 && (
                         <ul>
@@ -100,13 +118,12 @@ function AddForm({formData, setFormData, onSubmit, loading}:Props) {
                         </ul>
                     )}
                     </>
-                    )}
-                </label>
+                )}
+            </label>
 
-                <button type="submit" disabled={loading}>
-                    {!loading ? "add course" : <ClipLoader size={20} />}
-                </button>
-            </fieldset>
+            <button type="submit" disabled={loading}>
+                {!loading ? "add course" : <ClipLoader size={20} color="white"/>}
+            </button>
         </form>
     )
 }

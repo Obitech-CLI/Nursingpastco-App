@@ -30,16 +30,12 @@ function AddCourse() {
     }
 
     return (
-        <div>
-            <h2>add course</h2>
-            
             <AddForm 
             formData={formData}
             setFormData={setFormData}
             onSubmit={HandleFormSubmit}
             loading={PostData.loading}
             />
-        </div>
     )
 }
 

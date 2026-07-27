@@ -1,0 +1,50 @@
+form.add > .instituitions, .levels {
+    box-shadow: var(--box-shadow);
+    border-radius: 10px;
+    text-transform: capitalize;
+    padding: 1rem;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+form.add > .instituitions ul, .levels ul {
+    position: absolute;
+    top: 3.5rem;
+    background-color: var(--nav-bg);
+    z-index: 5;
+    width: 100%;
+    list-style-type: none;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+    border-radius: 10px;
+    height: 150px;
+    overflow: auto;
+}
+
+form.add > .instituitions ul li, .levels ul li {
+    border: var(--border);
+    padding: 0.7rem;
+    border-radius: 10px;
+}
+
+form.add > .instituitions button {
+    border: none;
+    background-color: transparent;
+}
+
+form.add > .course span {
+    position: absolute;
+    text-transform: capitalize;
+    left: 1rem;
+    background-color: var(--input-span);
+    color: var(--input-span-txt);
+    padding: 0.3rem 1rem;
+    border-radius: 10px;
+}

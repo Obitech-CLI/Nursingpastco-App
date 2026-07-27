@@ -1,7 +1,9 @@
 "use client";
 
+import { SelectLevel } from "@/features/public/components/SelectLevel";
 import { UseFetch } from "@/hooks/useFetch";
 import { CourseDataTypes, InstituitionDataTypes } from "@/types/types";
+import { LevelOptions } from "@/ui/AppContent";
 import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 
@@ -79,37 +81,14 @@ function SearchCourses({searchData, setSearchData, search, loading}:Props) {
                     {!searchData.level ? "select level" : searchData.level}
                     {showLevels && (
                     <ul>
-                        <li onClick={() => {
-                            setSearchData(prev => 
-                            ({...prev, level:"100 level"}));
-                            setShowLevels(!showLevels);
-                        }}
-                        >100 level
-                        </li>
-
-                        <li onClick={() => { 
-                            setSearchData(prev => 
-                            ({...prev, level:"200 level"}));
-                            setShowLevels(!showLevels)
-                        }}
-                        >200 level
-                        </li>
-
-                        <li onClick={() => {
-                            setSearchData(prev => 
-                            ({...prev, level:"300 level"}));
-                            setShowLevels(!showLevels);
-                        }}
-                        >300 level
-                        </li>
-
-                        <li onClick={() => {
-                            setSearchData(prev => 
-                            ({...prev, level:"400 level"}));
-                            setShowLevels(!showLevels);
-                        }}
-                        >400 level
-                        </li>
+                        {LevelOptions.map(level => (
+                            <li key={level.id} onClick={() => {
+                                setSearchData(prev => ({...prev, level: level.level}));
+                                setShowLevels(!showLevels);
+                            }}>
+                                {level.level}
+                            </li>
+                        ))}
                     </ul>
                     )}
                 </div>

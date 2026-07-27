@@ -132,6 +132,7 @@ h1 {
     text-transform: capitalize;
     font-family: serif;
     color: rgb(49, 127, 49);
+    margin: 0 1.5rem;
 }
 
 .auth > h1 {
