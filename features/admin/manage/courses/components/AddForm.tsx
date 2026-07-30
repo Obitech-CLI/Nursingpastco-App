@@ -6,7 +6,7 @@ import { LevelOptions } from "@/ui/AppContent";
 import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "../styles.module.css";
-import { ArrowBigDown, ArrowBigUp, ChevronDown, ChevronUp, Rotate3D, RotateCcw, RotateCcwKey, RotateCw } from "lucide-react";
+import { ArrowBigDown, ArrowBigUp, BoxSelect, ChevronDown, ChevronUp, Pen, Rotate3D, RotateCcw, RotateCcwKey, RotateCw } from "lucide-react";
 
 interface FormDataTypes {
     instituition: string;
@@ -59,7 +59,7 @@ function AddForm({formData, setFormData, onSubmit, loading}:Props) {
                 <button type="button" onClick={() => {
                     setReloadInstituitions(prev => prev + 1);
                     }}>
-                    {!fetctInstituitions.loading ? <RotateCw size={20}/> : <ClipLoader size={15}/>}
+                    {!fetctInstituitions.loading ? <RotateCw size={20}/> : <ClipLoader size={0}/>}
                     </button>
             ) : (null)}
 
@@ -88,7 +88,7 @@ function AddForm({formData, setFormData, onSubmit, loading}:Props) {
 
             <label className={styles.course}>
                 <span style={{
-                    top: focusInput ? "-1rem" : ""
+                    top: focusInput ? "-0.7rem" : ""
                 }}>{focusInput ? "enter course" : "course"}</span>
                 <input type="text" value={formData.course} 
                 onChange={(e) => {

@@ -1,11 +1,12 @@
 "use client";
 
-import { SelectLevel } from "@/features/public/components/SelectLevel";
 import { UseFetch } from "@/hooks/useFetch";
-import { CourseDataTypes, InstituitionDataTypes } from "@/types/types";
+import { InstituitionDataTypes } from "@/types/types";
 import { LevelOptions } from "@/ui/AppContent";
 import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
+import styles from "../styles.module.css";
+import { ChevronDown, ChevronUp, RotateCw, Search } from "lucide-react";
 
 interface SearchDataTypes {
     instituition: string;
@@ -46,17 +47,22 @@ function SearchCourses({searchData, setSearchData, search, loading}:Props) {
     }, [reloadInstituitions]);
 
     return (
-        <fieldset>
+        <fieldset className={styles.search}>
             <legend>search</legend>
 
             <div onClick={() => setShowInstituitions(!showInstituitions)}>
                 {!searchData.instituition ? "instituitions" : searchData.instituition}
+                {instituitions.length > 0 && (
+                <>
+                {showInstituitions ? <ChevronUp /> : <ChevronDown />}
+                </>
+                )}
 
                 {instituitions.length === 0 && !fetctInstituitions.loading ? (
                     <button onClick={() => {
                         setReloadInstituitions(prev => prev + 1);
                     }}>
-                        {!fetctInstituitions.loading ? "reload" : <ClipLoader size={15}/>}
+                        {!fetctInstituitions.loading ? <RotateCw size={20}/> : <ClipLoader size={15}/>}
                     </button>
                 ) : (null)}
 
@@ -79,6 +85,9 @@ function SearchCourses({searchData, setSearchData, search, loading}:Props) {
 
             <div onClick={() => setShowLevels(!showLevels)}>
                     {!searchData.level ? "select level" : searchData.level}
+                    <>
+                    {showLevels ? <ChevronUp /> : <ChevronDown />}
+                    </>
                     {showLevels && (
                     <ul>
                         {LevelOptions.map(level => (
@@ -94,7 +103,7 @@ function SearchCourses({searchData, setSearchData, search, loading}:Props) {
                 </div>
 
                 <button onClick={search}>
-                    {!loading ? "search" : <ClipLoader size={20}/>}
+                    {!loading ? <Search /> : <ClipLoader size={20} color="white"/>}
                 </button>
         </fieldset>
     )

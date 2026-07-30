@@ -5,6 +5,7 @@ import { SearchCourses } from "./SearchCourses";
 import { UseFetch } from "@/hooks/useFetch";
 import { ClipLoader } from "react-spinners";
 import { CourseDataTypes } from "@/types/types";
+import styles from "../styles.module.css";
 
 function ModifyCourses() {
 
@@ -41,27 +42,46 @@ function ModifyCourses() {
         loading={FetchSearchData.loading}
         />
 
-        <div>
-            <h2>courses</h2>
+        <div className={styles.modify}>
+            {searchedCourses.length > 0 && (
+                <h2>modify courses</h2>
+            )}
             
             {!FetchSearchData.loading ? (
             <>
             {searchedCourses.length > 0 ? (
-                <div>
+                <div className={styles.searched}>
+
                     <h2>{searchedCourses[0].instituition}</h2>
                     <h2>{searchedCourses[0].level}</h2>
+
+                    <div className={styles.courses}>
                     {searchedCourses.map(courses => (
                         <div key={courses.id}>
                             {courses.course}
                         </div>
                     ))}
+                    </div>
+
                 </div>
             ) : (
-                <div>no courses found</div>
+                <>
+                {FetchSearchData.error && !FetchSearchData.loading ? (
+                    <div className={styles.retry}>
+                        <h3>{FetchSearchData.error}</h3>
+                        <button type="button"
+                        onClick={HandleSearch}>
+                            retry
+                        </button>
+                    </div>
+                ) : (null)}
+                </>
             )}
             </>
             ) : (
-                <ClipLoader size={50} cssOverride={{ borderWidth: "5px" }}/>
+                <div className={styles.loading}>
+                <ClipLoader size={50} cssOverride={{ borderWidth: "2px" }}/>
+                </div>
             )}
         </div>
         </>

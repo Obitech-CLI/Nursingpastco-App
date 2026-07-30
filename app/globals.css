@@ -43,6 +43,11 @@ header {
     justify-content: space-between;
 }
 
+button {
+    border: none;
+    background-color: transparent;
+}
+
 header button {
     border: none;
     background-color: transparent;
