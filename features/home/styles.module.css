@@ -112,7 +112,6 @@ section.offers > div > div h3 {
 }
 
 .instituitionHero {
-    padding: 0 1rem;
     position: relative;
 }
 
@@ -120,7 +119,6 @@ section.offers > div > div h3 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50px;
 }
 
 .instituitionHero > div {
@@ -131,7 +129,7 @@ section.offers > div > div h3 {
     flex-direction: column;
     gap: 0.5rem;
     color: white;
-    width: 80%;
+    width: 90%;
     left: 50%;
     transform: translateX(-50%);
 }
@@ -144,11 +142,10 @@ section.offers > div > div h3 {
 
 .instituitionHero > div span {
     background-color: rgba(0, 0, 0, 0.8);
-    font-size: 1.5rem;
     text-transform: capitalize;
     padding: 0.5rem;
     width: fit-content;
-    border-radius: 50px;
+    border-radius: 10px;
 }
 
 .instituitionHero > div h3 {
@@ -165,5 +162,5 @@ section.offers > div > div h3 {
     align-self: flex-end;
     background-color: rgba(0, 0, 0, 0.9);
     outline: 2px solid var(--primary-color);
-    outline-offset: 0.5rem;
+    outline-offset: 0.3rem;
 }

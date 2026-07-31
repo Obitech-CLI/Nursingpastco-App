@@ -1,0 +1,23 @@
+.text1 {
+    font-size: 1.5rem;
+    text-align: center;
+    text-transform: capitalize;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.text1 h2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.text2 {
+    text-align: center;
+    font-size: 2rem;
+    text-transform: capitalize;
+    margin: 1rem;
+}
