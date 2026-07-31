@@ -168,21 +168,12 @@ section.offers > div > div h3 {
 .sub_offers {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 0.3rem;
     padding: 1rem 0 1rem 0.5rem;
 }
 
 .sub_offers > section {
     margin: 0 1rem 0 0.5rem;
-    box-shadow: var(--box-shadow);
-    border-radius: 20px;
-    padding: 1rem;
-}
-
-.sub_offers > section img {
-    object-fit: contain;
-    float: left;
-    margin-right: 0.5rem;
 }
 
 .sub_offers > div {
@@ -195,7 +186,7 @@ section.offers > div > div h3 {
 }
 
 .sub_offers > div > div {
-    min-width: 80%;
+    min-width: 90%;
     box-shadow: var(--box-shadow);
     padding: 2rem;
     border-radius: 20px;
@@ -228,8 +219,4 @@ section.offers > div > div h3 {
     text-align: center;
     align-items: center;
     gap: 0.5rem;
-}
-
-.sub_offers > div > div h2 {
-    font-size: 2rem;
 }
