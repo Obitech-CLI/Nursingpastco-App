@@ -1,5 +1,5 @@
 "use client";
-import { BadgeCheck, BookOpen, Brain, CalendarCheck2, ChartColumnIncreasingIcon, ClipboardList, Clock3, FileCheck2, Target } from "lucide-react";
+import { BadgeCheck, Bolt, BookOpen, Brain, CalendarCheck2, ChartColumnIncreasingIcon, ClipboardList, Clock3, FileCheck2, Target, Unlock } from "lucide-react";
 import styles from "../styles.module.css";
 import WLogo from "@/public/WhiteLogo.png";
 import DLogo from "@/public/DarkLogo.png";
@@ -70,7 +70,7 @@ function SubOffers() {
                 </div>
             </div>
 
-            <h2>100% free access</h2>
+            <h3><Unlock color="tomato" size={50}/>100% free access</h3>
         </div>
     )
 }
