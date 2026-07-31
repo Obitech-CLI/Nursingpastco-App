@@ -164,3 +164,72 @@ section.offers > div > div h3 {
     outline: 2px solid var(--primary-color);
     outline-offset: 0.3rem;
 }
+
+.sub_offers {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 0 1rem 0.5rem;
+}
+
+.sub_offers > section {
+    margin: 0 1rem 0 0.5rem;
+    box-shadow: var(--box-shadow);
+    border-radius: 20px;
+    padding: 1rem;
+}
+
+.sub_offers > section img {
+    object-fit: contain;
+    float: left;
+    margin-right: 0.5rem;
+}
+
+.sub_offers > div {
+    display: flex;
+    overflow: auto;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+    scrollbar-width: none;
+}
+
+.sub_offers > div > div {
+    min-width: 80%;
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.sub_offers > div > div ul {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sub_offers > div ul li span {
+    border: var(--border);
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sub_offers ul li {
+    font-size: 0.7rem;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sub_offers > div > div h2 {
+    font-size: 2rem;
+}

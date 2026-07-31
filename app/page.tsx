@@ -5,6 +5,7 @@ import { Hero } from "@/features/home/components/Hero";
 import { Offers } from "@/features/home/components/Offers";
 import { InstuitionHero } from "@/features/home/components/InstituitionHero";
 import { CheckCircle2, PercentCircle } from "lucide-react";
+import { SubOffers } from "@/features/home/components/SubOffers";
 
 function HomePage() {
   return (
@@ -27,6 +28,8 @@ function HomePage() {
         from thousands of<br />
         <span style={{color:"lightblue"}}>students</span>
       </div>
+
+      <SubOffers />
     </main>
     <Footer />
     </>

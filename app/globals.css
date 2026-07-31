@@ -20,7 +20,7 @@
 }
 
 [data-theme="dark"] {
-  --bg-color: rgba(0, 0, 0, 0.1);
+  --bg-color: rgba(0, 0, 0, 0.5);
   --bg-txt-color: white;
   --box-shadow: 0px 0px 2px white;
   --nav-bg: black;
@@ -30,7 +30,7 @@
   --input-span-txt: black;
 }
 
-body, html {
+body {
     background-color: var(--bg-color);
     color: var(--bg-txt-color);
 }
