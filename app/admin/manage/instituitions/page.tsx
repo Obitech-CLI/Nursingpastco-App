@@ -3,7 +3,7 @@ import AdminManageInstituitions from "./AdminManageInstituitions";
 export default function Page() {
     return (
         <main className="manage_instituitions">
-            <h1>manage instituitions</h1>
+            <h2>manage instituitions</h2>
             <AdminManageInstituitions />
         </main>
     )

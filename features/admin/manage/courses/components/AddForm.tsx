@@ -50,7 +50,7 @@ function AddForm({formData, setFormData, onSubmit, loading}:Props) {
 
     return (
         <form onSubmit={onSubmit} className={styles.add}>
-            <h2>add course</h2>
+            <h3>add course</h3>
 
             <label onClick={() => setShowInstituitions(!showInstituitions)} className={styles.instituitions}>
             {!formData.instituition ? "select instituition" : formData.instituition}

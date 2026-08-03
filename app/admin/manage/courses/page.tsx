@@ -3,7 +3,7 @@ import AdminManageCourses from "./AdminManageCourses";
 export default function Page() {
     return (
         <main>
-            <h1>manage courses</h1>
+            <h2>manage courses</h2>
             <AdminManageCourses />
         </main>
     )

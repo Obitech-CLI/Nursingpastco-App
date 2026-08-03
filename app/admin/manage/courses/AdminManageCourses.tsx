@@ -16,8 +16,7 @@ function AdminManageCourses() {
             <button type="button"
             onClick={() => setNavManageCourses({add: true, view: false})}
             style={{
-                border: navManageCourses.add ? "none" : "",
-                gridArea: navManageCourses.add ? "1/ 1/ 1/ 1" : "",
+                display: navManageCourses.add ? "none" : "",
             }}>
                 add courses{!navManageCourses.add ? <Plus /> : ""}
             </button>
@@ -25,8 +24,7 @@ function AdminManageCourses() {
             <button type="button"
             onClick={() => setNavManageCourses({add: false, view: true})}
             style={{
-                border: navManageCourses.view ? "none" : "",
-                gridArea: navManageCourses.view ? "1/ 1/ 1/ 1" : "",
+                display: navManageCourses.view ? "none" : "",
             }}>
                 view courses{!navManageCourses.view ? <Eye /> : ""}
             </button>

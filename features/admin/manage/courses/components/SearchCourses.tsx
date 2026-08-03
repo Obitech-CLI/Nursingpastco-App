@@ -51,7 +51,7 @@ function SearchCourses({searchData, setSearchData, search, loading}:Props) {
             <legend>search</legend>
 
             <div onClick={() => setShowInstituitions(!showInstituitions)}>
-                {!searchData.instituition ? "instituitions" : searchData.instituition}
+                <span>{!searchData.instituition ? "instituitions" : searchData.instituition}</span>
                 {instituitions.length > 0 && (
                 <>
                 {showInstituitions ? <ChevronUp /> : <ChevronDown />}
@@ -84,7 +84,7 @@ function SearchCourses({searchData, setSearchData, search, loading}:Props) {
             </div>
 
             <div onClick={() => setShowLevels(!showLevels)}>
-                    {!searchData.level ? "select level" : searchData.level}
+                    <span>{!searchData.level ? "select level" : searchData.level}</span>
                     <>
                     {showLevels ? <ChevronUp /> : <ChevronDown />}
                     </>
