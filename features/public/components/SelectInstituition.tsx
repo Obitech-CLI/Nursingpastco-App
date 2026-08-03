@@ -6,6 +6,7 @@ import Image from "next/image";
 import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "../styles.module.css";
+import InstituitionHero from "@/public/InstituitionLogo.jpeg";
 
 type Props = {
     setSelectedInstituition: React.Dispatch<SetStateAction<string>>;
@@ -33,21 +34,24 @@ function SelectInstituition({setSelectedInstituition}:Props) {
 
     return (
         <>
-        
+        <div className={styles.hero}>
+            <Image alt="" src={InstituitionHero} />
+            <h2>here are the list of instituitions which past questions are available on our site</h2>
+        </div>
         {!FetchInstituitions.loading ? (
         <>
         {!FetchInstituitions.error && instituitions.length > 0 ? (
             <div className={styles.instituitions}>
             {instituitions.map(instituition => (
                 <div key={instituition.id} className={styles.instituition}>
-                    <h2>{instituition.instituition_abbr}</h2>
                     <Image
                     src={instituition.instituition_logo}
                     alt=""
                     loading="eager"
-                    width={150}
-                    height={150}
+                    width={200}
+                    height={200}
                     />
+                    <h2>{instituition.instituition_abbr}</h2>
                     <h4>{instituition.instituition_name}</h4>
                     
                     <button type="button" onClick={() => {

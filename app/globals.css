@@ -80,12 +80,6 @@ footer p {
     text-align: right;
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
 form {
     display: flex;
     flex-direction: column;

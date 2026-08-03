@@ -76,15 +76,19 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
     return (
         <form onSubmit={onSubmit} className={styles.add}>
 
-            <h2>add past-question</h2>
+            <h3>add past-question</h3>
 
                 <label onClick={() => setShowInstituitions(!showInstituitions)} 
                 className={styles.select}>
                     {!formData.instituition ? "select instituition" : formData.instituition}
-                    {showInstituitions ? <ChevronDown /> : <ChevronUp />}
+                    {instituitions.length > 0 && (
+                        <>
+                        {showInstituitions ? <ChevronDown /> : <ChevronUp />}
+                        </>
+                    )}
                     {instituitions.length === 0 && (
                         <button onClick={HandleFetchInstituitions}>
-                            {FetchInstituitons.loading ? <ClipLoader size={20}/> : "reload"}
+                            {FetchInstituitons.loading ? <ClipLoader size={20}/> : <RotateCcw />}
                         </button>
                     )}
 

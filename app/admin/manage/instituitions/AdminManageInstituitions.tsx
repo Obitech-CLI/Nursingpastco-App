@@ -18,7 +18,7 @@ function AdminManageInstituitions() {
             <button type="button"
             onClick={() => setNavManageInstituitions({add: true, view: false})}
             style={{
-                border: navManageInstituitions.add ? "none" : "",
+                display: navManageInstituitions.add ? "none" : "",
                 gridArea: navManageInstituitions.add ? "1/ 1/ 1/ 1" : "",
             }}>
                 add instituitions{!navManageInstituitions.add ? <Plus /> : ""}
@@ -27,7 +27,7 @@ function AdminManageInstituitions() {
             <button type="button"
             onClick={() => setNavManageInstituitions({add: false, view: true})}
             style={{
-                border: navManageInstituitions.view ? "none" : "",
+                display: navManageInstituitions.view ? "none" : "",
                 gridArea: navManageInstituitions.view ? "1/ 1/ 1/ 1" : "",
             }}>
                 view instituitions{!navManageInstituitions.view ? <Eye /> : ""}

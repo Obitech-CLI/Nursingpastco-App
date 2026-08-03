@@ -11,17 +11,18 @@ div.switch {
     justify-content: start;
     align-items: start;
     gap: 1rem;
-    margin: 0 0 0 2rem;
+    margin: 0 0 0 1rem;
     overflow: auto;
     scrollbar-width: none;
 }
 
 div.switch > button {
-    padding: 1rem 2rem;
+    padding: 1rem;
+    width: 80%;
     border-radius: 10px;
-    background-color: var(--primary-color);
+    border: 1.5px solid var(--primary-color);
     text-transform: capitalize;
-    color: white;
+    color: var(--bg-txt-color);
     display: flex;
     align-items: center;
     font-size: 1rem;

@@ -37,29 +37,29 @@ function AddForm(
     return (
         <form onSubmit={onSubmit} className={styles.add}>
                 
-                <h2>add instituition</h2>
+                <h3>add instituition</h3>
 
-                <label><Pen />
+                <label className={styles.input}>
                     <input type="text" value={formData.instituition_name}
                     name="instituition_name" onChange={HandleFormChange} onFocus={() => {
                     setFocusInput(prev => ({...prev, name: true}))
                 }}/>
                     <span style={{
-                    top: focusInput.name ? "-1rem" : ""
+                    top: focusInput.name ? "-1.2rem" : ""
                 }}>{focusInput.name ? "enter instituition name" : "instituition name"}</span>
                 </label>
 
-                <label><Pen />
+                <label className={styles.input}>
                     <input type="text" value={formData.instituition_abbr}
                     name="instituition_abbr" onChange={HandleFormChange} onFocus={() => {
                     setFocusInput(prev => ({...prev, abbr: true}))
                 }}/>
                     <span style={{
-                    top: focusInput.abbr ? "-1rem" : ""
+                    top: focusInput.abbr ? "-1.2rem" : ""
                 }}>{focusInput.abbr ? "enter instituition(abbr)" : "instituition(abbr)"}</span>
                 </label>
 
-                <label><Image />
+                <label className={styles.file}><div><Image size={35}/></div>
                     <input type="file" ref={fileRef}
                      accept="image/*"
                     onChange={(e) => {

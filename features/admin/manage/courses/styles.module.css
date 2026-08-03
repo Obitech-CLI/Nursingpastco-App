@@ -61,11 +61,12 @@ fieldset.search {
     padding: 0.5rem 1rem 1rem;
     margin: 1rem;
     border-radius: 10px;
-    display: grid;
-    grid-template-columns: 50% 38% 5%;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     position: relative;
     justify-content: space-between;
+    gap: 0.5rem;
 }
 
 fieldset.search legend {
@@ -110,6 +111,7 @@ fieldset.search > div {
     padding: 0 1rem;
     white-space: nowrap;
     gap: 1rem;
+    width: 100%;
 }
 
 fieldset.search > div ul li {
@@ -120,10 +122,13 @@ fieldset.search > div ul li {
 
 fieldset.search > button {
     border: none;
-    color: var(--bg-txt-color);
+    color: white;
     text-transform: capitalize;
     background-color: transparent;
     height: 40px;
+    background-color: var(--secondary-color);
+    width: 50%;
+    border-radius: 50px;
 }
 
 .modify > .retry, .loading, .searched {
