@@ -51,16 +51,15 @@ function AddPastQuestion() {
     }
 
     return (
-        <>
         <AddForm
         formData={formData}
         setFormData={setFormData}
+        pdf={pdf}
         setPDF={setPDF}
         loading={PostPDFData.loading}
         onSubmit={HandleFormSubmit}
         fileRef={fileRef}
         />
-        </>
     )
 }
 

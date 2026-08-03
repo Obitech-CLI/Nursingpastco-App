@@ -45,7 +45,7 @@ function AddForm(
                     setFocusInput(prev => ({...prev, name: true}))
                 }}/>
                     <span style={{
-                    top: focusInput.name ? "-0.7rem" : ""
+                    top: focusInput.name ? "-1rem" : ""
                 }}>{focusInput.name ? "enter instituition name" : "instituition name"}</span>
                 </label>
 
@@ -55,7 +55,7 @@ function AddForm(
                     setFocusInput(prev => ({...prev, abbr: true}))
                 }}/>
                     <span style={{
-                    top: focusInput.abbr ? "-0.7rem" : ""
+                    top: focusInput.abbr ? "-1rem" : ""
                 }}>{focusInput.abbr ? "enter instituition(abbr)" : "instituition(abbr)"}</span>
                 </label>
 

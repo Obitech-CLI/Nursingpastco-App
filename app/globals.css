@@ -133,6 +133,12 @@ input {
     background-color: transparent;
 }
 
+label > span {
+    background-color: var(--input-span);
+    border-radius: 5px;
+    color: var(--input-span-txt);
+}
+
 h1 {
     text-transform: capitalize;
     font-family: serif;

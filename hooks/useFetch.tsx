@@ -13,7 +13,7 @@ function UseFetch() {
     {
         try {
             if (!navigator.onLine) {
-                setError("no internet connection")
+                setError(`No internet connection`)
                 return;
             }
 

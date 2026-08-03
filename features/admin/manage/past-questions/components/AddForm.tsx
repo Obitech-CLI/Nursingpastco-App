@@ -1,10 +1,12 @@
 "use client";
 
 import { UseFetch } from "@/hooks/useFetch";
-import { PastQuestionDataTypes, CourseDataTypes, InstituitionDataTypes } from "@/types/types";
+import { CourseDataTypes, InstituitionDataTypes } from "@/types/types";
 import { LevelOptions } from "@/ui/AppContent";
 import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
+import styles from "../style.module.css";
+import { Check, ChevronDown, ChevronUp, File, RotateCcw } from "lucide-react";
 
 interface FormDataTypes {
     instituition: string,
@@ -16,13 +18,14 @@ interface FormDataTypes {
 type Props = {
     formData: FormDataTypes;
     setFormData: React.Dispatch<SetStateAction<FormDataTypes>>;
+    pdf: File | null;
     setPDF: React.Dispatch<SetStateAction<File | null>>;
     loading: boolean;
     onSubmit: React.FormEventHandler<HTMLFormElement>;
     fileRef: React.RefObject<HTMLInputElement | null>;
 }
 
-function AddForm({formData, setFormData, setPDF, loading, onSubmit, fileRef}:Props) {
+function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef}:Props) {
 
     const [instituitions, setInstituitions] = useState<InstituitionDataTypes[]>([]);
     const [courses, setCourses] = useState<CourseDataTypes[]>([]);
@@ -33,6 +36,8 @@ function AddForm({formData, setFormData, setPDF, loading, onSubmit, fileRef}:Pro
     const [showInstituitions, setShowInstituitions] = useState(false);
     const [showLevels, setShowLevels] = useState(false);
     const [showCourses, setShowCourses] = useState(false);
+
+    const [focusInput, setFocusInput] = useState(false);
 
     const FetchInstituitons = UseFetch();
     const FetchCourses = UseFetch()
@@ -69,12 +74,14 @@ function AddForm({formData, setFormData, setPDF, loading, onSubmit, fileRef}:Pro
     }, []);
 
     return (
-        <form onSubmit={onSubmit}>
-            <fieldset>
-                <legend>add</legend>
+        <form onSubmit={onSubmit} className={styles.add}>
 
-                <label onClick={() => setShowInstituitions(!showInstituitions)}>
-                    {!formData.instituition ? "instituition" : formData.instituition}
+            <h2>add past-question</h2>
+
+                <label onClick={() => setShowInstituitions(!showInstituitions)} 
+                className={styles.select}>
+                    {!formData.instituition ? "select instituition" : formData.instituition}
+                    {showInstituitions ? <ChevronDown /> : <ChevronUp />}
                     {instituitions.length === 0 && (
                         <button onClick={HandleFetchInstituitions}>
                             {FetchInstituitons.loading ? <ClipLoader size={20}/> : "reload"}
@@ -104,8 +111,10 @@ function AddForm({formData, setFormData, setPDF, loading, onSubmit, fileRef}:Pro
                     )}
                 </label>
 
-                <label onClick={() => setShowLevels(!showLevels)}>
+                <label onClick={() => setShowLevels(!showLevels)} 
+                className={styles.select}>
                     {!formData.level ? "select level" : formData.level}
+                    {showLevels ? <ChevronDown /> : <ChevronUp />}
                     {showLevels && (
                         <>
                         {LevelOptions.length > 0 && (
@@ -126,11 +135,18 @@ function AddForm({formData, setFormData, setPDF, loading, onSubmit, fileRef}:Pro
                     )}
                 </label>
 
-                <label onClick={() => setShowCourses(!showCourses)}>
+                <label onClick={() => setShowCourses(!showCourses)}
+                    className={styles.select}>
                     {!formData.course ? "select course" : formData.course}
+                    {courses.length > 0 && (
+                        <>
+                        {showCourses ? <ChevronDown /> : <ChevronUp />}
+                        </>
+                    )}
+
                     {courses.length === 0 && (
                         <button onClick={HandleFetchCourses} type="button">
-                            {FetchCourses.loading ? <ClipLoader size={20}/> : "reload"}
+                            {FetchCourses.loading ? <ClipLoader size={20}/> : <RotateCcw />}
                         </button>
                     )}
                     
@@ -154,20 +170,31 @@ function AddForm({formData, setFormData, setPDF, loading, onSubmit, fileRef}:Pro
                     )}
                 </label>
 
-                <label>title
+                <label className={styles.title}>
+                    <span style={{
+                        top: focusInput ? "-0.9rem" : ""
+                    }}>{focusInput ? "enter past question title" : "past question title"}</span>
+
                     <input type="text" value={formData.title}
                     onChange={(e) => setFormData(prev => (
                         {...prev, title: e.target.value}
                     ))}
+                    onFocus={() => {
+                        setFocusInput(true);
+                    }}
                     />
                 </label>
 
-                <label>pdf
+                <label className={styles.file}>
+                    <File size={30}/>
                     <input type="file" accept="application/pdf"
                     ref={fileRef}
                     onChange={(e) => {
-                        setPDF(e.target.files?.[0] ?? null)
+                        if (e.target.files) {
+                            setPDF(e.target.files?.[0] ?? null)
+                        }
                     }}/>
+                    <span>{pdf ? "pdf selected" : "pdf"} {pdf ? <Check color="green"/> : null}</span>
                 </label>
 
                 <button 
@@ -175,7 +202,6 @@ function AddForm({formData, setFormData, setPDF, loading, onSubmit, fileRef}:Pro
                     {!loading ? "add pdf" : <ClipLoader size={20} />}
                 </button>
 
-            </fieldset>
         </form>
     )
 }

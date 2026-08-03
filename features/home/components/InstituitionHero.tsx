@@ -17,7 +17,7 @@ function InstuitionHero() {
                     <span>we cover</span>
                     <span>a wide range of</span>
                     <span>nursing instituitions</span>
-                    <span>accross africa</span>
+                    <span>across africa</span>
                 </div>
                 <Link href="">see available instituition</Link>
             </div>

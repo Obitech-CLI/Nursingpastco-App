@@ -1,0 +1,60 @@
+.add > label.select {
+    box-shadow: var(--box-shadow);
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+    border-radius: 10px;
+    text-transform: capitalize;
+}
+
+.add > label.select ul {
+    position: absolute;
+    top: 2.5rem;
+    background-color: var(--nav-bg);
+    box-shadow: var(--box-shadow);
+    z-index: 5;
+    list-style-type: none;
+    left: 50%;
+    width: 95%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    height: 150px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    overflow: auto;
+}
+
+.add > label ul li {
+    border: var(--border);
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+.add > label > span {
+    position: absolute;
+    left: 1rem;
+    text-transform: capitalize;
+    background-color: var(--input-span);
+    padding: 0.2rem 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.add label.file span {
+    position: relative;
+}
+
+.add label.file {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.add input[type="file"] {
+    display: none;
+}

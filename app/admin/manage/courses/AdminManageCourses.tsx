@@ -1,44 +1,40 @@
 "use client";
 
-import { UseManageCourses } from "@/contexts/admin/ManageCoursesProvider";
+import { UseManageNav } from "@/contexts/admin/ManageNavProvider";
 import { AddCourse } from "@/features/admin/manage/courses/components/AddCourse";
 import { ModifyCourses } from "@/features/admin/manage/courses/components/Modify";
 import "./courses.css";
-import { Eye, LucideView, Plus, PlusCircle, View } from "lucide-react";
+import { Eye, Plus } from "lucide-react";
 
 function AdminManageCourses() {
 
-    const { show, setShow } = UseManageCourses();
+    const { navManageCourses, setNavManageCourses } = UseManageNav();
 
     return (
         <>
         <div className="switch">
             <button type="button"
-            onClick={() => setShow({add: true, view: false})}
+            onClick={() => setNavManageCourses({add: true, view: false})}
             style={{
-                backgroundColor: show.add ? "transparent" : "",
-                color: show.add ? "" : "white",
-                gridArea: show.add ? "1/ 1/ 1/ 1" : "",
-                fontSize: show.add ? "1.5rem" : ""
+                border: navManageCourses.add ? "none" : "",
+                gridArea: navManageCourses.add ? "1/ 1/ 1/ 1" : "",
             }}>
-                add courses{!show.add ? <Plus /> : ""}
+                add courses{!navManageCourses.add ? <Plus /> : ""}
             </button>
 
             <button type="button"
-            onClick={() => setShow({add: false, view: true})}
+            onClick={() => setNavManageCourses({add: false, view: true})}
             style={{
-                backgroundColor: show.view ? "transparent" : "",
-                color: show.view ? "" : "white",
-                gridArea: show.view ? "1/ 1/ 1/ 1" : "",
-                fontSize: show.view ? "1.5rem" : ""
+                border: navManageCourses.view ? "none" : "",
+                gridArea: navManageCourses.view ? "1/ 1/ 1/ 1" : "",
             }}>
-                view courses{!show.view ? <Eye /> : ""}
+                view courses{!navManageCourses.view ? <Eye /> : ""}
             </button>
         </div>
         
-        {show.add && (<AddCourse />)}
+        {navManageCourses.add && (<AddCourse />)}
 
-        {show.view && (<ModifyCourses />)}
+        {navManageCourses.view && (<ModifyCourses />)}
         </>
     )
 }

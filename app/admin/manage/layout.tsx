@@ -1,6 +1,6 @@
 import { Footer } from "@/app/components/Footer";
 import { AdminManageHeader } from "@/app/components/headers/AdminHeader";
-import { ManageCoursesProvider } from "@/contexts/admin/ManageCoursesProvider";
+import { ManageNavProvider } from "@/contexts/admin/ManageNavProvider";
 
 export default function AdminManageLayout(
     {children}:{children:React.ReactNode}) {
@@ -8,9 +8,9 @@ export default function AdminManageLayout(
         <>
         <AdminManageHeader />
 
-        <ManageCoursesProvider>
+        <ManageNavProvider>
         {children}
-        </ManageCoursesProvider>
+        </ManageNavProvider>
         
         <Footer />
         </>

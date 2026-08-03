@@ -27,17 +27,20 @@ function Instituitions() {
 
     return (
         <>
+
         {selectedInstituition}{selectedLevel}
-        <SelectInstituition
-        setSelectedInstituition={setSelectedInstituition}
-        />
+            <SelectInstituition
+            setSelectedInstituition={setSelectedInstituition}
+            />
+
         {selectedInstituition && (
             <SelectLevel
             setSelectedLevel={setSelectedLevel}
             setSelectedInstituition={setSelectedInstituition}
             HandleSelections={HandleSelections}
-        />
+            />
         )}
+
         </>
     )
 }

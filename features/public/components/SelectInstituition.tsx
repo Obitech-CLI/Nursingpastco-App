@@ -33,9 +33,7 @@ function SelectInstituition({setSelectedInstituition}:Props) {
 
     return (
         <>
-        <div>
         
-        </div>
         {!FetchInstituitions.loading ? (
         <>
         {!FetchInstituitions.error && instituitions.length > 0 ? (
@@ -64,8 +62,8 @@ function SelectInstituition({setSelectedInstituition}:Props) {
         ) : (
             <>
             {FetchInstituitions.error ? (
-                <div>
-                    <p>{FetchInstituitions.error}</p>
+                <div className={styles.retry}>
+                    <h4>{FetchInstituitions.error}</h4>
                     <button onClick={HandleFetch}>
                      retry
                     </button>

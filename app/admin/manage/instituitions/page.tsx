@@ -1,4 +1,4 @@
-import AdminManageInstituitions from "./AdminManageSchools";
+import AdminManageInstituitions from "./AdminManageInstituitions";
 
 export default function Page() {
     return (

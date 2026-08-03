@@ -1,8 +1,7 @@
 form.add > label > span {
     position: absolute;
-    left: 3rem;
-    background-color: var(--bg-color);
-    padding: 0 0.3rem;
+    left: 2.8rem;
+    padding: 0.3rem 1rem;
     text-transform: capitalize;
     display: flex;
     align-items: center;
