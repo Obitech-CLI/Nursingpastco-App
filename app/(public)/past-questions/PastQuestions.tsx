@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "./styles.module.css";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { LevelOptions } from "@/ui/AppContent";
 
 function PastQuestions() {
 
@@ -21,6 +22,8 @@ function PastQuestions() {
 
     const [selectedCourse, setSelectedCourse] = useState("");
 
+    const [changeLevel, setChangeLevel] = useState(0);
+
     console.log(selectedCourse)
 
     useEffect(() => {
@@ -34,7 +37,7 @@ function PastQuestions() {
             setSelectedLogo(storedLogo);
         }
         
-    }, []);
+    }, [changeLevel]);
 
     const FetchCourses = UseFetch();
     const FetchPDFs = UseFetch();
@@ -73,6 +76,20 @@ function PastQuestions() {
         HandleFetchPDFs();
     }, [selectedCourse]);
 
+    const HandleLevelChange = (level: string) =>
+    {
+        localStorage.setItem("selectedLevel", level);
+        const storedLevel = localStorage.getItem("selectedLevel");
+
+        
+        if (storedLevel) {
+            setSelectedLevel(storedLevel)
+        }
+
+        setChangeLevel(prev => prev + 1)
+        
+    }
+
     return (
         <>
         <div className={styles.pastQuestions_hero}>
@@ -82,7 +99,25 @@ function PastQuestions() {
             )}
         </div>
 
-        <h5 className={styles.level}>{selectedLevel}</h5>
+        <div className={styles.btns}>
+            {LevelOptions.map(level => (
+                <button key={level.id}
+                onClick={() => {
+                    HandleLevelChange(level.level);
+                }}
+                style={{
+                    backgroundColor: selectedLevel === level.level ? "transparent" : "",
+                    color: selectedLevel === level.level ? "var(--bg-txt-color)" : "",
+                    border: selectedLevel === level.level ? "var(--border)" : "",
+                    padding: selectedLevel === level.level ? "0.7rem 1.5rem" : "",
+                    gridArea: selectedLevel === level.level ?  "1 /1 /1 /1" : ""
+                }}
+                >
+                    {level.level}
+                </button>
+            ))}
+        </div>
+
         <div className={styles.pastQuestions}>
 
             {!FetchCourses.loading ? (
@@ -141,7 +176,7 @@ function PastQuestions() {
                     {!FetchCourses.error ? (
                         <p>{"no course found"}</p>
                     ) : (
-                        <div>
+                        <div className={styles.retry}>
                             <p>{FetchCourses.error}</p>
                             <button onClick={HandleFetchCourses}>
                                 retry
@@ -151,7 +186,7 @@ function PastQuestions() {
                     </>
                 )}
                 </>
-            ) : (<ClipLoader size={40} />)}
+            ) : (<div className={styles.loading}><ClipLoader size={40} /></div>)}
         </div>
         </>
     )
