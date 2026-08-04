@@ -121,6 +121,8 @@
     width: 90%;
     margin: auto;
     padding-bottom: 0.5rem;
+    overflow: auto;
+    scrollbar-width: none;
 }
 
 .btns > button {
@@ -128,4 +130,5 @@
     padding: 0.4rem 1rem;
     color: white;
     border-radius: 5px;
+    white-space: nowrap;
 }
