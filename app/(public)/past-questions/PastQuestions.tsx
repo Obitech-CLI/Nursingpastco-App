@@ -1,10 +1,12 @@
 "use client";
 
 import { UseFetch } from "@/hooks/useFetch";
-import { FetchAdmin } from "@/lib/admin/admin";
 import { CourseDataTypes, PastQuestionDataTypes } from "@/types/types";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
+import styles from "./styles.module.css";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 function PastQuestions() {
 
@@ -15,6 +17,7 @@ function PastQuestions() {
 
     const [selectedInstituition, setSelectedInstituition] = useState("");
     const [selectedLevel, setSelectedLevel]= useState("");
+    const [selectedLogo, setSelectedLogo]= useState<string | null>(null);
 
     const [selectedCourse, setSelectedCourse] = useState("");
 
@@ -23,10 +26,12 @@ function PastQuestions() {
     useEffect(() => {
         const storedInstituition = localStorage.getItem("selectedInstituition");
         const storedLevel = localStorage.getItem("selectedLevel");
+        const storedLogo = localStorage.getItem("selectedLogo");
 
-        if (storedInstituition && storedLevel) {
+        if (storedInstituition && storedLevel && storedLogo) {
             setSelectedInstituition(storedInstituition);
             setSelectedLevel(storedLevel);
+            setSelectedLogo(storedLogo);
         }
         
     }, []);
@@ -70,32 +75,38 @@ function PastQuestions() {
 
     return (
         <>
-        <h2>{selectedInstituition}</h2>
-        <h2>{selectedLevel}</h2>
+        <div className={styles.pastQuestions_hero}>
+            <h2>{selectedInstituition}<br />past questions</h2>
+            {selectedLogo && (
+                <Image alt="" src={selectedLogo} width={100} height={100}/>
+            )}
+        </div>
 
-        <h1>past questions</h1>
+        <h5 className={styles.level}>{selectedLevel}</h5>
+        <div className={styles.pastQuestions}>
 
-        <div>
             {!FetchCourses.loading ? (
                 <>
                 {!FetchCourses.error && courses.length > 0 ? (
                     <>
                     {courses.map(course => (
                         <div key={course.id}>
-                        <ul>
-                            <li>{course.course}</li>
+                        <div className={styles.courses}>
+                            <h4>{course.course}</h4>
 
                             <button onClick={() => {
                                 if (course.id === showPDFs) {
                                     setShowPDFs(0);
+                                    setSelectedCourse("");
+                                    return;
                                 }
                                 setSelectedCourse(course.course);
                                 setShowPDFs(course.id);
-                            }}>open pdfs</button>
-                        </ul>
+                            }}>{showPDFs ? <ChevronDown /> : <ChevronUp />}</button>
+                        </div>
 
                         {showPDFs === course.id && (
-                            <>
+                            <div className={styles.pdfs}>
                             {!FetchPDFs.loading ? (
                             <>
                             {!FetchPDFs.error && pdfs.length > 0 ? (
@@ -106,14 +117,21 @@ function PastQuestions() {
                                 </ul>
                             ):(
                                 <>
-                                {!FetchPDFs.error ? (
+                                {!FetchPDFs.error && !FetchPDFs.loading ? (
                                     <p>no pdf found</p>
-                                ):(<p>{FetchPDFs.error}</p>)}
+                                ):(
+                                    <div className={styles.retry}>
+                                        <p>{FetchPDFs.error}</p>
+                                        <button onClick={HandleFetchPDFs}>
+                                            retry
+                                        </button>
+                                    </div>
+                                )}
                                 </>
                             )}
                             </>
                             ) : (<ClipLoader size={30}/>)}
-                            </>
+                            </div>
                         )}
                         </div>
                     ))}

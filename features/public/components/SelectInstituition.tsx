@@ -10,9 +10,10 @@ import InstituitionHero from "@/public/InstituitionLogo.jpeg";
 
 type Props = {
     setSelectedInstituition: React.Dispatch<SetStateAction<string>>;
+    setSelectedLogo: React.Dispatch<SetStateAction<string | null>>;
 }
 
-function SelectInstituition({setSelectedInstituition}:Props) {
+function SelectInstituition({setSelectedInstituition, setSelectedLogo}:Props) {
 
     const [instituitions, setInstituitions] = useState<InstituitionDataTypes[]>([]);
 
@@ -56,6 +57,7 @@ function SelectInstituition({setSelectedInstituition}:Props) {
                     
                     <button type="button" onClick={() => {
                         setSelectedInstituition(instituition.instituition_name);
+                        setSelectedLogo(instituition.instituition_logo);
                         }}>
                         past questions
                     </button>

@@ -8,15 +8,17 @@ import { useEffect, useState } from "react";
 function Instituitions() {
 
     const [selectedInstituition, setSelectedInstituition] = useState("");
-    const [selectedLevel, setSelectedLevel]= useState("");
+    const [selectedLevel, setSelectedLevel] = useState("");
+    const [selectedLogo, setSelectedLogo] = useState<string | null>(null)
 
     const router = useRouter();
 
     useEffect(() => {
-        if (!selectedInstituition || !selectedLevel) return;
+        if (!selectedInstituition || !selectedLevel || !selectedLogo) return;
 
         localStorage.setItem("selectedLevel", selectedLevel);
         localStorage.setItem("selectedInstituition", selectedInstituition);
+        localStorage.setItem("selectedLogo", selectedLogo);
 
     }, [selectedLevel]);
 
@@ -31,6 +33,7 @@ function Instituitions() {
         {selectedInstituition}{selectedLevel}
             <SelectInstituition
             setSelectedInstituition={setSelectedInstituition}
+            setSelectedLogo={setSelectedLogo}
             />
 
         {selectedInstituition && (
