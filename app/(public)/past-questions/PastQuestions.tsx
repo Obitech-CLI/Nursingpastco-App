@@ -108,9 +108,11 @@ function PastQuestions() {
                 style={{
                     backgroundColor: selectedLevel === level.level ? "transparent" : "",
                     color: selectedLevel === level.level ? "var(--bg-txt-color)" : "",
+                    fontSize: selectedLevel === level.level ? "1rem" : "",
                     border: selectedLevel === level.level ? "var(--border)" : "",
-                    padding: selectedLevel === level.level ? "0.7rem 1.5rem" : "",
-                    gridArea: selectedLevel === level.level ?  "1 /1 /1 /1" : ""
+                    marginBottom: selectedLevel === level.level ? "0.5rem" : "",
+                    borderRadius: selectedLevel === level.level ? "10px" : "",
+                    padding: selectedLevel === level.level ? "1rem 2rem" : ""
                 }}
                 >
                     {level.level}

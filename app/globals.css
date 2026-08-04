@@ -87,6 +87,12 @@ form {
     padding: 1.5rem;
 }
 
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 label {
     display: flex;
     align-items: center;
