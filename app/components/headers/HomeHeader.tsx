@@ -18,7 +18,7 @@ function HomeHeader() {
             <nav>
                 <HomeHeaderNav />
                 <AppTheme />
-                <Search size={30}/>
+                <Search size={25}/>
             </nav>
         </header>
     )
