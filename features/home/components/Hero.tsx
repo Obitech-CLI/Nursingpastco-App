@@ -30,7 +30,7 @@ function Hero() {
             </div>
 
             <button onClick={() => setShowLoginForm(true)}>
-                login
+                join community
             </button>
         </div>
     )

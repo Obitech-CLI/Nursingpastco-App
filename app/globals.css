@@ -17,10 +17,11 @@
   --modal: rgba(225, 225, 225, 0.5);
   --input-span: black;
   --input-span-txt: white;
+  --header-item: rgba(0, 0, 0, 0.5);
 }
 
 [data-theme="dark"] {
-  --bg-color: rgba(0, 0, 0, 0.5);
+  --bg-color: rgba(0, 0, 0, 0.9);
   --bg-txt-color: white;
   --box-shadow: 0px 0px 2px white;
   --nav-bg: black;
@@ -28,6 +29,7 @@
   --modal: rgba(0, 0, 0, 0.5);
   --input-span: white;
   --input-span-txt: black;
+  --header-item: rgba(225, 225, 225, 0.5)
 }
 
 body {
@@ -36,11 +38,41 @@ body {
 }
 
 header {
-    padding: 0 0.5rem;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+header > div {
+    display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0.4rem 0.5rem 0.5rem;
+    border-width: 1.5px 4px;
+    border-style: solid;
+    border-color: #002b4c;
+    border-radius: 10px;
+    margin: 0.5rem 0.5rem 0;
+}
+
+header > div button {
+    text-transform: capitalize;
+    background-color: var(--secondary-color);
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    color: white;
+}
+
+header > nav {
+    width: fit-content;
+    margin: -1.3rem auto 1rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    border: var(--border);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    background-color: var(--nav-bg);
 }
 
 button {
@@ -48,17 +80,17 @@ button {
     background-color: transparent;
 }
 
-header button {
-    border: none;
-    background-color: transparent;
-}
-
-header .logo {
+.logo {
     display: flex;
     align-items: center;
     text-transform: capitalize;
     gap: 0.5rem;
-    font-size: 1.2rem;
+    height: 40px;
+}
+
+/*header button {
+    border: none;
+    background-color: transparent;
 }
 
 header .navs button {
@@ -66,11 +98,11 @@ header .navs button {
     background-color: transparent;
 }
 
-header .navs {
+header nav {
     display: flex;
     align-items: center;
     gap: 1rem;
-}
+}*/
 
 footer {
     padding: 1.5rem 1rem 1.5rem;

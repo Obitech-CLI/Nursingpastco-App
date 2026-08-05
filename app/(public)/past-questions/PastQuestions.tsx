@@ -24,8 +24,6 @@ function PastQuestions() {
 
     const [changeLevel, setChangeLevel] = useState(0);
 
-    console.log(selectedCourse)
-
     useEffect(() => {
         const storedInstituition = localStorage.getItem("selectedInstituition");
         const storedLevel = localStorage.getItem("selectedLevel");
@@ -44,13 +42,15 @@ function PastQuestions() {
 
     const HandleFetchCourses = async () =>
     {
-        if (!selectedInstituition || !selectedLevel) return;
+        if (!selectedLevel) return;
 
         const res = await FetchCourses.Fetch(`/courses?instituition=${selectedInstituition}&level=${selectedLevel}`);
 
         if (!res) return;
 
         setCourses(res.courses);
+
+        console.log(JSON.stringify(res.courses))
     }
 
     const HandleFetchPDFs = async () =>
@@ -79,19 +79,17 @@ function PastQuestions() {
     const HandleLevelChange = (level: string) =>
     {
         localStorage.setItem("selectedLevel", level);
+
         const storedLevel = localStorage.getItem("selectedLevel");
 
-        
         if (storedLevel) {
             setSelectedLevel(storedLevel)
         }
-
-        setChangeLevel(prev => prev + 1)
-        
     }
 
     return (
         <>
+        {changeLevel}
         <div className={styles.pastQuestions_hero}>
             <h2>{selectedInstituition}<br />past questions</h2>
             {selectedLogo && (
@@ -124,7 +122,7 @@ function PastQuestions() {
 
             {!FetchCourses.loading ? (
                 <>
-                {!FetchCourses.error && courses.length > 0 ? (
+                {courses.length > 0 ? (
                     <>
                     {courses.map(course => (
                         <div key={course.id}>
@@ -175,16 +173,14 @@ function PastQuestions() {
                     </>
                 ) : (
                     <>
-                    {!FetchCourses.error ? (
-                        <p>{"no course found"}</p>
-                    ) : (
+                    {FetchCourses.error && courses.length === 0 ? (
                         <div className={styles.retry}>
                             <p>{FetchCourses.error}</p>
                             <button onClick={HandleFetchCourses}>
                                 retry
                             </button>
                         </div>
-                    )}
+                    ) : (null)}
                     </>
                 )}
                 </>

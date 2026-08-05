@@ -21,7 +21,8 @@ function HomeHeaderNav() {
         <div className={styles.home_header_nav}>
         <button type="button" 
         onClick={() => setShowNav(!showNav)}>
-            {!showNav ? <Menu/> : <X />}
+            <span>{!showNav ? <Menu size={20}/> : <X />}</span>
+            {/*!showNav ? "menu" : "close"*/}
         </button>
         {showNav && (
             <nav>
