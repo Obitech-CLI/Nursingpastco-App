@@ -65,7 +65,7 @@ header > div button {
 
 header > nav {
     width: fit-content;
-    margin: -1.3rem auto 1rem;
+    margin: -1.5rem auto 1rem;
     display: flex;
     gap: 1rem;
     align-items: center;
