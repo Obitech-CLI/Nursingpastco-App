@@ -25,6 +25,11 @@ function HomeHeaderNav() {
         </button>
         {showNav && (
             <nav>
+               <button type="button" 
+                  onClick={() => setShowNav(!showNav)}>
+                  <span>{!showNav ? <Menu size={25}/> : <X />}</span>
+               </button>
+
                <Link href="/instituitions">instituitions</Link>
                <Link href="/">courses</Link>
                <Link href="/">past questions</Link>
