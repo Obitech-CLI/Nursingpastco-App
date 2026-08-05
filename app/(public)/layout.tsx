@@ -1,11 +1,11 @@
 import { Footer } from "../components/Footer";
-import { AdminAuthHeader } from "../components/headers/AdminAuthHeader";
+import { PublicHeader } from "../components/headers/PublicHeader";
 
-export default function AdminManageLayout(
+export default function PublicLayout(
     {children}:{children:React.ReactNode}) {
     return (
         <>
-        <AdminAuthHeader />
+        <PublicHeader />
         {children}
         <Footer/>
         </>
