@@ -16,7 +16,7 @@ function HomePage() {
       <Offers />
 
       <div className={styles.text1}>
-        <h2>verified <CheckCircle2 size={50} color="green" /></h2>
+        <h4><CheckCircle2 size={50} color="green" /> verified</h4>
       </div>
 
       <InstuitionHero />

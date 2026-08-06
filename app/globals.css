@@ -41,36 +41,51 @@ header {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background-color: var(--nav-bg);
+    z-index: 99;
 }
 
 header > div {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.4rem 0.5rem 0.5rem;
-    border-width: 1.5px 4px;
-    border-style: solid;
-    border-color: #002b4c;
-    border-radius: 10px;
-    margin: 0.5rem 0.5rem 0;
+    padding: 0.9rem 0.7rem;
 }
 
-header > div button {
+header > div > div {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+header > div button:last-child {
     text-transform: capitalize;
-    background-color: var(--secondary-color);
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    color: white;
+    border: 1.5px solid var(--secondary-color);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1.5rem;
 }
 
 header > nav {
-    width: fit-content;
-    margin: -1.5rem auto 1rem;
+    position: fixed;
+    top: 3.5rem;
+    z-index: 55;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+header nav > div {
     display: flex;
     gap: 1rem;
     align-items: center;
     border: var(--border);
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 1.5rem;
     border-radius: 50px;
     background-color: var(--nav-bg);
 }
@@ -123,6 +138,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    margin-top: 5rem;
 }
 
 label {

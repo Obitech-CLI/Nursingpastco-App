@@ -3,24 +3,38 @@
 import { HomeHeaderNav } from "@/ui/nav/HomeHeaderNav";
 import { AppTheme } from "@/ui/Theme";
 import { LogoWithName } from "@/ui/Logo";
-import { ArrowBigLeft, ArrowLeft, LucideHome, Search } from "lucide-react";
+import { ArrowBigLeft, ArrowLeft, ChevronDown, ChevronUp, LucideHome, Search } from "lucide-react";
+import { useState } from "react";
 
 
 function PublicHeader() {
 
+    const [showNav, setShowNav] = useState(false);
+
     return (
         <header>
             <div>
-                <LogoWithName />
-                <button>login</button>
+                <div>
+                    <ArrowLeft />
+                    <LogoWithName />
+                </div>
+                <div>
+                    <button onClick={() => setShowNav(!showNav)}>
+                     {showNav ? <ChevronDown /> : <ChevronUp />}
+                    </button>
+                    <button>login</button>
+                </div>
             </div>
     
+            {showNav && (
             <nav>
-                <ArrowLeft />
-                <LucideHome />
-                <AppTheme />
-                <Search size={25}/>
+                <div>
+                    <LucideHome />
+                    <AppTheme />
+                    <Search size={25}/>
+                </div>
             </nav>
+            )}
         </header>
     )
 }

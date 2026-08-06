@@ -9,10 +9,11 @@
     margin-bottom: 1rem;
 }
 
-.text1 h2 {
+.text1 h4 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 0.3rem;
 }
 
 .text2 {

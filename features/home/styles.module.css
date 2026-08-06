@@ -11,22 +11,21 @@
 /*background-color: #f59e71; , ;*/
 
 .hero {
-    padding: 0 0.5rem 1rem;
+    padding: 0 1rem 1rem;
     background-color: transparent;
 }
 
 .hero button {
     padding: 1rem 2rem;
     width: 50%;
-    background-color: #002b4c;
+    border: 1.5px solid #002b4c;
     display: block;
     text-align: center;
     margin: auto;
-    color: white;
+    color: var(--bg-text-color);
     text-decoration: none;
-    border-radius: 50px;
+    border-radius: 5px;
     text-transform: capitalize;
-    border: none;
 }
 
 .hero > div {
@@ -92,7 +91,7 @@ section.offers > div a {
     text-transform: capitalize;
     color: var(--bg-text-color);
     align-self: left;
-    border-radius: 50px;
+    border-radius: 10px;
     width: 100%;
     text-align: center;
     border: 1.5px solid rgb(49, 127, 49);
@@ -131,7 +130,7 @@ section.offers > div > div h3 {
     gap: 0.5rem;
     color: white;
     width: 90%;
-    height: 90%;
+    height: 85%;
     left: 50%;
     transform: translateX(-50%);
 }
