@@ -36,8 +36,9 @@ function SelectInstituition({setSelectedInstituition, setSelectedLogo}:Props) {
     return (
         <>
         <div className={styles.hero}>
+            <h1>Instituitions</h1>
             <Image alt="" src={InstituitionHero} />
-            <h2>here are the list of instituitions which past questions are available on our site</h2>
+            <h2>here are the list of instituitions with available past questions</h2>
         </div>
         {!FetchInstituitions.loading ? (
         <>
@@ -67,23 +68,21 @@ function SelectInstituition({setSelectedInstituition, setSelectedLogo}:Props) {
             </div>
         ) : (
             <>
-            {FetchInstituitions.error ? (
+            {FetchInstituitions.error && !FetchInstituitions.loading ? (
                 <div className={styles.retry}>
                     <h4>{FetchInstituitions.error}</h4>
                     <button onClick={HandleFetch}>
                      retry
                     </button>
                 </div>
-            ) : (
-                <>
-                {!FetchInstituitions.loading && (<p>no instituition found</p>)}
-                </>
-            )}
+            ) : (null)}
             </>
         )}
         </>
         ) : (
-            <ClipLoader size={40} />
+            <div className={styles.loading}>
+                <ClipLoader size={60} />
+            </div>
         )}
         </>
     )

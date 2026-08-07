@@ -2,6 +2,10 @@
 import { BadgeCheck, Bolt, BookOpen, Brain, CalendarCheck2, ChartColumnIncreasingIcon, ClipboardList, Clock3, FileCheck2, Target, Unlock } from "lucide-react";
 import styles from "../styles.module.css";
 import { Logo } from "@/ui/Logo";
+import PImage from "@/public/PastQuestions.png";
+import TImage from "@/public/Textbooks.png";
+import CImage from "@/public/Contents.png";
+import Image from "next/image";
 
 function SubOffers() {
     return (
@@ -29,6 +33,7 @@ function SubOffers() {
                             higher<br />success
                         </li>
                     </ul>
+                    <Image src={PImage} alt="" width={200} height={200}/>
                 </div>
 
                 <div>
@@ -47,6 +52,7 @@ function SubOffers() {
                             quality<br />textbooks
                         </li>
                     </ul>
+                    <Image src={TImage} alt="" width={200} height={200}/>
                 </div>
 
                 <div>
@@ -65,6 +71,7 @@ function SubOffers() {
                             stay<br />ahead
                         </li>
                     </ul>
+                    <Image src={CImage} alt="" width={200} height={200}/>
                 </div>
             </div>
 

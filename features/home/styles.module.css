@@ -17,7 +17,7 @@
 
 .hero button {
     padding: 1rem 2rem;
-    width: 50%;
+    width: 70%;
     border: 1.5px solid #002b4c;
     display: block;
     text-align: center;
@@ -26,6 +26,7 @@
     text-decoration: none;
     border-radius: 5px;
     text-transform: capitalize;
+    font-size: 1rem;
 }
 
 .hero > div {
@@ -177,6 +178,11 @@ section.offers > div > div h3 {
     margin: 0 1rem 0 1rem;
 }
 
+.sub_offers > div > div h2 {
+    padding: 0;
+    margin: 0;
+}
+
 .sub_offers > h3 {
     text-align: center;
     margin-top: 1rem;
@@ -203,6 +209,7 @@ section.offers > div > div h3 {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    position: relative;
 }
 
 .sub_offers > div > div ul {
@@ -220,6 +227,14 @@ section.offers > div > div h3 {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.sub_offers div img {
+    position: absolute;
+    right: 0rem;
+    object-fit: contain;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .sub_offers ul li {
