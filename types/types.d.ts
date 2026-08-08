@@ -17,5 +17,6 @@ export interface PastQuestionDataTypes {
     instituition: string;
     course: string;
     level: string;
+    title?: string;
     pdf: File;
 }
