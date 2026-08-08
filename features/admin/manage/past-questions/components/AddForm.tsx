@@ -7,12 +7,12 @@ import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "../style.module.css";
 import { Check, ChevronDown, ChevronUp, File, RotateCcw } from "lucide-react";
+import Link from "next/link";
 
 interface FormDataTypes {
     instituition: string,
     course: string,
     level: string,
-    title: string
 }
 
 type Props = {
@@ -36,8 +36,6 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
     const [showInstituitions, setShowInstituitions] = useState(false);
     const [showLevels, setShowLevels] = useState(false);
     const [showCourses, setShowCourses] = useState(false);
-
-    const [focusInput, setFocusInput] = useState(false);
 
     const FetchInstituitons = UseFetch();
     const FetchCourses = UseFetch()
@@ -87,7 +85,7 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
                         </>
                     )}
                     {instituitions.length === 0 && (
-                        <button onClick={HandleFetchInstituitions}>
+                        <button onClick={HandleFetchInstituitions} type="button">
                             {FetchInstituitons.loading ? <ClipLoader size={20}/> : <RotateCcw />}
                         </button>
                     )}
@@ -129,8 +127,7 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
                                         setFormData(prev => ({...prev, level: level.level}));
                                         setShowLevels(!showLevels);
                                         setSelectedLevel(level.level);
-                                    }}>
-                                        {level.level}
+                                    }}>{level.level}
                                     </li>
                                 ))}
                             </ul>
@@ -144,49 +141,48 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
                     {!formData.course ? "select course" : formData.course}
                     {courses.length > 0 && (
                         <>
+                        <button type="button">
                         {showCourses ? <ChevronDown /> : <ChevronUp />}
+                        </button>
                         </>
                     )}
 
-                    {courses.length === 0 && (
+                    {courses.length === 0 ? (
                         <button onClick={HandleFetchCourses} type="button">
-                            {FetchCourses.loading ? <ClipLoader size={20}/> : <RotateCcw />}
+                            {!FetchCourses.loading ? (
+                                <RotateCcw />
+                            ) : (<ClipLoader size={20} />)}
                         </button>
-                    )}
+                    ) : (null)}
                     
                     {showCourses && (
                     <>
                     {courses.length > 0 ? (
                         <ul>
                             {courses.map(course => (
-                                <li onClick={() => setFormData(prev => ({...prev, course: course.course}))}
-                                key={course.id}>
-                                    {course.course}
+                                <li onClick={() => {
+                                    setShowCourses(!showCourses);
+                                    setFormData(prev => ({...prev, course: course.course}));
+                                }}
+                                key={course.id}>{course.course}
                                 </li>
                             ))}
                         </ul>
                     ) : (
-                        <ul>
-                            <li>no courses</li>
-                        </ul>
+                        <>
+                        {FetchCourses.error ? (
+                            <div className={styles.retry}>
+                                <p>{FetchCourses.error}</p>
+                                <button type="button" 
+                                   onClick={HandleFetchCourses}>
+                                    retry
+                                </button>
+                            </div>
+                        ) : (null)}
+                        </>
                     )}
                     </>
                     )}
-                </label>
-
-                <label className={styles.title}>
-                    <span style={{
-                        top: focusInput ? "-0.9rem" : ""
-                    }}>{focusInput ? "enter past question title" : "past question title"}</span>
-
-                    <input type="text" value={formData.title}
-                    onChange={(e) => setFormData(prev => (
-                        {...prev, title: e.target.value}
-                    ))}
-                    onFocus={() => {
-                        setFocusInput(true);
-                    }}
-                    />
                 </label>
 
                 <label className={styles.file}>
@@ -198,7 +194,10 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
                             setPDF(e.target.files?.[0] ?? null)
                         }
                     }}/>
-                    <span>{pdf ? "pdf selected" : "pdf"} {pdf ? <Check color="green"/> : null}</span>
+                    <span>
+                        {pdf ? "pdf selected" : "upload pdf"}
+                        {pdf ? <Check color="green" /> : null}
+                    </span>
                 </label>
 
                 <button 

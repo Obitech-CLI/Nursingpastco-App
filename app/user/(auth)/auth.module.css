@@ -11,10 +11,13 @@
     align-items: center;
     justify-content: flex-start;
     overflow: auto;
+    margin-top: 2rem;
 }
 
 .user_auth > button {
     background-color: transparent;
     border: none;
     align-self: self-end;
+    position: absolute;
+    top: 3rem;
 }

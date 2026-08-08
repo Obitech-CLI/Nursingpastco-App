@@ -39,14 +39,18 @@
     left: 1rem;
     text-transform: capitalize;
     background-color: var(--input-span);
-    padding: 0.2rem 0.5rem;
+    padding: 0.5rem 1rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    border-radius: 10px;
 }
 
 .add label.file span {
     position: relative;
+    box-shadow: var(--box-shadow);
+    background-color: transparent;
+    color: var(--bg-txt-color);
 }
 
 .add label.file {
@@ -57,4 +61,30 @@
 
 .add input[type="file"] {
     display: none;
+}
+
+.add .retry {
+    position: absolute;
+    top: 2.5rem;
+    background-color: var(--nav-bg);
+    box-shadow: var(--box-shadow);
+    z-index: 5;
+    list-style-type: none;
+    left: 50%;
+    width: 95%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.add .retry > button {
+    background-color: var(--secondary-color);
+    padding: 0.5rem 1.5rem;
+    border-radius: 50px;
+    color: white;
+    text-transform: capitalize;
 }

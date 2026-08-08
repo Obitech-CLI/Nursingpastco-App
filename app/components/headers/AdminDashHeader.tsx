@@ -1,27 +1,36 @@
 "use client";
 
-import { useTheme } from "next-themes";
-import Image from "next/image";
-import DarkLogo from "@/public/DarkLogo.png";
-import WhiteLogo from "@/public/WhiteLogo.png";
 import { AppTheme } from "@/ui/Theme";
+import { LogoWithName } from "@/ui/Logo";
+import { ChevronDown, ChevronUp, LucideHome, Search } from "lucide-react";
+import { useState } from "react";
 
 function AdminDashHeader() {
 
-    const { theme } = useTheme();
+    const [showNav, setShowNav] = useState(false);
+
     return (
         <header>
-        <div className="logo">
-            {theme !== "dark" ? (
-                <Image src={DarkLogo} alt="" width={70} height={70} style={{objectFit: "contain"}}/>
-            ) : (
-                <Image src={WhiteLogo} alt="" width={70} height={70} style={{objectFit: "contain"}}/>
-            )}
-            nursingpastco
+        <div>
+            <div>
+                <LogoWithName />
+            </div>
+            <div>
+                <span onClick={() => setShowNav(!showNav)}>
+                     {showNav ? <ChevronDown /> : <ChevronUp />}
+                </span>
+            </div>
         </div>
-        <div className="navs">
-            <AppTheme />
-        </div>
+        
+        {showNav && (
+            <nav>
+                <div>
+                    <LucideHome />
+                    <AppTheme />
+                    <Search size={25}/>
+                </div>
+            </nav>
+        )}
         </header>
     )
 }

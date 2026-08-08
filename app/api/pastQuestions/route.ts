@@ -11,11 +11,10 @@ export async function POST(req:NextRequest) {
     const instituition = formData.get("instituition") as string;
     const course = formData.get("course") as string;
     const level = formData.get("level") as string;
-    const title = formData.get("title") as string;
     const pdf = formData.get("pdf") as File;
 
     try {
-        const res = await AddPastQuestionService({instituition, course, level, title, pdf});
+        const res = await AddPastQuestionService({instituition, course, level, pdf});
 
         if(!res.status) {
             return NextResponse.json({

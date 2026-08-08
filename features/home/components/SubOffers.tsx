@@ -33,7 +33,6 @@ function SubOffers() {
                             higher<br />success
                         </li>
                     </ul>
-                    <Image src={PImage} alt="" width={200} height={200}/>
                 </div>
 
                 <div>
@@ -52,7 +51,6 @@ function SubOffers() {
                             quality<br />textbooks
                         </li>
                     </ul>
-                    <Image src={TImage} alt="" width={200} height={200}/>
                 </div>
 
                 <div>
@@ -71,7 +69,6 @@ function SubOffers() {
                             stay<br />ahead
                         </li>
                     </ul>
-                    <Image src={CImage} alt="" width={200} height={200}/>
                 </div>
             </div>
 

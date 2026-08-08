@@ -45,7 +45,7 @@ header {
     width: 100%;
     top: 0;
     background-color: var(--nav-bg);
-    z-index: 99;
+    z-index: 999;
 }
 
 header > div {

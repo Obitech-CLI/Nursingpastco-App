@@ -20,6 +20,7 @@ function UseFetch() {
             setLoading(true);
 
             const { data } = await api.get(url);
+            setError("")
             return data;
 
         } catch (err) {

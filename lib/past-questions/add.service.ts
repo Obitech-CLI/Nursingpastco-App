@@ -3,7 +3,7 @@
 import { PastQuestionDataTypes } from "@/types/types";
 import { supabase } from "../supabase/supabase";
 
-const AddPastQuestionService = async ({instituition, course, level, title, pdf}:PastQuestionDataTypes) =>
+const AddPastQuestionService = async ({instituition, course, level, pdf}:PastQuestionDataTypes) =>
 {
     if (!instituition || !course || !level) {
         return { success: false, error: "empty input field", status: 400 }
@@ -12,6 +12,8 @@ const AddPastQuestionService = async ({instituition, course, level, title, pdf}:
     if (!pdf) {
         return { success: false, error: "no pdf uploaded", status: 400 }
     }
+
+    const title = pdf.name.slice(0, -3);
 
     const pdfName = `${Date.now()}-${pdf.name}`;
 

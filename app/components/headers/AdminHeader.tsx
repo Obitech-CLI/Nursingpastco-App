@@ -5,31 +5,41 @@ import { useTheme } from "next-themes";
 import Image from "next/image";
 import DarkLogo from "@/public/DarkLogo.png";
 import WhiteLogo from "@/public/WhiteLogo.png";
-import { ArrowBigLeft, ArrowLeft } from "lucide-react";
+import { ArrowBigLeft, ArrowLeft, ChevronDown, ChevronUp, LucideHome, Search } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { LogoWithName } from "@/ui/Logo";
+import { useState } from "react";
 
 function AdminManageHeader() {
 
-    const { theme } = useTheme();
-
     const router = useRouter();
+    const [showNav, setShowNav] = useState(false);
 
     return (
         <header>
-        <div className="logo">
-            <button type="button" onClick={() => router.back()}>
-               <ArrowLeft/>
-            </button>
-            {theme !== "dark" ? (
-                <Image src={DarkLogo} alt="" width={70} height={70} style={{objectFit: "contain"}}/>
-            ) : (
-                <Image src={WhiteLogo} alt="" width={70} height={70} style={{objectFit: "contain"}}/>
-            )}
-                 nursingpastco
+        <div>
+            <div>
+                <button type="button" onClick={() => router.back()}>
+                <ArrowLeft/>
+                </button>
+                <LogoWithName />
+            </div>
+            <div>
+                <span onClick={() => setShowNav(!showNav)}>
+                     {showNav ? <ChevronDown /> : <ChevronUp />}
+                </span>
+            </div>
         </div>
-        <div className="navs">
-            <AppTheme />
-        </div>
+        
+        {showNav && (
+            <nav>
+                <div>
+                    <LucideHome />
+                    <AppTheme />
+                    <Search size={25}/>
+                </div>
+            </nav>
+        )}
         </header>
     )
 }

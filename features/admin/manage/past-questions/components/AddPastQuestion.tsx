@@ -10,7 +10,6 @@ function AddPastQuestion() {
         instituition: "",
         course: "",
         level: "",
-        title: ""
     })
 
     const [pdf, setPDF] = useState<File | null>(null);
@@ -28,7 +27,6 @@ function AddPastQuestion() {
         form_data.append("instituition", formData.instituition);
         form_data.append("course", formData.course);
         form_data.append("level", formData.level);
-        form_data.append("title", formData.title);
 
         if (pdf) {
             form_data.append("pdf", pdf);
@@ -42,9 +40,10 @@ function AddPastQuestion() {
             instituition: "",
             course: "",
             level: "",
-            title: ""
         });
+
         setPDF(null);
+        
         if (fileRef.current) {
             fileRef.current.value = "";
         }

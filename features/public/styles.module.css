@@ -117,22 +117,21 @@
 .hero h1 {
     text-align: center;
     text-transform: uppercase;
-    box-shadow: var(--box-shadow);
     padding: 1rem;
     color: var(--primary-color);
-    border-radius: 5px;
     width: 80%;
     margin: auto;
+    border-radius: 5px;
+    box-shadow: var(--box-shadow);
 }
 
 .hero h2 {
-    margin: 0;
     font-family: sans-serif;
     text-align: center;
     color: var(--bg-txt-color);
     text-transform: capitalize;
-    width: 70%;
     margin: auto;
+    width: 70%;
 }
 
 .hero img {

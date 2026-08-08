@@ -4,6 +4,7 @@ import { AdminManageNav } from "@/features/admin/dashboard/components/AdminManag
 function AdminDashboard() {
     return (
         <>
+        <h1>admin dashboard</h1>
         <AdminCard />
         <AdminManageNav />
         </>

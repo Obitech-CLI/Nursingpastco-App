@@ -49,8 +49,6 @@ function PastQuestions() {
         if (!res) return;
 
         setCourses(res.courses);
-
-        console.log(JSON.stringify(res.courses))
     }
 
     const HandleFetchPDFs = async () =>
@@ -66,8 +64,6 @@ function PastQuestions() {
         setPDFs(res.pastQuestions);
     }
 
-    console.log(FetchPDFs.error)
-
     useEffect(() => {
         HandleFetchCourses();
     }, [selectedInstituition, selectedLevel]);
@@ -79,17 +75,11 @@ function PastQuestions() {
     const HandleLevelChange = (level: string) =>
     {
         localStorage.setItem("selectedLevel", level);
-
-        const storedLevel = localStorage.getItem("selectedLevel");
-
-        if (storedLevel) {
-            setSelectedLevel(storedLevel)
-        }
+        setChangeLevel(prev => prev + 1)
     }
 
     return (
         <>
-        {changeLevel}
         <div className={styles.pastQuestions_hero}>
             <h2>{selectedInstituition}<br />past questions</h2>
             {selectedLogo && (
@@ -122,7 +112,7 @@ function PastQuestions() {
 
             {!FetchCourses.loading ? (
                 <>
-                {courses.length > 0 ? (
+                {courses.length > 0 && !FetchCourses.error ? (
                     <>
                     {courses.map(course => (
                         <div key={course.id}>
@@ -173,7 +163,7 @@ function PastQuestions() {
                     </>
                 ) : (
                     <>
-                    {FetchCourses.error && courses.length === 0 ? (
+                    {FetchCourses.error ? (
                         <div className={styles.retry}>
                             <p>{FetchCourses.error}</p>
                             <button onClick={HandleFetchCourses}>
