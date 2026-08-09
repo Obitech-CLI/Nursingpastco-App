@@ -89,12 +89,12 @@ section.offers h3 span {
 
 section.offers > div a {
     text-decoration: none;
-    padding: 1rem 2rem;
+    padding: 1rem 0;
     text-transform: capitalize;
     color: var(--bg-text-color);
     align-self: left;
     border-radius: 10px;
-    width: fit-content;
+    width: 100%;
     text-align: center;
     border: 1.5px solid rgb(49, 127, 49);
     background-color: transparent;
