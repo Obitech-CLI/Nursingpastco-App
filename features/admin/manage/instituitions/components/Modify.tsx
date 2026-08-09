@@ -36,7 +36,8 @@ function ModifyInstituitions({reload}:Props) {
 
     return (
         <div className={styles.modify}>
-            <h2>modify instituitions</h2>
+
+            <h2>instituitions</h2>
 
             {!FetchInstituitions.loading ? (
             <>

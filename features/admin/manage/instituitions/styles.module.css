@@ -1,12 +1,13 @@
 form.add > label span {
     position: absolute;
     left: 1rem;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem;
     text-transform: lowercase;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.9rem;
+    background-color: var(--input-span);
+    text-transform: capitalize;
 }
 
 form.add > label {
@@ -17,6 +18,9 @@ form.add > label {
 
 form.add > label.file span {
     position: relative;
+    box-shadow: var(--box-shadow);
+    text-transform: capitalize;
+    padding: 0.4rem 1.3rem;
 }
 
 form.add {
@@ -71,9 +75,8 @@ form.add input[type="file"] {
 
 .instituitions {
     display: flex;
-    overflow: auto;
+    flex-direction: column;
     align-items: center;
-    scrollbar-width: none;
     gap: 3rem;
     padding: 1rem 1rem 0;
 }
@@ -110,4 +113,8 @@ form.add input[type="file"] {
 
 .spinner .icon {
     color: var(--bg-txt-color);
+}
+
+.modify > h2 {
+    text-align: center;
 }

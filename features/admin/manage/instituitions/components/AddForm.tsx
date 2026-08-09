@@ -36,8 +36,6 @@ function AddForm(
 
     return (
         <form onSubmit={onSubmit} className={styles.add}>
-                
-                <h3>add instituition</h3>
 
                 <label className={styles.input}>
                     <input type="text" value={formData.instituition_name}
@@ -71,7 +69,7 @@ function AddForm(
                 </label>
 
                 <button type="submit">
-                    {!loading ? "add instituition" : <ClipLoader size={20} color="white"/>}
+                    {!loading ? "add" : <ClipLoader size={20} color="white"/>}
                 </button>
         </form>
     )

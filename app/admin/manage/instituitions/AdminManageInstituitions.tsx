@@ -3,7 +3,7 @@
 import { UseManageNav } from "@/contexts/admin/ManageNavProvider";
 import { AddInstituition } from "@/features/admin/manage/instituitions/components/AddInstituition";
 import { ModifyInstituitions } from "@/features/admin/manage/instituitions/components/Modify";
-import { Eye, Plus } from "lucide-react";
+import { Eye, Plus, Settings2 } from "lucide-react";
 import { useState } from "react";
 
 function AdminManageInstituitions() {
@@ -18,19 +18,23 @@ function AdminManageInstituitions() {
             <button type="button"
             onClick={() => setNavManageInstituitions({add: true, view: false})}
             style={{
-                display: navManageInstituitions.add ? "none" : "",
+                border: navManageInstituitions.add ? "none" : "",
                 gridArea: navManageInstituitions.add ? "1/ 1/ 1/ 1" : "",
+                fontSize: navManageInstituitions.add ? "1.3rem" : "",
             }}>
-                add instituitions{!navManageInstituitions.add ? <Plus /> : ""}
+                {!navManageInstituitions.add ? "add" : "add instituitions"}
+                {!navManageInstituitions.add ? <Plus /> : ""}
             </button>
 
             <button type="button"
             onClick={() => setNavManageInstituitions({add: false, view: true})}
             style={{
-                display: navManageInstituitions.view ? "none" : "",
+                border: navManageInstituitions.view ? "none" : "",
                 gridArea: navManageInstituitions.view ? "1/ 1/ 1/ 1" : "",
+                fontSize: navManageInstituitions.view ? "1.3rem" : "",
             }}>
-                view instituitions{!navManageInstituitions.view ? <Eye /> : ""}
+                {!navManageInstituitions.view ? "modify" : "modify instituitions"}
+                {!navManageInstituitions.view ? <Settings2 /> : ""}
             </button>
         </div>
 

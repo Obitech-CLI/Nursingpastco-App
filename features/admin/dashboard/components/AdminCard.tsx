@@ -30,7 +30,7 @@ function AdminCard() {
                 {admin?.lastname.slice(0, 1)}
             </div>
             
-            <h2>{admin?.firstname ?? "loading...."} {admin?.lastname ?? "loading..."}</h2>
+            <h3>{admin?.firstname ?? "loading...."} {admin?.lastname ?? "loading..."}</h3>
             {/*<LogoutAdminButton />*/}
         </div>
     )

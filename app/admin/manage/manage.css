@@ -6,21 +6,16 @@ main.manage_instituitions {
 }
 
 div.switch {
-    display: flex;
-    flex-direction: column;
-    justify-content: start;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     align-items: start;
     gap: 1rem;
-    margin: 0 0 0 1rem;
-    overflow: auto;
-    scrollbar-width: none;
 }
 
 div.switch > button {
-    padding: 1rem;
-    width: 80%;
+    padding: 1rem 0;
     border-radius: 10px;
-    border: 1.5px solid var(--primary-color);
+    border: 1.5px solid var(--secondary-color);
     text-transform: capitalize;
     color: var(--bg-txt-color);
     display: flex;
