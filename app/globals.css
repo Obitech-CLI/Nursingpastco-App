@@ -164,7 +164,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-top: 5.5rem;
+    margin: 5.5rem 0;
 }
 
 label {
