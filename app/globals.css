@@ -44,7 +44,7 @@ header {
     position: fixed;
     width: 100%;
     top: 0;
-    background-color: var(--nav-bg);
+    background-color: #c0ebff;
     z-index: 999;
 }
 
@@ -68,6 +68,7 @@ header > div button:last-child {
     display: flex;
     align-items: center;
     padding: 0.5rem 1.5rem;
+    background-color: var(--bg-color);
 }
 
 header > nav {
@@ -119,12 +120,33 @@ header nav {
     gap: 1rem;
 }*/
 
-footer {
-    padding: 1.5rem 1rem 1.5rem;
-}
-
 footer p {
     text-align: right;
+    margin: 1rem 1rem 5rem;
+}
+
+footer.public {
+    background-color: #c0ebff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+footer.public .socials {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+footer.public > span {
+    padding: 0.5rem 1rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.9);
+    border-radius: 5px;
 }
 
 form {
@@ -138,7 +160,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin-top: 5rem;
+    margin-top: 5.5rem;
 }
 
 label {

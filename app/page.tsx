@@ -6,6 +6,7 @@ import { Offers } from "@/features/home/components/Offers";
 import { InstuitionHero } from "@/features/home/components/InstituitionHero";
 import { CheckCircle2, PercentCircle } from "lucide-react";
 import { SubOffers } from "@/features/home/components/SubOffers";
+import { PublicFooter } from "./components/footers/Public";
 
 function HomePage() {
   return (
@@ -31,6 +32,7 @@ function HomePage() {
 
       <SubOffers />
     </main>
+    <PublicFooter />
     <Footer />
     </>
   )

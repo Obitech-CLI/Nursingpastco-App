@@ -1,4 +1,4 @@
-import { Footer } from "../components/Footer";
+import { PublicFooter } from "../components/footers/Public";
 import { PublicHeader } from "../components/headers/PublicHeader";
 
 export default function PublicLayout(
@@ -7,7 +7,7 @@ export default function PublicLayout(
         <>
         <PublicHeader />
         {children}
-        <Footer/>
+        <PublicFooter/>
         </>
     )
 }

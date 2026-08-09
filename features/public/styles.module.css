@@ -117,12 +117,6 @@
 .hero h1 {
     text-align: center;
     text-transform: uppercase;
-    padding: 1rem;
-    color: var(--primary-color);
-    width: 80%;
-    margin: auto;
-    border-radius: 5px;
-    box-shadow: var(--box-shadow);
 }
 
 .hero h2 {
@@ -135,9 +129,11 @@
 }
 
 .hero img {
-    width: 100%;
+    width: 95%;
     height: 250px;
     object-fit: cover;
     object-position: 20% 50%;
     position: relative;
+    margin: auto;
+    border-radius: 5px;
 }
