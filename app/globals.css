@@ -44,8 +44,10 @@ header {
     position: fixed;
     width: 100%;
     top: 0;
-    background-color: #c0ebff;
     z-index: 999;
+    border-bottom: 2px solid var(--secondary-color);
+    border-radius: 10px;
+    background-color: var(--nav-bg);
 }
 
 header > div {
@@ -126,7 +128,8 @@ footer p {
 }
 
 footer.public {
-    background-color: #c0ebff;
+    border-top: 2px solid var(--secondary-color);
+    border-radius: 10px;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -134,6 +137,7 @@ footer.public {
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
+    background-color: var(--nav-bg);
 }
 
 footer.public .socials {
@@ -144,8 +148,8 @@ footer.public .socials {
 
 footer.public > span {
     padding: 0.5rem 1rem;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.9);
+    color: var(--bg-txt-color);
+    border: var(--border);
     border-radius: 5px;
 }
 
