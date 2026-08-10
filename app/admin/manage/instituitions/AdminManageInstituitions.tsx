@@ -20,7 +20,7 @@ function AdminManageInstituitions() {
             style={{
                 border: navManageInstituitions.add ? "none" : "",
                 gridArea: navManageInstituitions.add ? "1/ 1/ 1/ 1" : "",
-                fontSize: navManageInstituitions.add ? "1.5rem" : "",
+                fontSize: navManageInstituitions.add ? "1.2rem" : "",
             }}>
                 {!navManageInstituitions.add ? "add" : "add\ninstituitions"}
                 {!navManageInstituitions.add ? <Plus /> : ""}
