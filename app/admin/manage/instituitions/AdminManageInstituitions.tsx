@@ -20,9 +20,9 @@ function AdminManageInstituitions() {
             style={{
                 border: navManageInstituitions.add ? "none" : "",
                 gridArea: navManageInstituitions.add ? "1/ 1/ 1/ 1" : "",
-                fontSize: navManageInstituitions.add ? "1.3rem" : "",
+                fontSize: navManageInstituitions.add ? "1.5rem" : "",
             }}>
-                {!navManageInstituitions.add ? "add" : "add instituitions"}
+                {!navManageInstituitions.add ? "add" : "add\ninstituitions"}
                 {!navManageInstituitions.add ? <Plus /> : ""}
             </button>
 
@@ -31,9 +31,9 @@ function AdminManageInstituitions() {
             style={{
                 border: navManageInstituitions.view ? "none" : "",
                 gridArea: navManageInstituitions.view ? "1/ 1/ 1/ 1" : "",
-                fontSize: navManageInstituitions.view ? "1.3rem" : "",
+                fontSize: navManageInstituitions.view ? "1.5rem" : "",
             }}>
-                {!navManageInstituitions.view ? "modify" : "modify instituitions"}
+                {!navManageInstituitions.view ? "modify" : "modify\ninstituitions"}
                 {!navManageInstituitions.view ? <Settings2 /> : ""}
             </button>
         </div>
