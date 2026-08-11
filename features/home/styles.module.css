@@ -184,10 +184,10 @@ section.offers > div > div h3 {
     padding: 0;
     margin: 0;
     font-size: 1.7rem;
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 1rem;
     width: fit-content;
     border-radius: 5px;
+    position: relative;
+    z-index: 10;
 }
 
 .sub_offers > h3 {
@@ -241,12 +241,20 @@ section.offers > div > div h3 {
 
 .sub_offers > div > div ul {
     list-style-type: none;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    display: flex;
     align-items: center;
     gap: 1rem;
     width: 100%;
     color: white;
+    position: relative;
+    z-index: 10;
+}
+
+.sub_offers .overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: absolute;
+    inset: 0;
+    border-radius: 5px;
 }
 
 .sub_offers > div ul li span {
@@ -266,7 +274,4 @@ section.offers > div > div h3 {
     text-align: center;
     align-items: center;
     gap: 0.5rem;
-    background-color: rgba(0, 0, 0, 0.8);
-    padding: 0.5rem 0;
-    border-radius: 5px;
 }

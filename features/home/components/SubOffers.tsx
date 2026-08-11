@@ -33,6 +33,7 @@ function SubOffers() {
                             higher<br />success
                         </li>
                     </ul>
+                    <div className={styles.overlay}></div>
                 </div>
 
                 <div className={styles.card2}>
@@ -51,6 +52,7 @@ function SubOffers() {
                             quality<br />textbooks
                         </li>
                     </ul>
+                    <div className={styles.overlay}></div>
                 </div>
 
                 <div className={styles.card3}>
@@ -69,6 +71,7 @@ function SubOffers() {
                             stay<br />ahead
                         </li>
                     </ul>
+                    <div className={styles.overlay}></div>
                 </div>
             </div>
 
