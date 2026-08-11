@@ -25,6 +25,7 @@ function AdminCard() {
 
     return (
         <div className={styles.card}>
+            <h2>admin dashboard</h2>
             <div className={styles.image}>
                 {admin?.firstname.slice(0, 1)} 
                 {admin?.lastname.slice(0, 1)}

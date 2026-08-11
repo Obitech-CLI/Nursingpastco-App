@@ -50,21 +50,29 @@ function SearchCourses({searchData, setSearchData, search, loading}:Props) {
         <fieldset className={styles.search}>
             <legend>search</legend>
 
-            <div onClick={() => setShowInstituitions(!showInstituitions)}>
+            <div onClick={() => {
+                setShowInstituitions(!showInstituitions);
+                setShowLevels(false);
+                }}>
                 <span>{!searchData.instituition ? "instituitions" : searchData.instituition}</span>
                 {instituitions.length > 0 && (
                 <>
-                {showInstituitions ? <ChevronUp /> : <ChevronDown />}
+                {instituitions.length > 0 && showInstituitions ? <ChevronUp /> : <ChevronDown />}
                 </>
                 )}
 
-                {instituitions.length === 0 && !fetctInstituitions.loading ? (
+                {instituitions.length === 0 && (
                     <button onClick={() => {
                         setReloadInstituitions(prev => prev + 1);
                     }}>
-                        {!fetctInstituitions.loading ? <RotateCw size={20}/> : <ClipLoader size={15}/>}
+                        {fetctInstituitions.loading && (
+                            <ClipLoader size={25}/>
+                        )}
+
+                        {!fetctInstituitions.loading && instituitions.length === 0 ? 
+                        <RotateCw size={20}/> : null}
                     </button>
-                ) : (null)}
+                )}
 
                 {showInstituitions && (
                 <>
@@ -83,8 +91,11 @@ function SearchCourses({searchData, setSearchData, search, loading}:Props) {
                 )}
             </div>
 
-            <div onClick={() => setShowLevels(!showLevels)}>
-                    <span>{!searchData.level ? "select level" : searchData.level}</span>
+            <div onClick={() => {
+                setShowLevels(!showLevels);
+                setShowInstituitions(false);
+            }}>
+                <span>{!searchData.level ? "select level" : searchData.level}</span>
                     <>
                     {showLevels ? <ChevronUp /> : <ChevronDown />}
                     </>

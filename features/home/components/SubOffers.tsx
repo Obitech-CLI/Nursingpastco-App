@@ -2,9 +2,9 @@
 import { BadgeCheck, Bolt, BookOpen, Brain, CalendarCheck2, ChartColumnIncreasingIcon, ClipboardList, Clock3, FileCheck2, Target, Unlock } from "lucide-react";
 import styles from "../styles.module.css";
 import { Logo } from "@/ui/Logo";
-import PImage from "@/public/PastQuestions.png";
-import TImage from "@/public/Textbooks.png";
-import CImage from "@/public/Contents.png";
+import PImage from "@/public/RealQuestions.png";
+import TImage from "@/public/StudyMaterials.png";
+import CImage from "@/public/UpdatedContent.png";
 import Image from "next/image";
 
 function SubOffers() {
@@ -17,7 +17,7 @@ function SubOffers() {
             </section>
 
             <div>
-                <div>
+                <div className={styles.card1}>
                     <h2>study real<br />past questions</h2>
                     <ul>
                         <li>
@@ -35,7 +35,7 @@ function SubOffers() {
                     </ul>
                 </div>
 
-                <div>
+                <div className={styles.card2}>
                     <h2>accurate nursing<br />study materials</h2>
                     <ul>
                         <li>
@@ -53,7 +53,7 @@ function SubOffers() {
                     </ul>
                 </div>
 
-                <div>
+                <div className={styles.card3}>
                     <h2>get regularly<br />updated contents</h2>
                     <ul>
                         <li>

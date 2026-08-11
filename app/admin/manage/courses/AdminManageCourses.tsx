@@ -3,8 +3,7 @@
 import { UseManageNav } from "@/contexts/admin/ManageNavProvider";
 import { AddCourse } from "@/features/admin/manage/courses/components/AddCourse";
 import { ModifyCourses } from "@/features/admin/manage/courses/components/Modify";
-import "./courses.css";
-import { Eye, Plus } from "lucide-react";
+import { Eye, Plus, Settings2 } from "lucide-react";
 
 function AdminManageCourses() {
 
@@ -16,17 +15,21 @@ function AdminManageCourses() {
             <button type="button"
             onClick={() => setNavManageCourses({add: true, view: false})}
             style={{
-                display: navManageCourses.add ? "none" : "",
+                border: navManageCourses.add ? "none" : "",
+                gridArea: navManageCourses.add ? "1/ 1/ 1/ 1" : "",
             }}>
-                add courses{!navManageCourses.add ? <Plus /> : ""}
+                {!navManageCourses.add ? "add" : "add courses"}
+                {!navManageCourses.add ? <Plus /> : ""}
             </button>
 
             <button type="button"
             onClick={() => setNavManageCourses({add: false, view: true})}
             style={{
-                display: navManageCourses.view ? "none" : "",
+                border: navManageCourses.view ? "none" : "",
+                gridArea: navManageCourses.view ? "1/ 1/ 1/ 1" : "",
             }}>
-                view courses{!navManageCourses.view ? <Eye /> : ""}
+                {!navManageCourses.view ? "modify" : "modify courses"}
+                {!navManageCourses.view ? <Settings2 /> : ""}
             </button>
         </div>
         

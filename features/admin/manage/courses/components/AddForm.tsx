@@ -50,23 +50,26 @@ function AddForm({formData, setFormData, onSubmit, loading}:Props) {
 
     return (
         <form onSubmit={onSubmit} className={styles.add}>
-            <h3>add course</h3>
 
-            <label onClick={() => setShowInstituitions(!showInstituitions)} className={styles.instituitions}>
+            <label onClick={() => {
+                setShowInstituitions(!showInstituitions);
+                setShowLevels(false);
+            }} className={styles.instituitions}>
             {!formData.instituition ? "select instituition" : formData.instituition}
 
-            {instituitions.length === 0 && !fetctInstituitions.loading ? (
+            {instituitions.length === 0 && (
                 <button type="button" onClick={() => {
                     setReloadInstituitions(prev => prev + 1);
                     }}>
-                    {!fetctInstituitions.loading ? <RotateCw size={20}/> : <ClipLoader size={0}/>}
-                    </button>
-            ) : (null)}
+                    {fetctInstituitions.loading && (<ClipLoader size={25}/>)}
+                    {!fetctInstituitions.loading && instituitions.length === 0 ? 
+                    <RotateCw size={20}/> : null}
+                </button>
+            )}
 
             {instituitions.length > 0 && (
-                <>
-                {showInstituitions ? <ChevronUp /> : <ChevronDown />}
-                </>
+                <>{showInstituitions && instituitions.length > 0 ? 
+                <ChevronUp /> : <ChevronDown />}</>
             )}
 
             {showInstituitions && (
@@ -100,7 +103,10 @@ function AddForm({formData, setFormData, onSubmit, loading}:Props) {
                 />
             </label>
 
-            <label onClick={() => setShowLevels(!showLevels)} className={styles.levels}>
+            <label onClick={() => {
+                setShowLevels(!showLevels);
+                setShowInstituitions(false);
+            }} className={styles.levels}>
                 {!formData.level ? "select level" : formData.level}
 
                 {showLevels ? <ChevronUp /> : <ChevronDown />}
@@ -122,7 +128,7 @@ function AddForm({formData, setFormData, onSubmit, loading}:Props) {
             </label>
 
             <button type="submit" disabled={loading}>
-                {!loading ? "add course" : <ClipLoader size={20} color="white"/>}
+                {!loading ? "add" : <ClipLoader size={20} color="white"/>}
             </button>
         </form>
     )

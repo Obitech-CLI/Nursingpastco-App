@@ -43,17 +43,14 @@ function ModifyCourses() {
         />
 
         <div className={styles.modify}>
-            {searchedCourses.length > 0 && (
-                <h2>modify courses</h2>
-            )}
             
             {!FetchSearchData.loading ? (
             <>
             {searchedCourses.length > 0 ? (
                 <div className={styles.searched}>
 
-                    <h2>{searchedCourses[0].instituition}</h2>
-                    <h2>{searchedCourses[0].level}</h2>
+                    <h3>{searchedCourses[0].instituition}</h3>
+                    <h3>{searchedCourses[0].level}</h3>
 
                     <div className={styles.courses}>
                     {searchedCourses.map(courses => (
