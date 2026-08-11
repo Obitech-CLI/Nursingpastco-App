@@ -188,6 +188,7 @@ section.offers > div > div h3 {
     border-radius: 5px;
     position: relative;
     z-index: 10;
+    text-shadow: 0px 0px 3px black;
 }
 
 .sub_offers > h3 {
@@ -251,7 +252,7 @@ section.offers > div > div h3 {
 }
 
 .sub_offers .overlay {
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.4);
     position: absolute;
     inset: 0;
     border-radius: 5px;
