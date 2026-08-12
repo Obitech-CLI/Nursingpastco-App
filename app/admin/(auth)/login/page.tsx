@@ -3,7 +3,7 @@ import LoginAdmin from "./LoginAdmin";
 export default function Page() {
     return (
         <main className="auth">
-            <h1>login account</h1>
+            <h2>login admin</h2>
             <LoginAdmin />
         </main>
     )

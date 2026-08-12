@@ -227,6 +227,8 @@ h1 {
     margin: 0 1rem;
 }
 
-.auth > h1 {
-    margin: 1rem;
+.auth > h2 {
+    margin: 1rem 1rem 0 1rem;
+    background-color: var(--h2);
+    padding: 1rem;
 }

@@ -29,7 +29,7 @@ function LoginForm({formData, setFormData, onSubmit, loading}:FormDataProps) {
     return (
         <form onSubmit={onSubmit} className={styles.auth}>
             <h2>sign in</h2>
-            <h3>welcome admin</h3>
+            <h3>welcome back</h3>
 
             <label><Mail size={35}/>
                 <input type="email" value={formData.email}
