@@ -8,6 +8,7 @@ import { ClipLoader } from "react-spinners";
 import styles from "../style.module.css";
 import { Check, ChevronDown, ChevronUp, File, RotateCcw } from "lucide-react";
 import Link from "next/link";
+import { toast } from "sonner";
 
 interface FormDataTypes {
     instituition: string,
@@ -43,6 +44,12 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
     const HandleFetchInstituitions = async () =>
     {
         const res = await FetchInstituitons.Fetch("/instituitions");
+
+        if (FetchInstituitons.error) {
+            toast.error(FetchInstituitons.error)
+            return;
+        }
+
         if (!res) return;
 
         setInstituitions(res.instituitions);
@@ -50,10 +57,24 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
 
     const HandleFetchCourses = async () =>
     {
-        if (!selectedInstituition && !selectedLevel) return;
+        if (!selectedInstituition) {
+            toast.error("no instituition selected")
+            return;
+        }
+        if (!selectedLevel) {
+            toast.error("no level selected")
+            return;
+        }
+        if (!selectedInstituition && !selectedLevel) {
+            return;
+        }
         
         const res = await FetchCourses.Fetch(`/courses?instituition=${selectedInstituition}&level=${selectedLevel}`);
         
+        if (FetchCourses.error) {
+            toast.error(FetchCourses.error)
+            return;
+        }
         if (!res) {
             setCourses([]);
             return;
@@ -74,9 +95,10 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
     return (
         <form onSubmit={onSubmit} className={styles.add}>
 
-            <h3>add past-question</h3>
-
-                <label onClick={() => setShowInstituitions(!showInstituitions)} 
+                <label onClick={() => {
+                    if (instituitions.length === 0) return;
+                    setShowInstituitions(!showInstituitions)
+                }} 
                 className={styles.select}>
                     {!formData.instituition ? "select instituition" : formData.instituition}
                     {instituitions.length > 0 && (
@@ -86,7 +108,10 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
                     )}
                     {instituitions.length === 0 && (
                         <button onClick={HandleFetchInstituitions} type="button">
-                            {FetchInstituitons.loading ? <ClipLoader size={20}/> : <RotateCcw />}
+                            {FetchInstituitons.loading && (<ClipLoader size={20}/>)}
+                            {!FetchInstituitons.loading && instituitions.length === 0 ? (
+                                <RotateCcw />
+                            ):(null)}
                         </button>
                     )}
 

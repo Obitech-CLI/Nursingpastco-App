@@ -12,6 +12,8 @@ type ContextProps = {
     setNavManageInstituitions: React.Dispatch<SetStateAction<ShowProps>>;
     navManageCourses: ShowProps;
     setNavManageCourses: React.Dispatch<SetStateAction<ShowProps>>;
+    navManagePastQuestions: ShowProps;
+    setNavManagePastQuestions: React.Dispatch<SetStateAction<ShowProps>>;
 }
 
 const ManageNavContext = createContext<ContextProps | null>(null);
@@ -28,12 +30,18 @@ function ManageNavProvider({children}:{children: ReactNode}) {
         view: false,
     });
 
+    const [navManagePastQuestions, setNavManagePastQuestions] = useState({
+        add: false,
+        view: false,
+    });
+
 
 
     return (
         <ManageNavContext.Provider value={{
             navManageInstituitions, setNavManageInstituitions,
-            navManageCourses, setNavManageCourses
+            navManageCourses, setNavManageCourses,
+            navManagePastQuestions, setNavManagePastQuestions
         }}>
             {children}
         </ManageNavContext.Provider>

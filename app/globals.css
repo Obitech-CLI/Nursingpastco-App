@@ -17,6 +17,7 @@
   --input-span: white;
   --input-span-txt: black;
   --header-item: rgba(0, 0, 0, 0.5);
+  --h2: rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="dark"] {
@@ -28,7 +29,8 @@
   --modal: rgba(0, 0, 0, 0.5);
   --input-span: black;
   --input-span-txt: white;
-  --header-item: rgba(225, 225, 225, 0.5)
+  --header-item: rgba(225, 225, 225, 0.5);
+  --h2: rgba(225, 225, 225, 0.2);
 }
 
 body {

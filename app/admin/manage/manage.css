@@ -5,11 +5,17 @@ main.manage {
     padding: 1rem;
 }
 
+main.manage > h2 {
+    background-color: var(--h2);
+    padding: 1rem;
+}
+
 div.switch {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: start;
     gap: 1rem;
+    padding-top: 1rem;
 }
 
 div.switch > button {

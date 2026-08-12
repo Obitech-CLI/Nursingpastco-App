@@ -7,6 +7,7 @@ import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "../styles.module.css";
 import { ChevronDown, ChevronUp, RotateCw, Search } from "lucide-react";
+import { toast } from "sonner";
 
 interface SearchDataTypes {
     instituition: string;
@@ -35,6 +36,11 @@ function SearchCourses({searchData, setSearchData, search, loading}:Props) {
     const HandleFetch = async () =>
     {
         const res = await fetctInstituitions.Fetch("/instituitions");
+        if (fetctInstituitions.error) {
+            toast.error(fetctInstituitions.error);
+            return;
+        }
+
         if (res) {
             if (res.success) {
                 setInstituitions(res.instituitions);
