@@ -8,6 +8,7 @@ main.manage {
 main.manage > h2 {
     background-color: var(--h2);
     padding: 1rem;
+    margin: 0;
 }
 
 div.switch {
