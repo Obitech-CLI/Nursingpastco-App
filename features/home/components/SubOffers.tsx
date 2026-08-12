@@ -22,15 +22,15 @@ function SubOffers() {
                     <ul>
                         <li>
                             <span><ClipboardList /></span>
-                            exam<br />focused
+                            <h4>exam<br />focused</h4>
                         </li>
                         <li>
                             <span><Brain/></span>
-                            better<br />preparation
+                            <h4>better<br />preparation</h4>
                         </li>
                         <li>
                             <span><ChartColumnIncreasingIcon /></span>
-                            higher<br />success
+                            <h4>higher<br />success</h4>
                         </li>
                     </ul>
                     <div className={styles.overlay}></div>
@@ -41,15 +41,15 @@ function SubOffers() {
                     <ul>
                         <li>
                             <span><Target /></span>
-                            accurate<br />notes
+                            <h4>accurate<br />notes</h4>
                         </li>
                         <li>
                             <span><BookOpen /></span>
-                            relevant<br />topics
+                            <h4>relevant<br />topics</h4>
                         </li>
                         <li>
                             <span><BadgeCheck /></span>
-                            quality<br />textbooks
+                            <h4>quality<br />textbooks</h4>
                         </li>
                     </ul>
                     <div className={styles.overlay}></div>
@@ -60,15 +60,15 @@ function SubOffers() {
                     <ul>
                         <li>
                             <span><CalendarCheck2 /></span>
-                            frequent<br />updates
+                            <h4>frequent<br />updates</h4>
                         </li>
                         <li>
                             <span><FileCheck2 /></span>
-                            accurate<br />and reliable
+                            <h4>accurate<br />and reliable</h4>
                         </li>
                         <li>
                             <span><Clock3 /></span>
-                            stay<br />ahead
+                            <h4>stay<br />ahead</h4>
                         </li>
                     </ul>
                     <div className={styles.overlay}></div>

@@ -137,6 +137,7 @@ footer.public {
     justify-content: space-between;
     padding: 1rem;
     background-color: var(--nav-bg);
+    z-index: 999;
 }
 
 footer.public .socials {
