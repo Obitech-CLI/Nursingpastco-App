@@ -10,8 +10,8 @@ function AdminManageNav() {
         <div className={styles.manage_nav}>
             <nav>
                 <div>
-                    <h2>users</h2>
-                    <h3>available: 3</h3>
+                    <h3>users</h3>
+                    <h4>available: 3</h4>
                     <Link href="">
                     <Settings size={25} className={styles.icon}/>
                       manage
@@ -19,8 +19,8 @@ function AdminManageNav() {
                 </div>
                 
                 <div>
-                    <h2>instituitions</h2>
-                    <h3>available: 6</h3>
+                    <h3>instituitions</h3>
+                    <h4>available: 6</h4>
                     <Link href="/admin/manage/instituitions">
                     <Settings size={25} className={styles.icon}/>
                       manage
@@ -28,8 +28,8 @@ function AdminManageNav() {
                 </div>
 
                 <div>
-                    <h2>courses</h2>
-                    <h3>available: 7</h3>
+                    <h3>courses</h3>
+                    <h4>available: 7</h4>
                     <Link href="/admin/manage/courses">
                     <Settings size={25} className={styles.icon}/>
                      manage
@@ -37,8 +37,8 @@ function AdminManageNav() {
                 </div>
 
                 <div>
-                    <h2>past questions</h2>
-                    <h3>available: 8</h3>
+                    <h3>past questions</h3>
+                    <h4>available: 8</h4>
                     <Link href="/admin/manage/past-questions">
                     <Settings size={25} className={styles.icon}/>
                       manage
