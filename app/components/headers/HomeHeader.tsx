@@ -17,7 +17,7 @@ function HomeHeader() {
                 <LogoWithName />
                 <div>
                     <button onClick={() => setShowNav(!showNav)}>
-                     {showNav ? <ChevronDown /> : <ChevronUp />}
+                     {showNav ? <ChevronDown color="black"/> : <ChevronUp color="black"/>}
                     </button>
                     <button>login</button>
                 </div>
