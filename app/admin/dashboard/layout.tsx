@@ -1,4 +1,4 @@
-import { Footer } from "@/app/components/Footer";
+import { AdminFooter } from "@/app/components/footers/Admin";
 import { AdminDashHeader } from "@/app/components/headers/AdminDashHeader";
 
 export default function AdminDashboardLayout(
@@ -7,7 +7,7 @@ export default function AdminDashboardLayout(
         <>
         <AdminDashHeader />
         {children}
-        <Footer />
+        <AdminFooter />
         </>
     )
 }

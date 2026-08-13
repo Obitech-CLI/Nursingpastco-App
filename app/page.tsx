@@ -1,5 +1,4 @@
 import { HomeHeader } from "./components/headers/HomeHeader";
-import { Footer } from "./components/Footer";
 import styles from "./page.module.css";
 import { Hero } from "@/features/home/components/Hero";
 import { Offers } from "@/features/home/components/Offers";
@@ -33,7 +32,6 @@ function HomePage() {
       <SubOffers />
     </main>
     <PublicFooter />
-    <Footer />
     </>
   )
 }

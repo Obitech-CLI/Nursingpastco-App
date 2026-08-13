@@ -32,7 +32,7 @@ function AdminCard() {
             </div>
             
             <h3>{admin?.firstname ?? "loading...."} {admin?.lastname ?? "loading..."}</h3>
-            {/*<LogoutAdminButton />*/}
+            <LogoutAdminButton />
         </div>
     )
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { UsePost } from "@/hooks/usePost";
+import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ClipLoader } from "react-spinners";
 
@@ -24,7 +25,7 @@ function LogoutAdminButton() {
         <button type="button" 
         onClick={HandleLogout} 
         disabled={loading}>
-            {!loading ? "logout" : <ClipLoader size={20}/>}
+            {!loading ? <LogOut size={30}/> : <ClipLoader size={20}/>}
         </button>
     )
 }

@@ -1,4 +1,4 @@
-import { Footer } from "@/app/components/Footer";
+import { AdminFooter } from "@/app/components/footers/Admin";
 import { AdminAuthHeader } from "@/app/components/headers/AdminAuthHeader";
 
 export default function AdminAuthLayout(
@@ -7,7 +7,7 @@ export default function AdminAuthLayout(
         <>
         <AdminAuthHeader />
         {children}
-        <Footer />
+        <AdminFooter />
         </>
     )
 }
