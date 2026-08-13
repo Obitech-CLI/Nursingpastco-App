@@ -4,6 +4,7 @@ import { UseManageNav } from "@/contexts/admin/ManageNavProvider";
 import { AddPastQuestion } from "@/features/admin/manage/past-questions/components/AddPastQuestion";
 import { Plus, Settings2 } from "lucide-react";
 import "../manage.css";
+import { ModifyPastQuestions } from "@/features/admin/manage/past-questions/components/Modify";
 
 function AdminManagePastQuestions() {
 
@@ -34,6 +35,7 @@ function AdminManagePastQuestions() {
         </div>
 
         {navManagePastQuestions.add && (<AddPastQuestion />)}
+        {navManagePastQuestions.view && (<ModifyPastQuestions />)}
         </>
     )
 }

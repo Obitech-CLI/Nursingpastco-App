@@ -33,3 +33,156 @@ div.switch > button {
     justify-content: center;
     white-space: pre-line;
 }
+
+fieldset.search {
+    border: var(--border);
+    padding: 0.5rem 1rem 1rem;
+    margin: 1rem 0rem 1rem;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    justify-content: space-between;
+    gap: 0.5rem;
+}
+
+fieldset.search legend {
+    text-transform: capitalize;
+    padding: 0 0.5rem 0;
+}
+
+fieldset.search > div > span {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+fieldset.search > div ul {
+    position: absolute;
+    top: 2.5rem;
+    background-color: var(--nav-bg);
+    z-index: 5;
+    list-style-type: none;
+    left: 50%;
+    width: 90%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+    border-radius: 10px;
+    height: 150px;
+    overflow: auto;
+    text-align: center;
+}
+
+fieldset.search > div {
+    box-shadow: var(--box-shadow);
+    border-radius: 10px;
+    text-transform: capitalize;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    padding: 0 1rem;
+    white-space: nowrap;
+    gap: 1rem;
+    width: 100%;
+    position: relative;
+}
+
+fieldset.search > div ul li {
+    border: var(--border);
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+fieldset.search > button {
+    border: none;
+    color: white;
+    text-transform: capitalize;
+    background-color: transparent;
+    height: 40px;
+    background-color: var(--secondary-color);
+    width: 50%;
+    border-radius: 50px;
+}
+
+.modify > .retry, .loading, .searched {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-transform: capitalize;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+
+.modify > .retry > button {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    text-transform: capitalize;
+    border-radius: 50px;
+}
+
+.modify h2 {
+    margin: 0 3.5rem;
+    color: var(--bg-txt-color);
+    font-family: sans-serif;
+}
+
+.modify > .searched .data {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.modify > .searched .data > div {
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+    text-align: center;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.modify > .searched .data > div h4 {
+    border: var(--border);
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    width: fit-content;
+    margin: auto;
+}
+
+.modify > .searched .data .instituitions h4 {
+    border: none;
+}
+
+.modify > .searched .data .instituitions img {
+    border-radius: 50%;
+    object-fit: contain;
+}
+
+.modify > .searched .data .instituitions > span {
+    text-transform: uppercase;
+}
+
+.modify > .searched .data .instituitions {
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modify > .searched .data .instituitions > div {
+    border: var(--border);
+    width: 100%;
+    padding: 1rem;
+    border-radius: 5px;
+}

@@ -19,8 +19,8 @@ const AdminAuth = async () =>
     let decoded: JwtPayload;
     try {
         decoded = jwt.verify(token, SECRET) as JwtPayload;
-        if (!decoded) { 
-            cookieStore.delete("adminToken") 
+        if (!decoded) {
+            cookieStore.delete("adminToken");
         }
     } catch (err) {
         console.error(err);

@@ -53,14 +53,14 @@ function SearchCourses({searchData, setSearchData, search, loading}:Props) {
     }, [reloadInstituitions]);
 
     return (
-        <fieldset className={styles.search}>
+        <fieldset className="search">
             <legend>search</legend>
 
             <div onClick={() => {
                 setShowInstituitions(!showInstituitions);
                 setShowLevels(false);
                 }}>
-                <span>{!searchData.instituition ? "instituitions" : searchData.instituition}</span>
+                <span>{!searchData.instituition ? "select instituition" : searchData.instituition}</span>
                 {instituitions.length > 0 && (
                 <>
                 {instituitions.length > 0 && showInstituitions ? <ChevronUp /> : <ChevronDown />}

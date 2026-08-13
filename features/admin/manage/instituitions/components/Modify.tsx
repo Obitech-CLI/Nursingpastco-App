@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "../styles.module.css";
-import { Edit3Icon, X } from "lucide-react";
+import { Edit, Edit3Icon, X } from "lucide-react";
 import { useTheme } from "next-themes";
 
 type Props = {
@@ -35,49 +35,51 @@ function ModifyInstituitions({reload}:Props) {
     const { theme } = useTheme();
 
     return (
-        <div className={styles.modify}>
-
-            <h2>instituitions</h2>
+        <div className="modify">
 
             {!FetchInstituitions.loading ? (
             <>
             {instituitions.length > 0 ? (
-                <div className={styles.instituitions}>
-                    {instituitions.map(instituition => (
-                        <div className={styles.instituition} key={instituition.id}>
+                <div className="searched">
+                    <h2>instituitions</h2>
 
-                        <div>
-                            <h4>{instituition.instituition_name}</h4>
-                            <div className={styles.logo}>
-                                <Image 
+                    <div className="data">
+                    {instituitions.map(instituition => (
+                        <div key={instituition.id} className="instituitions">
+                        
+                            <Image 
                                 alt="" 
                                 src={instituition.instituition_logo} 
-                                height={130} 
-                                width={130}
-                                />
-                            </div>
-                            <span>{instituition.instituition_abbr}</span>
-                        </div>
+                                height={150} 
+                                width={150}
+                            />
 
-                        <div className={styles.btns}>
+                            <div>
+
+                            <span>{instituition.instituition_abbr}</span>
+                            <h4>{instituition.instituition_name}</h4>
+
+                            <div className={styles.btns}>
                             <button>
-                                <Edit3Icon color="navy" size={30}/>
+                                <Edit color="navy" size={30}/>
                             </button>
 
                             <button>
                                 <X color="red" size={30}/>
                             </button>
-                        </div>
+                            </div>
 
+                            </div>
                         </div>
                     ))}
+                    </div>
                 </div>
             ) : (
                 <>
                 {!FetchInstituitions.loading && !FetchInstituitions.error ? (
                     <p className={styles.notfound}>no instituitions found</p>
                 ) : (
-                    <div className={styles.retry}>
+                    <div className="retry">
                         <p>{FetchInstituitions.error}</p>
                         <button onClick={HandleFetch}>
                             retry
@@ -88,7 +90,7 @@ function ModifyInstituitions({reload}:Props) {
             )}
             </>
             ) : (
-                <div className={styles.spinner}>
+                <div className="loading">
                     <ClipLoader 
                     size={50} 
                     cssOverride={{ borderWidth: "2px" }}

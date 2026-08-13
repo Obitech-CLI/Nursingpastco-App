@@ -1,11 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { SearchCourses } from "./SearchCourses";
+import { SearchCourses } from "./Search";
 import { UseFetch } from "@/hooks/useFetch";
 import { ClipLoader } from "react-spinners";
 import { CourseDataTypes } from "@/types/types";
 import styles from "../styles.module.css";
+import { Edit, X } from "lucide-react";
 
 function ModifyCourses() {
 
@@ -42,20 +43,30 @@ function ModifyCourses() {
         loading={FetchSearchData.loading}
         />
 
-        <div className={styles.modify}>
+        <div className="modify">
             
             {!FetchSearchData.loading ? (
             <>
             {searchedCourses.length > 0 ? (
-                <div className={styles.searched}>
+                <div className="searched">
 
-                    <h3>{searchedCourses[0].instituition}</h3>
-                    <h3>{searchedCourses[0].level}</h3>
+                    <h2>{searchedCourses[0].instituition}</h2>
+                    <h3>{searchedCourses[0].level} courses</h3>
 
-                    <div className={styles.courses}>
+                    <div className="data">
                     {searchedCourses.map(courses => (
                         <div key={courses.id}>
-                            {courses.course}
+                            <h4>{courses.course}</h4>
+
+                            <div className="btns">
+                            <button>
+                                <Edit color="navy" size={25}/>
+                            </button>
+
+                            <button>
+                                <X color="red" size={25}/>
+                            </button>
+                            </div>
                         </div>
                     ))}
                     </div>
@@ -64,7 +75,7 @@ function ModifyCourses() {
             ) : (
                 <>
                 {FetchSearchData.error && !FetchSearchData.loading ? (
-                    <div className={styles.retry}>
+                    <div className="retry">
                         <h3>{FetchSearchData.error}</h3>
                         <button type="button"
                         onClick={HandleSearch}>
@@ -76,7 +87,7 @@ function ModifyCourses() {
             )}
             </>
             ) : (
-                <div className={styles.loading}>
+                <div className="loading">
                 <ClipLoader size={50} cssOverride={{ borderWidth: "2px" }}/>
                 </div>
             )}
