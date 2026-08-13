@@ -51,7 +51,7 @@ header {
     top: 0;
     z-index: 999;
     border-bottom: 3px solid var(--secondary-color);
-    border-radius: 10px;
+    border-radius: 0 0 10px 10px;
     background-color: var(--header-bg);
 }
 
@@ -113,7 +113,6 @@ button {
 
 footer.admin {
     border-top: 3px solid var(--secondary-color);
-    border-radius: 10px;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -123,7 +122,6 @@ footer.admin {
 
 footer.public {
     border-top: 3px solid var(--secondary-color);
-    border-radius: 10px;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -136,6 +134,7 @@ footer.public {
 
 footer {
     background-color: var(--footer-bg);
+    border-radius: 10px 10px 0 0;
 }
 
 footer.public .socials {
