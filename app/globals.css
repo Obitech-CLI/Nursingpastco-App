@@ -6,7 +6,7 @@
 }
 
 :root {
-  --bg-color: white;
+  --bg-color: whitesmoke;
   --bg-txt-color: black;
   --box-shadow: 0px 0px 2px black;
   --nav-bg: white;
@@ -18,10 +18,12 @@
   --input-span-txt: black;
   --header-item: rgba(0, 0, 0, 0.5);
   --h2: rgba(0, 0, 0, 0.9);
+  --header-bg: white;
+  --footer-bg: white;
 }
 
 [data-theme="dark"] {
-  --bg-color: rgba(0, 0, 0, 0.9);
+  --bg-color: rgba(0, 0, 0, 0.5);
   --bg-txt-color: white;
   --box-shadow: 0px 0px 2px white;
   --nav-bg: black;
@@ -31,12 +33,13 @@
   --input-span-txt: white;
   --header-item: rgba(225, 225, 225, 0.5);
   --h2: white;
+  --header-bg: black;
+  --footer-bg: black;
 }
 
 body {
     background-color: var(--bg-color);
     color: var(--bg-txt-color);
-    padding: 0 0.3rem;
 }
 
 header {
@@ -49,7 +52,7 @@ header {
     z-index: 999;
     border-bottom: 3px solid var(--secondary-color);
     border-radius: 10px;
-    background-color: var(--nav-bg);
+    background-color: var(--header-bg);
 }
 
 header > div {
@@ -115,7 +118,6 @@ footer.admin {
     bottom: 0;
     width: 100%;
     padding: 1rem;
-    background-color: var(--nav-bg);
     text-align: right;
 }
 
@@ -129,8 +131,11 @@ footer.public {
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-    background-color: var(--nav-bg);
     z-index: 999;
+}
+
+footer {
+    background-color: var(--footer-bg);
 }
 
 footer.public .socials {
