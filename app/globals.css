@@ -13,13 +13,15 @@
   --border: 1.5px solid black;
   --primary-color: rgb(49, 127, 49);
   --secondary-color: #002b4c;
-  --modal: rgba(225, 225, 225, 0.5);
+  --modal: rgba(225, 225, 225, 0.8);
+  --modal-span: black;
+  --modal-txt-span: white;
   --input-span: white;
   --input-span-txt: black;
   --header-item: rgba(0, 0, 0, 0.5);
   --h2: rgba(0, 0, 0, 0.9);
-  --header-bg: #c0ebff;
-  --footer-bg: #c0ebff;
+  --header-bg: white;
+  --footer-bg: white;
 }
 
 [data-theme="dark"] {
@@ -29,12 +31,14 @@
   --nav-bg: black;
   --border: 1.5px solid white;
   --modal: rgba(0, 0, 0, 0.5);
+  --modal-span: white;
+  --modal-txt-span: black;
   --input-span: black;
   --input-span-txt: white;
   --header-item: rgba(225, 225, 225, 0.5);
   --h2: white;
-  --header-bg: #c0ebff;
-  --footer-bg: #c0ebff;
+  --header-bg: black;
+  --footer-bg: black;
   
 }
 
@@ -51,7 +55,7 @@ header {
     width: 100%;
     top: 0;
     z-index: 999;
-    border-bottom: 3px solid var(--secondary-color);
+    border-bottom: 4px solid var(--secondary-color);
     border-radius: 0 0 10px 10px;
     background-color: var(--header-bg);
 }
@@ -113,7 +117,7 @@ button {
 }
 
 footer.admin {
-    border-top: 3px solid var(--secondary-color);
+    border-top: 4px solid var(--secondary-color);
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -122,7 +126,7 @@ footer.admin {
 }
 
 footer.public {
-    border-top: 3px solid var(--secondary-color);
+    border-top: 4px solid var(--secondary-color);
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -163,7 +167,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    margin: 5.5rem 0;
+    margin: 6rem 0;
 }
 
 label {

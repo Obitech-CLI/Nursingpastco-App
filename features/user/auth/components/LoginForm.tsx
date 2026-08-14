@@ -3,20 +3,28 @@
 import { UseAuthProvider } from "@/contexts/user/AuthFormProvider";
 import styles from "../styles.module.css";
 import { Lock, Mail } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function LoginUserForm() {
 
-    const { setShowCreateForm, setShowLoginForm } = UseAuthProvider();
+    const { setShowCreateForm, setShowLoginForm, showLoginForm } = UseAuthProvider();
 
     const [focus, setFocus] = useState({
         email: false,
         password: false
     });
 
+    useEffect(() => {
+                document.body.style.overflow = showLoginForm ? "hidden" : "auto";
+            
+                return () => {
+                        document.body.style.overflow = "auto";
+                    }
+            }, [showLoginForm])
+
     return (
         <form className={styles.auth}>
-            <h1>login</h1>
+            <h2>login</h2>
             <div>
                 <h3>don't have an account?</h3>
                 <button onClick={() => {

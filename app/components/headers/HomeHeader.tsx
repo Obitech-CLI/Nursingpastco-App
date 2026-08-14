@@ -5,6 +5,7 @@ import { AppTheme } from "@/ui/Theme";
 import { LogoWithName } from "@/ui/Logo";
 import { ChevronDown, ChevronUp, Search } from "lucide-react";
 import { useState } from "react";
+import { LoginUserButton } from "@/ui/buttons/Login";
 
 
 function HomeHeader() {
@@ -19,7 +20,7 @@ function HomeHeader() {
                     <button onClick={() => setShowNav(!showNav)}>
                      {showNav ? <ChevronDown color="black"/> : <ChevronUp color="black"/>}
                     </button>
-                    <button>login</button>
+                    <LoginUserButton />
                 </div>
             </div>
     

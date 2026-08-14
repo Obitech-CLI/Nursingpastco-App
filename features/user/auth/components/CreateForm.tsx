@@ -3,11 +3,11 @@
 import { UseAuthProvider } from "@/contexts/user/AuthFormProvider";
 import styles from "../styles.module.css";
 import { Lock, Mail, User } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function CreateUserForm() {
 
-    const { setShowCreateForm, setShowLoginForm } = UseAuthProvider();
+    const { setShowCreateForm, setShowLoginForm, showCreateForm } = UseAuthProvider();
 
     const [focus, setFocus] = useState({
             fname: false,
@@ -16,9 +16,15 @@ function CreateUserForm() {
             password: false
         });
 
+        useEffect(() => {
+                document.body.style.overflow = showCreateForm ? "hidden" : "auto";
+                    
+                return () => { document.body.style.overflow = "auto"; }
+        }, [showCreateForm])
+
     return (
         <form className={styles.auth}>
-            <h1>create account</h1>
+            <h2>create account</h2>
             <div>
                 <h3>already have an account?</h3>
 
@@ -29,7 +35,7 @@ function CreateUserForm() {
                     login instead
                 </button>
             </div>
-            <h3>sign up</h3>
+            <h3>join in</h3>
             <label><User />
                 <input type="text" name="firstname"
                 onFocus={() => {

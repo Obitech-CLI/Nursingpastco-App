@@ -5,6 +5,7 @@ import { AppTheme } from "@/ui/Theme";
 import { LogoWithName } from "@/ui/Logo";
 import { ArrowBigLeft, ArrowLeft, ChevronDown, ChevronUp, LucideHome, Search } from "lucide-react";
 import { useState } from "react";
+import { LoginUserButton } from "@/ui/buttons/Login";
 
 
 function PublicHeader() {
@@ -22,7 +23,7 @@ function PublicHeader() {
                     <button onClick={() => setShowNav(!showNav)}>
                      {showNav ? <ChevronDown /> : <ChevronUp />}
                     </button>
-                    <button>login</button>
+                    <LoginUserButton />
                 </div>
             </div>
     

@@ -1,9 +1,11 @@
 .auth {
     width: 100%;
+    margin: 1rem 0 4rem;
 }
 
-.auth h1 {
+.auth h2 {
     margin: 0;
+    text-align: center;
 }
 
 .auth input {
@@ -14,7 +16,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    align-items: flex-start;
+    align-items: center;
     margin-left: 1rem;
     text-align: center;
     text-transform: capitalize;
@@ -24,8 +26,7 @@
     border: 1.5px solid var(--primary-color);
     text-transform: capitalize;
     background-color: transparent;
-    padding: 0.4rem 2rem;
-    width: max-content;
+    padding: 0.7rem 4rem;
     border-radius: 10px;
 }
 
@@ -40,9 +41,9 @@
 .auth label > span {
     position: absolute;
     left: 2.5rem;
-    background-color: var(--input-span);
+    background-color: var(--modal-span);
     border-radius: 5px;
     padding: 0.1rem 0.5rem 0.2rem;
     text-transform: capitalize;
-    color: var(--input-span-txt);
+    color: var(--modal-txt-span);
 }
