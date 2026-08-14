@@ -18,7 +18,8 @@
   --modal-txt-span: white;
   --input-span: white;
   --input-span-txt: black;
-  --header-item: rgba(0, 0, 0, 0.5);
+  --card: rgba(0, 0, 0, 0.8);
+  --card-color: white;
   --h2: rgba(0, 0, 0, 0.9);
   --header-bg: white;
   --footer-bg: white;
@@ -35,7 +36,8 @@
   --modal-txt-span: black;
   --input-span: black;
   --input-span-txt: white;
-  --header-item: rgba(225, 225, 225, 0.5);
+  --card: rgba(225, 225, 225, 0.8);
+  --card-color: black;
   --h2: white;
   --header-bg: black;
   --footer-bg: black;
@@ -54,7 +56,7 @@ header {
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 999;
+    z-index: 99;
     border-bottom: 4px solid var(--secondary-color);
     border-radius: 0 0 10px 10px;
     background-color: var(--header-bg);
@@ -86,7 +88,7 @@ header > div button:last-child {
 header > nav {
     position: fixed;
     top: 3.5rem;
-    z-index: 55;
+    z-index: 999;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -123,6 +125,7 @@ footer.admin {
     width: 100%;
     padding: 1rem;
     text-align: right;
+    z-index: 999;
 }
 
 footer.public {
@@ -134,7 +137,7 @@ footer.public {
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-    z-index: 999;
+    z-index: 99;
 }
 
 footer {

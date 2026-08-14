@@ -1,8 +1,8 @@
 .feedback_modal {
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.6);
     inset: 0;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(5px);
     padding: 2rem;
     display: flex;
     flex-direction: column;
@@ -22,7 +22,7 @@
 .feedback_modal .success {
     border: 1.5px solid green;
     padding: 2rem;
-    width: 90%;
+    width: 95%;
     border-radius: 10px;
     color: green;
     display: flex;
@@ -31,12 +31,13 @@
     justify-content: center;
     gap: 1rem;
     text-transform: capitalize;
+    background-color: var(--bg-color);
 }
 
 .feedback_modal .error {
     border: 1.5px solid red;
     padding: 2rem;
-    width: 90%;
+    width: 95%;
     border-radius: 10px;
     color: red;
     display: flex;
@@ -45,6 +46,7 @@
     justify-content: center;
     gap: 1rem;
     text-transform: capitalize;
+    background-color: var(--bg-color);
 }
 
 .home_header_nav > button {
@@ -58,7 +60,7 @@
 .home_header_nav > nav {
     position: fixed;
     background-color: var(--nav-bg);
-    z-index: 100;
+    z-index: 10;
     height: 100dvh;
     top: 0;
     left: 0;

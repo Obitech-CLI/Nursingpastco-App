@@ -14,12 +14,17 @@ function AdminManageInstituitions() {
 
     return (
         <>
-        <div className="switch">
+        <div className="switch" style={{
+            gridTemplateColumns: navManageInstituitions.add || navManageInstituitions.view ?
+            "2fr 1fr" : ""
+        }}>
+            <h2>manage instituitions</h2>
             <button type="button"
             onClick={() => setNavManageInstituitions({add: true, view: false})}
             style={{
                 border: navManageInstituitions.add ? "none" : "",
-                gridArea: navManageInstituitions.add ? "1/ 1/ 1/ 1" : "",
+                gridArea: navManageInstituitions.add ? "2/ 1/ 2/ 2" : "",
+                fontSize: navManageInstituitions.add ? "1.3rem" : "",
             }}>
                 {!navManageInstituitions.add ? "add" : "add instituitions"}
                 {!navManageInstituitions.add ? <Plus /> : ""}
@@ -29,7 +34,8 @@ function AdminManageInstituitions() {
             onClick={() => setNavManageInstituitions({add: false, view: true})}
             style={{
                 border: navManageInstituitions.view ? "none" : "",
-                gridArea: navManageInstituitions.view ? "1/ 1/ 1/ 1" : "",
+                gridArea: navManageInstituitions.view ? "2/ 1/ 2/ 2" : "",
+                fontSize: navManageInstituitions.view ? "1.3rem" : "",
             }}>
                 {!navManageInstituitions.view ? "modify" : "modify instituitions"}
                 {!navManageInstituitions.view ? <Settings2 /> : ""}

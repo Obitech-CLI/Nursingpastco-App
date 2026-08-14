@@ -5,17 +5,21 @@ main.manage {
     padding: 1rem;
 }
 
-main.manage > h2 {
-    background-color: var(--h2);
-    padding: 1rem;
-    margin: 0;
-}
-
 div.switch {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: start;
     gap: 1rem;
+    border-width: 3px 0 3px;
+    border-style: solid;
+    border-color: var(--secondary-color);
+    border-radius: 15px;
+    padding: 1rem 0.5rem;
+    margin: 0 0.5rem;
+}
+
+div.switch > h2 {
+    grid-column: span 2;
 }
 
 div.switch > button {

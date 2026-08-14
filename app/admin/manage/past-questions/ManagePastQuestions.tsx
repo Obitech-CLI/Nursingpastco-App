@@ -12,12 +12,17 @@ function AdminManagePastQuestions() {
 
     return (
         <>
-        <div className="switch">
+        <div className="switch" style={{
+            gridTemplateColumns: navManagePastQuestions.add || navManagePastQuestions.view ?
+            "2fr 1fr" : ""
+        }}>
+            <h2>manage past questions</h2>
             <button type="button"
             onClick={() => setNavManagePastQuestions({add: true, view: false})}
             style={{
                 border: navManagePastQuestions.add ? "none" : "",
-                gridArea: navManagePastQuestions.add ? "1/ 1/ 1/ 1" : "",
+                gridArea: navManagePastQuestions.add ? "2/ 1/ 2/ 2" : "",
+                fontSize: navManagePastQuestions.add ? "1.3rem" : "",
             }}>
                 {!navManagePastQuestions.add ? "add" : "add past-questions"}
                 {!navManagePastQuestions.add ? <Plus /> : ""}
@@ -27,7 +32,8 @@ function AdminManagePastQuestions() {
             onClick={() => setNavManagePastQuestions({add: false, view: true})}
             style={{
                 border: navManagePastQuestions.view ? "none" : "",
-                gridArea: navManagePastQuestions.view ? "1/ 1/ 1/ 1" : "",
+                gridArea: navManagePastQuestions.view ? "2/ 1/ 2/ 2" : "",
+                fontSize: navManagePastQuestions.view ? "1.3rem" : "",
             }}>
                 {!navManagePastQuestions.view ? "modify" : "modify past-questions"}
                 {!navManagePastQuestions.view ? <Settings2 /> : ""}
