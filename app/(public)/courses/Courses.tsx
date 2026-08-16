@@ -5,7 +5,7 @@ import { UseFetch } from "@/hooks/useFetch";
 import { LevelOptions } from "@/ui/AppContent";
 import { useEffect, useState } from "react";
 import styles from "./courses.module.css";
-import { ChevronDown, ChevronUp, RotateCw } from "lucide-react";
+import { ChevronDown, ChevronUp, RotateCw, X } from "lucide-react";
 import { InstituitionDataTypes } from "@/types/types";
 import { ClipLoader } from "react-spinners";
 
@@ -54,6 +54,14 @@ function Courses() {
         HandleFetchInstituitions();
     }, [selectedLevel]);
 
+    useEffect(() => {
+        document.body.style.overflow = showInstituitions || showLevel ? "hidden" : "";
+
+        return () => {
+            document.body.style.overflow = "auto";
+        }
+    }, [showInstituitions, showLevel])
+
     return (
         <>
         <fieldset className={styles.select}>
@@ -65,6 +73,12 @@ function Courses() {
                {showLevel ? <ChevronDown /> : <ChevronUp />}
                 {showLevel && (
                     <ul>
+                        <h2>select</h2>
+                        <button onClick={() => {
+                            setShowLevel(false);
+                        }}>
+                            <X />
+                        </button>
                        {LevelOptions.map(level => (
                        <li key={level.id} onClick={() => {
                         setSelectedLevel(level.level)
@@ -99,6 +113,10 @@ function Courses() {
                         <>
                         {instituitions.length > 0 && (
                             <ul>
+                                <h2>select</h2>
+                                <button onClick={() => {
+                                   setShowInstituitions(false);
+                                }}><X /></button>
                                 {instituitions.map(i => (
                                     <li key={i.id}>
                                         {i.instituition_name}

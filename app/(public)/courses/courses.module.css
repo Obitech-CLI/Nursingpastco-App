@@ -20,27 +20,33 @@ fieldset.select > div {
 }
 
 fieldset.select > div ul {
-    position: absolute;
+    position: fixed;
     z-index: 10;
-    width: 90%;
-    background-color: var(--bg-op-color);
+    inset: 0;
+    background-color: var(--modal);
     list-style-type: none;
-    left: 50%;
-    transform: translateX(-50%);
-    color: var(--bg-txt-op-color);
-    padding: 1rem;
+    color: var(--modal-txt);
+    padding: 7rem 2rem;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    top: 2.5rem;
+    justify-content: start;
+    gap: 1rem;
+    backdrop-filter: blur(3px);
+    overflow: auto;
+}
+
+fieldset.select > div ul > button {
+    position: absolute;
+    top: 6.5rem;
+    right: 3rem;
 }
 
 fieldset.select > div ul li {
-    background-color: var(--bg-color);
-    color: var(--bg-txt-color);
-    padding: 0.5rem;
+    border: var(--border);
+    padding: 1rem;
     text-align: center;
+    border-radius: 50px;
 }
 
 fieldset.select legend {

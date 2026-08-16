@@ -106,6 +106,7 @@
 .loading {
     width: fit-content;
     margin: 0.5rem auto;
+    color: var(--bg-txt-color);
 }
 
 .hero {
