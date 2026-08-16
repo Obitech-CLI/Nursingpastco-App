@@ -23,6 +23,9 @@
   --h2: rgba(0, 0, 0, 0.9);
   --header-bg: white;
   --footer-bg: white;
+  --menu-bg: white;
+  --bg-op-color: black;
+  --bg-txt-op-color: white;
 }
 
 [data-theme="dark"] {
@@ -41,12 +44,22 @@
   --h2: white;
   --header-bg: black;
   --footer-bg: black;
-  
+  --menu-bg: black;
+  --bg-op-color: white;
+  --bg-txt-op-color: black;
 }
 
 body {
     background-color: var(--bg-color);
     color: var(--bg-txt-color);
+}
+
+a {
+    text-transform: capitalize;
+    text-decoration: none;
+    border: 2px solid green;
+    color: green;
+    border-radius: 10px;
 }
 
 header {
@@ -56,7 +69,7 @@ header {
     position: fixed;
     width: 100%;
     top: 0;
-    z-index: 99;
+    z-index: 1000;
     border-bottom: 4px solid var(--secondary-color);
     border-radius: 0 0 10px 10px;
     background-color: var(--header-bg);
@@ -75,20 +88,10 @@ header > div > div {
     gap: 0.6rem;
 }
 
-header > div button:last-child {
-    text-transform: capitalize;
-    border: 1.5px solid var(--secondary-color);
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    padding: 0.5rem 1.5rem;
-    background-color: var(--bg-color);
-}
-
 header > nav {
     position: fixed;
     top: 3.5rem;
-    z-index: 999;
+    z-index: 1001;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -118,52 +121,52 @@ button {
     height: 40px;
 }
 
-footer.admin {
-    border-top: 4px solid var(--secondary-color);
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    padding: 1rem;
-    text-align: right;
-    z-index: 999;
-}
-
-footer.public {
-    border-top: 4px solid var(--secondary-color);
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem;
-    z-index: 99;
-}
-
-footer {
-    background-color: var(--footer-bg);
-    border-radius: 10px 10px 0 0;
-    color: black;
-}
-
-footer.public .socials {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-footer.public > span {
-    padding: 0.5rem 1rem;
-    color: var(--bg-txt-color);
-    border: var(--border);
-    border-radius: 5px;
-}
-
 form {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
     padding: 1.5rem;
+}
+
+footer {
+    background-color: var(--footer-bg);
+}
+
+footer > .socials {
+    background-color: var(--footer-bg);
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    border-top: 5px solid var(--secondary-color);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+    z-index: 1000;
+}
+
+footer > div p {
+    margin-bottom: 4rem;
+    text-align: right;
+    padding: 1rem;
+}
+
+footer > .socials span {
+    font-size: 1.5rem;
+}
+
+footer > .socials > div {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background-color: white;
+    padding: 0.3rem 1rem;
+    border-radius: 5px;
+}
+
+footer > .socials > div > a {
+    border: none;
 }
 
 main {

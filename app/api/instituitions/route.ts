@@ -1,5 +1,6 @@
 import AddInstituition from "@/lib/instituitions/add.service";
 import GetInstituitions from "@/lib/instituitions/get.service";
+import { NextRequest } from "next/server";
 
 export async function POST(req: Request) {
 
@@ -37,10 +38,14 @@ export async function POST(req: Request) {
     }
 }
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+
+    const searchParams = req.nextUrl.searchParams;
+    const instituition = searchParams.get("instituition") as string;
 
     try {
-        const res = await GetInstituitions();
+
+        const res = await GetInstituitions(instituition);
 
         if (!res.success) {
             return Response.json({
@@ -48,8 +53,6 @@ export async function GET() {
                 error: res.error
             },{status: res.status});
         }
-
-        console.log(res)
 
         return Response.json({
             success: res.success,

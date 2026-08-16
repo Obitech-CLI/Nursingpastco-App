@@ -7,6 +7,11 @@ import { AuthFormProvider } from "@/contexts/user/AuthFormProvider";
 import LoginUser from "./user/(auth)/login/LoginUser";
 import CreateUser from "./user/(auth)/create/CreateUser";
 import { Toaster } from "sonner";
+import { MenuProvider } from "@/contexts/modals/MenuContext";
+import { MenuModal } from "@/ui/modals/Menu";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
+import { ManageNavProvider } from "@/contexts/admin/ManageNavProvider";
 
 export default function RootLayout({children}: Readonly<{
   children: React.ReactNode;
@@ -18,15 +23,22 @@ export default function RootLayout({children}: Readonly<{
         <SuccessModalProvider>
           <ErrorModalProvider>
             <AuthFormProvider>
+              <MenuProvider>
+                <ManageNavProvider>
 
+            <Header />
             {children}
+            <Footer />
 
             <CreateUser />
             <LoginUser />
             <SuccessModal />
             <ErrorModal />
+            <MenuModal />
             <Toaster position="top-center"/>
             
+               </ManageNavProvider>
+             </MenuProvider>
             </AuthFormProvider>
           </ErrorModalProvider>
         </SuccessModalProvider>

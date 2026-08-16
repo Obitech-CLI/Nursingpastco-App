@@ -1,0 +1,40 @@
+div.select {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 1rem 2rem;
+    position: relative;
+    gap: 1rem;
+}
+
+div.select > div {
+    box-shadow: var(--box-shadow);
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    text-transform: capitalize;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+div.select > div ul {
+    position: absolute;
+    width: 90%;
+    background-color: var(--bg-op-color);
+    list-style-type: none;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--bg-txt-op-color);
+    padding: 1rem;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    top: 2.5rem;
+}
+
+div.select > div ul li {
+    background-color: var(--bg-color);
+    color: var(--bg-txt-color);
+    padding: 0.5rem;
+    text-align: center;
+}

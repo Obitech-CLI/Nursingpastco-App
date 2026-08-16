@@ -2,6 +2,7 @@
 
 import { UseAuthProvider } from "@/contexts/user/AuthFormProvider";
 import { useEffect } from "react";
+import styles from "../ui.module.css";
 
 function LoginUserButton() {
 
@@ -16,7 +17,7 @@ function LoginUserButton() {
         }, [showLoginForm])
 
     return (
-        <button onClick={() => setShowLoginForm(true)}>
+        <button onClick={() => setShowLoginForm(true)} className={styles.login}>
             login
         </button>
     )

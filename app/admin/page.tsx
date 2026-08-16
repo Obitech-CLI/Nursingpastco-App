@@ -1,4 +1,4 @@
-import { Check, CheckCircle, Lock, ShieldCheck, UserPlus } from "lucide-react";
+import { CheckCircle, Lock, ShieldCheck, UserPlus } from "lucide-react";
 import Link from "next/link";
 import "./admin.css";
 

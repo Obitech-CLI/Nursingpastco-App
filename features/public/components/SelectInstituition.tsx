@@ -37,8 +37,8 @@ function SelectInstituition({setSelectedInstituition, setSelectedLogo}:Props) {
         <>
         <div className={styles.hero}>
             <Image alt="" src={InstituitionHero} />
-            <h1>Instituitions</h1>
-            <h2>here are the list of instituitions with available past questions</h2>
+            <h2>Instituitions</h2>
+            <h3>here are the list of instituitions with available past questions</h3>
         </div>
         {!FetchInstituitions.loading ? (
         <>

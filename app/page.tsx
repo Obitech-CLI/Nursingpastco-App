@@ -1,16 +1,16 @@
-import { HomeHeader } from "./components/headers/HomeHeader";
 import styles from "./page.module.css";
 import { Hero } from "@/features/home/components/Hero";
 import { Offers } from "@/features/home/components/Offers";
 import { InstuitionHero } from "@/features/home/components/InstituitionHero";
-import { CheckCircle2, PercentCircle } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { SubOffers } from "@/features/home/components/SubOffers";
-import { PublicFooter } from "./components/footers/Public";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 
 function HomePage() {
   return (
     <>
-    <HomeHeader />
+    <Header />
     <main>
       <Hero />
       <Offers />
@@ -31,7 +31,6 @@ function HomePage() {
 
       <SubOffers />
     </main>
-    <PublicFooter />
     </>
   )
 }
