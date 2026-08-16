@@ -144,7 +144,7 @@
     gap: 1rem;
 }
 
-.select_course > .course h4 {
+.select_course > .course > h4 {
     border: var(--border);
     display: flex;
     align-items: center;
@@ -161,24 +161,28 @@
 }
 
 .select_course > .course .info {
-    position: absolute;
-    background-color: var(--bg-op-color);
-    color: var(--bg-txt-op-color);
-    box-shadow: var(--box-shadow);
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 15px;
-    padding: 1rem;
-    width: 90%;
+    position: fixed;
+    background-color: var(--modal);
+    backdrop-filter: blur(5px);
+    color: var(--modal-txt);
+    inset: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 1rem;
     text-transform: capitalize;
-    height: 140px;
+}
+
+.select_course .info > button {
+    position: absolute;
+    right: 3rem;
+    top: 8rem;
 }
 
 .select_course > .course .info > a {
-    padding: 0.5rem 1.5rem;
+    padding: 1rem;
+    width: 80%;
+    text-align: center;
+    border-radius: 50px;
 }

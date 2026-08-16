@@ -1,7 +1,7 @@
 "use client";
 
 import { CourseDataTypes, InstituitionDataTypes } from "@/types/types";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, SquareArrowOutUpRight, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "../styles.module.css";
@@ -85,21 +85,25 @@ function SelectCourse({allCourses, loading, error, reFetch, filterLevel} : Props
                             setShowInfo(course.id);
                             setSelectedInstituition(course.instituition);
                             setSelectedLevel(course.level);
-                        }}>{course.course} {showInfo === course.id ? <ChevronDown /> : <ChevronUp />}
+                        }}>{course.course} <SquareArrowOutUpRight />
                         </h4>
 
                         {showInfo === course.id && (
                             <div className={styles.info}>
+                                <button onClick={() => {
+                                    setShowInfo(0)
+                                }}><X /></button>
                             {!FetchInstuition.loading ? (
                                 <>
                                 {instituition.length > 0 && !FetchInstuition.error ? (
                                 <>
-                                <h5>{course.instituition}</h5>
-                                <h5>{course.level}</h5>
+                                <h3>{course.instituition}</h3>
+                                <h4>{course.level}</h4>
 
                                 <Link href="/past-questions">
                                     past quesions
                                 </Link>
+
                                 </>
                                 ) : (
                                     <div className={styles.retry}>

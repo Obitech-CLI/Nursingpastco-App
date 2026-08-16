@@ -13,7 +13,7 @@
   --border: 1.5px solid black;
   --primary-color: rgb(49, 127, 49);
   --secondary-color: #002b4c;
-  --modal: rgba(225, 225, 225, 0.8);
+  --modal: rgba(225, 225, 225, 0.5);
   --modal-span: black;
   --modal-txt-span: white;
   --input-span: white;
@@ -57,7 +57,7 @@ body {
 a {
     text-transform: capitalize;
     text-decoration: none;
-    border: 2px solid green;
+    border: 1.5px solid green;
     color: green;
     border-radius: 10px;
 }
