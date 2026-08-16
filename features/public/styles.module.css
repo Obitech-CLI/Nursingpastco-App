@@ -164,7 +164,7 @@
 .select_course > .course .info {
     position: fixed;
     background-color: var(--modal);
-    backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
     color: var(--modal-txt);
     inset: 0;
     display: flex;
