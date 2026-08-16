@@ -58,6 +58,7 @@ function Courses() {
         <>
         <fieldset className={styles.select}>
             <legend>filter</legend>
+
             {allCourses.length > 0 || FetchAllCourses.error ? (
             <div onClick={() => {
                 setShowLevel(!showLevel);
@@ -77,7 +78,7 @@ function Courses() {
             </div>
             ) : (null)}
 
-            {!FetchAllCourses.error ? (
+            {!FetchAllCourses.error && selectedLevel ? (
                 <div onClick={() => {
                     setShowInstituitions(!showInstituitions)
                 }}> {selectedInstituition ? selectedInstituition : "select instituition"}
