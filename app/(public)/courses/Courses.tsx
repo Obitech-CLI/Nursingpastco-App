@@ -25,7 +25,12 @@ function Courses() {
 
     const HandleFetchAllCourses = async () =>
     {
-        const res = await FetchAllCourses.Fetch(`/courses/all?selectedLevel=${selectedLevel}`);
+        let res;
+        if (!selectedLevel) {
+            res = await FetchAllCourses.Fetch(`/courses/all`);
+        } else {
+            res = await FetchAllCourses.Fetch(`/courses/all?selectedLevel=${selectedLevel}`);
+        }
 
         if (!res) return;
 
@@ -51,7 +56,8 @@ function Courses() {
 
     return (
         <>
-        <div className={styles.select}>
+        <fieldset className={styles.select}>
+            <legend>filter</legend>
             {allCourses.length > 0 || FetchAllCourses.error ? (
             <div onClick={() => {
                 setShowLevel(!showLevel);
@@ -106,7 +112,7 @@ function Courses() {
                 </div>
             ) : (null)}
 
-        </div>
+        </fieldset>
 
         <SelectCourse
         allCourses={allCourses}
