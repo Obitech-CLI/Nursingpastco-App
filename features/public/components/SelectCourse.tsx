@@ -66,16 +66,16 @@ function SelectCourse({allCourses, loading, error, reFetch, filterLevel} : Props
             <>
             {allCourses.length > 0 && !error ? (
                 <>
-                <h2>
+                <h3>
                     {filterLevel && allCourses.length > 0 ? (
                         <>{"all " + allCourses[0].level + " courses"}</>
                     ) : (
                         <>{"all courses"}</>
                     )}
-                </h2>
+                </h3>
                 {allCourses.map(course => (
                     <div key={course.id} className={styles.course}>
-                        <h3 onClick={() => {
+                        <h4 onClick={() => {
                             if (course.id === showInfo) {
                                     setShowInfo(0);
                                     setSelectedInstituition("");
@@ -86,7 +86,7 @@ function SelectCourse({allCourses, loading, error, reFetch, filterLevel} : Props
                             setSelectedInstituition(course.instituition);
                             setSelectedLevel(course.level);
                         }}>{course.course} {showInfo === course.id ? <ChevronDown /> : <ChevronUp />}
-                        </h3>
+                        </h4>
 
                         {showInfo === course.id && (
                             <div className={styles.info}>

@@ -3,6 +3,7 @@ import Courses from "./Courses";
 export default function Page() {
     return (
         <main>
+            <h2>Courses</h2>
             <Courses />
         </main>
     )
