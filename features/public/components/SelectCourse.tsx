@@ -94,8 +94,8 @@ function SelectCourse({allCourses, loading, error, reFetch, filterLevel} : Props
                                 <>
                                 {instituition.length > 0 && !FetchInstuition.error ? (
                                 <>
-                                <h4>{course.instituition}</h4>
-                                <h4>{course.level}</h4>
+                                <h5>{course.instituition}</h5>
+                                <h5>{course.level}</h5>
 
                                 <Link href="/past-questions">
                                     past quesions
