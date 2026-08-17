@@ -1,18 +1,19 @@
 "use client";
 
 import { UseFetch } from "@/hooks/useFetch";
-import { CourseDataTypes, PastQuestionDataTypes } from "@/types/types";
+import { CourseDataTypes, InstituitionDataTypes, PastQuestionDataTypes } from "@/types/types";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "./styles.module.css";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, X } from "lucide-react";
 import { LevelOptions } from "@/ui/AppContent";
 
 function PastQuestions() {
 
     const [courses, setCourses] = useState<CourseDataTypes[]>([]);
     const [pdfs, setPDFs] = useState<PastQuestionDataTypes[]>([]);
+    const [instituitions, setInstituitions] = useState<InstituitionDataTypes[]>([])
 
     const [showPDFs, setShowPDFs] = useState(0);
 
@@ -23,6 +24,8 @@ function PastQuestions() {
     const [selectedCourse, setSelectedCourse] = useState("");
 
     const [changeLevel, setChangeLevel] = useState(0);
+
+    const [showInstituitions, setShowInstituitions] = useState(false);
 
     useEffect(() => {
         const storedInstituition = localStorage.getItem("selectedInstituition");
@@ -39,6 +42,16 @@ function PastQuestions() {
 
     const FetchCourses = UseFetch();
     const FetchPDFs = UseFetch();
+    const FetchInstituitions = UseFetch();
+
+    const HandleFetchInstituitions = async () =>
+    {
+        const res = await FetchInstituitions.Fetch("/instituitions");
+
+        if (!res) return;
+
+        setInstituitions(res.instituitions);
+    }
 
     const HandleFetchCourses = async () =>
     {
@@ -72,6 +85,18 @@ function PastQuestions() {
         HandleFetchPDFs();
     }, [selectedCourse]);
 
+    useEffect(() => {
+        HandleFetchInstituitions();
+    }, [])
+
+    useEffect(() => {
+        document.body.style.overflow = showInstituitions ? "hidden" : "";
+
+        return () => {
+            document.body.style.overflow = "auto";
+        }
+    }, [showInstituitions])
+
     const HandleLevelChange = (level: string) =>
     {
         localStorage.setItem("selectedLevel", level);
@@ -81,10 +106,50 @@ function PastQuestions() {
     return (
         <>
         <div className={styles.pastQuestions_hero}>
-            <h2>{selectedInstituition}<br />past questions</h2>
+            <h2 onClick={() => {
+                setShowInstituitions(!showInstituitions)
+            }}>
+                {selectedInstituition ? selectedInstituition : "select instituition"}
+                {showInstituitions ? <ChevronDown /> : <ChevronUp />}
+            </h2>
+
+            {showInstituitions && (
+                <div className={styles.instituitions}>
+                <button onClick={() => setShowInstituitions(false)}>
+                    <X />
+                </button>
+                {!FetchInstituitions.loading ? (
+                    <>
+                    {instituitions.length > 0 ? (
+                        <div className={styles.select}>
+                        <h2>select</h2>
+                        {instituitions.map(i => (
+                            <button key={i.id}>
+                                {i.instituition_name}
+                            </button>
+                        ))}
+                        </div>
+                    ) : (
+                        <div className={styles.retry}>
+                            <p>{FetchInstituitions.error}</p>
+                            <button onClick={HandleFetchInstituitions}>retry</button>
+                        </div>
+                    )}
+                    </>
+                ) : (
+                    <div className={styles.loading}>
+                        <ClipLoader />
+                    </div>
+                )}
+                </div>
+            )}
             {selectedLogo && (
                 <Image alt="" src={selectedLogo} width={100} height={100}/>
             )}
+
+            <h3>
+                past questions<br />{selectedLevel}
+            </h3>
         </div>
 
         <div className={styles.btns}>

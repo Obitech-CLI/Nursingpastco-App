@@ -1,8 +1,12 @@
 "use client";
 
 import Link from "next/link";
-import { FaFacebook, FaTelegram, FaTiktok, FaYoutube } from "react-icons/fa";
+import { FaFacebook, FaTelegram, FaTiktok, FaWhatsapp, FaYoutube } from "react-icons/fa";
 import { usePathname } from "next/navigation";
+import { BsWhatsapp } from "react-icons/bs";
+import { GrWhatsapp } from "react-icons/gr";
+import { PiWhatsappLogoFill } from "react-icons/pi";
+import { RiWhatsappFill } from "react-icons/ri";
 
 function Footer() {
 
@@ -13,20 +17,19 @@ function Footer() {
 
     return (
             <footer>
-            <div className="footer">
-                <p style={{
-                    marginBottom: (!pathname.startsWith("/admin") || !pathname.startsWith("/user")) ?
-                    "1rem" : ""
-                }}>&copy; nursingpastco {year}</p>
-            </div>
-            {(!pathname.startsWith("/admin") || !pathname.startsWith("/user")) && (
+            {!pathname.startsWith("/admin") ? (
+                <>
+                <p>&copy; nursingpastco {year}</p>
                 <div className="socials">
                    <span>20.1k</span>
                    <div>
-                      <Link href=""><FaFacebook size={25} color="#1877f2"/></Link>
-                      <Link href=""><FaTiktok size={20} color="#000000"/></Link>
-                      <Link href=""><FaYoutube size={30} color="#ff0000"/></Link> 
+                      <Link href=""><RiWhatsappFill size={30} color="#00ff00"/></Link>
                    </div>
+                </div>
+                </>
+            ) : (
+                <div className="footer">
+                <p>&copy; nursingpastco {year}</p>
                 </div>
             )}
             </footer>

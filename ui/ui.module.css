@@ -91,13 +91,14 @@ button.login {
 .menu {
     position: fixed;
     height: 100dvh;
-    width: 70%;
+    width: 85%;
     inset: 0;
     background-color: var(--menu-bg);
-    padding: 6rem 1rem;
+    padding: 6.5rem 1rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    z-index: 888;
 }
 
 .menu > a {

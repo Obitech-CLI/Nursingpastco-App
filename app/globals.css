@@ -91,7 +91,7 @@ header > div > div {
 header > nav {
     position: fixed;
     top: 3.5rem;
-    z-index: 1001;
+    z-index: 100999;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -138,18 +138,27 @@ footer > .socials {
     width: 100%;
     bottom: 0;
     border-top: 5px solid var(--secondary-color);
-    border-radius: 10px;
+    border-radius: 10px 10px 0 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
+    padding: 0.7rem 1rem;
     z-index: 1000;
 }
 
-footer > div p {
-    margin-bottom: 4rem;
-    text-align: right;
+footer .footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    border-top: 5px solid var(--secondary-color);
+    border-radius: 10px 10px 0 0;
     padding: 1rem;
+    z-index: 1000;
+    background-color: var(--footer-bg);
+}
+
+footer > .footer p {
+    text-align: right;
 }
 
 footer > .socials span {
@@ -160,9 +169,13 @@ footer > .socials > div {
     display: flex;
     align-items: center;
     gap: 1rem;
-    background-color: white;
-    padding: 0.3rem 1rem;
     border-radius: 5px;
+}
+
+footer > p {
+    margin-bottom: 3.5rem;
+    text-align: right;
+    padding: 1rem;
 }
 
 footer > .socials > div > a {
