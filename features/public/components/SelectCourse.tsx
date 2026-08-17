@@ -71,9 +71,23 @@ function SelectCourse({allCourses, loading, error, reFetch, filterLevel, search,
                 <>
                 <h3>
                     {filterLevel && allCourses.length > 0 ? (
-                        <>{"all " + allCourses[0].level + " courses"}</>
+                        <>
+                        {!search ? (
+                            <>{allCourses[0].level + " courses"}</>
+                        ) : (
+                            <>
+                            {allCourses[0].level}
+                            <em>matched searched courses result</em>
+                            </>
+                        )}
+                        </>
                     ) : (
-                        <>{"all courses"}</>
+                        <>
+                        {"all courses"}
+                        {search && (
+                            <em>all matched searched result</em>
+                        )}
+                        </>
                     )}
                 </h3>
                 

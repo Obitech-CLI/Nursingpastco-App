@@ -1,6 +1,6 @@
 fieldset.select {
     display: grid;
-    grid-template-columns: 10% auto;
+    grid-template-columns: 15% auto;
     padding: 1rem;
     border: var(--border);
     gap: 1.5rem 1rem;
@@ -8,7 +8,7 @@ fieldset.select {
     margin: 0 1rem 2rem;
 }
 
-fieldset.select > div, fieldset.select > button {
+fieldset.select > div {
     box-shadow: var(--box-shadow);
     padding: 0.7rem 1rem;
     border-radius: 10px;
@@ -17,6 +17,14 @@ fieldset.select > div, fieldset.select > button {
     align-items: center;
     justify-content: space-between;
     position: relative;
+}
+
+fieldset.select > button {
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    text-transform: capitalize;
 }
 
 fieldset.select > div ul {

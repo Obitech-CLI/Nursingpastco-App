@@ -12,6 +12,7 @@ import { ClipLoader } from "react-spinners";
 function Courses() {
 
     const [allCourses, setAllCourses] = useState([]);
+    const [all, setAll] = useState(false);
 
     const [showLevel, setShowLevel] = useState(false);
     const [selectedLevel, setSelectedLevel] = useState("");
@@ -24,19 +25,7 @@ function Courses() {
 
     const HandleFetchAllCourses = async () =>
     {
-        let res;
-
-        if (!selectedLevel && !search) {
-
-            res = await FetchAllCourses.Fetch(`/courses/all`);
-
-        } else if (selectedLevel && !search) {
-
-            res = await FetchAllCourses.Fetch(`/courses/all?selectedLevel=${selectedLevel}`);
-
-        } else if (!selectedLevel && search) {
-            res = await FetchAllCourses.Fetch(`/courses/all?search=${search}`);
-        }
+        const res = await FetchAllCourses.Fetch(`/courses/all?selectedLevel=${selectedLevel}&search=${search}`);
 
         if (!res) return;
 
@@ -59,7 +48,11 @@ function Courses() {
         <>
         <fieldset className={styles.select}>
             <legend>filter</legend>
-            <button>
+            <button onClick={() => {
+                setSelectedLevel("");
+                setSearch("")
+                setFocusSearch(false);
+            }}>
                 all
             </button>
             <div onClick={() => {
@@ -76,7 +69,8 @@ function Courses() {
                         </button>
                        {LevelOptions.map(level => (
                        <li key={level.id} onClick={() => {
-                        setSelectedLevel(level.level)
+                        setSelectedLevel(level.level);
+                        setFocusSearch(false);
                        }}>
                         {level.level}
                         </li>
@@ -85,7 +79,7 @@ function Courses() {
                 )}
             </div>
 
-            <label onClick={() => setFocusSearch(true)}>
+            <label onFocus={() => setFocusSearch(true)}>
                   <span style={{
                     top: focusSearch ? "-0.8rem" : ""
                   }}>

@@ -159,6 +159,14 @@
     text-transform: capitalize;
     color: var(--primary-color);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.select_course > h3 em {
+    color: var(--bg-txt-color);
+    font-size: 0.9rem;
+    text-transform: lowercase;
 }
 
 .select_course > .course .info {
