@@ -5,31 +5,37 @@ import { UseFetch } from "@/hooks/useFetch";
 import { LevelOptions } from "@/ui/AppContent";
 import { useEffect, useState } from "react";
 import styles from "./courses.module.css";
-import { ChevronDown, ChevronUp, RotateCw, X } from "lucide-react";
+import { ChevronDown, ChevronUp, Pen, RotateCw, Search, X } from "lucide-react";
 import { InstituitionDataTypes } from "@/types/types";
 import { ClipLoader } from "react-spinners";
 
 function Courses() {
 
     const [allCourses, setAllCourses] = useState([]);
-    const [instituitions, setInstituitions] = useState<InstituitionDataTypes[]>([]);
 
     const [showLevel, setShowLevel] = useState(false);
-    const [showInstituitions, setShowInstituitions] = useState(false);
     const [selectedLevel, setSelectedLevel] = useState("");
-    const [selectedInstituition, setSelectedInstituition] = useState("");
+
+    const [search, setSearch] = useState("");
+    const [focusSearch, setFocusSearch] = useState(false);
 
 
     const FetchAllCourses = UseFetch();
-    const FetchInstituitions = UseFetch();
 
     const HandleFetchAllCourses = async () =>
     {
         let res;
-        if (!selectedLevel) {
+
+        if (!selectedLevel && !search) {
+
             res = await FetchAllCourses.Fetch(`/courses/all`);
-        } else {
+
+        } else if (selectedLevel && !search) {
+
             res = await FetchAllCourses.Fetch(`/courses/all?selectedLevel=${selectedLevel}`);
+
+        } else if (!selectedLevel && search) {
+            res = await FetchAllCourses.Fetch(`/courses/all?search=${search}`);
         }
 
         if (!res) return;
@@ -37,36 +43,25 @@ function Courses() {
         setAllCourses(res.allCourses)
     }
 
-    const HandleFetchInstituitions = async () =>
-    {
-        const res = await FetchInstituitions.Fetch(`/instituitions`);
-
-        if (!res) return;
-
-        setInstituitions(res.instituitions)
-    }
-
     useEffect(() => {
         HandleFetchAllCourses();
-    }, [selectedLevel]);
+    }, [selectedLevel, search]);
 
     useEffect(() => {
-        HandleFetchInstituitions();
-    }, [selectedLevel]);
-
-    useEffect(() => {
-        document.body.style.overflow = showInstituitions || showLevel ? "hidden" : "";
+        document.body.style.overflow = showLevel ? "hidden" : "";
 
         return () => {
             document.body.style.overflow = "auto";
         }
-    }, [showInstituitions, showLevel])
+    }, [showLevel])
 
     return (
         <>
         <fieldset className={styles.select}>
             <legend>filter</legend>
-
+            <button>
+                all
+            </button>
             <div onClick={() => {
                 setShowLevel(!showLevel);
             }}>{selectedLevel ? selectedLevel : "select level"}
@@ -90,44 +85,18 @@ function Courses() {
                 )}
             </div>
 
-            {!FetchAllCourses.error && selectedLevel ? (
-                <div onClick={() => {
-                    setShowInstituitions(!showInstituitions)
-                }}> {selectedInstituition ? selectedInstituition : "select instituition"}
-
-                    {!FetchInstituitions.loading && instituitions.length > 0 ? (
-                        <>
-                        {showInstituitions ? <ChevronDown /> : <ChevronUp />}
-                        </>
-                    ) : (
-                        <>
-                        {FetchInstituitions.loading ? 
-                        <ClipLoader size={20}/> : 
-                        <button onClick={HandleFetchInstituitions}>
-                            <RotateCw />
-                        </button>}
-                        </>
-                    )}
-
-                    {showInstituitions && (
-                        <>
-                        {instituitions.length > 0 && (
-                            <ul>
-                                <h2>select</h2>
-                                <button onClick={() => {
-                                   setShowInstituitions(false);
-                                }}><X /></button>
-                                {instituitions.map(i => (
-                                    <li key={i.id}>
-                                        {i.instituition_name}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                        </>
-                    )}
-                </div>
-            ) : (null)}
+            <label onClick={() => setFocusSearch(true)}>
+                  <span style={{
+                    top: focusSearch ? "-0.8rem" : ""
+                  }}>
+                  {focusSearch ? <Pen size={20}/> : <Search size={20}/>}
+                  {focusSearch ? "enter course" : "search course"}
+                  </span>
+                  <input type="search"
+                  value={search}
+                   onChange={(e) => setSearch(e.target.value)}
+                  />
+            </label>
 
         </fieldset>
 
@@ -137,6 +106,8 @@ function Courses() {
         error={FetchAllCourses.error}
         reFetch={HandleFetchAllCourses}
         filterLevel={selectedLevel}
+        search={search}
+        setSearch={setSearch}
         />
         </>
     )

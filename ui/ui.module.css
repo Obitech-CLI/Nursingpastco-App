@@ -102,4 +102,5 @@ button.login {
 
 .menu > a {
     padding: 1rem;
+    color: var(--bg-txt-color);
 }

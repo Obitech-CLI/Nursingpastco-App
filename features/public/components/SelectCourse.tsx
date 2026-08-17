@@ -1,8 +1,8 @@
 "use client";
 
 import { CourseDataTypes, InstituitionDataTypes } from "@/types/types";
-import { ChevronDown, ChevronUp, SquareArrowOutUpRight, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Pen, Search, SquareArrowOutUpRight, X } from "lucide-react";
+import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "../styles.module.css";
 import Link from "next/link";
@@ -14,9 +14,11 @@ type Props = {
     error: string;
     reFetch: () => void;
     filterLevel: string;
+    search: string;
+    setSearch: React.Dispatch<SetStateAction<string>>;
 }
 
-function SelectCourse({allCourses, loading, error, reFetch, filterLevel} : Props) {
+function SelectCourse({allCourses, loading, error, reFetch, filterLevel, search, setSearch} : Props) {
 
     const [showInfo, setShowInfo] = useState(0);
 
@@ -62,6 +64,7 @@ function SelectCourse({allCourses, loading, error, reFetch, filterLevel} : Props
 
     return (
         <div className={styles.select_course}>
+
         {!loading ? (
             <>
             {allCourses.length > 0 && !error ? (
@@ -73,6 +76,7 @@ function SelectCourse({allCourses, loading, error, reFetch, filterLevel} : Props
                         <>{"all courses"}</>
                     )}
                 </h3>
+                
                 {allCourses.map(course => (
                     <div key={course.id} className={styles.course}>
                         <h4 onClick={() => {
@@ -97,6 +101,7 @@ function SelectCourse({allCourses, loading, error, reFetch, filterLevel} : Props
                                 <>
                                 {instituition.length > 0 && !FetchInstuition.error ? (
                                 <>
+                                <h3>{course.course}</h3>
                                 <h3>{course.instituition}</h3>
                                 <h4>{course.level}</h4>
 

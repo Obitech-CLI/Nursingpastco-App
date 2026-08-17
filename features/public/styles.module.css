@@ -150,8 +150,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.6rem 1rem;
-    border-radius: 15px;
+    padding: 0.8rem 1rem;
+    border-radius: 5px;
     text-transform: capitalize;
 }
 
@@ -173,6 +173,7 @@
     justify-content: center;
     gap: 1rem;
     text-transform: capitalize;
+    z-index: 50;
 }
 
 .select_course .info > button {

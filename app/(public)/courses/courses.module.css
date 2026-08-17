@@ -1,14 +1,14 @@
 fieldset.select {
-    display: flex;
-    flex-direction: column;
-    margin: 0 1rem 2rem;
-    gap: 1rem;
-    border: var(--border);
+    display: grid;
+    grid-template-columns: 10% auto;
     padding: 1rem;
+    border: var(--border);
+    gap: 1.5rem 1rem;
     border-radius: 5px;
+    margin: 0 1rem 2rem;
 }
 
-fieldset.select > div {
+fieldset.select > div, fieldset.select > button {
     box-shadow: var(--box-shadow);
     padding: 0.7rem 1rem;
     border-radius: 10px;
@@ -21,7 +21,6 @@ fieldset.select > div {
 
 fieldset.select > div ul {
     position: fixed;
-    z-index: 10;
     inset: 0;
     background-color: var(--modal);
     list-style-type: none;
@@ -34,6 +33,7 @@ fieldset.select > div ul {
     gap: 1rem;
     backdrop-filter: blur(10px);
     overflow: auto;
+    z-index: 50;
 }
 
 fieldset.select > div ul > button {
@@ -50,6 +50,25 @@ fieldset.select > div ul li {
 }
 
 fieldset.select legend {
+    text-transform: capitalize;
+    padding: 0 0.5rem;
+}
+
+fieldset.select > label {
+    grid-column: span 2;
+}
+
+fieldset.select > label input {
+    padding: 0.7rem 1rem;
+    width: 100%;
+}
+
+fieldset.select > label span {
+    position: absolute;
+    left: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     text-transform: capitalize;
     padding: 0 0.5rem;
 }

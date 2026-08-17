@@ -2,9 +2,9 @@
 
 import { supabase } from "../supabase/supabase";
 
-const GetAllCourses = async (level: string) =>
+const GetAllCourses = async (level: string, search: string) =>
 {
-    if (!level) {
+    if (!level && !search) {
         const { data, error } = await supabase
         .from("nursingpastco_courses")
         .select("id, instituition, course, level")
@@ -19,12 +19,29 @@ const GetAllCourses = async (level: string) =>
            allCourses: data,
            status: 200
         }
+    } else if (level && !search) {
+        const { data, error } = await supabase
+        .from("nursingpastco_courses")
+        .select("id, instituition, course, level")
+        .eq("level", level)
+        .order("created_at", {ascending: false});
+    
+
+        if (data?.length === 0 || error) {
+            return { success: false, error: "no course found", status: 404 }
+            }
+
+        return {
+        success: true,
+        allCourses: data,
+        status: 200
+        }
     }
 
     const { data, error } = await supabase
     .from("nursingpastco_courses")
     .select("id, instituition, course, level")
-    .eq("level", level)
+    .eq("course", search)
     .order("created_at", {ascending: false});
     
 

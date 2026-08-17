@@ -5,9 +5,10 @@ export async function GET(req: NextRequest) {
 
     const searchParams = req.nextUrl.searchParams;
     const level = searchParams.get("selectedLevel") as string;
+    const search = searchParams.get("search") as string;
     
     try {
-        const res = await GetAllCourses(level);
+        const res = await GetAllCourses(level, search);
 
         if (!res.success) {
             return NextResponse.json({
