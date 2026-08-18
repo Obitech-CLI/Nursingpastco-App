@@ -8,6 +8,7 @@ import { ClipLoader } from "react-spinners";
 import styles from "./styles.module.css";
 import { ChevronDown, ChevronUp, X } from "lucide-react";
 import { LevelOptions } from "@/ui/AppContent";
+import { PiImageBrokenLight } from "react-icons/pi";
 
 function PastQuestions() {
 
@@ -23,7 +24,7 @@ function PastQuestions() {
 
     const [selectedCourse, setSelectedCourse] = useState("");
 
-    const [changeLevel, setChangeLevel] = useState(0);
+    const [change, setChange] = useState(0);
 
     const [showInstituitions, setShowInstituitions] = useState(false);
 
@@ -38,7 +39,7 @@ function PastQuestions() {
             setSelectedLogo(storedLogo);
         }
         
-    }, [changeLevel]);
+    }, [change]);
 
     const FetchCourses = UseFetch();
     const FetchPDFs = UseFetch();
@@ -100,7 +101,17 @@ function PastQuestions() {
     const HandleLevelChange = (level: string) =>
     {
         localStorage.setItem("selectedLevel", level);
-        setChangeLevel(prev => prev + 1)
+        setChange(prev => prev + 1)
+    }
+
+    const HandleInstituitionChange = (instituition: string, logo: string) =>
+    {
+        localStorage.setItem("selectedInstituition", instituition);
+        localStorage.setItem("selectedLogo", logo);
+        localStorage.setItem("selectedLevel", "100 level");
+        setSelectedLevel("");
+        setCourses([]);
+        setChange(prev => prev + 1)
     }
 
     return (
@@ -124,7 +135,10 @@ function PastQuestions() {
                         <div className={styles.select}>
                         <h2>select</h2>
                         {instituitions.map(i => (
-                            <button key={i.id}>
+                            <button key={i.id} onClick={() => {
+                                HandleInstituitionChange(i.instituition_name, i.instituition_logo);
+                                setShowInstituitions(false);
+                            }}>
                                 {i.instituition_name}
                             </button>
                         ))}
@@ -143,9 +157,16 @@ function PastQuestions() {
                 )}
                 </div>
             )}
-            {selectedLogo && (
-                <Image alt="" src={selectedLogo} width={100} height={100}/>
+            
+            {selectedLogo && selectedInstituition ? (
+                <Image alt="" 
+                src={selectedLogo} width={100} height={100}/>
+            ) : (
+                <div style={{
+                    width: "100px", height: "100px", border: "var(--border)"
+                }}></div>
             )}
+            
 
             <h3>
                 past questions<br />{selectedLevel}
