@@ -1,9 +1,9 @@
 .pastQuestions_hero {
-    display: grid;
-    grid-template-columns: auto auto;
+    display: flex;
+    align-items: center;
     align-items: center;
     justify-content: center;
-    gap: 0 1rem;
+    gap: 1rem;
     padding: 0;
     margin-bottom: 1.5rem;
 }
@@ -35,15 +35,15 @@
     text-transform: capitalize;
 }
 
-.pastQuestions_hero > h2 {
-    margin-top: 1rem;
-    padding: 0;
+.pastQuestions_hero > h3 {
     text-align: right;
     font-family: sans-serif;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0;
+    gap: 0.5rem;
 }
 
 .pastQuestions_hero > .instituitions {

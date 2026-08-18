@@ -46,7 +46,9 @@ function Courses() {
 
     return (
         <>
-        <div className={styles.select}>
+        <div className={styles.select} style={{
+            rowGap: focusSearch ? "1rem" : ""
+        }}>
             <button onClick={() => {
                 setSelectedLevel("");
                 setSearch("")
@@ -88,6 +90,11 @@ function Courses() {
                   <input type="search"
                   value={search}
                    onChange={(e) => setSearch(e.target.value)}
+                   onBlur={() => {
+                    if (!search) {
+                        setFocusSearch(false);
+                    }
+                   }}
                   />
             </label>
 

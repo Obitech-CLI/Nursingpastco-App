@@ -28,7 +28,7 @@ function LoginForm({formData, setFormData, onSubmit, loading}:FormDataProps) {
 
     return (
         <form onSubmit={onSubmit} className={styles.auth}>
-            <h2>sign in</h2>
+            <h3>sign in</h3>
             <h3>welcome back</h3>
 
             <label><Mail size={35}/>
@@ -54,11 +54,6 @@ function LoginForm({formData, setFormData, onSubmit, loading}:FormDataProps) {
             <button type="submit" disabled={loading}>
                 {!loading ? "login" : <ClipLoader size={20} color="white"/> }
             </button>
-
-            <div className={styles.link}>
-                <h4>don't have an account?</h4>
-                <Link href="/admin/create">create account<LinkIcon/></Link>
-            </div>
         </form>
     )
 }

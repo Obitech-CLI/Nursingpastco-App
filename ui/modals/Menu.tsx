@@ -19,6 +19,7 @@ function MenuModal() {
     return (
         <>
         {showMenu && (
+            <>
             <nav className={styles.menu}>
                {pathname !== "/instituitions" && (
                 <Link onClick={ResetMenu} href="/instituitions">instituitions</Link>
@@ -33,6 +34,8 @@ function MenuModal() {
                 <Link onClick={ResetMenu} href="/contents">contents</Link>
                )}
             </nav>
+            <div className={styles.overlay}></div>
+            </>
         )}
         </>
     )

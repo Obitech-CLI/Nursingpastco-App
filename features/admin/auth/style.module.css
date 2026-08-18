@@ -1,24 +1,6 @@
-.link {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem 1rem 1rem;
-    text-transform: capitalize;
-    gap: 0.5rem;
-}
-
-.link a {
-    text-decoration: none;
-    width: 100%;
-    border: 1.5px solid var(--primary-color);
-    padding: 1rem;
-    border-radius: 20px;
-    color: var(--bg-txt-color);
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    justify-content: center;
+form.auth > h3 {
+    width: 80%;
+    margin: auto;
 }
 
 form.auth > label > span {

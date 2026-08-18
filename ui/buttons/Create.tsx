@@ -1,6 +1,7 @@
 "use client";
 
 import { UseAuthProvider } from "@/contexts/user/AuthFormProvider";
+import { Users } from "lucide-react";
 import { useEffect } from "react";
 
 function CreateUserButton() {
@@ -17,7 +18,7 @@ function CreateUserButton() {
 
     return (
         <button onClick={() => setShowCreateForm(true)}>
-            join community
+            join community <Users />
         </button>
     )
 }

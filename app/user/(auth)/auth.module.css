@@ -11,7 +11,7 @@
     align-items: center;
     justify-content: flex-start;
     overflow: auto;
-    margin-top: 2rem;
+    margin-top: 3rem;
 }
 
 .user_auth > button {

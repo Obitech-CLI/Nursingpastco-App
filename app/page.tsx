@@ -4,13 +4,10 @@ import { Offers } from "@/features/home/components/Offers";
 import { InstuitionHero } from "@/features/home/components/InstituitionHero";
 import { CheckCircle2 } from "lucide-react";
 import { SubOffers } from "@/features/home/components/SubOffers";
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
 
 function HomePage() {
   return (
     <>
-    <Header />
     <main>
       <Hero />
       <Offers />

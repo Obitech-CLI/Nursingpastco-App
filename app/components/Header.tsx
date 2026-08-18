@@ -11,7 +11,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 function Header() {
 
-    const [showNav, setShowNav] = useState(false);
+    const [showNav, setShowNav] = useState(true);
     const pathname = usePathname();
     const router = useRouter();
 
@@ -24,7 +24,7 @@ function Header() {
     }
 
     const GoBack = () => {
-        router.back();
+        history.back();
     }
 
     return (
@@ -44,12 +44,16 @@ function Header() {
             {showNav && (
             <nav>
                 <div>
-                    {pathname !== "/admin/dashboard" && (
+                    {pathname !== "/" && (
                         <>
-                        {pathname !== "/" && (
+                        {pathname !== "/admin/dashboard" && (
                             <>
-                            <button onClick={GoBack}><ArrowLeft /></button>
-                            <button onClick={GoHome}><HomeIcon /></button>
+                            {pathname !== "/admin/login" && (
+                                <>
+                                <button onClick={GoBack}><ArrowLeft /></button>
+                                <button onClick={GoHome}><HomeIcon /></button>
+                                </>
+                            )}
                             </>
                         )}
                         </>

@@ -117,12 +117,12 @@ function PastQuestions() {
     return (
         <>
         <div className={styles.pastQuestions_hero}>
-            <h2 onClick={() => {
+            <h3 onClick={() => {
                 setShowInstituitions(!showInstituitions)
             }}>
                 {selectedInstituition ? selectedInstituition : "select instituition"}
                 {showInstituitions ? <ChevronDown /> : <ChevronUp />}
-            </h2>
+            </h3>
 
             {showInstituitions && (
                 <div className={styles.instituitions}>
@@ -166,11 +166,6 @@ function PastQuestions() {
                     width: "100px", height: "100px", border: "var(--border)"
                 }}></div>
             )}
-            
-
-            <h3>
-                past questions<br />{selectedLevel}
-            </h3>
         </div>
 
         <div className={styles.btns}>
