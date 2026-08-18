@@ -90,7 +90,7 @@ header > div > div {
 
 header > nav {
     position: fixed;
-    top: 3.5rem;
+    top: 3rem;
     z-index: 100999;
     display: flex;
     align-items: center;
@@ -106,6 +106,7 @@ header nav > div {
     padding: 0.5rem 1.5rem;
     border-radius: 50px;
     background-color: var(--nav-bg);
+    color: var(--bg-txt-color);
 }
 
 button {

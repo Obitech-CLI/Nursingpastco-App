@@ -1,14 +1,13 @@
-fieldset.select {
+div.select {
     display: grid;
     grid-template-columns: 15% auto;
-    padding: 1rem;
-    border: var(--border);
     gap: 1.5rem 1rem;
     border-radius: 5px;
-    margin: 0 1rem 2rem;
+    margin: 0.5rem 1rem 2rem;
+    border: none;
 }
 
-fieldset.select > div {
+div.select > div {
     box-shadow: var(--box-shadow);
     padding: 0.7rem 1rem;
     border-radius: 10px;
@@ -19,15 +18,15 @@ fieldset.select > div {
     position: relative;
 }
 
-fieldset.select > button {
+div.select > button {
     text-align: center;
-    box-shadow: var(--box-shadow);
+    border: var(--border);
     padding: 0.7rem 1rem;
     border-radius: 10px;
     text-transform: capitalize;
 }
 
-fieldset.select > div ul {
+div.select > div ul {
     position: fixed;
     inset: 0;
     background-color: var(--modal);
@@ -44,34 +43,35 @@ fieldset.select > div ul {
     z-index: 50;
 }
 
-fieldset.select > div ul > button {
+div.select > div ul > button {
     position: absolute;
     top: 6.5rem;
     right: 3rem;
 }
 
-fieldset.select > div ul li {
+div.select > div ul li {
     border: var(--border);
     padding: 1rem;
     text-align: center;
     border-radius: 50px;
 }
 
-fieldset.select legend {
+div.select legend {
     text-transform: capitalize;
     padding: 0 0.5rem;
 }
 
-fieldset.select > label {
+div.select > label {
     grid-column: span 2;
+    width: 75%;
 }
 
-fieldset.select > label input {
-    padding: 0.7rem 1rem;
+div.select > label input {
+    padding: 1rem;
     width: 100%;
 }
 
-fieldset.select > label span {
+div.select > label span {
     position: absolute;
     left: 0.7rem;
     display: flex;

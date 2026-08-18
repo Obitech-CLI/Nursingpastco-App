@@ -1,7 +1,7 @@
 .pastQuestions_hero {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    align-items: flex-start;
+    grid-template-columns: auto auto;
+    align-items: center;
     justify-content: center;
     gap: 0 1rem;
     padding: 0;
@@ -126,15 +126,15 @@
 }
 
 .pastQuestions .retry {
-    height: 120px;
-    border-radius: 50px;
+    height: 140px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.6rem;
+    gap: 1rem;
     margin: 1rem 0;
-    text-transform: capitalize;
+    border: var(--border);
 }
 
 .pastQuestions .loading {

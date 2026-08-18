@@ -84,9 +84,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.5rem;
+    gap: 1rem;
     height: 150px;
-    margin: auto;
+    margin: 2rem auto 0;
 }
 
 .retry > h4 {
@@ -136,13 +136,16 @@
     object-fit: cover;
     object-position: 20% 50%;
     position: relative;
+    border-radius: 10px;
 }
 
 .select_course {
-    margin: 0 1.5rem;
+    margin: 0 1rem;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    border-top: 3px solid var(--secondary-color);
+    border-radius: 10px;
 }
 
 .select_course > .course > h4 {

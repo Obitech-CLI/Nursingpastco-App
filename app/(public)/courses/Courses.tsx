@@ -46,8 +46,7 @@ function Courses() {
 
     return (
         <>
-        <fieldset className={styles.select}>
-            <legend>filter</legend>
+        <div className={styles.select}>
             <button onClick={() => {
                 setSelectedLevel("");
                 setSearch("")
@@ -92,7 +91,7 @@ function Courses() {
                   />
             </label>
 
-        </fieldset>
+        </div>
 
         <SelectCourse
         allCourses={allCourses}

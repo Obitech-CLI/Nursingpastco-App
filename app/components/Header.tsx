@@ -33,7 +33,7 @@ function Header() {
                 <LogoWithName />
                 <div>
                     <button onClick={() => setShowNav(!showNav)}>
-                     {showNav ? <ChevronDown color="black"/> : <ChevronUp color="black"/>}
+                     {showNav ? <ChevronDown /> : <ChevronUp />}
                     </button>
                     {!pathname.startsWith("/admin") && (
                         <LoginUserButton />
