@@ -14,9 +14,9 @@ function AppTheme() {
     return (
         <div className={styles.app_theme}>
         <button onClick={() => HandleShowTheme(!showTheme)}>
-            <span>
+            
                 {theme === "dark" ? <Moon /> : <Sun />}
-            </span>
+        
         </button>
         {showTheme && (
             <div className={styles.select_theme}>

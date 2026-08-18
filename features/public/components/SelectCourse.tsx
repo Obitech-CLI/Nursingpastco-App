@@ -63,6 +63,7 @@ function SelectCourse({allCourses, loading, error, reFetch, filterLevel, search,
     }, [instituition]);
 
     return (
+        <>
         <div className={styles.select_course}>
 
         {!loading ? (
@@ -157,6 +158,7 @@ function SelectCourse({allCourses, loading, error, reFetch, filterLevel, search,
             </div>
         )}
         </div>
+        </>
     )
 }
 

@@ -72,15 +72,16 @@ section.offers h4 > span {
 section.offers > div {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 2rem;
+    margin-top: 1rem;
 }
 
 section.offers > div > div {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
-    border-radius: 50px;
-    padding: 1rem 2rem;
+    gap: 0.7rem;
+    border-radius: 10px;
+    margin-left: 2rem;
 }
 
 section.offers h3 span {
@@ -108,7 +109,6 @@ section.offers p {
 
 section.offers > div > div h3 {
     text-transform: capitalize;
-    color: var(--bg-text-color);
     display: flex;
     align-items: center;
     gap: 0.5rem;
