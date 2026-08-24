@@ -28,8 +28,8 @@ function Footer() {
                         <Link href="/privacy">privacy / policies</Link>
                     </nav>
                     <div className="sponsor">
-                        powered by
-                        <Image alt="" src={ObitechLogo} width={150} height={150}/>
+                        <span>powered by<br /><em>obitech</em></span>
+                        <Image alt="" src={ObitechLogo} width={60} height={60}/>
                     </div>
                     <div>
                         <p>Disclaimer: We are an independent resource and not affiliated with any official nursing body. Materials are for study purposes only.</p>

@@ -152,15 +152,26 @@ footer > .info nav a {
 footer > .info .sponsor {
     display: flex;
     align-items: center;
-    justify-content: center;
     text-transform: capitalize;
+    justify-content: center;
     gap: 1rem;
+    text-align: center;
 }
+
 footer > .info .sponsor > img {
     object-fit: cover;
     border-radius: 50%;
     background-color: white;
     padding: 0.1rem;
+}
+
+footer > .info .sponsor > span em {
+    font-size: 1.5rem;
+}
+
+footer > .info .sponsor > span {
+    border-right: var(--border);
+    padding-right: 1rem;
 }
 
 footer > .info {
