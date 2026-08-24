@@ -2,7 +2,7 @@
 
 import { supabase } from "../supabase/supabase";
 
-const DeleteInstituition = async (id: number) =>
+const DeleteInstituition = async (id: string) =>
 {
     const { data: instituition, error: instituitionError } = await supabase
     .from("nursingpastco_instituitions")

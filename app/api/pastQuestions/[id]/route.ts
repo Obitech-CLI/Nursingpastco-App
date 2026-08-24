@@ -1,7 +1,7 @@
 import DeletePastQuestion from "@/lib/past-questions/delete.service";
 import { NextRequest } from "next/server";
 
-export async function DELETE(req: NextRequest, {params}:{params: Promise<{id:number}>}) {
+export async function DELETE(req: NextRequest, {params}:{params: Promise<{id:string}>}) {
 
     const { id } = await params;
 
