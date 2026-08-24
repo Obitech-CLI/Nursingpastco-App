@@ -2,7 +2,7 @@
 
 import { supabase } from "../supabase/supabase";
 
-const DeleteCourse = async (id: number) =>
+const DeleteCourse = async (id: string) =>
 {
     const { error: deleteError } = await supabase
     .from("nursingpastco_courses")

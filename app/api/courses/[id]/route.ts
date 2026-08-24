@@ -1,7 +1,7 @@
 import DeleteCourse from "@/lib/courses/delete.service";
 import { NextRequest } from "next/server";
 
-export async function DELETE(req: NextRequest, {params}:{params: Promise<{id:number}>}) {
+export async function DELETE(req: NextRequest, {params}:{params: Promise<{id:string}>}) {
 
     const { id } = await params;
 
