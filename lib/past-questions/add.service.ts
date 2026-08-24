@@ -1,9 +1,15 @@
 "use server";
 
-import { PastQuestionDataTypes } from "@/types/types";
 import { supabase } from "../supabase/supabase";
 
-const AddPastQuestionService = async ({instituition, course, level, pdf}:PastQuestionDataTypes) =>
+export interface PastQuestionDataProps {
+    instituition: string;
+    course: string;
+    level: string;
+    pdf: File;
+}
+
+const AddPastQuestionService = async ({instituition, course, level, pdf}:PastQuestionDataProps) =>
 {
     if (!instituition || !course || !level) {
         return { success: false, error: "empty input field", status: 400 }
