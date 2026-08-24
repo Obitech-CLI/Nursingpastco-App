@@ -1,6 +1,6 @@
 "use client";
 
-import { childrenNode, ErrorModalType, SuccessModalType } from "@/types/contexts"
+import { childrenNode, ConfirmModalType, ErrorModalType, SuccessModalType } from "@/types/contexts"
 import { createContext, useContext, useState } from "react"
 
 const SuccessModalContext = createContext<SuccessModalType | null>(null)
@@ -35,9 +35,27 @@ function ErrorModalProvider({children}:childrenNode) {
     )
 }
 
+const ConfirmModalContext = createContext<ConfirmModalType | null>(null)
+
+function ConfirmModalProvider({children}:childrenNode) {
+
+    const [confirmMessage, setConfirmMessage] = useState<string>("");
+    const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false);
+    const [confirm, setConfirm] = useState<boolean>(false);
+
+    return (
+        <ConfirmModalContext.Provider value={{
+            confirm, setConfirm, confirmMessage, setConfirmMessage, showConfirmModal, setShowConfirmModal
+        }}>
+            {children}
+        </ConfirmModalContext.Provider>
+    )
+}
+
 export { 
     SuccessModalProvider, 
-    ErrorModalProvider
+    ErrorModalProvider,
+    ConfirmModalProvider
 }
 
 export const useSuccessModal = () => {
@@ -54,6 +72,16 @@ export const useSuccessModal = () => {
 export const useErrorModal = () => {
     
     const context = useContext(ErrorModalContext)
+    if (!context) {
+        throw new Error("no context available")
+    };
+
+    return context;
+}
+
+export const useConfirmModal = () => {
+    
+    const context = useContext(ConfirmModalContext)
     if (!context) {
         throw new Error("no context available")
     };

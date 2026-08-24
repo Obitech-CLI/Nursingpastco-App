@@ -6,8 +6,9 @@ import { LevelOptions } from "@/ui/AppContent";
 import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "../styles.module.css";
-import { ChevronDown, ChevronUp, RotateCw, Search } from "lucide-react";
+import { ChevronDown, ChevronUp, RotateCw, Search, X } from "lucide-react";
 import { toast } from "sonner";
+import { useErrorModal } from "@/contexts/modals/FeedbackContext";
 
 interface SearchDataTypes {
     instituition: string;
@@ -33,30 +34,40 @@ function SearchCourses({searchData, setSearchData, search, loading}:Props) {
 
     const [reloadInstituitions, setReloadInstituitions] = useState(0);
 
+    const { setErrorMessage, setShowErrorModal, errorMessage } = useErrorModal();
+
     const HandleFetch = async () =>
     {
         const res = await fetctInstituitions.Fetch("/instituitions");
         if (fetctInstituitions.error) {
-            toast.error(fetctInstituitions.error);
+            setErrorMessage(fetctInstituitions.error);
+            setShowErrorModal(true);
             return;
         }
 
-        if (res) {
-            if (res.success) {
-                setInstituitions(res.instituitions);
-            }
-        }
+        if (!res) return;
+            
+        setInstituitions(res.instituitions);
     }
 
     useEffect(() => {
         HandleFetch();
     }, [reloadInstituitions]);
 
+    useEffect(() => {
+        document.body.style.overflow = showLevels || showInstituitions || errorMessage ? "hidden" : "";
+
+        return () => {
+            document.body.style.overflow = "auto";
+        }
+    }, [showInstituitions, showLevels, errorMessage])
+
     return (
         <fieldset className="search">
             <legend>search</legend>
 
             <div onClick={() => {
+                if (instituitions.length === 0) return;
                 setShowInstituitions(!showInstituitions);
                 setShowLevels(false);
                 }}>
@@ -84,6 +95,8 @@ function SearchCourses({searchData, setSearchData, search, loading}:Props) {
                 <>
                 {instituitions && instituitions.length > 0 ? (
                     <ul>
+                        <span onClick={() => setShowInstituitions(false)}><X /></span>
+                        <h2>select</h2>
                         {instituitions.map(instituition => (
                             <li key={instituition.id} onClick={() => {
                                 setSearchData(prev => ({...prev, instituition: instituition.instituition_name}));
@@ -107,6 +120,8 @@ function SearchCourses({searchData, setSearchData, search, loading}:Props) {
                     </>
                     {showLevels && (
                     <ul>
+                        <span onClick={() => setShowLevels(false)}><X /></span>
+                        <h2>select</h2>
                         {LevelOptions.map(level => (
                             <li key={level.id} onClick={() => {
                                 setSearchData(prev => ({...prev, level: level.level}));

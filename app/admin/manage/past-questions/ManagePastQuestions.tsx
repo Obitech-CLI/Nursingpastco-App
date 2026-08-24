@@ -5,10 +5,19 @@ import { AddPastQuestion } from "@/features/admin/manage/past-questions/componen
 import { Plus, Settings2 } from "lucide-react";
 import "../manage.css";
 import { ModifyPastQuestions } from "@/features/admin/manage/past-questions/components/Modify";
+import { useState } from "react";
 
 function AdminManagePastQuestions() {
 
     const { navManagePastQuestions, setNavManagePastQuestions } = UseManageNav();
+
+    const [ edit, setEdit ] = useState(false);
+    const [ editData, setEditData ] = useState({
+            id: 0,
+            instituition: "",
+            course: "",
+            level: ""
+        });
 
     return (
         <>
@@ -24,12 +33,30 @@ function AdminManagePastQuestions() {
                 gridArea: navManagePastQuestions.add ? "2/ 1/ 2/ 2" : "",
                 fontSize: navManagePastQuestions.add ? "1.3rem" : "",
             }}>
-                {!navManagePastQuestions.add ? "add" : "add past-questions"}
+                {!navManagePastQuestions.add ? (
+                    <>
+                    {!edit ? "add" : "update"}
+                    </>
+                ) : (
+                    <>
+                    {!edit ? "add past-question" : "update past-question"}
+                    </>
+                )}
                 {!navManagePastQuestions.add ? <Plus /> : ""}
             </button>
 
             <button type="button"
-            onClick={() => setNavManagePastQuestions({add: false, view: true})}
+            onClick={() => {
+                setNavManagePastQuestions({add: false, view: true});
+                setEditData({
+                    id: 0,
+                    instituition: "",
+                    course: "",
+                    level: ""
+                })
+                setEdit(false);
+            }}
+            
             style={{
                 border: navManagePastQuestions.view ? "none" : "",
                 gridArea: navManagePastQuestions.view ? "2/ 1/ 2/ 2" : "",
@@ -40,8 +67,22 @@ function AdminManagePastQuestions() {
             </button>
         </div>
 
-        {navManagePastQuestions.add && (<AddPastQuestion />)}
-        {navManagePastQuestions.view && (<ModifyPastQuestions />)}
+        {navManagePastQuestions.add && (
+            <AddPastQuestion
+            edit={edit}
+            setEdit={setEdit}
+            editData={editData}
+            setEditData={setEditData}
+            />
+        )}
+        {navManagePastQuestions.view && (
+            <ModifyPastQuestions
+            edit={edit}
+            setEdit={setEdit}
+            setNav={setNavManagePastQuestions}
+            setEditData={setEditData}
+            />
+        )}
         </>
     )
 }

@@ -4,14 +4,13 @@
     background-color: var(--modal);
     backdrop-filter: blur(10px);
     z-index: 99;
-    padding: 2rem;
     color: var(--bg-text-color);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     overflow: auto;
-    margin-top: 3rem;
+    padding: 6rem 0 4.5rem;
 }
 
 .user_auth > button {
@@ -19,5 +18,6 @@
     border: none;
     align-self: self-end;
     position: absolute;
-    top: 4rem;
+    top: 7rem;
+    right: 2rem;
 }

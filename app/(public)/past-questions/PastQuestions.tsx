@@ -91,12 +91,12 @@ function PastQuestions() {
     }, [])
 
     useEffect(() => {
-        document.body.style.overflow = showInstituitions ? "hidden" : "";
+        document.body.style.overflow = showInstituitions || showPDFs ? "hidden" : "";
 
         return () => {
             document.body.style.overflow = "auto";
         }
-    }, [showInstituitions])
+    }, [showInstituitions, showPDFs])
 
     const HandleLevelChange = (level: string) =>
     {
@@ -198,9 +198,8 @@ function PastQuestions() {
                     {courses.map(course => (
                         <div key={course.id}>
                         <div className={styles.courses}>
-                            <h4>{course.course}</h4>
-
-                            <button onClick={() => {
+                            <h4
+                            onClick={() => {
                                 if (course.id === showPDFs) {
                                     setShowPDFs(0);
                                     setSelectedCourse("");
@@ -208,11 +207,20 @@ function PastQuestions() {
                                 }
                                 setSelectedCourse(course.course);
                                 setShowPDFs(course.id);
-                            }}>{showPDFs ? <ChevronDown /> : <ChevronUp />}</button>
+                            }}
+                            >{course.course} <span>{showPDFs ? <ChevronDown /> : <ChevronUp />}</span></h4>
                         </div>
 
                         {showPDFs === course.id && (
                             <div className={styles.pdfs}>
+                            <h2>select past question</h2>
+                            <button onClick={() => {
+                                if (course.id === showPDFs) {
+                                    setShowPDFs(0);
+                                    setSelectedCourse("");
+                                    return;
+                                }
+                            }}><X /></button>
                             {!FetchPDFs.loading ? (
                             <>
                             {!FetchPDFs.error && pdfs.length > 0 ? (
@@ -226,7 +234,7 @@ function PastQuestions() {
                                 {!FetchPDFs.error && !FetchPDFs.loading ? (
                                     <p>no pdf found</p>
                                 ):(
-                                    <div className={styles.retry}>
+                                    <div className={styles.select_retry}>
                                         <p>{FetchPDFs.error}</p>
                                         <button onClick={HandleFetchPDFs}>
                                             retry
@@ -236,7 +244,7 @@ function PastQuestions() {
                                 </>
                             )}
                             </>
-                            ) : (<ClipLoader size={30}/>)}
+                            ) : (<div className={styles.select_loading}><ClipLoader size={30}/></div>)}
                             </div>
                         )}
                         </div>

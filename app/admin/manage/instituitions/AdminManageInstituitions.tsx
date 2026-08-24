@@ -8,9 +8,13 @@ import { useState } from "react";
 
 function AdminManageInstituitions() {
 
-    const [reload, setReload] = useState(0);
-
     const { navManageInstituitions, setNavManageInstituitions } = UseManageNav();
+    const [ edit, setEdit ] = useState(false);
+    const [ editData, setEditData ] = useState({
+        id: 0,
+        instituition_name: "",
+        instituition_abbr: "",
+    });
 
     return (
         <>
@@ -26,12 +30,29 @@ function AdminManageInstituitions() {
                 gridArea: navManageInstituitions.add ? "2/ 1/ 2/ 2" : "",
                 fontSize: navManageInstituitions.add ? "1.3rem" : "",
             }}>
-                {!navManageInstituitions.add ? "add" : "add instituitions"}
+                {!navManageInstituitions.add ? (
+                    <>
+                    {!edit ? "add" : "update"}
+                    </>
+                ) : (
+                    <>
+                    {!edit ? "add instituition" : "update instituition"}
+                    </>
+                )}
+    
                 {!navManageInstituitions.add ? <Plus /> : ""}
             </button>
 
             <button type="button"
-            onClick={() => setNavManageInstituitions({add: false, view: true})}
+            onClick={() => {
+                setNavManageInstituitions({add: false, view: true});
+                setEditData({
+                    id: 0,
+                    instituition_name: "",
+                    instituition_abbr: "",
+                })
+                setEdit(false);
+            }}
             style={{
                 border: navManageInstituitions.view ? "none" : "",
                 gridArea: navManageInstituitions.view ? "2/ 1/ 2/ 2" : "",
@@ -42,8 +63,22 @@ function AdminManageInstituitions() {
             </button>
         </div>
 
-        {navManageInstituitions.add && (<AddInstituition setReload={setReload}/>)}
-        {navManageInstituitions.view && (<ModifyInstituitions reload={reload}/>)}
+        {navManageInstituitions.add && (
+            <AddInstituition
+            edit={edit}
+            setEdit={setEdit}
+            editData={editData}
+            setEditData={setEditData}
+            />
+        )}
+        {navManageInstituitions.view && (
+            <ModifyInstituitions
+            edit={edit}
+            setEdit={setEdit}
+            setNav={setNavManageInstituitions}
+            setEditData={setEditData}
+            />
+        )}
         </>
     )
 }

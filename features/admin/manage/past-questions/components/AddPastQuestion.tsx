@@ -1,10 +1,24 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { SetStateAction, useRef, useState } from "react";
 import { AddForm } from "./AddForm";
 import { UsePost } from "@/hooks/usePost";
 
-function AddPastQuestion() {
+interface editData {
+    id: number,
+    instituition: string,
+    course: string,
+    level: string
+}
+
+type Props = {
+    edit: boolean,
+    setEdit: React.Dispatch<SetStateAction<boolean>>;
+    editData: editData;
+    setEditData: React.Dispatch<SetStateAction<editData>>;
+}
+
+function AddPastQuestion({edit, setEdit, editData, setEditData} : Props) {
 
     const [formData, setFormData] = useState({
         instituition: "",
@@ -58,6 +72,10 @@ function AddPastQuestion() {
         loading={PostPDFData.loading}
         onSubmit={HandleFormSubmit}
         fileRef={fileRef}
+        edit={edit}
+        setEdit={setEdit}
+        editData={editData}
+        setEditData={setEditData}
         />
     )
 }

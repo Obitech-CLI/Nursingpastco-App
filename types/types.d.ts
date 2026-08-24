@@ -1,5 +1,5 @@
 export interface InstituitionDataTypes {
-    id?: number;
+    id: number;
     instituition_name: string;
     instituition_abbr: string;
     instituition_logo: url;
@@ -13,10 +13,10 @@ export interface CourseDataTypes {
 }
 
 export interface PastQuestionDataTypes {
-    id?: number;
+    id: number;
     instituition: string;
     course: string;
     level: string;
-    title?: string;
+    title: string;
     pdf: File;
 }

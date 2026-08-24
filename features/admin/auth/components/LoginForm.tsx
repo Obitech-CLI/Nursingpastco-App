@@ -37,7 +37,8 @@ function LoginForm({formData, setFormData, onSubmit, loading}:FormDataProps) {
                     setFocusInput(prev => ({...prev, email: true}))
                 }}/>
                 <span style={{
-                    top: focusInput.email ? "-1rem" : ""
+                    top: focusInput.email ? "-1rem" : "",
+                    border: focusInput.email ? "var(--border)" : ""
                 }}>{focusInput.email ? "enter your email" : "email"}</span>
             </label>
 
@@ -47,7 +48,8 @@ function LoginForm({formData, setFormData, onSubmit, loading}:FormDataProps) {
                     setFocusInput(prev => ({...prev, password: true}))
                 }}/>
                 <span style={{
-                    top: focusInput.password ? "-1rem" : ""
+                    top: focusInput.password ? "-1rem" : "",
+                    border: focusInput.password ? "var(--border)" : ""
                 }}>{focusInput.password ? "enter your password" : "password"}</span>
             </label>
 

@@ -1,8 +1,9 @@
 "use client";
 
-import { useErrorModal, useSuccessModal } from "@/contexts/modals/FeedbackContext";
+import { useConfirmModal, useErrorModal, useSuccessModal } from "@/contexts/modals/FeedbackContext";
 import styles from "../ui.module.css";
 import { CircleAlert, CircleCheck } from "lucide-react";
+import { UseDelete } from "@/hooks/useDelete";
 
 function SuccessModal() {
 
@@ -52,4 +53,42 @@ function ErrorModal() {
     )
 }
 
-export { SuccessModal, ErrorModal }
+function ConfirmModal() {
+
+    const { setConfirm, confirmMessage, setConfirmMessage, setShowConfirmModal , showConfirmModal} = 
+    useConfirmModal();
+
+    const dismissModal = () => {
+        setShowConfirmModal(false);
+        setConfirmMessage("");
+        setConfirm(false);
+    }
+
+    return (
+        <>
+        {showConfirmModal && confirmMessage ? (
+            <div className={styles.feedback_modal}>
+
+                <div className={styles.error}>
+
+                    <h4>{confirmMessage}</h4>
+                    <CircleAlert size={30}/>
+                    <button onClick={dismissModal}>cancel</button>
+
+                    <button onClick={() => {
+                        setConfirm(true);
+                        setShowConfirmModal(false);
+                        setConfirmMessage("");
+                    }} style={{backgroundColor: "red"}}>
+                        delete
+                    </button>
+                    
+                </div>
+
+            </div>
+        ) : (null)}
+        </>
+    )
+}
+
+export { SuccessModal, ErrorModal, ConfirmModal }

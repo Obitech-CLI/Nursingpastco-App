@@ -17,3 +17,12 @@ export type ErrorModalType = {
     showErrorModal: boolean;
     setShowErrorModal: React.Dispatch<SetStateAction<boolean>>;
 }
+
+export type ConfirmModalType = {
+    confirm: boolean;
+    setConfirm: React.Dispatch<SetStateAction<boolean>>;
+    confirmMessage: string;
+    setConfirmMessage: React.Dispatch<SetStateAction<string>>;
+    showConfirmModal: boolean;
+    setShowConfirmModal: React.Dispatch<SetStateAction<boolean>>;
+}

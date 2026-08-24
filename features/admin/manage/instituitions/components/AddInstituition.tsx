@@ -4,11 +4,20 @@ import { SetStateAction, useRef, useState } from "react"
 import { AddForm } from "./AddForm"
 import { UsePost } from "@/hooks/usePost";
 
-type Props = {
-    setReload: React.Dispatch<SetStateAction<number>>
+interface editData {
+    id: number,
+    instituition_name: string,
+    instituition_abbr: string,
 }
 
-function AddInstituition({setReload}:Props) {
+type Props = {
+    edit: boolean,
+    setEdit: React.Dispatch<SetStateAction<boolean>>;
+    editData: editData;
+    setEditData: React.Dispatch<SetStateAction<editData>>;
+}
+
+function AddInstituition({edit, setEdit, editData, setEditData} : Props) {
 
     const [formData, setFormData] = useState({
         instituition_name: "",
@@ -36,20 +45,18 @@ function AddInstituition({setReload}:Props) {
 
         const res = await PostData.Post("/instituitions", form_data);
 
-        if (res) {
-            if (!res.success) return;
+        if (!res) return;
 
             setFormData({
                 instituition_name: "",
                 instituition_abbr: "",
             });
 
+            setLogo(null)
+
             if (fileRef.current) {
                 fileRef.current.value = "";
             }
-
-            setReload(prev => prev + 1);
-        }
     }
 
     return (
@@ -61,6 +68,10 @@ function AddInstituition({setReload}:Props) {
         onSubmit={HandleFormSubmit}
         loading={PostData.loading}
         fileRef={fileRef}
+        edit={edit}
+        setEdit={setEdit}
+        editData={editData}
+        setEditData={setEditData}
         />
     )
 }

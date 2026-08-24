@@ -3,21 +3,43 @@
 import { UseFetch } from "@/hooks/useFetch";
 import { InstituitionDataTypes } from "@/types/types";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "../styles.module.css";
-import { Edit, Edit3Icon, X } from "lucide-react";
+import { Edit, X } from "lucide-react";
 import { useTheme } from "next-themes";
+import { UseDelete } from "@/hooks/useDelete";
+import { useConfirmModal } from "@/contexts/modals/FeedbackContext";
 
-type Props = {
-    reload: number;
+interface Nav {
+    add: boolean;
+    view: boolean;
 }
 
-function ModifyInstituitions({reload}:Props) {
+interface editData {
+    id: number,
+    instituition_name: string,
+    instituition_abbr: string,
+}
+
+type Props = {
+    edit: boolean,
+    setEdit: React.Dispatch<SetStateAction<boolean>>;
+    setNav: React.Dispatch<SetStateAction<Nav>>;
+    setEditData: React.Dispatch<SetStateAction<editData>>;
+}
+
+function ModifyInstituitions({edit, setEdit, setNav, setEditData} : Props) {
 
     const [instituitions, setInstituitions] = useState<InstituitionDataTypes []>([]);
 
+    const [deleteId, setDeleteId] = useState(0);
+    const [reload, setReload] = useState(0);
+
     const FetchInstituitions = UseFetch();
+    const DeleteInstituition = UseDelete();
+
+    const { confirm, setShowConfirmModal, setConfirmMessage } = useConfirmModal();
 
     const HandleFetch = async () =>
     {
@@ -27,6 +49,26 @@ function ModifyInstituitions({reload}:Props) {
 
         setInstituitions(res.instituitions);
     }
+
+    const HandleDeleteClick = (id: number) =>
+    {
+        if (!id) return;
+
+        setConfirmMessage("are you sure you want to delete instituition?");
+        setShowConfirmModal(true);
+        setDeleteId(id);
+    }
+
+    const Delete = async () => {
+        if (!confirm && !deleteId) return;
+        await DeleteInstituition.Delete(`/instituitions/${deleteId}`);
+
+        setReload(prev => prev + 1);
+    }
+
+    useEffect(() => {
+        Delete();
+    }, [confirm])
 
     useEffect(() => {
         HandleFetch();
@@ -41,7 +83,7 @@ function ModifyInstituitions({reload}:Props) {
             <>
             {instituitions.length > 0 ? (
                 <div className="searched">
-                    <h2>instituitions</h2>
+                    <h3>all instituitions</h3>
 
                     <div className="data">
                     {instituitions.map(instituition => (
@@ -60,13 +102,30 @@ function ModifyInstituitions({reload}:Props) {
                             <h4>{instituition.instituition_name}</h4>
 
                             <div className={styles.btns}>
-                            <button>
+                            <button onClick={() => {
+                                setEdit(true);
+                                setNav({add: true, view: false});
+                                setEditData({
+                                    id: instituition.id,
+                                    instituition_name: instituition.instituition_name,
+                                    instituition_abbr: instituition.instituition_abbr
+                                })
+                            }}>
                                 <Edit color="navy" size={30}/>
                             </button>
 
-                            <button>
+                            <button onClick={() => HandleDeleteClick(instituition.id as number)} 
+                                disabled={DeleteInstituition.loading}>
                                 <X color="red" size={30}/>
                             </button>
+
+                            {DeleteInstituition.loading && (
+                                <div className="overlay-loading">
+                                  <ClipLoader />
+                                  <p>deleting instituition...</p>
+                                  <p style={{textTransform: "lowercase"}}>hold on a bit</p>
+                                </div>
+                            )}
                             </div>
 
                             </div>

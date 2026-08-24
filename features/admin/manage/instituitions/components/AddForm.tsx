@@ -3,9 +3,15 @@
 import { SetStateAction, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "../styles.module.css";
-import { Check, Image, Pen, } from "lucide-react";
+import { Check, Image, Pen, X, } from "lucide-react";
 
 interface FormDataTypes {
+    instituition_name: string,
+    instituition_abbr: string,
+}
+
+interface editData {
+    id: number,
     instituition_name: string,
     instituition_abbr: string,
 }
@@ -18,15 +24,23 @@ type Props = {
     onSubmit: React.FormEventHandler<HTMLFormElement>;
     loading: boolean;
     fileRef: React.RefObject<HTMLInputElement | null>;
+    edit: boolean,
+    setEdit: React.Dispatch<SetStateAction<boolean>>;
+    editData: editData;
+    setEditData: React.Dispatch<React.SetStateAction<editData>>;
 }
 
 function AddForm(
-    {formData, setFormData, setLogo, logo, onSubmit, loading, fileRef}:Props
+    {formData, setFormData, setLogo, logo, onSubmit, loading, fileRef, edit, setEdit, editData, setEditData}:Props
     ) {
 
     const HandleFormChange = (e:React.ChangeEvent<HTMLInputElement>) =>
     {
-        setFormData(prev => ({...prev, [e.target.name]:e.target.value}));
+        if (!edit) {
+            setFormData(prev => ({...prev, [e.target.name]:e.target.value}));
+        } else {
+            setEditData(prev => ({...prev, [e.target.name]:e.target.value}));
+        }
     }
 
     const [focusInput, setFocusInput] = useState({
@@ -34,30 +48,67 @@ function AddForm(
         abbr: false,
     })
 
+    const CancelEdit = () => {
+        setEdit(false);
+        setEditData({
+            id: 0,
+            instituition_name: "",
+            instituition_abbr: "",
+        })
+    }
+
     return (
         <form onSubmit={onSubmit} className={styles.add}>
 
+                {edit && (
+                <span onClick={CancelEdit}>
+                    cancel update <X color="red"/>
+                </span>
+                )}
+
                 <label className={styles.input}>
-                    <input type="text" value={formData.instituition_name}
+                    <input type="text" value={edit ? editData.instituition_name : formData.instituition_name}
                     name="instituition_name" onChange={HandleFormChange} onFocus={() => {
                     setFocusInput(prev => ({...prev, name: true}))
                 }}/>
                     <span style={{
-                    top: focusInput.name ? "-1.2rem" : ""
-                }}>{focusInput.name ? "enter instituition name" : "instituition name"}</span>
+                    top: focusInput.name || edit ? "-1.2rem" : "",
+                    border: focusInput.name || edit ? "var(--border)" : ""
+                    }}>
+                    {focusInput.name || edit ? (
+                        <>
+                        {edit ? "update instituition name" : "enter instituition name"}
+                        </>
+                    ) : (
+                        <>
+                        {edit ? "" : "instituition name"}
+                        </>
+                    )}
+                    </span>
                 </label>
 
                 <label className={styles.input}>
-                    <input type="text" value={formData.instituition_abbr}
+                    <input type="text" value={edit ? editData.instituition_abbr : formData.instituition_abbr}
                     name="instituition_abbr" onChange={HandleFormChange} onFocus={() => {
                     setFocusInput(prev => ({...prev, abbr: true}))
-                }}/>
+                    }}/>
                     <span style={{
-                    top: focusInput.abbr ? "-1.2rem" : ""
-                }}>{focusInput.abbr ? "enter instituition(abbr)" : "instituition(abbr)"}</span>
+                    top: focusInput.abbr || edit ? "-1.2rem" : "",
+                    border: focusInput.abbr || edit ? "var(--border)" : ""
+                     }}>
+                    {focusInput.abbr || edit ? (
+                        <>
+                        {edit ? "update instituition abbr" : "enter instituition abbr"}
+                        </>
+                    ) : (
+                        <>
+                        {edit ? "" : "instituition abbr"}
+                        </>
+                    )}
+                    </span>
                 </label>
 
-                <label className={styles.file}><div><Image size={35}/></div>
+                <label className={styles.file}><Image size={30}/>
                     <input type="file" ref={fileRef}
                      accept="image/*"
                     onChange={(e) => {
@@ -65,11 +116,18 @@ function AddForm(
                             setLogo(e.target.files?.[0] ?? null)
                         }
                     }}/>
-                    <span>{logo ? "logo selected" : "select a logo"} {logo ? <Check color="green"/> : null}</span>
+                    <span>
+                        {logo ? "logo selected" : "select logo"} 
+                        {logo ? <Check color="green" size={20}/> : ""}
+                    </span>
                 </label>
 
                 <button type="submit">
-                    {!loading ? "add" : <ClipLoader size={20} color="white"/>}
+                    {!loading ? (
+                        <>
+                        {edit ? "update" : "add"}
+                        </>
+                    ) : <ClipLoader size={20} color="white"/>}
                 </button>
         </form>
     )

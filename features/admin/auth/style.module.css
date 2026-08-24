@@ -1,11 +1,11 @@
 form.auth > h3 {
-    width: 80%;
-    margin: auto;
+    margin-left: 2.5rem;
 }
 
 form.auth > label > span {
     position: absolute;
     left: 3.5rem;
     padding: 0.3rem 0.5rem;
-    text-transform: capitalize;
+    text-transform: lowercase;
+    border-radius: 10px;
 }

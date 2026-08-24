@@ -1,10 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { AddForm } from "./AddForm";
 import { UsePost } from "@/hooks/usePost";
 
-function AddCourse() {
+interface editData {
+    id: number,
+    instituition: string,
+    course: string,
+    level: string
+}
+
+type Props = {
+    edit: boolean,
+    setEdit: React.Dispatch<SetStateAction<boolean>>;
+    editData: editData;
+    setEditData: React.Dispatch<SetStateAction<editData>>;
+}
+
+function AddCourse({edit, setEdit, editData, setEditData} : Props) {
 
     const [formData, setFormData] = useState({
         instituition: "",
@@ -35,6 +49,10 @@ function AddCourse() {
             setFormData={setFormData}
             onSubmit={HandleFormSubmit}
             loading={PostData.loading}
+            edit={edit}
+            setEdit={setEdit}
+            editData={editData}
+            setEditData={setEditData}
             />
     )
 }

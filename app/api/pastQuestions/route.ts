@@ -16,6 +16,8 @@ export async function POST(req:NextRequest) {
     try {
         const res = await AddPastQuestionService({instituition, course, level, pdf});
 
+        console.log(res)
+
         if(!res.status) {
             return NextResponse.json({
                 success: res.success,

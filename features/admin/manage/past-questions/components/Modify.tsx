@@ -1,13 +1,32 @@
 import { UseFetch } from "@/hooks/useFetch";
 import { PastQuestionDataTypes } from "@/types/types";
-import { useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { Search } from "./Search";
-import styles from "../style.module.css";
 import { ClipLoader } from "react-spinners";
-import { toast } from "sonner";
-import { Edit, Edit3Icon, X } from "lucide-react";
+import { Edit, X } from "lucide-react";
+import { UseDelete } from "@/hooks/useDelete";
+import { useConfirmModal, useErrorModal } from "@/contexts/modals/FeedbackContext";
 
-function ModifyPastQuestions() {
+interface Nav {
+    add: boolean;
+    view: boolean;
+}
+
+interface editData {
+    id: number,
+    instituition: string,
+    course: string,
+    level: string
+}
+
+type Props = {
+    edit: boolean,
+    setEdit: React.Dispatch<SetStateAction<boolean>>;
+    setNav: React.Dispatch<SetStateAction<Nav>>;
+    setEditData: React.Dispatch<SetStateAction<editData>>;
+}
+
+function ModifyPastQuestions({edit, setEdit, setNav, setEditData} : Props) {
 
     const [searchedPastQuestions, setSearchedPastQuestions] = useState<PastQuestionDataTypes[]>([]);
 
@@ -17,20 +36,30 @@ function ModifyPastQuestions() {
         level: "",
     });
 
+    const [deleteId, setDeleteId] = useState(0);
+    const [reload, setReload] = useState(0);
+
     const FetchPastQuestions = UseFetch();
+    const DeletePastQuestion = UseDelete();
+
+    const { confirm, setShowConfirmModal, setConfirmMessage } = useConfirmModal();
+    const { setErrorMessage, setShowErrorModal } = useErrorModal();
 
     const HandleSearch = async () =>
     {
         if (!searchData.instituition) {
-            toast.error("no instituition selected");
+            setErrorMessage("no instituition selected");
+            setShowErrorModal(true);
             return;
         }
         if (!searchData.level) {
-            toast.error("no level selected");
+            setErrorMessage("no level selected");
+            setShowErrorModal(true);
             return;
         }
         if (!searchData.course) {
-            toast.error("no course selected");
+            setErrorMessage("no course selected");
+            setShowErrorModal(true);
             return;
         }
         
@@ -43,6 +72,31 @@ function ModifyPastQuestions() {
 
         setSearchedPastQuestions(res.pastQuestions);
     }
+
+    const HandleDeleteClick = (id: number) =>
+    {
+        if (!id) return;
+
+        setConfirmMessage("are you sure you want to delete past question?");
+        setShowConfirmModal(true);
+        setDeleteId(id);
+    }
+
+    const Delete = async () => {
+        if (!confirm && !deleteId) return;
+        await DeletePastQuestion.Delete(`/pastQuestions/${deleteId}`);
+
+        setReload(prev => prev + 1);
+    }
+
+    useEffect(() => {
+        Delete();
+    }, [confirm])
+
+    useEffect(() => {
+        if (!searchData.instituition && !searchData.course && !searchData.level) return;
+        HandleSearch();
+    }, [reload])
 
     return (
         <>
@@ -60,23 +114,42 @@ function ModifyPastQuestions() {
             {searchedPastQuestions.length > 0 ? (
                 <div className="searched">
 
-                    <h2>{searchedPastQuestions[0].instituition}</h2>
-                    <h3>{searchedPastQuestions[0].course} past-questions</h3>
-                    <h3>{searchedPastQuestions[0].level}</h3>
+                    <h3>{searchedPastQuestions[0].instituition}</h3>
+                    <h4>{searchedPastQuestions[0].course} past-questions</h4>
+                    <h4>{searchedPastQuestions[0].level}</h4>
 
                     <div className="data">
                     {searchedPastQuestions.map(pastQuestions => (
                         <div key={pastQuestions.id}>
-                            <h4>{pastQuestions.title}</h4>
+                            <h5>{pastQuestions.title}</h5>
 
                             <div className="btns">
-                            <button>
+                            <button onClick={() => {
+                                setEdit(true);
+                                setNav({add: true, view: false});
+                                setEditData({
+                                    id: pastQuestions.id,
+                                    instituition: pastQuestions.instituition,
+                                    course: pastQuestions.course,
+                                    level: pastQuestions.level
+                                })
+                            }}>
                                 <Edit color="navy" size={25}/>
                             </button>
 
-                            <button>
+                            <button onClick={() => HandleDeleteClick(pastQuestions.id as number)}
+                                disabled={DeletePastQuestion.loading}>
                                 <X color="red" size={25}/>
                             </button>
+
+                            {DeletePastQuestion.loading && (
+                                <div className="overlay-loading">
+                                  <ClipLoader />
+                                  <p>deleting instituition...</p>
+                                  <p style={{textTransform: "lowercase"}}>hold on a bit</p>
+                                </div>
+                            )}
+
                             </div>
                         </div>
                     ))}

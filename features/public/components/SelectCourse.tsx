@@ -63,14 +63,12 @@ function SelectCourse({allCourses, loading, error, reFetch, filterLevel, search,
     }, [instituition]);
 
     return (
-        <>
         <div className={styles.select_course}>
-
-        {!loading ? (
-            <>
-            {allCourses.length > 0 && !error ? (
+            {!loading ? (
                 <>
-                <h3>
+                {allCourses.length > 0 && !error ? (
+                    <>
+                    <h3>
                     {filterLevel && allCourses.length > 0 ? (
                         <>
                         {!search ? (
@@ -90,10 +88,11 @@ function SelectCourse({allCourses, loading, error, reFetch, filterLevel, search,
                         )}
                         </>
                     )}
-                </h3>
-                
-                {allCourses.map(course => (
-                    <div key={course.id} className={styles.course}>
+                    </h3>
+
+                    <div className={styles.course}>
+                        {allCourses.map(course => (
+                        <div key={course.id} className={styles.courses}>
                         <h4 onClick={() => {
                             if (course.id === showInfo) {
                                     setShowInfo(0);
@@ -104,61 +103,60 @@ function SelectCourse({allCourses, loading, error, reFetch, filterLevel, search,
                             setShowInfo(course.id);
                             setSelectedInstituition(course.instituition);
                             setSelectedLevel(course.level);
-                        }}>{course.course} <SquareArrowOutUpRight />
+                             }}>{course.course} <SquareArrowOutUpRight />
                         </h4>
 
                         {showInfo === course.id && (
                             <div className={styles.info}>
-                                <button onClick={() => {
-                                    setShowInfo(0)
-                                }}><X /></button>
-                            {!FetchInstuition.loading ? (
-                                <>
-                                {instituition.length > 0 && !FetchInstuition.error ? (
-                                <>
-                                <h3>{course.course}</h3>
-                                <h3>{course.instituition}</h3>
-                                <h4>{course.level}</h4>
+                                <button onClick={() => {setShowInfo(0)}}><X /></button>
 
-                                <Link href="/past-questions">
-                                    past quesions
-                                </Link>
+                                {!FetchInstuition.loading ? (
+                                    <>
+                                    {instituition.length > 0 && !FetchInstuition.error ? (
+                                        <>
+                                        <h3>{course.course}</h3>
+                                        <h3>{course.instituition}</h3>
+                                        <h3>{course.level}</h3>
 
-                                </>
-                                ) : (
-                                    <div className={styles.retry}>
+                                        <Link href="/past-questions">
+                                        past quesions
+                                        </Link>
+                                        </>
+                                     ) : (
+                                        <div className={styles.retry}>
                                         <h4>{FetchInstuition.error}</h4>
                                         <button onClick={HandleFetchInstituition}>retry</button>
-                                    </div>
-                                )}
-                                </>
-                            ) : (
-                                <div className={styles.loading}>
+                                        </div>
+                                    )}
+                                    </>
+                                ) : (
+                                  <div className={styles.loading}>
                                     <ClipLoader />
-                                </div>
-                            )}
+                                  </div>
+                                )}
                             </div>
                         )}
+                        </div>
 
+                        ))}
                     </div>
-                ))}
-                </>
-            ) : (
+                    </>
+                ) : (
                 <div className={styles.retry}>
                     <h4>{error}</h4>
                     <button onClick={reFetch}>
                         retry
                     </button>
                 </div>
+                )}
+                </>
+            ) : (
+                <div className={styles.loading}>
+                   <ClipLoader size={50}/>
+                </div>
             )}
-            </>
-        ) : (
-            <div className={styles.loading}>
-                <ClipLoader size={50}/>
-            </div>
-        )}
+
         </div>
-        </>
     )
 }
 

@@ -7,6 +7,8 @@ import { BsWhatsapp } from "react-icons/bs";
 import { GrWhatsapp } from "react-icons/gr";
 import { PiWhatsappLogoFill } from "react-icons/pi";
 import { RiWhatsappFill } from "react-icons/ri";
+import Image from "next/image";
+import ObitechLogo from "@/public/Obitech Logo.png";
 
 function Footer() {
 
@@ -17,9 +19,27 @@ function Footer() {
 
     return (
             <footer>
+            {!pathname.startsWith("/admin") && (
+                <div className="info">
+                    <nav>
+                        <Link href="/about">about us</Link>
+                        <Link href="/contact">contact us</Link>
+                        <Link href="/terms">terms / conditions</Link>
+                        <Link href="/privacy">privacy / policies</Link>
+                    </nav>
+                    <div className="sponsor">
+                        powered by
+                        <Image alt="" src={ObitechLogo} width={150} height={150}/>
+                    </div>
+                    <div>
+                        <p>Disclaimer: We are an independent resource and not affiliated with any official nursing body. Materials are for study purposes only.</p>
+                        <p>&copy; nursingpastco {year}</p>
+                    </div>
+                </div>
+            )}
+
             {!pathname.startsWith("/admin") ? (
                 <>
-                <p>&copy; nursingpastco {year}</p>
                 <div className="socials">
                    <span>20.1k</span>
                    <div>

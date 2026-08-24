@@ -3,17 +3,25 @@
 import { UseFetch } from "@/hooks/useFetch";
 import { CourseDataTypes, InstituitionDataTypes } from "@/types/types";
 import { LevelOptions } from "@/ui/AppContent";
-import { SetStateAction, useEffect, useState } from "react";
+import { SetStateAction, use, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "../style.module.css";
-import { Check, ChevronDown, ChevronUp, File, RotateCcw } from "lucide-react";
+import { Check, ChevronDown, ChevronUp, File, RotateCcw, RotateCw, X } from "lucide-react";
 import Link from "next/link";
 import { toast } from "sonner";
+import { useErrorModal } from "@/contexts/modals/FeedbackContext";
 
 interface FormDataTypes {
     instituition: string,
     course: string,
     level: string,
+}
+
+interface editData {
+    id: number,
+    instituition: string,
+    course: string,
+    level: string
 }
 
 type Props = {
@@ -24,9 +32,13 @@ type Props = {
     loading: boolean;
     onSubmit: React.FormEventHandler<HTMLFormElement>;
     fileRef: React.RefObject<HTMLInputElement | null>;
+    edit: boolean,
+    setEdit: React.Dispatch<SetStateAction<boolean>>;
+    editData: editData;
+    setEditData: React.Dispatch<SetStateAction<editData>>;
 }
 
-function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef}:Props) {
+function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef, edit, setEdit, editData, setEditData}:Props) {
 
     const [instituitions, setInstituitions] = useState<InstituitionDataTypes[]>([]);
     const [courses, setCourses] = useState<CourseDataTypes[]>([]);
@@ -38,6 +50,8 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
     const [showLevels, setShowLevels] = useState(false);
     const [showCourses, setShowCourses] = useState(false);
 
+    const { setErrorMessage, setShowErrorModal, errorMessage } = useErrorModal();
+
     const FetchInstituitons = UseFetch();
     const FetchCourses = UseFetch()
 
@@ -46,7 +60,8 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
         const res = await FetchInstituitons.Fetch("/instituitions");
 
         if (FetchInstituitons.error) {
-            toast.error(FetchInstituitons.error)
+            setErrorMessage(FetchInstituitons.error);
+            setShowErrorModal(true);
             return;
         }
 
@@ -57,22 +72,29 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
 
     const HandleFetchCourses = async () =>
     {
-        if (!selectedInstituition) {
-            toast.error("no instituition selected")
+
+        if (!selectedInstituition && !selectedLevel && !edit) {
+            setErrorMessage("no instituition and level selected");
+            setShowErrorModal(true);
             return;
         }
-        if (!selectedLevel) {
-            toast.error("no level selected")
+
+        if (!selectedInstituition && !edit) {
+            setErrorMessage("no instituition selected");
+            setShowErrorModal(true);
             return;
         }
-        if (!selectedInstituition && !selectedLevel) {
+        if (!selectedLevel && !edit) {
+            setErrorMessage("no level selected");
+            setShowErrorModal(true);
             return;
         }
         
-        const res = await FetchCourses.Fetch(`/courses?instituition=${selectedInstituition}&level=${selectedLevel}`);
+        const res = await FetchCourses.Fetch(`/courses?instituition=${selectedInstituition || editData.instituition}&level=${selectedLevel || editData.level}`);
         
         if (FetchCourses.error) {
-            toast.error(FetchCourses.error)
+            setErrorMessage(FetchCourses.error);
+            setShowErrorModal(true);
             return;
         }
         if (!res) {
@@ -84,23 +106,49 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
     }
 
     useEffect(() => {
-        if (!selectedInstituition && !selectedLevel) return;
-        HandleFetchCourses();
-    }, [selectedInstituition, selectedLevel]);
-
-    useEffect(() => {
         HandleFetchInstituitions();
     }, []);
 
+    useEffect(() => {
+        if (!edit) return;
+        HandleFetchCourses();
+    }, [edit])
+
+    useEffect(() => {
+            document.body.style.overflow = showLevels || showInstituitions || showCourses || errorMessage ? "hidden" : "";
+    
+            return () => {
+                document.body.style.overflow = "auto";
+            }
+        }, [showCourses, showInstituitions, showLevels, errorMessage])
+
+        const CancelEdit = () => {
+        setEdit(false);
+        setEditData({
+            id: 0,
+            instituition: "",
+            course: "",
+            level: ""
+        })
+    }
+
     return (
         <form onSubmit={onSubmit} className={styles.add}>
+
+            {edit && (
+                <span onClick={CancelEdit}>
+                    cancel update <X color="red"/>
+                </span>
+            )}
 
                 <label onClick={() => {
                     if (instituitions.length === 0) return;
                     setShowInstituitions(!showInstituitions)
                 }} 
                 className={styles.select}>
-                    {!formData.instituition ? "select instituition" : formData.instituition}
+
+                    <>{formData.instituition || editData.instituition ? formData.instituition || editData.instituition : "select instituition"}</>
+
                     {instituitions.length > 0 && (
                         <>
                         {showInstituitions ? <ChevronDown /> : <ChevronUp />}
@@ -119,11 +167,20 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
                     <>
                     {instituitions.length > 0 ? (
                         <ul>
+                            <span onClick={() => setShowInstituitions(false)}><X /></span>
+                            <h2>select</h2>
                             {instituitions.map(instituition => (
                                 <li key={instituition.id} 
                                 onClick={() => {
+                                    if (edit) {
+                                    setCourses([]);
                                     setSelectedInstituition(instituition.instituition_name);
-                                    setFormData(prev =>({...prev, instituition: instituition.instituition_name}));
+                                    setEditData(prev => ({...prev, instituition: instituition.instituition_name}));
+                                    return;
+                                    }
+                                    setCourses([]);
+                                    setSelectedInstituition(instituition.instituition_name);
+                                    setFormData(prev =>({...prev, course: "", instituition: instituition.instituition_name}));
                                 }}>
                                     {instituition.instituition_name}
                                 </li>
@@ -140,16 +197,28 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
 
                 <label onClick={() => setShowLevels(!showLevels)} 
                 className={styles.select}>
-                    {!formData.level ? "select level" : formData.level}
+                    <>
+                     {formData.level || editData.level ? formData.level || editData.level : "select level"}
+                    </>
                     {showLevels ? <ChevronDown /> : <ChevronUp />}
                     {showLevels && (
                         <>
                         {LevelOptions.length > 0 && (
                             <ul>
+                                <span onClick={() => setShowLevels(false)}><X /></span>
+                                <h2>select</h2>
                                 {LevelOptions.map(level => (
                                     <li key={level.id}
                                     onClick={() => {
-                                        setFormData(prev => ({...prev, level: level.level}));
+                                        if (edit) {
+                                        setEditData(prev => ({...prev, level:level.level}));
+                                        setShowLevels(!showLevels);
+                                        setSelectedLevel(level.level);
+                                        setCourses([]);
+                                        return;
+                                        }
+                                        setCourses([]);
+                                        setFormData(prev => ({...prev, course: "", level: level.level}));
                                         setShowLevels(!showLevels);
                                         setSelectedLevel(level.level);
                                     }}>{level.level}
@@ -161,50 +230,46 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
                     )}
                 </label>
 
-                <label onClick={() => setShowCourses(!showCourses)}
-                    className={styles.select}>
-                    {!formData.course ? "select course" : formData.course}
+                <label className={styles.select} onClick={() => {
+                        if (courses.length === 0) return;
+                        setShowCourses(!showCourses);
+                    }}>
+                    <>
+                    {formData.course || editData.course ? formData.course || editData.course : "select course"}
+                    </>
+
                     {courses.length > 0 && (
                         <>
-                        <button type="button">
                         {showCourses ? <ChevronDown /> : <ChevronUp />}
-                        </button>
                         </>
                     )}
-
-                    {courses.length === 0 ? (
+                    {courses.length === 0 && (
                         <button onClick={HandleFetchCourses} type="button">
-                            {!FetchCourses.loading ? (
+                            {FetchCourses.loading && (<ClipLoader size={20}/>)}
+                            {!FetchCourses.loading && courses.length === 0 ? (
                                 <RotateCcw />
-                            ) : (<ClipLoader size={20} />)}
+                            ):(null)}
                         </button>
-                    ) : (null)}
+                    )}
                     
                     {showCourses && (
                     <>
-                    {courses.length > 0 ? (
+                    {courses.length > 0 && (
                         <ul>
+                            <span onClick={() => setShowCourses(!showCourses)}><X /></span>
+                            <h2>select</h2>
                             {courses.map(course => (
-                                <li onClick={() => {
-                                    setShowCourses(!showCourses);
+                                <li key={course.id} onClick={() => {
+                                    if (edit) {
+                                        setEditData(prev => ({...prev, course: course.course}));
+                                        return;
+                                    }
                                     setFormData(prev => ({...prev, course: course.course}));
-                                }}
-                                key={course.id}>{course.course}
+                                }}>
+                                {course.course}
                                 </li>
                             ))}
                         </ul>
-                    ) : (
-                        <>
-                        {FetchCourses.error ? (
-                            <div className={styles.retry}>
-                                <p>{FetchCourses.error}</p>
-                                <button type="button" 
-                                   onClick={HandleFetchCourses}>
-                                    retry
-                                </button>
-                            </div>
-                        ) : (null)}
-                        </>
                     )}
                     </>
                     )}
@@ -227,7 +292,7 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
 
                 <button 
                 type="submit">
-                    {!loading ? "add pdf" : <ClipLoader size={20} />}
+                    {!loading ? "add pdf" : <ClipLoader color="white" size={20} />}
                 </button>
 
         </form>

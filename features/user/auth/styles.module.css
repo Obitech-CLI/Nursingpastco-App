@@ -1,6 +1,5 @@
 .auth {
     width: 100%;
-    margin: 1rem 0 4rem;
 }
 
 .auth h2 {
@@ -32,18 +31,21 @@
 
 .auth h3 {
     text-transform: capitalize;
+    margin-left: 2rem;
 }
 
 .auth input {
-    padding: 0.7rem;
+    padding: 1rem;
+    border-radius: 10px;
 }
 
 .auth label > span {
     position: absolute;
     left: 2.5rem;
-    background-color: var(--modal-span);
-    border-radius: 5px;
-    padding: 0.1rem 0.5rem 0.2rem;
-    text-transform: capitalize;
-    color: var(--modal-txt-span);
+    background-color: var(--input-span);
+    border-radius: 10px;
+    padding: 0.3rem 0.5rem;
+    color: var(--input-txt-span);
+    text-transform: lowercase;
+    border: var(--border);
 }

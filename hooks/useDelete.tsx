@@ -1,18 +1,20 @@
 "use client";
 
-import { useErrorModal, useSuccessModal } from "@/contexts/modals/FeedbackContext";
+import { useConfirmModal, useErrorModal, useSuccessModal } from "@/contexts/modals/FeedbackContext";
 import { api } from "@/lib/axios";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-function UsePost() {
+function UseDelete() {
 
     const [loading, setLoading] = useState(false);
 
-    const { setSuccessMessage, setShowSuccessModal, successMessage } = useSuccessModal();
-    const { setErrorMessage, setShowErrorModal, errorMessage } = useErrorModal();
+    const { setSuccessMessage, setShowSuccessModal } = useSuccessModal();
+    const { setErrorMessage, setShowErrorModal } = useErrorModal();
 
-    const Post = async (url:string, formData:any) =>
+    const { confirm, setConfirm } = useConfirmModal();
+
+    const Delete = async (url:string) =>
     {
         try {
             if (!navigator.onLine) {
@@ -21,14 +23,14 @@ function UsePost() {
                 return;
             }
 
+            if (!confirm) return;
+
             setLoading(true);
 
-            const { data } = await api.post(url, formData);
+            const { data } = await api.delete(url);
 
             setShowSuccessModal(true);
             setSuccessMessage(data.message);
-
-            return data;
 
         } catch (err) {
             if (axios.isAxiosError(err)) {
@@ -44,11 +46,12 @@ function UsePost() {
             }
         } finally {
             setLoading(false);
+            setConfirm(false);
         }
     }
 
-    return { Post, loading }
+    return { Delete, loading }
 
 }
 
-export { UsePost }
+export { UseDelete }

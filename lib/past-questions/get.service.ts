@@ -14,7 +14,7 @@ const GetPastQuestions = async (instituition:string, level:string, course:string
     
 
     if (data?.length === 0 || error) {
-        return { success: false, error: "no course found", status: 404 }
+        return { success: false, error: "no past-question found", status: 404 }
     }
 
     return {

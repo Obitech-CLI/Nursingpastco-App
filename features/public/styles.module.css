@@ -76,7 +76,7 @@
     width: 60%;
 }
 
-.retry {
+.retry, .loading {
     border: var(--border);
     width: 90%;
     border-radius: 10px;
@@ -86,7 +86,7 @@
     justify-content: center;
     gap: 1rem;
     height: 150px;
-    margin: 2rem auto 0;
+    margin: 1rem auto 0;
 }
 
 .retry > h4 {
@@ -101,12 +101,6 @@
     border-radius: 50px;
     color: white;
     text-transform: capitalize;
-}
-
-.loading {
-    width: fit-content;
-    margin: 0.5rem auto;
-    color: var(--bg-txt-color);
 }
 
 .hero {
@@ -143,18 +137,22 @@
     margin: 2rem 1rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.5rem;
     border-top: 3px solid var(--secondary-color);
     border-radius: 10px;
-    padding: 1rem;
+    padding: 1rem 0;
 }
 
-.select_course > .course > h4 {
+.select_course > .course .courses {
+    margin-top: 1rem;
+}
+
+.select_course > .course > .courses h4 {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-    border-radius: 50px;
+    border-radius: 20px;
     text-transform: capitalize;
     background-color: var(--card);
     color: var(--card-color);

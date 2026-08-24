@@ -44,6 +44,15 @@ function AdminManageNav() {
                       manage
                     </Link>
                 </div>
+
+                <div>
+                    <h3>site / app info</h3>
+                    <h4>available: 5</h4>
+                    <Link href="/admin/manage/info">
+                    <Settings size={25} className={styles.icon}/>
+                      manage
+                    </Link>
+                </div>
             </nav>
         </div>
     )

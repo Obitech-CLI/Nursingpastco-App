@@ -26,7 +26,7 @@ function CreateUserForm() {
         <form className={styles.auth}>
             <h2>create account</h2>
             <div>
-                <h3>already have an account?</h3>
+                <h4>already have an account?</h4>
 
                 <button onClick={() => {
                     setShowLoginForm(true);
@@ -43,7 +43,7 @@ function CreateUserForm() {
                 }}
                 />
                 <span style={{
-                    top: focus.fname ? "-0.9rem" : "",
+                    top: focus.fname ? "-1rem" : "",
                 }}>{focus.fname ? "enter your firstname" : "firstname"}</span>
             </label>
 
@@ -54,7 +54,7 @@ function CreateUserForm() {
                 }}
                 />
                 <span style={{
-                    top: focus.lname ? "-0.9rem" : "",
+                    top: focus.lname ? "-1rem" : "",
                 }}>{focus.lname ? "enter your lastname" : "lastname"}</span>
             </label>
 
@@ -65,7 +65,7 @@ function CreateUserForm() {
                 }}
                 />
                 <span style={{
-                    top: focus.email ? "-0.9rem" : "",
+                    top: focus.email ? "-1rem" : "",
                 }}>{focus.email ? "enter your email address" : "email address"}</span>
             </label>
 
@@ -76,7 +76,7 @@ function CreateUserForm() {
                 }}
                 />
                 <span style={{
-                    top: focus.password ? "-0.9rem" : "",
+                    top: focus.password ? "-1rem" : "",
                 }}>{focus.password ? "enter your password" : "password"}</span>
             </label>
 

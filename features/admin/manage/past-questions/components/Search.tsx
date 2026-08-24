@@ -1,11 +1,12 @@
 import { UseFetch } from "@/hooks/useFetch";
 import { CourseDataTypes, InstituitionDataTypes } from "@/types/types";
 import { LevelOptions } from "@/ui/AppContent";
-import { ChevronDown, ChevronUp, RotateCw, SearchIcon } from "lucide-react";
+import { ChevronDown, ChevronUp, RotateCw, SearchIcon, X } from "lucide-react";
 import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import { toast } from "sonner";
 import styles from "../style.module.css";
+import { useErrorModal } from "@/contexts/modals/FeedbackContext";
 
 interface SearchDataTypes {
     instituition: string;
@@ -33,38 +34,54 @@ function Search({searchData, setSearchData, search, loading}:Props) {
     const FetchCourses = UseFetch();
 
     const [reloadInstituitions, setReloadInstituitions] = useState(0);
-    const [reloadCourses, setReloadCourses] = useState(0);
+
+    const { setErrorMessage, setShowErrorModal, errorMessage } = useErrorModal();
 
     const HandleFetchInstituitions = async () =>
     {
         const res = await FetchInstituitions.Fetch("/instituitions");
         if (FetchInstituitions.error) {
-            toast.error(FetchInstituitions.error);
+            setErrorMessage(FetchInstituitions.error);
+            setShowErrorModal(true);
             return;
         }
 
-        if (res) {
-            if (res.success) {
-                setInstituitions(res.instituitions);
-            }
-        }
+        if (!res) return;
+
+        setInstituitions(res.instituitions);
     }
 
     const HandleFetchCourses = async () =>
     {
-        if (!searchData.instituition && !searchData.level) return;
-
-        const res = await FetchCourses.Fetch(`/courses?instituition=${searchData.instituition}&level=${searchData.level}`);
-        if (FetchCourses.error) {
-            toast.error(FetchCourses.error);
+        if (!searchData.instituition && !searchData.level) {
+            setErrorMessage("no instituition or level selected");
+            setShowErrorModal(true);
             return;
         }
 
-        if (res) {
-            if (res.success) {
-                setCourses(res.courses);
-            }
+        if (!searchData.instituition) {
+            setErrorMessage("no instituition selected");
+            setShowErrorModal(true);
+            return;
         }
+
+        if (!searchData.level) {
+            setErrorMessage("no level selected");
+            setShowErrorModal(true);
+            return;
+        }
+
+        const res = await FetchCourses.Fetch(`/courses?instituition=${searchData.instituition}&level=${searchData.level}`);
+        
+        if (FetchCourses.error) {
+            setErrorMessage(FetchCourses.error);
+            setShowErrorModal(true);
+            return;
+        }
+
+        if (!res) return;
+           
+        setCourses(res.courses);
     }
 
     useEffect(() => {
@@ -72,14 +89,19 @@ function Search({searchData, setSearchData, search, loading}:Props) {
     }, [reloadInstituitions]);
 
     useEffect(() => {
-        HandleFetchCourses();
-    }, [reloadCourses]);
+        document.body.style.overflow = showLevels || showInstituitions || showCourses ? "hidden" : "";
+
+        return () => {
+            document.body.style.overflow = "auto";
+        }
+    }, [showCourses, showInstituitions, showLevels])
 
     return (
         <fieldset className="search">
             <legend>search</legend>
 
             <div onClick={() => {
+                if (instituitions.length === 0) return;
                 setShowInstituitions(!showInstituitions);
                 setShowLevels(false);
                 setShowCourses(false);
@@ -108,10 +130,12 @@ function Search({searchData, setSearchData, search, loading}:Props) {
                 <>
                 {instituitions && instituitions.length > 0 ? (
                     <ul>
+                        <span onClick={() => setShowInstituitions(!showInstituitions)}><X /></span>
+                        <h2>select</h2>
                         {instituitions.map(instituition => (
                             <li key={instituition.id} onClick={() => {
-                                setSearchData(prev => ({...prev, instituition: instituition.instituition_name}));
-                                setReloadCourses(prev => prev + 1);
+                                setCourses([]);
+                                setSearchData(prev => ({...prev, course: "", instituition: instituition.instituition_name}));
                             }}>
                                 {instituition.instituition_name}
                             </li>
@@ -132,10 +156,12 @@ function Search({searchData, setSearchData, search, loading}:Props) {
 
                 {showLevels && (
                     <ul>
+                        <span onClick={() => setShowLevels(!showLevels)}><X /></span>
+                        <h2>select</h2>
                         {LevelOptions.map(level => (
                             <li key={level.id} onClick={() => {
-                                setSearchData(prev => ({...prev, level: level.level}));
-                                setReloadCourses(prev => prev + 1);
+                                setCourses([]);
+                                setSearchData(prev => ({...prev,course: "", level: level.level}));
                                 setShowLevels(!showLevels);
                             }}>
                             {level.level}
@@ -146,6 +172,7 @@ function Search({searchData, setSearchData, search, loading}:Props) {
             </div>
 
             <div onClick={() => {
+                if (courses.length === 0) return;
                 setShowCourses(!showCourses);
                 setShowLevels(false);
                 setShowInstituitions(false);
@@ -158,9 +185,7 @@ function Search({searchData, setSearchData, search, loading}:Props) {
                 )}
 
                 {courses.length === 0 && (
-                    <button onClick={() => {
-                        setReloadCourses(prev => prev + 1);
-                    }}>
+                    <button onClick={HandleFetchCourses}>
                         {FetchCourses.loading && (
                             <ClipLoader size={25}/>
                         )}
@@ -174,6 +199,8 @@ function Search({searchData, setSearchData, search, loading}:Props) {
                 <>
                 {courses.length > 0 ? (
                     <ul>
+                        <span onClick={() => setShowCourses(!showCourses)}><X /></span>
+                        <h2>select</h2>
                         {courses.map(course => (
                             <li key={course.id} onClick={() => {
                                 setSearchData(prev => ({...prev, course: course.course}));
@@ -187,7 +214,7 @@ function Search({searchData, setSearchData, search, loading}:Props) {
                 )}
             </div>
 
-            <button onClick={search}>
+            <button onClick={search} type="button">
                 {!loading ? <SearchIcon /> : <ClipLoader size={20} color="white"/>}
             </button>
         </fieldset>

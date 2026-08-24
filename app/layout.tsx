@@ -1,7 +1,7 @@
-import { ErrorModal, SuccessModal } from "@/ui/modals/Feedback";
+import { ConfirmModal, ErrorModal, SuccessModal } from "@/ui/modals/Feedback";
 import "./globals.css";
 import "./admin/manage/manage.css";
-import { ErrorModalProvider, SuccessModalProvider } from "@/contexts/modals/FeedbackContext";
+import { ConfirmModalProvider, ErrorModalProvider, SuccessModalProvider } from "@/contexts/modals/FeedbackContext";
 import { AppThemeProvider } from "@/contexts/ThemeProvider";
 import { AuthFormProvider } from "@/contexts/user/AuthFormProvider";
 import LoginUser from "./user/(auth)/login/LoginUser";
@@ -22,6 +22,7 @@ export default function RootLayout({children}: Readonly<{
         <AppThemeProvider>
         <SuccessModalProvider>
           <ErrorModalProvider>
+            <ConfirmModalProvider>
             <AuthFormProvider>
               <MenuProvider>
                 <ManageNavProvider>
@@ -34,12 +35,14 @@ export default function RootLayout({children}: Readonly<{
             <LoginUser />
             <SuccessModal />
             <ErrorModal />
+            <ConfirmModal />
             <MenuModal />
             <Toaster position="top-center"/>
             
                </ManageNavProvider>
              </MenuProvider>
             </AuthFormProvider>
+            </ConfirmModalProvider>
           </ErrorModalProvider>
         </SuccessModalProvider>
         </AppThemeProvider>

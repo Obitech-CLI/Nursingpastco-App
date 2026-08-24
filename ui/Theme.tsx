@@ -3,7 +3,7 @@
 import { useState } from "react";
 import styles from "./ui.module.css";
 import { useTheme } from "next-themes";
-import { ChevronDown, ChevronUp, Moon, Sun } from "lucide-react";
+import { Moon, Sun } from "lucide-react";
 
 function AppTheme() {
 
