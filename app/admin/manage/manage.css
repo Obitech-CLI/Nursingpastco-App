@@ -183,3 +183,69 @@ fieldset.search > button {
     align-items: center;
     border-radius: 100px;
 }
+
+.modify > .site-info-btns {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.modify > .site-info-btns button {
+    background-color: var(--secondary-color);
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    color: white;
+    border-radius: 50px;
+    text-transform: capitalize;
+}
+
+form.add {
+    text-transform: capitalize;
+}
+
+form.add label:first-child {
+    box-shadow: var(--box-shadow);
+    padding: 0.7rem;
+    border-radius: 10px;
+}
+
+form.add > div {
+    display: flex;
+    flex-direction: column;
+}
+
+form.add > div textarea {
+    height: 200px;
+    border: var(--border);
+    border-radius: 10px;
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+form.add label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+form.add label > ul {
+    background-color: var(--modal);
+    position: fixed;
+    inset: 0;
+    backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 7.5rem 1rem 5rem;
+    list-style-type: none;
+    text-align: center;
+    overflow: auto;
+}
+
+form.add label > ul li {
+    text-align: center;
+    border: var(--border);
+    padding: 1rem;
+    border-radius: 50px;
+}

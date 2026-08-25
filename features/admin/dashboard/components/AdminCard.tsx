@@ -15,7 +15,7 @@ function AdminCard() {
     const HandleFetch = async () =>
     {
         const res = await FetchAdmin.Fetch("/admin");
-        if (!res.success) return;
+        if (!res) return;
         setAdmin(res.admin)
     }
 
