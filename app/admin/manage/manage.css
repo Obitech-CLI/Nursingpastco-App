@@ -110,6 +110,13 @@ fieldset.search > button {
     border-radius: 50px;
 }
 
+.modify {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
 .modify > .retry, .loading, .searched {
     display: flex;
     flex-direction: column;

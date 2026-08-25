@@ -1,11 +1,38 @@
 "use client";
 
+import { UseFetch } from "@/hooks/useFetch";
 import { AppInfoCategories } from "@/ui/AppContent";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { ClipLoader } from "react-spinners";
+
+type SiteInfoType = {
+    id: number;
+    category: string;
+    information: string;
+}
 
 function ModifySiteInfo() {
 
+    const [siteInfo, setSiteInfo] = useState<SiteInfoType[]>([]);
+
     const [selectedCategory, setSelectedCategory] = useState("");
+
+    const FetchSiteInfo = UseFetch();
+
+    const HandleFetchSiteInfo = async () =>
+    {
+        if (!selectedCategory) return;
+
+        const res = await FetchSiteInfo.Fetch(`/site-info/${selectedCategory}`);
+
+        if (!res) return;
+
+        setSiteInfo(res.siteInfo);
+    }
+
+    useEffect(() => {
+        HandleFetchSiteInfo();
+    }, [selectedCategory])
 
     return (
         <>
@@ -33,6 +60,34 @@ function ModifySiteInfo() {
             {selectedCategory && (
                 <>
                 <h2>{selectedCategory}</h2>
+                {!FetchSiteInfo.loading ? (
+                    <>
+                    {siteInfo.length > 0 ? (
+                        <ul>
+                        {siteInfo.map(info => (
+                            <li key={info.id}>
+                                {info.information}
+                            </li>
+                        ))}
+                        </ul>
+                    ) : (
+                        <>
+                        {FetchSiteInfo.error && (
+                            <div className="retry">
+                            <p>{FetchSiteInfo.error}</p>
+                            <button type="button" onClick={HandleFetchSiteInfo}>
+                                retry
+                            </button>
+                        </div>
+                        )}
+                        </>
+                    )}
+                    </>
+                ) : (
+                    <div className="loading">
+                        <ClipLoader size={40}/>
+                    </div>
+                )}
                 </>
             )}
 
