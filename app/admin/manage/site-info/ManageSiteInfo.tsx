@@ -12,7 +12,7 @@ function AdminManageSiteInfo() {
 
     const [ edit, setEdit ] = useState(false);
     const [ editData, setEditData ] = useState({
-        id: 0,
+        id: "",
         category: "",
         title: "",
         sub_title: "",
@@ -46,7 +46,7 @@ function AdminManageSiteInfo() {
             onClick={() => {
                 setNavManageSiteInfo({add: false, view: true});
                 setEditData({
-                    id: 0,
+                    id: "",
                     category: "",
                     title: "",
                     sub_title: "",

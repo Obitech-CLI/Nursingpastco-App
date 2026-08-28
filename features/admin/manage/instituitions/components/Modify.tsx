@@ -17,7 +17,7 @@ interface Nav {
 }
 
 interface editData {
-    id: number,
+    id: string,
     instituition_name: string,
     instituition_abbr: string,
 }
@@ -33,7 +33,7 @@ function ModifyInstituitions({edit, setEdit, setNav, setEditData} : Props) {
 
     const [instituitions, setInstituitions] = useState<InstituitionDataTypes []>([]);
 
-    const [deleteId, setDeleteId] = useState(0);
+    const [deleteId, setDeleteId] = useState("");
     const [reload, setReload] = useState(0);
 
     const FetchInstituitions = UseFetch();
@@ -50,7 +50,7 @@ function ModifyInstituitions({edit, setEdit, setNav, setEditData} : Props) {
         setInstituitions(res.instituitions);
     }
 
-    const HandleDeleteClick = (id: number) =>
+    const HandleDeleteClick = (id: string) =>
     {
         if (!id) return;
 
@@ -64,6 +64,7 @@ function ModifyInstituitions({edit, setEdit, setNav, setEditData} : Props) {
         await DeleteInstituition.Delete(`/instituitions/${deleteId}`);
 
         setReload(prev => prev + 1);
+        setDeleteId("")
     }
 
     useEffect(() => {
@@ -106,7 +107,7 @@ function ModifyInstituitions({edit, setEdit, setNav, setEditData} : Props) {
                                 setEdit(true);
                                 setNav({add: true, view: false});
                                 setEditData({
-                                    id: instituition.id,
+                                    id: String(instituition.id),
                                     instituition_name: instituition.instituition_name,
                                     instituition_abbr: instituition.instituition_abbr
                                 })
@@ -114,7 +115,7 @@ function ModifyInstituitions({edit, setEdit, setNav, setEditData} : Props) {
                                 <Edit color="navy" size={30}/>
                             </button>
 
-                            <button onClick={() => HandleDeleteClick(instituition.id as number)} 
+                            <button onClick={() => HandleDeleteClick(String(instituition.id))} 
                                 disabled={DeleteInstituition.loading}>
                                 <X color="red" size={30}/>
                             </button>

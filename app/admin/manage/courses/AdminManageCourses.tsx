@@ -12,7 +12,7 @@ function AdminManageCourses() {
 
     const [ edit, setEdit ] = useState(false);
     const [ editData, setEditData ] = useState({
-        id: 0,
+        id: "",
         instituition: "",
         course: "",
         level: ""
@@ -48,7 +48,7 @@ function AdminManageCourses() {
             onClick={() => {
                 setNavManageCourses({add: false, view: true});
                 setEditData({
-                    id: 0,
+                    id: "",
                     instituition: "",
                     course: "",
                     level: ""

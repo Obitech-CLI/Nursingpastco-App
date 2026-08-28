@@ -13,7 +13,7 @@ interface Nav {
 }
 
 interface editData {
-    id: number,
+    id: string,
     instituition: string,
     course: string,
     level: string
@@ -36,7 +36,7 @@ function ModifyPastQuestions({edit, setEdit, setNav, setEditData} : Props) {
         level: "",
     });
 
-    const [deleteId, setDeleteId] = useState(0);
+    const [deleteId, setDeleteId] = useState("");
     const [reload, setReload] = useState(0);
 
     const FetchPastQuestions = UseFetch();
@@ -73,7 +73,7 @@ function ModifyPastQuestions({edit, setEdit, setNav, setEditData} : Props) {
         setSearchedPastQuestions(res.pastQuestions);
     }
 
-    const HandleDeleteClick = (id: number) =>
+    const HandleDeleteClick = (id: string) =>
     {
         if (!id) return;
 
@@ -84,9 +84,12 @@ function ModifyPastQuestions({edit, setEdit, setNav, setEditData} : Props) {
 
     const Delete = async () => {
         if (!confirm && !deleteId) return;
-        await DeletePastQuestion.Delete(`/pastQuestions/${deleteId}`);
+        const res = await DeletePastQuestion.Delete(`/pastQuestions/${deleteId}`);
 
-        setReload(prev => prev + 1);
+        if (res.success) {
+            setReload(prev => prev + 1);
+            setDeleteId("");
+        }
     }
 
     useEffect(() => {
@@ -128,7 +131,7 @@ function ModifyPastQuestions({edit, setEdit, setNav, setEditData} : Props) {
                                 setEdit(true);
                                 setNav({add: true, view: false});
                                 setEditData({
-                                    id: pastQuestions.id,
+                                    id: String(pastQuestions.id),
                                     instituition: pastQuestions.instituition,
                                     course: pastQuestions.course,
                                     level: pastQuestions.level
@@ -137,7 +140,7 @@ function ModifyPastQuestions({edit, setEdit, setNav, setEditData} : Props) {
                                 <Edit color="navy" size={25}/>
                             </button>
 
-                            <button onClick={() => HandleDeleteClick(pastQuestions.id as number)}
+                            <button onClick={() => HandleDeleteClick(String(pastQuestions.id))}
                                 disabled={DeletePastQuestion.loading}>
                                 <X color="red" size={25}/>
                             </button>

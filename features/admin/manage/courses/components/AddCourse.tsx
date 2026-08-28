@@ -6,7 +6,7 @@ import { UsePost } from "@/hooks/usePost";
 import { UsePatch } from "@/hooks/usePatch";
 
 interface editData {
-    id: number,
+    id: string,
     instituition: string,
     course: string,
     level: string
@@ -59,7 +59,7 @@ function AddCourse({edit, setEdit, editData, setEditData} : Props) {
             if (res.success) {
 
             setEditData({
-               id: 0,
+               id: "",
                instituition: "",
                course: "",
                level: ""

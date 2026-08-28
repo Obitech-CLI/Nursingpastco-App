@@ -12,7 +12,7 @@ export type SiteInfoDataTypes = {
 }
 
 export type EditSiteInfoDataTypes = {
-    id: number;
+    id: string;
     category: string;
     title: string;
     sub_title: string;

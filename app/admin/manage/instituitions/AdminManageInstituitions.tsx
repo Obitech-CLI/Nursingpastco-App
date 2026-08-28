@@ -11,7 +11,7 @@ function AdminManageInstituitions() {
     const { navManageInstituitions, setNavManageInstituitions } = UseManageNav();
     const [ edit, setEdit ] = useState(false);
     const [ editData, setEditData ] = useState({
-        id: 0,
+        id: "",
         instituition_name: "",
         instituition_abbr: "",
     });
@@ -47,7 +47,7 @@ function AdminManageInstituitions() {
             onClick={() => {
                 setNavManageInstituitions({add: false, view: true});
                 setEditData({
-                    id: 0,
+                    id: "",
                     instituition_name: "",
                     instituition_abbr: "",
                 })

@@ -5,7 +5,7 @@ import { AddForm } from "./AddForm"
 import { UsePost } from "@/hooks/usePost";
 
 interface editData {
-    id: number,
+    id: string,
     instituition_name: string,
     instituition_abbr: string,
 }

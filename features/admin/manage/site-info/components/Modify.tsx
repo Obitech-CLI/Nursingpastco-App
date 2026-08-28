@@ -30,14 +30,14 @@ function ModifySiteInfo({edit, setEdit, setNav, setEditData} : Props) {
     const FetchSiteInfo = UseFetch();
     const DeleteSiteInfo = UseDelete();
 
-    const [deleteId, setDeleteId] = useState(0);
+    const [deleteId, setDeleteId] = useState("");
     const [deleteCategory, setDeleteCategory] = useState("");
     const [reload, setReload] = useState(0);
     
     const { confirm, setShowConfirmModal, setConfirmMessage } = useConfirmModal();
     
     
-    const HandleDeleteClick = (id: number, category: string) =>
+    const HandleDeleteClick = (id: string, category: string) =>
         {
             if (!id) return;
     
@@ -53,7 +53,7 @@ function ModifySiteInfo({edit, setEdit, setNav, setEditData} : Props) {
             setSiteInfo([]);
             setReload(prev => prev + 1);
             setDeleteCategory("");
-            setDeleteId(0);
+            setDeleteId("");
         }
     
 
@@ -120,7 +120,7 @@ function ModifySiteInfo({edit, setEdit, setNav, setEditData} : Props) {
                                 setEdit(true);
                                 setNav({add: true, view: false});
                                 setEditData({
-                                    id: info.id,
+                                    id: String(info.id),
                                     category: info.category,
                                     title: info.title,
                                     sub_title: info.sub_title,
@@ -130,7 +130,7 @@ function ModifySiteInfo({edit, setEdit, setNav, setEditData} : Props) {
                                    <PenBox color="blue"/>
                                 </button>
 
-                                <button onClick={() => HandleDeleteClick(info.id as number, info.category as string)}
+                                <button onClick={() => HandleDeleteClick(String(info.id), info.category as string)}
                                 disabled={DeleteSiteInfo.loading}>
                                    <X color="red"/>
                                 </button>

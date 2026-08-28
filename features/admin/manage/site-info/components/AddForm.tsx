@@ -39,7 +39,7 @@ function AddForm({formData, setFormData, submit, loading, focus, setFocus, edit,
     const CancelEdit = () => {
         setEdit(false);
         setEditData({
-            id: 0,
+            id: "",
             category: "",
             title: "",
             sub_title: "",

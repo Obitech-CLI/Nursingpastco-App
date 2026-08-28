@@ -18,7 +18,7 @@ interface FormDataTypes {
 }
 
 interface editData {
-    id: number,
+    id: string,
     instituition: string,
     course: string,
     level: string
@@ -125,7 +125,7 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
         const CancelEdit = () => {
         setEdit(false);
         setEditData({
-            id: 0,
+            id: "",
             instituition: "",
             course: "",
             level: ""

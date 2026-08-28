@@ -13,7 +13,7 @@ function AdminManagePastQuestions() {
 
     const [ edit, setEdit ] = useState(false);
     const [ editData, setEditData ] = useState({
-            id: 0,
+            id: "",
             instituition: "",
             course: "",
             level: ""
@@ -49,7 +49,7 @@ function AdminManagePastQuestions() {
             onClick={() => {
                 setNavManagePastQuestions({add: false, view: true});
                 setEditData({
-                    id: 0,
+                    id: "",
                     instituition: "",
                     course: "",
                     level: ""
