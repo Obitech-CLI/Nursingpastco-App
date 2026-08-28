@@ -3,7 +3,7 @@
 import { useErrorModal, useSuccessModal } from "@/contexts/modals/FeedbackContext";
 import { api } from "@/lib/axios";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function UsePost() {
 

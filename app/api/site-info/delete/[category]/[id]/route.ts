@@ -1,15 +1,13 @@
-import AddSiteInfo from "@/lib/site-info/add.service";
+import DeleteSiteInfo from "@/lib/site-info/delete.service";
+import { NextRequest } from "next/server";
 
-export async function POST(req: Request) {
-    const body = await req.json();
+export async function DELETE(req: NextRequest, {params}:{params: Promise<{category:string, id:string}>}) {
 
-    const category = body.category;
-    const title = body.title;
-    const sub_title = body.title;
-    const information = body.information;
+    const { category, id } = await params;
 
     try {
-        const res = await AddSiteInfo({category, title, sub_title, information})
+        const res = await DeleteSiteInfo(id, category);
+
         if (!res.success) {
             return Response.json({
                 success: res.success,
@@ -26,6 +24,6 @@ export async function POST(req: Request) {
         console.error(err);
         return Response.json({
             error: "server error"
-        },{status: 500})
+        })
     }
 }

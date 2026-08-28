@@ -28,8 +28,10 @@ function LoginForm({formData, setFormData, onSubmit, loading}:FormDataProps) {
 
     return (
         <form onSubmit={onSubmit} className={styles.auth}>
-            <h3>sign in</h3>
-            <h3>welcome back</h3>
+            <div>
+                <h3>sign in</h3>
+                <h4>welcome back</h4>
+            </div>
 
             <label><Mail size={35}/>
                 <input type="email" value={formData.email}

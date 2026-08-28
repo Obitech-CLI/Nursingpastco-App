@@ -80,7 +80,7 @@ section.offers > div > div {
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
-    border-radius: 10px;
+    border-radius: 50px;
     margin-left: 2rem;
 }
 

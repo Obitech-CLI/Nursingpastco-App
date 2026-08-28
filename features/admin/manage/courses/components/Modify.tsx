@@ -15,7 +15,7 @@ interface Nav {
 }
 
 interface editData {
-    id: number,
+    id: string,
     instituition: string,
     course: string,
     level: string
@@ -114,7 +114,7 @@ function ModifyCourses({edit, setEdit, setNav, setEditData} : Props) {
                                 setEdit(true);
                                 setNav({add: true, view: false});
                                 setEditData({
-                                    id: courses.id,
+                                    id: String(courses.id),
                                     instituition: courses.instituition,
                                     course: courses.course,
                                     level: courses.level

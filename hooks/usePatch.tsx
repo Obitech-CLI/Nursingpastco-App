@@ -1,20 +1,18 @@
 "use client";
 
-import { useConfirmModal, useErrorModal, useSuccessModal } from "@/contexts/modals/FeedbackContext";
+import { useErrorModal, useSuccessModal } from "@/contexts/modals/FeedbackContext";
 import { api } from "@/lib/axios";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-function UseDelete() {
+function UsePatch() {
 
     const [loading, setLoading] = useState(false);
 
     const { setSuccessMessage, setShowSuccessModal } = useSuccessModal();
     const { setErrorMessage, setShowErrorModal } = useErrorModal();
 
-    const { confirm, setConfirm } = useConfirmModal();
-
-    const Delete = async (url:string) =>
+    const Patch = async (url:string, editData:any) =>
     {
         try {
             if (!navigator.onLine) {
@@ -23,11 +21,9 @@ function UseDelete() {
                 return;
             }
 
-            if (!confirm) return;
-
             setLoading(true);
 
-            const { data } = await api.delete(url);
+            const { data } = await api.patch(url, editData);
 
             setShowSuccessModal(true);
             setSuccessMessage(data.message);
@@ -48,12 +44,11 @@ function UseDelete() {
             }
         } finally {
             setLoading(false);
-            setConfirm(false);
         }
     }
 
-    return { Delete, loading }
+    return { Patch, loading }
 
 }
 
-export { UseDelete }
+export { UsePatch }

@@ -1,19 +1,30 @@
 "use client";
 
 import { AppInfoCategories } from "@/ui/AppContent";
-import { ChevronDown, ChevronUp, X } from "lucide-react";
+import { ChevronDown, ChevronUp, MinusCircle, PlusCircle, X } from "lucide-react";
 import { SetStateAction, useEffect, useState } from "react";
-import { SiteInfoDataTypes } from "./AddSiteInfo";
+import { EditSiteInfoDataTypes, SiteInfoDataTypes } from "./AddSiteInfo";
 import { ClipLoader } from "react-spinners";
 
-type Props = {
-    formData: SiteInfoDataTypes,
-    setFormData: React.Dispatch<SetStateAction<SiteInfoDataTypes>>,
-    submit: React.FormEventHandler<HTMLFormElement>;
-    loading: boolean;
+type focusType = {
+    title: boolean;
+    sub: boolean;
 }
 
-function AddForm({formData, setFormData, submit, loading}: Props) {
+type Props = {
+    formData: SiteInfoDataTypes;
+    setFormData: React.Dispatch<SetStateAction<SiteInfoDataTypes>>;
+    submit: React.FormEventHandler<HTMLFormElement>;
+    loading: boolean;
+    focus: focusType;
+    setFocus: React.Dispatch<SetStateAction<focusType>>;
+    edit: boolean,
+    setEdit: React.Dispatch<SetStateAction<boolean>>;
+    editData: EditSiteInfoDataTypes;
+    setEditData: React.Dispatch<SetStateAction<EditSiteInfoDataTypes>>;
+}
+
+function AddForm({formData, setFormData, submit, loading, focus, setFocus, edit, setEdit, editData, setEditData}: Props) {
 
     const [showCategories, setShowCategories] = useState(false);
 
@@ -25,13 +36,31 @@ function AddForm({formData, setFormData, submit, loading}: Props) {
         }
     }, [showCategories])
 
+    const CancelEdit = () => {
+        setEdit(false);
+        setEditData({
+            id: 0,
+            category: "",
+            title: "",
+            sub_title: "",
+            information: ""
+        })
+    }
+
     return (
         <>
         <form className="add" onSubmit={submit}>
+
+            {edit && (
+                <span onClick={CancelEdit}>
+                    cancel update <X color="red"/>
+                </span>
+            )}
+
             <label onClick={() => {
                 setShowCategories(!showCategories)
             }}>
-                {formData.category ? formData.category : "select category"}
+                {formData.category || editData.category ? formData.category || editData.category : "select category"}
                 {showCategories ? <ChevronDown /> : <ChevronUp />}
                 {showCategories && (
                     <>
@@ -42,7 +71,11 @@ function AddForm({formData, setFormData, submit, loading}: Props) {
                             {AppInfoCategories.map(category => (
                                 <li key={category.id}
                                 onClick={() => {
-                                    setFormData(prev => ({...prev, category: category.category}))
+                                    if (edit) {
+                                        setEditData(prev => ({...prev, category: category.category}))
+                                        return;
+                                    }
+                                    setFormData(prev => ({...prev, category: category.category}));
                                 }}>
                                 {category.category}
                                 </li>
@@ -53,14 +86,74 @@ function AddForm({formData, setFormData, submit, loading}: Props) {
                 )}
             </label>
 
+            <label>
+                <span
+                style={{
+                    top: focus.title || editData.title ? "-1rem" : "",
+                    border: focus.title || editData.title ? "var(--border)" : "",
+                    padding: focus.title || editData.title ? "0.3rem 0.6rem" : ""
+                }}
+                >
+                    {focus.title || edit ? (
+                        <>
+                        {edit ? "update title" : "enter title"}
+                        </>
+                    ) : (
+                        <>
+                        {edit ? "" : "title"}
+                        </>
+                    )}
+                </span>
+                <input type="text" value={edit ? editData.title : formData.title}
+                onChange={(e) => {
+                    if (edit) {
+                        setEditData(prev => ({...prev, title: e.target.value}));
+                        return;
+                    }
+                    setFormData(prev => ({...prev, title: e.target.value}))
+                }}
+                onFocus={() => setFocus(prev => ({...prev, title: true}))}
+                />
+            </label>
+
+            <label>
+                <span
+                style={{
+                    top: focus.sub || editData.sub_title ? "-1rem" : "",
+                    border: focus.sub || editData.sub_title ? "var(--border)" : "",
+                    padding: focus.sub || editData.sub_title ? "0.3rem 0.6rem" : ""
+                }}
+                >
+                    {focus.sub || edit ? (
+                        <>
+                        {edit ? "update sub title" : "enter sub title"}
+                        </>
+                    ) : (
+                        <>
+                        {edit ? "" : "sub title"}
+                        </>
+                    )}
+                </span>
+                <input type="text" value={edit ? editData.sub_title : formData.sub_title}
+                onChange={(e) => {
+                    if (edit) {
+                        setEditData(prev => ({...prev, sub_title: e.target.value}));
+                        return;
+                    }
+                    setFormData(prev => ({...prev, sub_title: e.target.value}));
+                }}
+                onFocus={() => setFocus(prev => ({...prev, sub: true}))}
+                />
+            </label>
+
             <div>
-                <textarea
+                <textarea value={edit ? editData.information : formData.information}
                 onChange={(e) => setFormData(prev => ({...prev, information: e.target.value}))}
-                placeholder="enter information"/>
+                placeholder={edit ? "update information" : "enter information"}/>
             </div>
 
             <button type="submit" disabled={loading}>
-                {loading ? <ClipLoader size={20} color="white"/> : "add"}
+                {loading ? <ClipLoader size={20} color="white"/> : (<>{edit ? "update" : "add"}</>)}
             </button>
         </form>
         </>

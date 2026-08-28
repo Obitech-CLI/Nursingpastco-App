@@ -4,30 +4,44 @@ import { supabase } from "../supabase/supabase";
 
 type Props = {
     category: string;
+    title: string;
+    sub_title: string;
     information: string;
 }
 
 const AddSiteInfo = 
-async ({category, information}:Props) =>
+async ({category, title, sub_title, information}:Props) =>
 {
 
-    if (!category || !information) {
-        return { success: false, error: "empty input field", status: 400 }
+    if (!category) {
+        return { success: false, error: "empty category", status: 400 }
     }
 
-    const { error: insertError } = await supabase
-    .from("nursingpastco_site_info")
-    .insert({
-        category: category,
-        information: information,
-    });
+    if (title || sub_title || information) {
 
-    if (insertError) throw new Error("failed to add site info, try again");
+        const { error: insertError } = await supabase
+        .from("nursingpastco_site_info")
+        .insert({
+           category: category,
+           title: title,
+           sub_title: sub_title,
+           information: information,
+        });
 
-    return {
-        success: true,
-        message: "site info added success",
-        status: 201
+        if (insertError) throw new Error("failed to add site info, try again");
+
+        return {
+           success: true,
+           message: "site info added success",
+           status: 201
+        }
+        
+    } else {
+        return {
+           success: false,
+           error: "complete atleast one input field",
+           status: 400
+        }
     }
 }
 

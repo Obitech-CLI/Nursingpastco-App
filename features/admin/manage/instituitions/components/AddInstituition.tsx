@@ -24,6 +24,11 @@ function AddInstituition({edit, setEdit, editData, setEditData} : Props) {
         instituition_abbr: "",
     });
 
+    const [focusInput, setFocusInput] = useState({
+        name: false,
+        abbr: false,
+    })
+
     const [logo, setLogo] = useState<File | null>(null);
 
     const fileRef = useRef<HTMLInputElement>(null);
@@ -72,6 +77,8 @@ function AddInstituition({edit, setEdit, editData, setEditData} : Props) {
         setEdit={setEdit}
         editData={editData}
         setEditData={setEditData}
+        focusInput={focusInput}
+        setFocusInput={setFocusInput}
         />
     )
 }

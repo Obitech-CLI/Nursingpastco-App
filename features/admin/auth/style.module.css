@@ -1,5 +1,12 @@
-form.auth > h3 {
-    margin-left: 2.5rem;
+form.auth > div {
+    margin-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+form.auth > div h3 {
+    text-transform: uppercase;
 }
 
 form.auth > label > span {
@@ -8,4 +15,10 @@ form.auth > label > span {
     padding: 0.3rem 0.5rem;
     text-transform: lowercase;
     border-radius: 10px;
+}
+
+form.auth {
+    margin: 0 1rem;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px black;
 }

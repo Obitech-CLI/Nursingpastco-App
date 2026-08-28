@@ -1,5 +1,6 @@
 import AddCourse from "@/lib/courses/add.service";
 import GetCourses from "@/lib/courses/get.service";
+import UpdateCourse from "@/lib/courses/patch.service";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: Request) {
@@ -11,6 +12,37 @@ export async function POST(req: Request) {
 
     try {
         const res = await AddCourse({instituition, course, level});
+
+        if (!res.success) {
+            return Response.json({
+                success: res.success,
+                error: res.error
+            },{status: res.status});
+        }
+
+        return Response.json({
+            success: res.success,
+            message: res.message
+        },{status: res.status});
+
+    } catch (err) {
+        console.error(err);
+        return Response.json({
+            error: "server error"
+        },{status: 500})
+    }
+}
+
+export async function PATCH(req: Request) {
+    const body = await req.json();
+
+    const id = body.id;
+    const instituition = body.instituition;
+    const course = body.course;
+    const level = body.level;
+
+    try {
+        const res = await UpdateCourse({id, instituition, course, level});
 
         if (!res.success) {
             return Response.json({

@@ -1,23 +1,61 @@
 "use client";
 
+import { useConfirmModal } from "@/contexts/modals/FeedbackContext";
+import { UseDelete } from "@/hooks/useDelete";
 import { UseFetch } from "@/hooks/useFetch";
 import { AppInfoCategories } from "@/ui/AppContent";
-import { useEffect, useState } from "react";
+import { PenBox, X } from "lucide-react";
+import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
+import { EditSiteInfoDataTypes } from "./AddSiteInfo";
 
-type SiteInfoType = {
-    id: number;
-    category: string;
-    information: string;
+interface Nav {
+    add: boolean;
+    view: boolean;
 }
 
-function ModifySiteInfo() {
+type Props = {
+    edit: boolean,
+    setEdit: React.Dispatch<SetStateAction<boolean>>;
+    setNav: React.Dispatch<SetStateAction<Nav>>;
+    setEditData: React.Dispatch<SetStateAction<EditSiteInfoDataTypes>>;
+}
 
-    const [siteInfo, setSiteInfo] = useState<SiteInfoType[]>([]);
+function ModifySiteInfo({edit, setEdit, setNav, setEditData} : Props) {
+
+    const [siteInfo, setSiteInfo] = useState<EditSiteInfoDataTypes[]>([]);
 
     const [selectedCategory, setSelectedCategory] = useState("");
 
     const FetchSiteInfo = UseFetch();
+    const DeleteSiteInfo = UseDelete();
+
+    const [deleteId, setDeleteId] = useState(0);
+    const [deleteCategory, setDeleteCategory] = useState("");
+    const [reload, setReload] = useState(0);
+    
+    const { confirm, setShowConfirmModal, setConfirmMessage } = useConfirmModal();
+    
+    
+    const HandleDeleteClick = (id: number, category: string) =>
+        {
+            if (!id) return;
+    
+            setConfirmMessage("are you sure you want to delete site info?");
+            setShowConfirmModal(true);
+            setDeleteId(id);
+            setDeleteCategory(category);
+        }
+    
+    const Delete = async () => {
+            if (!confirm && !deleteId) return;
+            await DeleteSiteInfo.Delete(`/site-info/delete/${deleteCategory}/${deleteId}`);
+            setSiteInfo([]);
+            setReload(prev => prev + 1);
+            setDeleteCategory("");
+            setDeleteId(0);
+        }
+    
 
     const HandleFetchSiteInfo = async () =>
     {
@@ -32,7 +70,11 @@ function ModifySiteInfo() {
 
     useEffect(() => {
         HandleFetchSiteInfo();
-    }, [selectedCategory])
+    }, [selectedCategory, reload]);
+
+    useEffect(() => {
+        Delete();
+    }, [confirm])
 
     return (
         <>
@@ -43,7 +85,8 @@ function ModifySiteInfo() {
                 {AppInfoCategories.map(category => (
                     <button type="button" key={category.id}
                     onClick={() => {
-                        setSelectedCategory(category.category)
+                        setSiteInfo([]);
+                        setSelectedCategory(category.category);
                     }}
                     style={{
                         backgroundColor: selectedCategory === category.category ? "transparent" : "",
@@ -63,13 +106,46 @@ function ModifySiteInfo() {
                 {!FetchSiteInfo.loading ? (
                     <>
                     {siteInfo.length > 0 ? (
-                        <ul>
+                        <div className="site-info">
                         {siteInfo.map(info => (
-                            <li key={info.id}>
-                                {info.information}
-                            </li>
+                            <div key={info.id} className="info">
+
+                            <h3>{info.title}</h3>
+                            <h4>{info.sub_title}</h4>
+                            <p>{info.information}</p>
+
+                            <div>
+                                <button type="button"
+                                onClick={() => {
+                                setEdit(true);
+                                setNav({add: true, view: false});
+                                setEditData({
+                                    id: info.id,
+                                    category: info.category,
+                                    title: info.title,
+                                    sub_title: info.sub_title,
+                                    information: info.information
+                                })
+                                }}>
+                                   <PenBox color="blue"/>
+                                </button>
+
+                                <button onClick={() => HandleDeleteClick(info.id as number, info.category as string)}
+                                disabled={DeleteSiteInfo.loading}>
+                                   <X color="red"/>
+                                </button>
+
+                                {DeleteSiteInfo.loading && (
+                                <div className="overlay-loading">
+                                  <ClipLoader />
+                                  <p>deleting site info...</p>
+                                  <p style={{textTransform: "lowercase"}}>hold on a bit</p>
+                                </div>
+                                )}
+                            </div>
+                            </div>
                         ))}
-                        </ul>
+                        </div>
                     ) : (
                         <>
                         {FetchSiteInfo.error && (

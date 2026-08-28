@@ -9,7 +9,15 @@ import { useState } from "react";
 function AdminManageSiteInfo() {
 
     const { navManageSiteInfo, setNavManageSiteInfo } = UseManageNav();
+
     const [ edit, setEdit ] = useState(false);
+    const [ editData, setEditData ] = useState({
+        id: 0,
+        category: "",
+        title: "",
+        sub_title: "",
+        information: ""
+    });
 
     return (
         <>
@@ -37,6 +45,13 @@ function AdminManageSiteInfo() {
             <button type="button"
             onClick={() => {
                 setNavManageSiteInfo({add: false, view: true});
+                setEditData({
+                    id: 0,
+                    category: "",
+                    title: "",
+                    sub_title: "",
+                    information: ""
+                })
                 setEdit(false);
             }}
             
@@ -50,8 +65,23 @@ function AdminManageSiteInfo() {
             </button>
         </div>
 
-        {navManageSiteInfo.add && (<AddSiteInfo />)}
-        {navManageSiteInfo.view && (<ModifySiteInfo />)}
+        {navManageSiteInfo.add && (
+            <AddSiteInfo
+            edit={edit}
+            setEdit={setEdit}
+            editData={editData}
+            setEditData={setEditData}
+            />
+        )}
+
+        {navManageSiteInfo.view && (
+            <ModifySiteInfo
+            edit={edit}
+            setEdit={setEdit}
+            setNav={setNavManageSiteInfo}
+            setEditData={setEditData}
+            />
+        )}
         </>
     )
 }

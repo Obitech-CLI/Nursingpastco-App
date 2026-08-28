@@ -3,6 +3,7 @@
 import { SetStateAction, useState } from "react";
 import { AddForm } from "./AddForm";
 import { UsePost } from "@/hooks/usePost";
+import { UsePatch } from "@/hooks/usePatch";
 
 interface editData {
     id: number,
@@ -26,21 +27,47 @@ function AddCourse({edit, setEdit, editData, setEditData} : Props) {
         level: ""
     });
 
+    const [focusInput, setFocusInput] = useState(false);
+
     const PostData = UsePost();
+    const PatchData = UsePatch();
 
     const HandleFormSubmit = async (e:React.FormEvent<HTMLFormElement>) =>
     {
         e.preventDefault();
     
-        const res = await PostData.Post("/courses", formData);
+        if (!edit) {
+            const res = await PostData.Post("/courses", formData);
 
-        if (!res) return;
+            if (!res) return;
 
-        setFormData({
-            instituition: "",
-            course: "",
-            level: ""
-        });
+            if (res.success) {
+
+            setFormData({
+               instituition: "",
+               course: "",
+               level: ""
+            });
+
+            setFocusInput(false);
+            }
+        } else if (edit) {
+            const res = await PatchData.Patch("/courses", editData);
+
+            if (!res) return;
+
+            if (res.success) {
+
+            setEditData({
+               id: 0,
+               instituition: "",
+               course: "",
+               level: ""
+            });
+
+            setFocusInput(false);
+            }
+        }
     }
 
     return (
@@ -48,11 +75,13 @@ function AddCourse({edit, setEdit, editData, setEditData} : Props) {
             formData={formData}
             setFormData={setFormData}
             onSubmit={HandleFormSubmit}
-            loading={PostData.loading}
+            loading={PostData.loading || PatchData.loading}
             edit={edit}
             setEdit={setEdit}
             editData={editData}
             setEditData={setEditData}
+            focusInput={focusInput}
+            setFocusInput={setFocusInput}
             />
     )
 }

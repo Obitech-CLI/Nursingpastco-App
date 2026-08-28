@@ -31,16 +31,16 @@ type Props = {
     setEdit: React.Dispatch<SetStateAction<boolean>>;
     editData: editData;
     setEditData: React.Dispatch<SetStateAction<editData>>;
+    focusInput: boolean;
+    setFocusInput: React.Dispatch<SetStateAction<boolean>>;
 }
 
-function AddForm({formData, setFormData, onSubmit, loading, edit, setEdit, editData, setEditData}:Props) {
+function AddForm({formData, setFormData, onSubmit, loading, edit, setEdit, editData, setEditData, focusInput, setFocusInput}:Props) {
 
     const [instituitions, setInstituitions] = useState<InstituitionDataTypes []>([]);
 
     const [showInstituitions, setShowInstituitions] = useState(false);
     const [showLevels, setShowLevels] = useState(false);
-
-    const [focusInput, setFocusInput] = useState(false);
 
     const { setErrorMessage, setShowErrorModal, errorMessage } = useErrorModal();
 

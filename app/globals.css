@@ -70,10 +70,11 @@ header {
     width: 100%;
     top: 0;
     z-index: 1000;
-    border-width: 10px 2px 5px;
-    border-color: var(--secondary-color);
+    border-color: #002b4c;
+    border-width: 10px 0px 5px;
     border-style: solid;
     background-color: var(--header-bg);
+    border-radius: 0px 0px 10px 10px;
 }
 
 header > div {

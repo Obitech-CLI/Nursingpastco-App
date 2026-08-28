@@ -1,6 +1,6 @@
 "use client";
 
-import { SetStateAction, useState } from "react";
+import { SetStateAction } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "../styles.module.css";
 import { Check, Image, Pen, X, } from "lucide-react";
@@ -16,6 +16,11 @@ interface editData {
     instituition_abbr: string,
 }
 
+type FocusTypes = {
+    name: boolean;
+    abbr: boolean;
+}
+
 type Props = {
     formData: FormDataTypes;
     setFormData: React.Dispatch<SetStateAction<FormDataTypes>>;
@@ -28,10 +33,12 @@ type Props = {
     setEdit: React.Dispatch<SetStateAction<boolean>>;
     editData: editData;
     setEditData: React.Dispatch<React.SetStateAction<editData>>;
+    focusInput: FocusTypes;
+    setFocusInput: React.Dispatch<React.SetStateAction<FocusTypes>>;
 }
 
 function AddForm(
-    {formData, setFormData, setLogo, logo, onSubmit, loading, fileRef, edit, setEdit, editData, setEditData}:Props
+    {formData, setFormData, setLogo, logo, onSubmit, loading, fileRef, edit, setEdit, editData, setEditData, focusInput, setFocusInput}:Props
     ) {
 
     const HandleFormChange = (e:React.ChangeEvent<HTMLInputElement>) =>
@@ -42,11 +49,6 @@ function AddForm(
             setEditData(prev => ({...prev, [e.target.name]:e.target.value}));
         }
     }
-
-    const [focusInput, setFocusInput] = useState({
-        name: false,
-        abbr: false,
-    })
 
     const CancelEdit = () => {
         setEdit(false);
