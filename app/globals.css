@@ -189,18 +189,16 @@ footer > .info p {
 }
 
 footer > .socials {
-    background-color: var(--footer-bg);
+    background-color: var(--secondary-color);
     position: fixed;
     width: 100%;
     bottom: 0;
-    border-width: 5px 2px 10px;
-    border-color: var(--secondary-color);
-    border-style: solid;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.7rem 1rem;
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
     z-index: 1000;
+    border-radius: 5px 5px 0 0;
 }
 
 footer .footer {
@@ -215,7 +213,12 @@ footer .footer {
 }
 
 footer > .socials span {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
+    padding: 0.4rem 1rem 0.4rem;
+    color: white;
+    border-right: 1px solid white;
+    border-left: 1px solid white;
+    border-radius: 5px;
 }
 
 footer > .socials > div {
@@ -227,6 +230,9 @@ footer > .socials > div {
 
 footer > .socials > div > a {
     border: none;
+    border-left: 1px solid white;
+    border-radius: 5px;
+    padding-left: 1rem;
 }
 
 main {

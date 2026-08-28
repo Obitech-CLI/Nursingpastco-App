@@ -107,6 +107,13 @@ button.login {
     padding: 1rem;
     color: var(--bg-txt-color);
     border-radius: 30px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.menu > a:hover {
+    background-color: rgba(0, 255, 0, 0.1);
 }
 
 .overlay {

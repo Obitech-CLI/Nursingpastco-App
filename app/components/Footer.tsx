@@ -5,7 +5,7 @@ import { FaFacebook, FaTelegram, FaTiktok, FaWhatsapp, FaYoutube } from "react-i
 import { usePathname } from "next/navigation";
 import { BsWhatsapp } from "react-icons/bs";
 import { GrWhatsapp } from "react-icons/gr";
-import { PiWhatsappLogoFill } from "react-icons/pi";
+import { PiWhatsappLogo, PiWhatsappLogoFill } from "react-icons/pi";
 import { RiWhatsappFill } from "react-icons/ri";
 import Image from "next/image";
 import ObitechLogo from "@/public/Obitech Logo.png";
@@ -43,7 +43,9 @@ function Footer() {
                 <div className="socials">
                    <span>20.1k</span>
                    <div>
-                      <Link href=""><RiWhatsappFill size={30} color="#00ff00"/></Link>
+                      <Link href=""><FaTiktok size={25} color="#000000"/></Link>
+                      <Link href=""><FaYoutube size={25} color="red"/></Link>
+                      <Link href=""><FaWhatsapp size={25} color="#00ff00"/></Link>
                    </div>
                 </div>
                 </>
