@@ -8,6 +8,7 @@
 :root {
   --bg-color: white;
   --bg-txt-color: black;
+  --div-color: whitesmoke;
   --box-shadow: 0px 0px 2px black;
   --nav-bg: white;
   --border: 1.5px solid black;
@@ -29,8 +30,9 @@
 }
 
 [data-theme="dark"] {
-  --bg-color: black;
+  --bg-color: rgba(0, 0, 0, 0.5);
   --bg-txt-color: white;
+  --div-color: black;
   --box-shadow: 0px 0px 2px white;
   --nav-bg: black;
   --border: 1.5px solid white;
@@ -176,7 +178,7 @@ footer > .info .sponsor > span {
 }
 
 footer > .info {
-    margin-bottom: 5rem;
+    margin-bottom: 3.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -259,6 +261,16 @@ h2 {
     margin: 0 2rem;
     font-family: serif;
     font-family: sans-serif;
+}
+
+form {
+    background-color: var(--div-color);
+    border-radius: 20px;
+    box-shadow: var(--box-shadow);
+}
+
+form > label {
+    background-color: var(--bg-color);
 }
 
 form > h3 {

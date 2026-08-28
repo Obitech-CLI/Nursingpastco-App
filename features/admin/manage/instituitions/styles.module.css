@@ -27,6 +27,7 @@ form.add > label.file {
     width: fit-content;
     display: flex;
     align-items: center;
+    background-color: var(--div-bg);
 }
 
 form.add {

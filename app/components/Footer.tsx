@@ -33,7 +33,7 @@ function Footer() {
                     </div>
                     <div>
                         <p>Disclaimer: We are an independent resource and not affiliated with any official nursing body. Materials are for study purposes only.</p>
-                        <p>&copy; nursingpastco {year}</p>
+                        <p style={{margin: "0.5rem 0"}}>&copy; nursingpastco {year}</p>
                     </div>
                 </div>
             )}

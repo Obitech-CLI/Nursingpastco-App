@@ -81,7 +81,9 @@ section.offers > div > div {
     flex-direction: column;
     gap: 0.7rem;
     border-radius: 50px;
-    margin-left: 2rem;
+    padding: 2rem;
+    background-color: var(--div-color);
+    box-shadow: var(--box-shadow);
 }
 
 section.offers h3 span {
