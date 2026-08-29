@@ -36,7 +36,7 @@ function CreateUserForm() {
                 </button>
             </div>
             <h3>join in</h3>
-            <label><User />
+            <label><User size={30}/>
                 <input type="text" name="firstname"
                 onFocus={() => {
                     setFocus(prev => ({...prev, fname: true}));
@@ -47,7 +47,7 @@ function CreateUserForm() {
                 }}>{focus.fname ? "enter your firstname" : "firstname"}</span>
             </label>
 
-            <label><User />
+            <label><User size={30}/>
                 <input type="text" name="lastname"
                 onFocus={() => {
                     setFocus(prev => ({...prev, lname: true}));
@@ -58,7 +58,7 @@ function CreateUserForm() {
                 }}>{focus.lname ? "enter your lastname" : "lastname"}</span>
             </label>
 
-            <label><Mail />
+            <label><Mail size={30}/>
                 <input type="email" name="email"
                 onFocus={() => {
                     setFocus(prev => ({...prev, email: true}));
@@ -69,7 +69,7 @@ function CreateUserForm() {
                 }}>{focus.email ? "enter your email address" : "email address"}</span>
             </label>
 
-            <label><Lock />
+            <label><Lock size={30}/>
                 <input type="password" name="password"
                 onFocus={() => {
                     setFocus(prev => ({...prev, password: true}));

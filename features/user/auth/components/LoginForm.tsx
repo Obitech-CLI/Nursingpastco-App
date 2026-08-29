@@ -38,7 +38,7 @@ function LoginUserForm() {
             </div>
             <h3>welcome back</h3>
 
-            <label><Mail />
+            <label><Mail size={30}/>
                 <input type="email" name="email"
                 onFocus={() => {
                     setFocus(prev => ({...prev, email: true}));
@@ -49,7 +49,7 @@ function LoginUserForm() {
                 }}>{focus.email ? "enter your email address" : "email address"}</span>
             </label>
 
-            <label><Lock />
+            <label><Lock size={30}/>
                 <input type="password" name="password"
                 onFocus={() => {
                     setFocus(prev => ({...prev, password: true}));
