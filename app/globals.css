@@ -94,7 +94,7 @@ header > div > div {
 
 header > nav {
     position: fixed;
-    top: 4rem;
+    top: 4.5rem;
     z-index: 100999;
     display: flex;
     align-items: center;

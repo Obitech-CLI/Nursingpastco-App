@@ -81,7 +81,7 @@ function SelectInstituition({setSelectedInstituition, setSelectedLogo}:Props) {
         </>
         ) : (
             <div className={styles.loading}>
-                <ClipLoader size={60} />
+                <ClipLoader size={60} color="var(--bg-txt-color)"/>
             </div>
         )}
         </>

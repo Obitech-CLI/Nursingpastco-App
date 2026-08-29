@@ -20,6 +20,7 @@ function SelectLevel({setSelectedLevel, setSelectedInstituition, HandleSelection
             }}>
                 <X />
             </button>
+            <h2>select</h2>
             <ul>
                 {LevelOptions.length > 0 && (
                     <>

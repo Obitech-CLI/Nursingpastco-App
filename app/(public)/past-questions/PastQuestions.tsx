@@ -213,7 +213,6 @@ function PastQuestions() {
 
                         {showPDFs === course.id && (
                             <div className={styles.pdfs}>
-                            <h2>select past question</h2>
                             <button onClick={() => {
                                 if (course.id === showPDFs) {
                                     setShowPDFs(0);
@@ -221,6 +220,7 @@ function PastQuestions() {
                                     return;
                                 }
                             }}><X /></button>
+                            <h2>select<br />past question</h2>
                             {!FetchPDFs.loading ? (
                             <>
                             {!FetchPDFs.error && pdfs.length > 0 ? (
@@ -263,7 +263,7 @@ function PastQuestions() {
                     </>
                 )}
                 </>
-            ) : (<div className={styles.loading}><ClipLoader size={40} /></div>)}
+            ) : (<div className={styles.loading}><ClipLoader size={40} color="var(--bg-txt-color)"/></div>)}
         </div>
         </>
     )

@@ -23,7 +23,7 @@
 }
 
 .pastQuestions_hero .retry > button {
-    background-color: var(--secondary-color);
+    background-color: #c0ebff;
     padding: 1rem 4rem;
     border-radius: 50px;
     color: white;
@@ -93,6 +93,9 @@
     padding: 0 1rem;
     border-radius: 10px;
     justify-content: space-between;
+    border: 2px solid #c0ebff;
+    background-color: var(--card);
+    color: var(--card-color);
 }
 
 .pastQuestions > div .courses > h4 {
@@ -112,7 +115,7 @@
     box-shadow: var(--box-shadow);
     backdrop-filter: blur(10px);
     inset: 0;
-    padding: 7.5rem 1rem;
+    padding: 8rem 1rem 5rem;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -121,15 +124,8 @@
 }
 
 .pastQuestions > div .pdfs > h2 {
-    margin: 0 1rem;
+    text-align: center;
 }
-
-.pastQuestions > div .pdfs > button {
-    position: absolute;
-    top: 7.5rem;
-    right: 2rem;
-}
-
 
 .pastQuestions > div .pdfs ul {
     display: flex;
@@ -176,10 +172,11 @@
 }*/
 
 .pastQuestions > .retry button, .select_retry button {
-    background-color: var(--secondary-color);
-    padding: 0.5rem 2rem;
+    background-color: #c0ebff;
+    padding: 0.7rem 2rem;
     border-radius: 20px;
-    color: white;
+    color: black;
+    box-shadow: 1px 1px black;
     text-transform: capitalize;
 }
 
@@ -208,12 +205,14 @@
     margin: auto;
     overflow: auto;
     scrollbar-width: none;
+    padding: 0.2rem;
 }
 
 .btns > button {
-    background-color: var(--secondary-color);
-    padding: 0.4rem 1rem;
-    color: white;
-    border-radius: 5px;
+    background-color: #c0ebff;
+    padding: 0.6rem 1rem;
+    color: black;
+    border-radius: 10px;
     white-space: nowrap;
+    box-shadow: var(--box-shadow);
 }
