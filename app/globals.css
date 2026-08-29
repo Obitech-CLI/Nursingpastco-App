@@ -59,9 +59,9 @@ body {
 a {
     text-transform: capitalize;
     text-decoration: none;
-    border: 1.5px solid green;
-    color: green;
-    border-radius: 10px;
+    background-color: green;
+    color: white;
+    border-radius: 30px;
 }
 
 header {
@@ -105,6 +105,13 @@ header > nav {
     transform: translateX(-50%);
 }
 
+header button.icon {
+    background-color: transparent;
+    box-shadow: none;
+    color: var(--bg-txt-color);
+    border: none;
+}
+
 header nav > div {
     display: flex;
     gap: 1rem;
@@ -116,8 +123,35 @@ header nav > div {
     color: var(--bg-txt-color);
 }
 
+form > button {
+    border: none;
+    background-color: #c0ebff;
+    box-shadow: 1px 1px black;
+    color: #002b4c;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    text-transform: capitalize;
+}
+
 button {
     border: none;
+    background-color: transparent;
+}
+
+button.open {
+    border: 2px solid #c0ebff;
+    box-shadow: 0px 0px 3px black;
+    color: var(--bg-txt-color);
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1.5rem;
+    gap: 1rem;
+    text-transform: capitalize;
     background-color: transparent;
 }
 
@@ -127,17 +161,6 @@ button {
     text-transform: capitalize;
     gap: 0.5rem;
     height: 40px;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    padding: 1.5rem;
-}
-
-footer {
-    background-color: var(--footer-bg);
 }
 
 footer > .info nav {
@@ -150,6 +173,8 @@ footer > .info nav {
 footer > .info nav a {
     border: none;
     text-decoration: underline;
+    color: green;
+    background-color: transparent;
 }
 
 footer > .info .sponsor {
@@ -184,6 +209,7 @@ footer > .info {
     align-items: center;
     padding: 1rem 1rem 0;
     gap: 1rem;
+    background-color: transparent;
 }
 
 footer > .info p {
@@ -235,6 +261,7 @@ footer > .socials > div > a {
     border-left: 1px solid white;
     border-radius: 5px;
     padding-left: 1rem;
+    background-color: transparent;
 }
 
 main {
@@ -249,10 +276,11 @@ label {
     align-items: center;
     gap: 0.5rem;
     position: relative;
+    background-color: transparent;
 }
 
 main.auth {
-    gap: 1rem;
+    padding: 0 1rem;
 }
 
 h2 {
@@ -265,8 +293,13 @@ h2 {
 
 form {
     background-color: var(--div-color);
-    border-radius: 20px;
+    border-radius: 10px;
     box-shadow: var(--box-shadow);
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 }
 
 form > label {
@@ -278,24 +311,50 @@ form > h3 {
 }
 
 form > button {
-    align-self: flex-start;
-    width: 50%;
     height: 50px;
-    border: none;
-    background-color: #002b4c;
-    border-radius: 50px;
-    color: white;
-    text-transform: capitalize;
+    width: 50%;
     margin-left: 2rem;
 }
 
-input {
+form > label {
+    background-color: transparent;
+}
+
+form > .change {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-transform: capitalize;
+    gap: 0.5rem;
+}
+
+form > .change > button {
+    padding: 0.5rem 2rem;
+    border: 1.5px solid #c0ebff;
+    background-color: transparent;
+    box-shadow: var(--box-shadow);
+    color: var(--bg-txt-color);
+}
+
+form > h3 {
+    margin-left: 2rem;
+}
+
+form > label > span {
+    position: absolute;
+    left: 3rem;
+    border: var(--border);
+    padding: 0.3rem 0.6rem;
+}
+
+form > label input {
     border: var(--border);
     padding: 1rem;
     font-size: 1rem;
-    border-radius: 10px;
+    border-radius: 20px;
     width: 100%;
-    background-color: transparent;
+    background-color: var(--bg-color);
+    outline: none;
 }
 
 label > span {

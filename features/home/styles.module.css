@@ -16,21 +16,10 @@
 }
 
 .hero button {
-    padding: 1rem 2rem;
-    width: 70%;
-    border: 2px solid #002b4c;
-    display: block;
+    padding: 1rem 4rem;
     text-align: center;
     margin: auto;
-    color: var(--bg-text-color);
-    text-decoration: none;
-    border-radius: 10px;
-    text-transform: capitalize;
     font-size: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
 }
 
 .hero > div {
@@ -95,13 +84,17 @@ section.offers > div a {
     text-decoration: none;
     padding: 1rem;
     text-transform: capitalize;
-    color: var(--bg-text-color);
+    color: white;
     align-self: left;
     border-radius: 50px;
     width: 80%;
     text-align: center;
-    border: 1.5px solid rgb(49, 127, 49);
+}
+
+section.offers > div a:hover {
     background-color: transparent;
+    color: var(--bg-txt-color);
+    border: 1.5px solid green;
 }
 
 section.offers p {

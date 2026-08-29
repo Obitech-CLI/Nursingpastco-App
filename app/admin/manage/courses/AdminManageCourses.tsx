@@ -22,7 +22,7 @@ function AdminManageCourses() {
         <>
         <div className="switch" style={{
             gridTemplateColumns: navManageCourses.add || navManageCourses.view ?
-            "2fr 1fr" : ""
+            "1fr 1fr" : ""
         }}>
             <h2>manage courses</h2>
             <button type="button"

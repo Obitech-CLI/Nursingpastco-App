@@ -17,7 +17,7 @@ function MenuButton() {
     }, [showMenu])
 
     return (
-        <button type="button" 
+        <button className="icon" type="button" 
         onClick={() => setShowMenu(!showMenu)}>
             <span>{!showMenu ? <Menu size={25}/> : <X />}</span>
         </button>

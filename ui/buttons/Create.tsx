@@ -17,7 +17,7 @@ function CreateUserButton() {
     }, [showCreateForm])
 
     return (
-        <button onClick={() => setShowCreateForm(true)}>
+        <button className="open" onClick={() => setShowCreateForm(true)}>
             join community <Users />
         </button>
     )

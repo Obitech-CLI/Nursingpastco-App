@@ -23,12 +23,12 @@ function CreateUserForm() {
         }, [showCreateForm])
 
     return (
-        <form className={styles.auth}>
+        <form className="auth">
             <h2>create account</h2>
-            <div>
+            <div className="change">
                 <h4>already have an account?</h4>
 
-                <button onClick={() => {
+                <button type="button" className="open" onClick={() => {
                     setShowLoginForm(true);
                     setShowCreateForm(false)
                 }}>

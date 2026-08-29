@@ -22,11 +22,7 @@
 }
 
 .auth div > button {
-    border: 1.5px solid var(--primary-color);
-    text-transform: capitalize;
-    background-color: transparent;
     padding: 0.7rem 4rem;
-    border-radius: 10px;
 }
 
 .auth h3 {

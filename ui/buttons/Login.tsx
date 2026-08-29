@@ -17,7 +17,7 @@ function LoginUserButton() {
         }, [showLoginForm])
 
     return (
-        <button onClick={() => setShowLoginForm(true)} className={styles.login}>
+        <button onClick={() => setShowLoginForm(true)} className="open">
             login
         </button>
     )

@@ -32,7 +32,7 @@ function Header() {
             <div>
                 <LogoWithName />
                 <div>
-                    <button onClick={() => setShowNav(!showNav)}>
+                    <button type="button" className="icon" onClick={() => setShowNav(!showNav)}>
                      {showNav ? <ChevronDown /> : <ChevronUp />}
                     </button>
                     {!pathname.startsWith("/admin") && (
@@ -50,8 +50,8 @@ function Header() {
                             <>
                             {pathname !== "/admin/login" && (
                                 <>
-                                <button onClick={GoBack}><ArrowLeft /></button>
-                                <button onClick={GoHome}><HomeIcon /></button>
+                                <button className="icon" onClick={GoBack}><ArrowLeft /></button>
+                                <button className="icon" onClick={GoHome}><HomeIcon /></button>
                                 </>
                             )}
                             </>

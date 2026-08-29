@@ -21,22 +21,22 @@ function AppTheme() {
         {showTheme && (
             <div className={styles.select_theme}>
 
-                <button onClick={() => {
+                <button className="icon" onClick={() => {
                     setTheme("light");
                     HandleShowTheme(!showTheme);
                 }} style={{
                 backgroundColor: theme === "light" ? "#002b4c" : "",
-                color: theme !== "light" ? "white" : ""
+                color: theme === "light" ? "white" : ""
                 }}>
                     <Sun size={20}/>light
                 </button>
 
-                <button onClick={() => {
+                <button className="icon" onClick={() => {
                     setTheme("dark");
                     HandleShowTheme(!showTheme);
                 }} style={{
                 backgroundColor: theme === "dark" ? "#002b4c" : "",
-                color: theme !== "dark" ? "black" : ""
+                color: theme === "dark" ? "white" : ""
                 }}>
                     <Moon size={20}/>dark
                 </button>

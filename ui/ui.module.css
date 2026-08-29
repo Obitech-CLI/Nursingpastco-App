@@ -51,12 +51,9 @@
 }
 
 button.login {
-    text-transform: capitalize;
-    border: 2px solid var(--secondary-color);
-    border-radius: 5px;
     display: flex;
     align-items: center;
-    padding: 0.5rem 1.5rem;
+    padding: 0.7rem 1.5rem;
 }
 
 .select_theme {
@@ -85,9 +82,10 @@ button.login {
 }
 
 .app_theme > button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    background-color: transparent;
+    color: var(--bg-txt-color);
+    box-shadow: none;
+    border: none;
 }
 
 .menu {
@@ -105,7 +103,7 @@ button.login {
 
 .menu > a {
     padding: 1rem;
-    color: var(--bg-txt-color);
+    color: white;
     border-radius: 30px;
     display: flex;
     align-items: center;
@@ -113,7 +111,9 @@ button.login {
 }
 
 .menu > a:hover {
-    background-color: rgba(0, 255, 0, 0.1);
+    background-color: transparent;
+    color: var(--bg-txt-color);
+    border: 1.5px solid green;
 }
 
 .overlay {

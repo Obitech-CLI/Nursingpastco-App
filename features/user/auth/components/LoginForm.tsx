@@ -17,21 +17,23 @@ function LoginUserForm() {
     useEffect(() => {
                 document.body.style.overflow = showLoginForm ? "hidden" : "auto";
             
-                return () => {
-                        document.body.style.overflow = "auto";
+                if (!showLoginForm) {
+                        return () => {
+                            document.body.style.overflow = "auto";
+                        }
                     }
             }, [showLoginForm])
 
     return (
-        <form className={styles.auth}>
+        <form className="auth">
             <h2>login</h2>
-            <div>
+            <div className="change">
                 <h4>don't have an account?</h4>
-                <button onClick={() => {
+                <button type="button" className="open" onClick={() => {
                     setShowCreateForm(true);
                     setShowLoginForm(false);
                 }}>
-                    create account
+                    create an account
                 </button>
             </div>
             <h3>welcome back</h3>
@@ -58,7 +60,7 @@ function LoginUserForm() {
                 }}>{focus.password ? "enter your password" : "password"}</span>
             </label>
 
-            <button>
+            <button type="submit">
                 continue
             </button>
         </form>

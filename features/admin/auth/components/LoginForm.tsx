@@ -27,13 +27,11 @@ function LoginForm({formData, setFormData, onSubmit, loading}:FormDataProps) {
     });
 
     return (
-        <form onSubmit={onSubmit} className={styles.auth}>
-            <div>
-                <h3>sign in</h3>
-                <h4>welcome back</h4>
-            </div>
+        <form onSubmit={onSubmit} className="auth">
 
-            <label><Mail size={35}/>
+                <h3>welcome back</h3>
+
+            <label><Mail size={30}/>
                 <input type="email" value={formData.email}
                 name="email" onChange={HandleFormChange} onFocus={() => {
                     setFocusInput(prev => ({...prev, email: true}))
@@ -44,7 +42,7 @@ function LoginForm({formData, setFormData, onSubmit, loading}:FormDataProps) {
                 }}>{focusInput.email ? "enter your email" : "email"}</span>
             </label>
 
-            <label><Lock size={35}/>
+            <label><Lock size={30}/>
                 <input type="password" value={formData.password}
                 name="password" onChange={HandleFormChange} onFocus={() => {
                     setFocusInput(prev => ({...prev, password: true}))
@@ -56,7 +54,7 @@ function LoginForm({formData, setFormData, onSubmit, loading}:FormDataProps) {
             </label>
 
             <button type="submit" disabled={loading}>
-                {!loading ? "login" : <ClipLoader size={20} color="white"/> }
+                {!loading ? "login" : <ClipLoader size={20} color="black"/> }
             </button>
         </form>
     )
