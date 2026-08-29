@@ -11,7 +11,7 @@
   --div-color: whitesmoke;
   --box-shadow: 0px 0px 2px black;
   --nav-bg: white;
-  --border: 1.5px solid black;
+  --border: 1px solid black;
   --primary-color: rgb(49, 127, 49);
   --secondary-color: #002b4c;
   --modal: rgba(225, 225, 225, 0.5);
@@ -19,7 +19,7 @@
   --modal-txt-span: white;
   --input-span: white;
   --input-span-txt: black;
-  --card: rgba(0, 0, 0, 0.8);
+  --card: rgba(0, 0, 0, 0.9);
   --card-color: white;
   --h2: rgba(0, 0, 0, 0.9);
   --header-bg: white;
@@ -35,13 +35,13 @@
   --div-color: black;
   --box-shadow: 0px 0px 2px white;
   --nav-bg: black;
-  --border: 1.5px solid white;
+  --border: 1px solid white;
   --modal: rgba(0, 0, 0, 0.5);
   --modal-span: white;
   --modal-txt-span: black;
   --input-span: black;
   --input-span-txt: white;
-  --card: rgba(225, 225, 225, 0.8);
+  --card: rgba(225, 225, 225, 0.9);
   --card-color: black;
   --h2: white;
   --menu-bg: black;
@@ -292,11 +292,9 @@ h2 {
 }
 
 form {
-    background-color: var(--div-color);
+    background-color: transparent;
     border-radius: 10px;
-    box-shadow: var(--box-shadow);
     width: 100%;
-    padding: 2rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;

@@ -32,7 +32,7 @@ div.select > div ul {
     background-color: var(--modal);
     list-style-type: none;
     color: var(--modal-txt);
-    padding: 7rem 2rem;
+    padding: 7.5rem 2rem 4.5rem;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
@@ -43,10 +43,8 @@ div.select > div ul {
     z-index: 50;
 }
 
-div.select > div ul > button {
-    position: absolute;
-    top: 6.5rem;
-    right: 3rem;
+div.select > div ul > h2 {
+    text-align: center;
 }
 
 div.select > div ul li {
@@ -64,6 +62,10 @@ div.select > label {
 div.select > label input {
     padding: 1rem;
     width: 100%;
+    border: var(--border);
+    background-color: transparent;
+    outline: none;
+    border-radius: 10px;
 }
 
 div.select > label span {
@@ -74,4 +76,5 @@ div.select > label span {
     gap: 0.5rem;
     text-transform: capitalize;
     padding: 0 0.5rem;
+    background-color: var(--input-span);
 }

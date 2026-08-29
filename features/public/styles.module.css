@@ -151,11 +151,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 0.8rem;
     border-radius: 20px;
     text-transform: capitalize;
     background-color: var(--card);
     color: var(--card-color);
+    border: 2px solid #c0ebff;
+    box-shadow: var(--box-shadow);
 }
 
 .select_course > h3 {
@@ -202,4 +204,10 @@
     width: 80%;
     text-align: center;
     border-radius: 50px;
+}
+
+.select_course > .course .info > a:hover {
+    background-color: transparent;
+    border: 1.5px solid green;
+    color: var(--bg-txt-color);
 }

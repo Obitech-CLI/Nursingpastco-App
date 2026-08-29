@@ -81,7 +81,7 @@ function CreateUserForm() {
             </label>
 
             <button>
-                continue
+                create
             </button>
         </form>
     )

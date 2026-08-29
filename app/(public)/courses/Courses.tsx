@@ -62,12 +62,12 @@ function Courses() {
                {showLevel ? <ChevronDown /> : <ChevronUp />}
                 {showLevel && (
                     <ul>
-                        <h2>select</h2>
                         <button onClick={() => {
                             setShowLevel(false);
                         }}>
                             <X />
                         </button>
+                        <h2>select</h2>
                        {LevelOptions.map(level => (
                        <li key={level.id} onClick={() => {
                         setSelectedLevel(level.level);

@@ -61,7 +61,7 @@ function LoginUserForm() {
             </label>
 
             <button type="submit">
-                continue
+                login
             </button>
         </form>
     )
