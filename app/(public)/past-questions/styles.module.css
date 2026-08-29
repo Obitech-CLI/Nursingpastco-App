@@ -90,7 +90,7 @@
     box-shadow: var(--box-shadow);
     text-transform: capitalize;
     height: 40px;
-    padding: 0 1rem;
+    padding: 0.7rem 0.5rem;
     border-radius: 10px;
     justify-content: space-between;
     border: 2px solid #c0ebff;
