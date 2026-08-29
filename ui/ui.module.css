@@ -103,7 +103,7 @@ button.login {
 
 .menu > a {
     padding: 1rem;
-    color: white;
+    color: var(--bg-txt-color);
     border-radius: 30px;
     display: flex;
     align-items: center;
@@ -111,9 +111,9 @@ button.login {
 }
 
 .menu > a:hover {
-    background-color: transparent;
+    background-color: rgba(0, 100, 0, 0.1);
     color: var(--bg-txt-color);
-    border: 1.5px solid green;
+    border: none;
 }
 
 .overlay {

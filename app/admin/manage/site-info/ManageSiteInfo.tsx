@@ -21,7 +21,10 @@ function AdminManageSiteInfo() {
 
     return (
         <>
-        <div className="switch">
+        <div className="switch" style={{
+            gridTemplateColumns: navManageSiteInfo.add || navManageSiteInfo.view ?
+            "1fr 1fr" : ""
+        }}>
             <h2>manage app/site info</h2>
             <button type="button"
             onClick={() => setNavManageSiteInfo({add: true, view: false})}

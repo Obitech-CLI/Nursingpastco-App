@@ -20,7 +20,7 @@ function AdminManageInstituitions() {
         <>
         <div className="switch" style={{
             gridTemplateColumns: navManageInstituitions.add || navManageInstituitions.view ?
-            "2fr 1fr" : ""
+            "1fr 1fr" : ""
         }}>
             <h2>manage instituitions</h2>
             <button type="button"

@@ -26,8 +26,9 @@
     background-color: #c0ebff;
     padding: 1rem 4rem;
     border-radius: 50px;
-    color: white;
+    color: black;
     text-transform: capitalize;
+    box-shadow: 1px 1px black;
 }
 
 .pastQuestions_hero > h3 {
@@ -49,21 +50,21 @@
     position: fixed;
     inset: 0;
     background-color: var(--modal);
-    backdrop-filter: blur(10px);
-    padding: 7.5rem 1rem;
+    backdrop-filter: blur(20px);
+    padding: 8rem 1rem 5rem;
     overflow: auto;
-}
-
-.pastQuestions_hero > .instituitions > button {
-    position: absolute;
-    top: 7.5rem;
-    right: 2rem;
+    display: flex;
+    flex-direction: column;
 }
 
 .pastQuestions_hero > .instituitions .select {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+
+.pastQuestions_hero > .instituitions .select > h2 {
+    text-align: center;
 }
 
 .pastQuestions_hero > .instituitions .select > button {
@@ -75,7 +76,7 @@
 }
 
 .pastQuestions {
-    padding: 1rem;
+    padding: 1rem 0;
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -89,9 +90,8 @@
     align-items: center;
     box-shadow: var(--box-shadow);
     text-transform: capitalize;
-    height: 40px;
-    padding: 0.7rem 0.5rem;
-    border-radius: 10px;
+    padding: 0.7rem;
+    border-radius: 20px;
     justify-content: space-between;
     border: 2px solid #c0ebff;
     background-color: var(--card);
@@ -113,7 +113,7 @@
     position: fixed;
     background-color: var(--modal);
     box-shadow: var(--box-shadow);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(20px);
     inset: 0;
     padding: 8rem 1rem 5rem;
     border-radius: 10px;
@@ -165,12 +165,6 @@
     border: var(--border);
 }
 
-/*.pastQuestions .loading {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}*/
-
 .pastQuestions > .retry button, .select_retry button {
     background-color: #c0ebff;
     padding: 0.7rem 2rem;
@@ -209,9 +203,9 @@
 }
 
 .btns > button {
-    background-color: #c0ebff;
+    border: 1.5px solid #c0ebff;
     padding: 0.6rem 1rem;
-    color: black;
+    color: var(--bg-txt-color);
     border-radius: 10px;
     white-space: nowrap;
     box-shadow: var(--box-shadow);

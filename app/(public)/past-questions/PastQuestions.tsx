@@ -126,14 +126,16 @@ function PastQuestions() {
 
             {showInstituitions && (
                 <div className={styles.instituitions}>
-                <button onClick={() => setShowInstituitions(false)}>
-                    <X />
-                </button>
+                    <button onClick={() => setShowInstituitions(false)}>
+                              <X />
+                        </button>
+
                 {!FetchInstituitions.loading ? (
                     <>
                     {instituitions.length > 0 ? (
+                    
                         <div className={styles.select}>
-                        <h2>select</h2>
+                        <h2>select<br />instituition</h2>
                         {instituitions.map(i => (
                             <button key={i.id} onClick={() => {
                                 HandleInstituitionChange(i.instituition_name, i.instituition_logo);
@@ -143,6 +145,7 @@ function PastQuestions() {
                             </button>
                         ))}
                         </div>
+                        
                     ) : (
                         <div className={styles.retry}>
                             <p>{FetchInstituitions.error}</p>
@@ -152,7 +155,7 @@ function PastQuestions() {
                     </>
                 ) : (
                     <div className={styles.loading}>
-                        <ClipLoader />
+                        <ClipLoader size={50}/>
                     </div>
                 )}
                 </div>
@@ -244,7 +247,7 @@ function PastQuestions() {
                                 </>
                             )}
                             </>
-                            ) : (<div className={styles.select_loading}><ClipLoader size={30}/></div>)}
+                            ) : (<div className={styles.select_loading}><ClipLoader size={30} color="var(--bg-txt-color)"/></div>)}
                             </div>
                         )}
                         </div>

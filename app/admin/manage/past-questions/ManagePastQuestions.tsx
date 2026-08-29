@@ -23,7 +23,7 @@ function AdminManagePastQuestions() {
         <>
         <div className="switch" style={{
             gridTemplateColumns: navManagePastQuestions.add || navManagePastQuestions.view ?
-            "2fr 1fr" : ""
+            "1fr 1fr" : ""
         }}>
             <h2>manage past questions</h2>
             <button type="button"

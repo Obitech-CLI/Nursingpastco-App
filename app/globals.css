@@ -59,8 +59,8 @@ body {
 a {
     text-transform: capitalize;
     text-decoration: none;
-    background-color: green;
-    color: white;
+    border: 2px solid green;
+    color: var(--bg-txt-color);
     border-radius: 30px;
 }
 

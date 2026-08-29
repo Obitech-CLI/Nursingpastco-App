@@ -84,7 +84,7 @@ section.offers > div a {
     text-decoration: none;
     padding: 1rem;
     text-transform: capitalize;
-    color: white;
+    color: var(--bg-txt-color);
     align-self: left;
     border-radius: 50px;
     width: 80%;
@@ -92,9 +92,9 @@ section.offers > div a {
 }
 
 section.offers > div a:hover {
-    background-color: transparent;
+    background-color: rgba(0, 100, 0, 0.1);
     color: var(--bg-txt-color);
-    border: 1.5px solid green;
+    border: none;
 }
 
 section.offers p {
