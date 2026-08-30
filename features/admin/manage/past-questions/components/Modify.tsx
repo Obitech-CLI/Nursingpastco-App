@@ -37,7 +37,6 @@ function ModifyPastQuestions({edit, setEdit, setNav, setEditData} : Props) {
     });
 
     const [deleteId, setDeleteId] = useState("");
-    const [reload, setReload] = useState(0);
 
     const FetchPastQuestions = UseFetch();
     const DeletePastQuestion = UseDelete();
@@ -87,7 +86,7 @@ function ModifyPastQuestions({edit, setEdit, setNav, setEditData} : Props) {
         const res = await DeletePastQuestion.Delete(`/pastQuestions/${deleteId}`);
 
         if (res.success) {
-            setReload(prev => prev + 1);
+            HandleSearch();
             setDeleteId("");
         }
     }
@@ -95,11 +94,6 @@ function ModifyPastQuestions({edit, setEdit, setNav, setEditData} : Props) {
     useEffect(() => {
         Delete();
     }, [confirm])
-
-    useEffect(() => {
-        if (!searchData.instituition && !searchData.course && !searchData.level) return;
-        HandleSearch();
-    }, [reload])
 
     return (
         <>
@@ -115,39 +109,39 @@ function ModifyPastQuestions({edit, setEdit, setNav, setEditData} : Props) {
             {!FetchPastQuestions.loading ? (
             <>
             {searchedPastQuestions.length > 0 ? (
-                <div className="searched">
+                <>
 
                     <h3>{searchedPastQuestions[0].instituition}</h3>
                     <h4>{searchedPastQuestions[0].course} past-questions</h4>
                     <h4>{searchedPastQuestions[0].level}</h4>
 
-                    <div className="data">
-                    {searchedPastQuestions.map(pastQuestions => (
-                        <div key={pastQuestions.id}>
-                            <h5>{pastQuestions.title}</h5>
+                    <>
+                    {searchedPastQuestions.map(pastQuestion => (
+                        <div key={pastQuestion.id} className="results">
+                            <h4>{pastQuestion.title}</h4>
 
                             <div className="btns">
                             <button onClick={() => {
                                 setEdit(true);
                                 setNav({add: true, view: false});
                                 setEditData({
-                                    id: String(pastQuestions.id),
-                                    instituition: pastQuestions.instituition,
-                                    course: pastQuestions.course,
-                                    level: pastQuestions.level
+                                    id: String(pastQuestion.id),
+                                    instituition: pastQuestion.instituition,
+                                    course: pastQuestion.course,
+                                    level: pastQuestion.level
                                 })
                             }}>
-                                <Edit color="navy" size={25}/>
+                                <Edit color="navy" size={30}/>
                             </button>
 
-                            <button onClick={() => HandleDeleteClick(String(pastQuestions.id))}
+                            <button onClick={() => HandleDeleteClick(String(pastQuestion.id))}
                                 disabled={DeletePastQuestion.loading}>
-                                <X color="red" size={25}/>
+                                <X color="red" size={30}/>
                             </button>
 
                             {DeletePastQuestion.loading && (
-                                <div className="overlay-loading">
-                                  <ClipLoader />
+                                <div className="delete-loading">
+                                  <ClipLoader size={40} color="var(--bg-txt-color)"/>
                                   <p>deleting instituition...</p>
                                   <p style={{textTransform: "lowercase"}}>hold on a bit</p>
                                 </div>
@@ -156,9 +150,9 @@ function ModifyPastQuestions({edit, setEdit, setNav, setEditData} : Props) {
                             </div>
                         </div>
                     ))}
-                    </div>
+                    </>
 
-                </div>
+                </>
             ) : (
                 <>
                 {FetchPastQuestions.error && !FetchPastQuestions.loading ? (
@@ -175,7 +169,7 @@ function ModifyPastQuestions({edit, setEdit, setNav, setEditData} : Props) {
             </>
             ) : (
                 <div className="loading">
-                <ClipLoader size={50} cssOverride={{ borderWidth: "2px" }}/>
+                <ClipLoader size={40} color="var(--bg-txt-color)"/>
                 </div>
             )}
         </div>

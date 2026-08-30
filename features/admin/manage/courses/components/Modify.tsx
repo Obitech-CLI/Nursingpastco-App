@@ -7,7 +7,7 @@ import { ClipLoader } from "react-spinners";
 import { CourseDataTypes } from "@/types/types";
 import { Edit, X } from "lucide-react";
 import { UseDelete } from "@/hooks/useDelete";
-import { useConfirmModal } from "@/contexts/modals/FeedbackContext";
+import { useConfirmModal, useErrorModal } from "@/contexts/modals/FeedbackContext";
 
 interface Nav {
     add: boolean;
@@ -37,8 +37,9 @@ function ModifyCourses({edit, setEdit, setNav, setEditData} : Props) {
         level: "",
     });
 
-    const [deleteId, setDeleteId] = useState(0);
-    const [reload, setReload] = useState(0);
+    const { setErrorMessage, setShowErrorModal, showErrorModal } = useErrorModal();
+
+    const [deleteId, setDeleteId] = useState("");
 
     const FetchSearchData = UseFetch();
     const DeleteCourse = UseDelete();
@@ -47,38 +48,51 @@ function ModifyCourses({edit, setEdit, setNav, setEditData} : Props) {
 
     const HandleSearch = async () =>
     {
-        if (!searchData.instituition && !searchData.level) return;
+        if (!searchData.instituition && !searchData.level) {
+            setShowErrorModal(true);
+            setErrorMessage("no instituition & level selected");
+            return;
+        }
+        if (!searchData.instituition) {
+            setShowErrorModal(true);
+            setErrorMessage("no instituition");
+            return;
+        }
+        if (!searchData.level) {
+            setShowErrorModal(true);
+            setErrorMessage("no level selected");
+            return;
+        }
         
         const res = await FetchSearchData.Fetch(`/courses?instituition=${searchData.instituition}&level=${searchData.level}`);
-        console.log(res)
-        if (!res) {
+        
+        if (res.success) {
             setSearchCourses([]);
+            setSearchCourses(res.courses);
             return;
-        };
-
-        setSearchCourses(res.courses);
+        }
     
     }
 
-    const HandleDeleteClick = (id: number) =>
+    const HandleDeleteClick = (id: string) =>
     {
         if (!id) return;
 
-        setConfirmMessage("are you sure you want to delete course?");
+        setConfirmMessage("are you sure you want to delete this course?");
         setShowConfirmModal(true);
         setDeleteId(id);
     }
 
     const Delete = async () => {
         if (!confirm && !deleteId) return;
-        await DeleteCourse.Delete(`/courses/${deleteId}`);
 
-        setReload(prev => prev + 1);
+        const res = await DeleteCourse.Delete(`/courses/${deleteId}`);
+
+        if (res.success) {
+            setDeleteId("");
+            HandleSearch();
+        }
     }
-
-    useEffect(() => {
-        HandleSearch();
-    }, [reload]);
 
     useEffect(() => {
         Delete();
@@ -98,15 +112,15 @@ function ModifyCourses({edit, setEdit, setNav, setEditData} : Props) {
             {!FetchSearchData.loading ? (
             <>
             {searchedCourses.length > 0 ? (
-                <div className="searched">
+                <>
 
                     <h3>{searchedCourses[0].instituition}</h3>
-                    <h3>{searchedCourses[0].level} courses</h3>
+                    <h3>{searchedCourses[0].level}<br />courses</h3>
 
-                    <div className="data">
-                    {searchedCourses.map(courses => (
-                        <div key={courses.id}>
-                            <h5>{courses.course}</h5>
+                    <>
+                    {searchedCourses.map(course => (
+                        <div key={course.id} className="results">
+                            <h4>{course.course}</h4>
 
                             <div className="btns">
                             <button type="button"
@@ -114,23 +128,23 @@ function ModifyCourses({edit, setEdit, setNav, setEditData} : Props) {
                                 setEdit(true);
                                 setNav({add: true, view: false});
                                 setEditData({
-                                    id: String(courses.id),
-                                    instituition: courses.instituition,
-                                    course: courses.course,
-                                    level: courses.level
+                                    id: String(course.id),
+                                    instituition: course.instituition,
+                                    course: course.course,
+                                    level: course.level
                                 })
                             }}>
-                                <Edit color="navy" size={25}/>
+                                <Edit color="navy" size={30}/>
                             </button>
 
-                            <button onClick={() => HandleDeleteClick(courses.id as number)}
+                            <button onClick={() => HandleDeleteClick(String(course.id))}
                                 disabled={DeleteCourse.loading}>
-                                <X color="red" size={25}/>
+                                <X color="red" size={30}/>
                             </button>
 
                             {DeleteCourse.loading && (
-                                <div className="overlay-loading">
-                                  <ClipLoader />
+                                <div className="delete-loading">
+                                  <ClipLoader size={40} color="var(--bg-txt-color)"/>
                                   <p>deleting instituition...</p>
                                   <p style={{textTransform: "lowercase"}}>hold on a bit</p>
                                 </div>
@@ -139,9 +153,9 @@ function ModifyCourses({edit, setEdit, setNav, setEditData} : Props) {
                             </div>
                         </div>
                     ))}
-                    </div>
+                    </>
 
-                </div>
+                </>
             ) : (
                 <>
                 {FetchSearchData.error && !FetchSearchData.loading ? (

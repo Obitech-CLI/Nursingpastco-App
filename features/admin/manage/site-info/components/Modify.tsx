@@ -32,7 +32,6 @@ function ModifySiteInfo({edit, setEdit, setNav, setEditData} : Props) {
 
     const [deleteId, setDeleteId] = useState("");
     const [deleteCategory, setDeleteCategory] = useState("");
-    const [reload, setReload] = useState(0);
     
     const { confirm, setShowConfirmModal, setConfirmMessage } = useConfirmModal();
     
@@ -41,7 +40,7 @@ function ModifySiteInfo({edit, setEdit, setNav, setEditData} : Props) {
         {
             if (!id) return;
     
-            setConfirmMessage("are you sure you want to delete site info?");
+            setConfirmMessage("are you sure you want to delete this info?");
             setShowConfirmModal(true);
             setDeleteId(id);
             setDeleteCategory(category);
@@ -49,11 +48,14 @@ function ModifySiteInfo({edit, setEdit, setNav, setEditData} : Props) {
     
     const Delete = async () => {
             if (!confirm && !deleteId) return;
-            await DeleteSiteInfo.Delete(`/site-info/delete/${deleteCategory}/${deleteId}`);
-            setSiteInfo([]);
-            setReload(prev => prev + 1);
-            setDeleteCategory("");
-            setDeleteId("");
+            const res = await DeleteSiteInfo.Delete(`/site-info/delete/${deleteCategory}/${deleteId}`);
+            
+            if (res.success) {
+                setSiteInfo([]);
+                setDeleteCategory("");
+                setDeleteId("");
+                HandleFetchSiteInfo();
+            }
         }
     
 
@@ -69,8 +71,9 @@ function ModifySiteInfo({edit, setEdit, setNav, setEditData} : Props) {
     }
 
     useEffect(() => {
+        setSiteInfo([]);
         HandleFetchSiteInfo();
-    }, [selectedCategory, reload]);
+    }, [selectedCategory])
 
     useEffect(() => {
         Delete();
@@ -81,11 +84,10 @@ function ModifySiteInfo({edit, setEdit, setNav, setEditData} : Props) {
         <div className="modify">
 
             {AppInfoCategories.length > 0 && (
-                <div className="site-info-btns">
+                <div className="change-btns">
                 {AppInfoCategories.map(category => (
                     <button type="button" key={category.id}
                     onClick={() => {
-                        setSiteInfo([]);
                         setSelectedCategory(category.category);
                     }}
                     style={{
@@ -106,9 +108,14 @@ function ModifySiteInfo({edit, setEdit, setNav, setEditData} : Props) {
                 {!FetchSiteInfo.loading ? (
                     <>
                     {siteInfo.length > 0 ? (
-                        <div className="site-info">
+                        <>
                         {siteInfo.map(info => (
-                            <div key={info.id} className="info">
+                            <div key={info.id} className="results" style={{
+                                textAlign: "left",
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: "0.5rem"
+                            }}>
 
                             <h3>{info.title}</h3>
                             <h4>{info.sub_title}</h4>
@@ -127,17 +134,17 @@ function ModifySiteInfo({edit, setEdit, setNav, setEditData} : Props) {
                                     information: info.information
                                 })
                                 }}>
-                                   <PenBox color="blue"/>
+                                   <PenBox color="blue" size={30}/>
                                 </button>
 
                                 <button onClick={() => HandleDeleteClick(String(info.id), info.category as string)}
                                 disabled={DeleteSiteInfo.loading}>
-                                   <X color="red"/>
+                                   <X color="red" size={30}/>
                                 </button>
 
                                 {DeleteSiteInfo.loading && (
-                                <div className="overlay-loading">
-                                  <ClipLoader />
+                                <div className="delete-loading">
+                                  <ClipLoader size={40} color="var(--bg-txt-color)"/>
                                   <p>deleting site info...</p>
                                   <p style={{textTransform: "lowercase"}}>hold on a bit</p>
                                 </div>
@@ -145,7 +152,7 @@ function ModifySiteInfo({edit, setEdit, setNav, setEditData} : Props) {
                             </div>
                             </div>
                         ))}
-                        </div>
+                        </>
                     ) : (
                         <>
                         {FetchSiteInfo.error && (
@@ -161,7 +168,7 @@ function ModifySiteInfo({edit, setEdit, setNav, setEditData} : Props) {
                     </>
                 ) : (
                     <div className="loading">
-                        <ClipLoader size={40}/>
+                        <ClipLoader size={40} color="var(--bg-txt-color)"/>
                     </div>
                 )}
                 </>

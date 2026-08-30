@@ -82,26 +82,32 @@ function ModifyInstituitions({edit, setEdit, setNav, setEditData} : Props) {
             {!FetchInstituitions.loading ? (
             <>
             {instituitions.length > 0 ? (
-                <div className="searched">
+                <>
                     <h3>all instituitions</h3>
 
-                    <div className="data">
+                    <>
                     {instituitions.map(instituition => (
-                        <div key={instituition.id} className="instituitions">
+                        <div key={instituition.id} className="results">
                         
                             <Image 
                                 alt="" 
                                 src={instituition.instituition_logo} 
                                 height={150} 
                                 width={150}
+                                style={{
+                                    alignSelf: "center",
+                                    objectFit: "contain"
+                                }}
                             />
 
                             <div>
 
-                            <span>{instituition.instituition_abbr}</span>
+                            <span style={{textTransform: "uppercase"}}>
+                                {instituition.instituition_abbr}
+                            </span>
                             <h4>{instituition.instituition_name}</h4>
 
-                            <div>
+                            <div className="btns">
                             <button onClick={() => {
                                 setEdit(true);
                                 setNav({add: true, view: false});
@@ -120,8 +126,8 @@ function ModifyInstituitions({edit, setEdit, setNav, setEditData} : Props) {
                             </button>
 
                             {DeleteInstituition.loading && (
-                                <div className="overlay-loading">
-                                  <ClipLoader />
+                                <div className="delete-loading">
+                                  <ClipLoader size={40} color="var(--bg-txt-color)"/>
                                   <p>deleting instituition...</p>
                                   <p style={{textTransform: "lowercase"}}>hold on a bit</p>
                                 </div>
@@ -131,13 +137,11 @@ function ModifyInstituitions({edit, setEdit, setNav, setEditData} : Props) {
                             </div>
                         </div>
                     ))}
-                    </div>
-                </div>
+                    </>
+                </>
             ) : (
                 <>
-                {!FetchInstituitions.loading && !FetchInstituitions.error ? (
-                    <p>no instituitions found</p>
-                ) : (
+                {!FetchInstituitions.error && (
                     <div className="retry">
                         <p>{FetchInstituitions.error}</p>
                         <button onClick={HandleFetch}>
@@ -151,9 +155,8 @@ function ModifyInstituitions({edit, setEdit, setNav, setEditData} : Props) {
             ) : (
                 <div className="loading">
                     <ClipLoader 
-                    size={50} 
-                    cssOverride={{ borderWidth: "2px" }}
-                    color={theme !== "dark" ? "black" : "white"}
+                    size={40} 
+                    color="var(--bg-txt-color)"
                     />
                 </div>
             )}
