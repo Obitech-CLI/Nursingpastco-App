@@ -587,4 +587,25 @@ fieldset.search > button {
     text-transform: capitalize;
     border-radius: 50px;
     box-shadow: 1px 1px black;
+    color: black;
+}
+
+.contact-us > form h3 {
+    margin: 0;
+}
+
+.contact-us {
+    padding: 0 1rem;
+    text-transform: capitalize;
+}
+
+.contact-us > form {
+    width: 100%;
+}
+
+.about-us {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 3rem 1rem;
 }

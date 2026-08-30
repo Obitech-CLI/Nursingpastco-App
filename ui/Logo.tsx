@@ -20,7 +20,7 @@ function Logo() {
     return (
         <div className="logo">
             <Image src={theme === "light" ? DarkLogo : LightLogo} 
-            alt="" width={50} height={50} style={{objectFit: "contain"}}
+            alt="" width={150} height={150} style={{objectFit: "contain"}}
             />
         </div>
     )
