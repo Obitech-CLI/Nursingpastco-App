@@ -2,8 +2,11 @@
 
 import { UseAuthProvider } from "@/contexts/user/AuthFormProvider";
 import styles from "../styles.module.css";
-import { Lock, Mail, User } from "lucide-react";
+import { ChevronDown, Lock, Mail, RotateCcw, School2, User, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import Link from "next/link";
+import { UseFetch } from "@/hooks/useFetch";
+import { ClipLoader } from "react-spinners";
 
 function CreateUserForm() {
 
@@ -16,11 +19,17 @@ function CreateUserForm() {
             password: false
         });
 
+        const [instituitions, setInstituitions] = useState([]);
+
+        const FetchInstituitions = UseFetch();
+
+        const [showInstituitions, setShowInstituitions] = useState(false);
+
         useEffect(() => {
-                document.body.style.overflow = showCreateForm ? "hidden" : "auto";
+                document.body.style.overflow = showCreateForm || showInstituitions ? "hidden" : "auto";
                     
                 return () => { document.body.style.overflow = "auto"; }
-        }, [showCreateForm])
+        }, [showCreateForm, showInstituitions])
 
     return (
         <form className="auth">
@@ -69,6 +78,56 @@ function CreateUserForm() {
                 }}>{focus.email ? "enter your email address" : "email address"}</span>
             </label>
 
+            <label><School2 size={30}/>
+                <label className="select" style={{width: "100%"}}>
+                    <>
+                    {"select instituition"}
+                    <span onClick={() => {
+                    setShowInstituitions(true);
+                    }}><ChevronDown />
+                    </span>
+                    </>
+
+                    <>
+                    {showInstituitions && (
+                        <div className="select-overlay">
+                            <>
+                            <span onClick={() => setShowInstituitions(false)}>
+                                <X size={20} color="var(--bg-txt-color)"/>
+                            </span>
+                            </>
+                        {!FetchInstituitions.loading ? (
+                            <>
+                            <h3>select instituition</h3>
+                            {instituitions.length > 0 ? (
+                                <ul>
+                                    {instituitions.map(i => (
+                                        <li></li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                <div className="retry">
+                                    <p>{FetchInstituitions.error}</p>
+                                    <button type="button">
+                                        retry
+                                    </button>
+                                </div>
+                            )}
+                            </>
+                        ) : (
+                            <div className="loading">
+                                <ClipLoader />
+                            </div>
+                        )}
+                        </div>
+                    )}
+                    </>
+
+
+                </label>
+            </label>
+
+            
             <label><Lock size={30}/>
                 <input type="password" name="password"
                 onFocus={() => {
@@ -79,6 +138,12 @@ function CreateUserForm() {
                     top: focus.password ? "-1rem" : "",
                 }}>{focus.password ? "enter your password" : "password"}</span>
             </label>
+
+            <div className="terms-check">
+                i accept these
+                <input type="checkbox" />
+                <Link href="/terms">terms and conditions</Link>
+            </div>
 
             <button>
                 create

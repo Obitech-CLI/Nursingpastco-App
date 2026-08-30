@@ -422,6 +422,30 @@ form > label ul li {
     border-radius: 50px;
 }
 
+form.auth .select-overlay {
+    position: fixed;
+    background-color: var(--div-color);
+    backdrop-filter: blur(20px);
+    height: 300px;
+    width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 800;
+    border-radius: 10px;
+    color: var(--bg-txt-color);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+}
+
+form.auth .select-overlay > span {
+    position: absolute;
+    right: 0.7rem;
+    top: 0.7rem;
+}
+
 form > span {
     display: flex;
     align-items: center;
@@ -431,6 +455,19 @@ form > span {
     justify-content: flex-start;
     width: fit-content;
     border: 1.5px solid red;
+}
+
+form > .terms-check {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+form > .terms-check > a {
+    border: none;
+    text-decoration: underline;
+    color: green;
 }
 
 h1 {
@@ -573,6 +610,24 @@ fieldset.search > button {
     color: black;
 }
 
+.retry > button{
+    background-color: #c0ebff;
+    box-shadow: 1px 1px black;
+    padding: 0.7rem 2rem;
+    border-radius: 50px;
+    text-transform: capitalize;
+    color: black;
+}
+
+.retry {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
 .modify .change-btns {
     display: flex;
     flex-flow: row wrap;
@@ -604,20 +659,15 @@ fieldset.search > button {
 
 .contact-us > form {
     width: 100%;
-    border-radius: 10px;
-    box-shadow: 3px 3px black;
-    border: var(--border);
+    margin-top: 1rem;
 }
 
 .contact-us .email {
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
     align-items: flex-start;
-    border-radius: 10px;
-    box-shadow: 3px 3px black;
-    border: var(--border);
 }
 
 .contact-us i {
@@ -638,8 +688,12 @@ fieldset.search > button {
     padding: 3rem 1rem;
 }
 
-.contact-us form > div {
+.contact-us form > div,.contact-us .email > div {
     display: flex;
     flex-direction: column;
-    gap: 0.7rem;
+    border-radius: 10px;
+    box-shadow: 3px 3px black;
+    border: var(--border);
+    padding: 1rem;
+    gap: 0.5rem;
 }
