@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { UseFetch } from "@/hooks/useFetch";
 import { ClipLoader } from "react-spinners";
+import { InstituitionDataTypes } from "@/types/types";
 
 function CreateUserForm() {
 
@@ -19,9 +20,20 @@ function CreateUserForm() {
             password: false
         });
 
-        const [instituitions, setInstituitions] = useState([]);
+        const [instituitions, setInstituitions] = useState<InstituitionDataTypes []>([]);
 
         const FetchInstituitions = UseFetch();
+
+        const HandleFetchInstituitions = async () =>
+        {
+            const res = await FetchInstituitions.Fetch("/instituitions");
+
+            if (!res) return;
+
+            if (res.success) {
+                setInstituitions(res.instituitions)
+            }
+        }
 
         const [showInstituitions, setShowInstituitions] = useState(false);
 
@@ -30,6 +42,10 @@ function CreateUserForm() {
                     
                 return () => { document.body.style.overflow = "auto"; }
         }, [showCreateForm, showInstituitions])
+
+        useEffect(() => {
+            HandleFetchInstituitions();
+        }, [])
 
     return (
         <form className="auth">
@@ -93,16 +109,16 @@ function CreateUserForm() {
                         <div className="select-overlay">
                             <>
                             <span onClick={() => setShowInstituitions(false)}>
-                                <X size={20} color="var(--bg-txt-color)"/>
+                                <X size={30} color="var(--bg-txt-color)"/>
                             </span>
                             </>
                         {!FetchInstituitions.loading ? (
                             <>
-                            <h3>select instituition</h3>
                             {instituitions.length > 0 ? (
                                 <ul>
+                                    <h3>select instituition</h3>
                                     {instituitions.map(i => (
-                                        <li></li>
+                                        <li key={i.id}>{i.instituition_name}</li>
                                     ))}
                                 </ul>
                             ) : (
