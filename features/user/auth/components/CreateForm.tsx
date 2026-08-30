@@ -58,7 +58,7 @@ function CreateUserForm() {
 
         const HandleFormChange = (e:React.ChangeEvent<HTMLInputElement>) => {
             const target = e.target;
-            const value = target.type === "checked" ? target.checked : target.value;
+            const value = target.type === 'checkbox' ? target.checked : target.value;
             const name = target.name;
 
             setFormData(prev => ({...prev, [name]: value}));
@@ -78,6 +78,7 @@ function CreateUserForm() {
                 </button>
             </div>
             <h3>join in</h3>
+            <p>{JSON.stringify(formData)}</p>
             <label><User size={30}/>
                 <input type="text" name="firstname" value={formData.firstname}
                 onFocus={() => {
