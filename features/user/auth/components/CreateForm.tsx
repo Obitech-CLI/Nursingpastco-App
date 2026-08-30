@@ -11,6 +11,15 @@ import { InstituitionDataTypes } from "@/types/types";
 
 function CreateUserForm() {
 
+    const [formData, setFormData] = useState({
+        firstname: "",
+        lastname: "",
+        email: "",
+        instituition: "",
+        password: "",
+        terms: false
+    });
+
     const { setShowCreateForm, setShowLoginForm, showCreateForm } = UseAuthProvider();
 
     const [focus, setFocus] = useState({
@@ -47,6 +56,14 @@ function CreateUserForm() {
             HandleFetchInstituitions();
         }, [])
 
+        const HandleFormChange = (e:React.ChangeEvent<HTMLInputElement>) => {
+            const target = e.target;
+            const value = target.type === "checked" ? target.checked : target.value;
+            const name = target.name;
+
+            setFormData(prev => ({...prev, [name]: value}));
+        }
+
     return (
         <form className="auth">
             <h2>create account</h2>
@@ -62,10 +79,11 @@ function CreateUserForm() {
             </div>
             <h3>join in</h3>
             <label><User size={30}/>
-                <input type="text" name="firstname"
+                <input type="text" name="firstname" value={formData.firstname}
                 onFocus={() => {
                     setFocus(prev => ({...prev, fname: true}));
                 }}
+                onChange={HandleFormChange}
                 />
                 <span style={{
                     top: focus.fname ? "-1rem" : "",
@@ -73,10 +91,11 @@ function CreateUserForm() {
             </label>
 
             <label><User size={30}/>
-                <input type="text" name="lastname"
+                <input type="text" name="lastname" value={formData.lastname}
                 onFocus={() => {
                     setFocus(prev => ({...prev, lname: true}));
                 }}
+                onChange={HandleFormChange}
                 />
                 <span style={{
                     top: focus.lname ? "-1rem" : "",
@@ -84,10 +103,11 @@ function CreateUserForm() {
             </label>
 
             <label><Mail size={30}/>
-                <input type="email" name="email"
+                <input type="email" name="email" value={formData.email}
                 onFocus={() => {
                     setFocus(prev => ({...prev, email: true}));
                 }}
+                onChange={HandleFormChange}
                 />
                 <span style={{
                     top: focus.email ? "-1rem" : "",
@@ -97,7 +117,7 @@ function CreateUserForm() {
             <label><School2 size={30}/>
                 <label className="select" style={{width: "100%"}}>
                     <>
-                    {"select instituition"}
+                    {formData.instituition ? formData.instituition : "select instituition"}
                     <span onClick={() => {
                     setShowInstituitions(true);
                     }}><ChevronDown />
@@ -118,21 +138,28 @@ function CreateUserForm() {
                                 <ul>
                                     <h3>select instituition</h3>
                                     {instituitions.map(i => (
-                                        <li key={i.id}>{i.instituition_name}</li>
+                                        <li key={i.id} onClick={() => {
+                                            setFormData(prev => ({...prev, instituition: i.instituition_name}));
+                                            setShowInstituitions(false);
+                                        }}>
+                                            {i.instituition_name}
+                                        </li>
                                     ))}
                                 </ul>
                             ) : (
                                 <div className="retry">
                                     <p>{FetchInstituitions.error}</p>
-                                    <button type="button">
+                                    <button type="button" onClick={HandleFetchInstituitions}>
                                         retry
                                     </button>
                                 </div>
                             )}
                             </>
                         ) : (
-                            <div className="loading">
-                                <ClipLoader />
+                            <div className="loading" style={{
+                                border: "none"
+                            }}>
+                                <ClipLoader size={40} color="var(--bg-txt-color)"/>
                             </div>
                         )}
                         </div>
@@ -145,10 +172,11 @@ function CreateUserForm() {
 
             
             <label><Lock size={30}/>
-                <input type="password" name="password"
+                <input type="password" name="password" value={formData.password}
                 onFocus={() => {
                     setFocus(prev => ({...prev, password: true}));
                 }}
+                onChange={HandleFormChange}
                 />
                 <span style={{
                     top: focus.password ? "-1rem" : "",
@@ -157,7 +185,9 @@ function CreateUserForm() {
 
             <div className="terms-check">
                 i accept these
-                <input type="checkbox" />
+                <input type="checkbox" name="terms" checked={formData.terms}
+                onChange={HandleFormChange}
+                />
                 <Link href="/terms">terms and conditions</Link>
             </div>
 
