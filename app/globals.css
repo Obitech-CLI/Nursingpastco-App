@@ -604,8 +604,8 @@ fieldset.search > button {
 
 .contact-us > form {
     width: 100%;
-    background-color: var(--div-color);
-    box-shadow: var(--box-shadow);
+    border-radius: 10px;
+    box-shadow: 1.5px 1.5px black;
 }
 
 .contact-us .email {
@@ -614,9 +614,8 @@ fieldset.search > button {
     flex-direction: column;
     gap: 0.5rem;
     align-items: flex-start;
-    background-color: var(--div-color);
     border-radius: 10px;
-    box-shadow: var(--box-shadow);
+    box-shadow: 1.5px 1.5px black;
 }
 
 .contact-us i {
