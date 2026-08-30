@@ -341,7 +341,7 @@ form > label.file > span {
 }
 
 form textarea {
-    background-color: transparent;
+    background-color: var(--bg-color);
     width: 100%;
     height: 200px;
     padding: 0.6rem;
@@ -595,12 +595,39 @@ fieldset.search > button {
 }
 
 .contact-us {
-    padding: 0 1rem;
+    padding: 1rem;
     text-transform: capitalize;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .contact-us > form {
     width: 100%;
+    background-color: var(--div-color);
+    box-shadow: var(--box-shadow);
+}
+
+.contact-us .email {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+    background-color: var(--div-color);
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+}
+
+.contact-us i {
+    color: var(--secondary-color);
+}
+
+.contact-us > .email a {
+    padding: 0.5rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .about-us {
@@ -608,4 +635,10 @@ fieldset.search > button {
     flex-direction: column;
     gap: 1rem;
     padding: 3rem 1rem;
+}
+
+.contact-us form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
 }

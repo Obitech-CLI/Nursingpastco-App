@@ -1,5 +1,8 @@
 "use client";
 
+import { Mail, MailOpenIcon } from "lucide-react";
+import Link from "next/link";
+
 function ContactUs() {
     return (
         <main>
@@ -7,11 +10,19 @@ function ContactUs() {
             
             <div className="contact-us">
 
+            <div className="email">
+                <p>For collaboration, partnership and sponsorship?</p>
+                <i> Reach out to us via email.</i>
+                <h3>send us an email</h3>
+                <Link href="">Email Now <Mail /></Link>
+            </div>
+
             <form>
-                <h3>send us a message</h3>
-                <p>for complaint or enquiry about our website? you can reach out to us by sending a direct message to our
-                admin panel for a quick response
-                </p>
+                <div>
+                    <p>for complaint or enquiry about our website?</p>
+                    <i>You can send us a direct message.</i>
+                    <h3>send us a message</h3>
+                </div>
                 <label>
                     <input type="name"/>
                     <span>your name</span>
