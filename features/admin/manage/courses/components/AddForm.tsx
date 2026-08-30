@@ -5,7 +5,6 @@ import { InstituitionDataTypes } from "@/types/types";
 import { LevelOptions } from "@/ui/AppContent";
 import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
-import styles from "../styles.module.css";
 import { ChevronDown, ChevronUp, RotateCw, X } from "lucide-react";
 import { useErrorModal } from "@/contexts/modals/FeedbackContext";
 
@@ -85,7 +84,7 @@ function AddForm({formData, setFormData, onSubmit, loading, edit, setEdit, editD
     }
 
     return (
-        <form onSubmit={onSubmit} className={styles.add}>
+        <form onSubmit={onSubmit}>
 
             {edit && (
                 <span onClick={CancelEdit}>
@@ -93,11 +92,11 @@ function AddForm({formData, setFormData, onSubmit, loading, edit, setEdit, editD
                 </span>
             )}
 
-            <label onClick={() => {
+            <label className="select" onClick={() => {
                 if (instituitions.length === 0) return;
                 setShowInstituitions(!showInstituitions);
                 setShowLevels(false);
-            }} className={styles.instituitions}>
+            }}>
 
             <>
             {formData.instituition || editData.instituition ? formData.instituition || editData.instituition : "select instituition"}
@@ -141,7 +140,7 @@ function AddForm({formData, setFormData, onSubmit, loading, edit, setEdit, editD
             )}
             </label>
 
-            <label className={styles.course}>
+            <label>
                 <span style={{
                     top: focusInput || edit ? "-0.8rem" : "",
                     border: focusInput || edit ? "var(--border)" : ""
@@ -170,10 +169,10 @@ function AddForm({formData, setFormData, onSubmit, loading, edit, setEdit, editD
                 />
             </label>
 
-            <label onClick={() => {
+            <label className="select" onClick={() => {
                 setShowLevels(!showLevels);
                 setShowInstituitions(false);
-                }} className={styles.levels}>
+                }}>
                 
                 <>
                 {formData.level || editData.level ? formData.level || editData.level : "select level"}
@@ -211,7 +210,7 @@ function AddForm({formData, setFormData, onSubmit, loading, edit, setEdit, editD
                         <>
                         {edit ? "update" : "add"}
                         </>
-                ) : <ClipLoader size={20} color="white"/>}
+                ) : <ClipLoader size={20} color="black"/>}
             </button>
         </form>
     )

@@ -1,7 +1,7 @@
 "use client";
 
 import { AppInfoCategories } from "@/ui/AppContent";
-import { ChevronDown, ChevronUp, MinusCircle, PlusCircle, X } from "lucide-react";
+import { ChevronDown, ChevronUp, X } from "lucide-react";
 import { SetStateAction, useEffect, useState } from "react";
 import { EditSiteInfoDataTypes, SiteInfoDataTypes } from "./AddSiteInfo";
 import { ClipLoader } from "react-spinners";
@@ -49,7 +49,7 @@ function AddForm({formData, setFormData, submit, loading, focus, setFocus, edit,
 
     return (
         <>
-        <form className="add" onSubmit={submit}>
+        <form onSubmit={submit}>
 
             {edit && (
                 <span onClick={CancelEdit}>
@@ -57,11 +57,12 @@ function AddForm({formData, setFormData, submit, loading, focus, setFocus, edit,
                 </span>
             )}
 
-            <label onClick={() => {
+            <label className="select" onClick={() => {
                 setShowCategories(!showCategories)
             }}>
                 {formData.category || editData.category ? formData.category || editData.category : "select category"}
                 {showCategories ? <ChevronDown /> : <ChevronUp />}
+
                 {showCategories && (
                     <>
                     {AppInfoCategories.length > 0 && (
@@ -153,7 +154,7 @@ function AddForm({formData, setFormData, submit, loading, focus, setFocus, edit,
             </div>
 
             <button type="submit" disabled={loading}>
-                {loading ? <ClipLoader size={20} color="white"/> : (<>{edit ? "update" : "add"}</>)}
+                {loading ? <ClipLoader size={20} color="black"/> : (<>{edit ? "update" : "add"}</>)}
             </button>
         </form>
         </>

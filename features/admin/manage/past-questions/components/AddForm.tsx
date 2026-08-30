@@ -5,10 +5,7 @@ import { CourseDataTypes, InstituitionDataTypes } from "@/types/types";
 import { LevelOptions } from "@/ui/AppContent";
 import { SetStateAction, use, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
-import styles from "../style.module.css";
 import { Check, ChevronDown, ChevronUp, File, RotateCcw, RotateCw, X } from "lucide-react";
-import Link from "next/link";
-import { toast } from "sonner";
 import { useErrorModal } from "@/contexts/modals/FeedbackContext";
 
 interface FormDataTypes {
@@ -133,7 +130,7 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
     }
 
     return (
-        <form onSubmit={onSubmit} className={styles.add}>
+        <form onSubmit={onSubmit}>
 
             {edit && (
                 <span onClick={CancelEdit}>
@@ -145,7 +142,7 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
                     if (instituitions.length === 0) return;
                     setShowInstituitions(!showInstituitions)
                 }} 
-                className={styles.select}>
+                className="select">
 
                     <>{formData.instituition || editData.instituition ? formData.instituition || editData.instituition : "select instituition"}</>
 
@@ -196,7 +193,7 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
                 </label>
 
                 <label onClick={() => setShowLevels(!showLevels)} 
-                className={styles.select}>
+                className="select">
                     <>
                      {formData.level || editData.level ? formData.level || editData.level : "select level"}
                     </>
@@ -230,7 +227,7 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
                     )}
                 </label>
 
-                <label className={styles.select} onClick={() => {
+                <label className="select" onClick={() => {
                         if (courses.length === 0) return;
                         setShowCourses(!showCourses);
                     }}>
@@ -275,7 +272,7 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
                     )}
                 </label>
 
-                <label className={styles.file}>
+                <label className="file">
                     <File size={30}/>
                     <input type="file" accept="application/pdf"
                     ref={fileRef}

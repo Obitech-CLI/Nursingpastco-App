@@ -5,7 +5,6 @@ import { InstituitionDataTypes } from "@/types/types";
 import Image from "next/image";
 import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
-import styles from "../styles.module.css";
 import { Edit, X } from "lucide-react";
 import { useTheme } from "next-themes";
 import { UseDelete } from "@/hooks/useDelete";
@@ -102,7 +101,7 @@ function ModifyInstituitions({edit, setEdit, setNav, setEditData} : Props) {
                             <span>{instituition.instituition_abbr}</span>
                             <h4>{instituition.instituition_name}</h4>
 
-                            <div className={styles.btns}>
+                            <div>
                             <button onClick={() => {
                                 setEdit(true);
                                 setNav({add: true, view: false});
@@ -137,7 +136,7 @@ function ModifyInstituitions({edit, setEdit, setNav, setEditData} : Props) {
             ) : (
                 <>
                 {!FetchInstituitions.loading && !FetchInstituitions.error ? (
-                    <p className={styles.notfound}>no instituitions found</p>
+                    <p>no instituitions found</p>
                 ) : (
                     <div className="retry">
                         <p>{FetchInstituitions.error}</p>

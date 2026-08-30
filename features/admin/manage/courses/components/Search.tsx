@@ -5,9 +5,7 @@ import { InstituitionDataTypes } from "@/types/types";
 import { LevelOptions } from "@/ui/AppContent";
 import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
-import styles from "../styles.module.css";
 import { ChevronDown, ChevronUp, RotateCw, Search, X } from "lucide-react";
-import { toast } from "sonner";
 import { useErrorModal } from "@/contexts/modals/FeedbackContext";
 
 interface SearchDataTypes {

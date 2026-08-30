@@ -2,7 +2,6 @@
 
 import { SetStateAction } from "react";
 import { ClipLoader } from "react-spinners";
-import styles from "../styles.module.css";
 import { Check, Image, Pen, X, } from "lucide-react";
 
 interface FormDataTypes {
@@ -60,7 +59,7 @@ function AddForm(
     }
 
     return (
-        <form onSubmit={onSubmit} className={styles.add}>
+        <form onSubmit={onSubmit}>
 
                 {edit && (
                 <span onClick={CancelEdit}>
@@ -68,7 +67,7 @@ function AddForm(
                 </span>
                 )}
 
-                <label className={styles.input}>
+                <label>
                     <input type="text" value={edit ? editData.instituition_name : formData.instituition_name}
                     name="instituition_name" onChange={HandleFormChange} onFocus={() => {
                     setFocusInput(prev => ({...prev, name: true}))
@@ -89,7 +88,7 @@ function AddForm(
                     </span>
                 </label>
 
-                <label className={styles.input}>
+                <label>
                     <input type="text" value={edit ? editData.instituition_abbr : formData.instituition_abbr}
                     name="instituition_abbr" onChange={HandleFormChange} onFocus={() => {
                     setFocusInput(prev => ({...prev, abbr: true}))
@@ -110,7 +109,7 @@ function AddForm(
                     </span>
                 </label>
 
-                <label className={styles.file}><Image size={30}/>
+                <label className="file"><Image size={30}/>
                     <input type="file" ref={fileRef}
                      accept="image/*"
                     onChange={(e) => {
@@ -129,7 +128,7 @@ function AddForm(
                         <>
                         {edit ? "update" : "add"}
                         </>
-                    ) : <ClipLoader size={20} color="white"/>}
+                    ) : <ClipLoader size={20} color="black"/>}
                 </button>
         </form>
     )
