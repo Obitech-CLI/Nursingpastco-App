@@ -1,5 +1,6 @@
 "use client";
 
+import { UseUser } from "@/contexts/user/UserProvider";
 import { UsePost } from "@/hooks/usePost";
 import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -8,6 +9,8 @@ import { ClipLoader } from "react-spinners";
 function LogoutUserButton() {
 
     const PostLogoutUser = UsePost();
+
+    const { setUser } = UseUser();
 
     const router = useRouter();
 
@@ -21,10 +24,9 @@ function LogoutUserButton() {
 
         if (res.success) {
 
-            localStorage.removeItem("user");
+            setUser(null);
 
             router.replace("/");
-
         }
         
     }

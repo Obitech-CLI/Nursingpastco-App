@@ -35,7 +35,6 @@ export const CreateUser = async ({firstname, lastname, email, instituition, pass
             email: email,
             instituition: instituition,
             password: hashedPassword,
-            terms: terms
         })
         .select("*")
         .single();
@@ -52,7 +51,7 @@ export const CreateUser = async ({firstname, lastname, email, instituition, pass
 
         return { 
             success: true, 
-            message: "acoount created success", 
+            message: "account created success", 
             status: 201, token: 
             userToken,
             user: {

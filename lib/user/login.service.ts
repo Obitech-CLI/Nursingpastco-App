@@ -38,8 +38,8 @@ export const LoginUser = async ({email, password}:LoginUserType) =>
     return { 
         success: true, 
         message: "login success", 
-        status: 200, token: 
-        userToken,
+        status: 200, 
+        token: userToken,
         user: {
             firstname: user.firstname,
             lastname: user.lastname,

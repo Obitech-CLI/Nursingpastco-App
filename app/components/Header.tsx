@@ -8,6 +8,7 @@ import { LoginUserButton } from "@/ui/buttons/Login";
 import { MenuButton } from "@/ui/buttons/Menu";
 import { usePathname, useRouter } from "next/navigation";
 import { UseAuthProvider } from "@/contexts/user/AuthFormProvider";
+import { UseUser } from "@/contexts/user/UserProvider";
 
 
 function Header() {
@@ -30,6 +31,8 @@ function Header() {
         setShowCreateForm(false);
         setShowLoginForm(false);
     }
+
+    const { user } = UseUser();
 
     return (
         <header>

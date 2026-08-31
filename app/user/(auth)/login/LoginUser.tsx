@@ -6,6 +6,8 @@ import { UseAuthProvider } from "@/contexts/user/AuthFormProvider";
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { UsePost } from "@/hooks/usePost";
+import { usePathname, useRouter } from "next/navigation";
+import { UseUser } from "@/contexts/user/UserProvider";
 
 function LoginUser() {
 
@@ -16,7 +18,12 @@ function LoginUser() {
     
     const PostFormData = UsePost();
 
+    const pathname = usePathname();
+    const router = useRouter();
+
     const { showLoginForm, setShowCreateForm, setShowLoginForm } = UseAuthProvider();
+
+    const { setUser } = UseUser();
 
     useEffect(() => {
         document.body.style.overflow = showLoginForm ? "hidden" : "auto";
@@ -34,12 +41,12 @@ function LoginUser() {
 
         if (res.success) {
 
-            localStorage.setItem("user", JSON.stringify(res.user));
+            setUser(res.user);
 
             setFormData({
                 email: "",
                 password: "",
-            })
+            });
 
             setShowCreateForm(false);
             setShowLoginForm(false);

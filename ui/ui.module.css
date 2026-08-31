@@ -9,6 +9,7 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    z-index: 999;
 }
 
 .feedback_modal button {
@@ -95,19 +96,19 @@ button.login {
     inset: 0;
     background-color: var(--menu-bg);
     padding: 7.5rem 1rem;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-rows: 60px 60px 60px 60px;
     gap: 1rem;
     z-index: 888;
 }
 
 .menu > a {
-    padding: 1rem;
     color: var(--bg-txt-color);
     border-radius: 30px;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    padding: 1rem;
 }
 
 .menu > a:hover {

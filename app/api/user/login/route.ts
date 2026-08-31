@@ -31,6 +31,7 @@ export async function POST(req:Request) {
         return Response.json({
             success: res.success,
             message: res.message,
+            user: res.user
         },{ status: res.status})
 
     } catch (err) {

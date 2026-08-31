@@ -12,6 +12,7 @@ import { MenuModal } from "@/ui/modals/Menu";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { ManageNavProvider } from "@/contexts/admin/ManageNavProvider";
+import { UserProvider } from "@/contexts/user/UserProvider";
 
 export default function RootLayout({children}: Readonly<{
   children: React.ReactNode;
@@ -19,6 +20,7 @@ export default function RootLayout({children}: Readonly<{
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
+        <UserProvider>
         <AppThemeProvider>
         <SuccessModalProvider>
           <ErrorModalProvider>
@@ -46,6 +48,7 @@ export default function RootLayout({children}: Readonly<{
           </ErrorModalProvider>
         </SuccessModalProvider>
         </AppThemeProvider>
+        </UserProvider>
       </body>
     </html>
   );

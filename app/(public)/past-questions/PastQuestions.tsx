@@ -147,14 +147,14 @@ function PastQuestions() {
                         </div>
                         
                     ) : (
-                        <div className={styles.retry}>
+                        <div className="retry">
                             <p>{FetchInstituitions.error}</p>
                             <button onClick={HandleFetchInstituitions}>retry</button>
                         </div>
                     )}
                     </>
                 ) : (
-                    <div className={styles.loading}>
+                    <div className="loading">
                         <ClipLoader size={50}/>
                     </div>
                 )}
@@ -237,7 +237,7 @@ function PastQuestions() {
                                 {!FetchPDFs.error && !FetchPDFs.loading ? (
                                     <p>no pdf found</p>
                                 ):(
-                                    <div className={styles.select_retry}>
+                                    <div className="retry">
                                         <p>{FetchPDFs.error}</p>
                                         <button onClick={HandleFetchPDFs}>
                                             retry
@@ -247,7 +247,7 @@ function PastQuestions() {
                                 </>
                             )}
                             </>
-                            ) : (<div className={styles.select_loading}><ClipLoader size={30} color="var(--bg-txt-color)"/></div>)}
+                            ) : (<div className="loading"><ClipLoader size={30} color="var(--bg-txt-color)"/></div>)}
                             </div>
                         )}
                         </div>
@@ -256,7 +256,7 @@ function PastQuestions() {
                 ) : (
                     <>
                     {FetchCourses.error ? (
-                        <div className={styles.retry}>
+                        <div className="retry">
                             <p>{FetchCourses.error}</p>
                             <button onClick={HandleFetchCourses}>
                                 retry
@@ -266,7 +266,7 @@ function PastQuestions() {
                     </>
                 )}
                 </>
-            ) : (<div className={styles.loading}><ClipLoader size={40} color="var(--bg-txt-color)"/></div>)}
+            ) : (<div className="loading"><ClipLoader size={40} color="var(--bg-txt-color)"/></div>)}
         </div>
         </>
     )

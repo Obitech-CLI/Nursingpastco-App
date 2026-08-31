@@ -123,14 +123,14 @@ function SelectCourse({allCourses, loading, error, reFetch, filterLevel, search,
                                         </Link>
                                         </>
                                      ) : (
-                                        <div className={styles.retry}>
+                                        <div className="retry">
                                         <h4>{FetchInstuition.error}</h4>
                                         <button onClick={HandleFetchInstituition}>retry</button>
                                         </div>
                                     )}
                                     </>
                                 ) : (
-                                  <div className={styles.loading}>
+                                  <div className="loading">
                                     <ClipLoader />
                                   </div>
                                 )}
@@ -142,7 +142,7 @@ function SelectCourse({allCourses, loading, error, reFetch, filterLevel, search,
                     </div>
                     </>
                 ) : (
-                <div className={styles.retry}>
+                <div className="retry">
                     <h4>{error}</h4>
                     <button onClick={reFetch}>
                         retry
@@ -151,7 +151,7 @@ function SelectCourse({allCourses, loading, error, reFetch, filterLevel, search,
                 )}
                 </>
             ) : (
-                <div className={styles.loading}>
+                <div className="loading">
                    <ClipLoader size={50}/>
                 </div>
             )}

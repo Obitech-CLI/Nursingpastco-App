@@ -13,7 +13,7 @@ const StrictUserAuth = async () =>
     const token = cookieStore.get("userToken")?.value;
 
     if (!token) {
-        return redirect("/user/login");
+        return redirect("/");
     }
 
     let decoded: JwtPayload;
@@ -24,7 +24,7 @@ const StrictUserAuth = async () =>
         }
     } catch (err) {
         console.error(err);
-        return redirect("/user/login");
+        return redirect("/");
         
     }
 
@@ -32,13 +32,15 @@ const StrictUserAuth = async () =>
 
     const { data: user, error } = await supabase
     .from("nursingpastco_user")
-    .select("id, role")
+    .select("id, role, active")
     .eq("id", decoded.id)
     .single();
 
-    if (!user || error) return redirect("/user/login");
+    if (!user || error) return redirect("/");
 
     if (user.role !== "user") return redirect("/");
+
+    if (!user.active) return redirect("/");
 
     return user;
 }

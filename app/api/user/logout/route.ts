@@ -8,7 +8,7 @@ export async function POST() {
         cookieStore.delete("userToken");
 
         return Response.json({
-            sucess: true,
+            success: true,
             message: "logged out",
         }, {status: 200})
 

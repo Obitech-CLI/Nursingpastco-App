@@ -31,7 +31,7 @@ const UserAuth = async () =>
 
     const { data: user, error } = await supabase
     .from("nursingpastco_user")
-    .select("id, role")
+    .select("id, firstname, lastname, email, instituition, role")
     .eq("id", decoded.id)
     .single();
 
@@ -39,7 +39,12 @@ const UserAuth = async () =>
 
     if (user.role !== "user") return null;
 
-    return user;
+    return {
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        instituition: user.instituition
+    }
 }
 
 export default UserAuth;

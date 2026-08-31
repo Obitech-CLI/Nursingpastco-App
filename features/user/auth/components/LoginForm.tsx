@@ -72,7 +72,7 @@ function LoginUserForm({formData, setFormData, loading, submit}:Props) {
                     <ClipLoader size={25} color="black"/>
                     {"logging..."}
                     </>
-                ) : "create"}
+                ) : "login"}
             </button>
         </form>
     )

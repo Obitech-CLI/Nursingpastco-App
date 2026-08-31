@@ -1,5 +1,6 @@
 "use client";
 
+import { UseUser } from "@/contexts/user/UserProvider";
 import styles from "../auth.module.css";
 import { UseAuthProvider } from "@/contexts/user/AuthFormProvider";
 import { CreateUserForm } from "@/features/user/auth/components/CreateForm";
@@ -20,6 +21,8 @@ function CreateUser() {
 
     const PostFormData = UsePost();
 
+    const { setUser } = UseUser();
+
     const { showCreateForm, setShowCreateForm, setShowLoginForm } = UseAuthProvider();
 
     useEffect(() => {
@@ -37,7 +40,7 @@ function CreateUser() {
 
         if (res.success) {
 
-            localStorage.setItem("user", JSON.stringify(res.user));
+            setUser(res.user);
 
             setFormData({
                 firstname: "",

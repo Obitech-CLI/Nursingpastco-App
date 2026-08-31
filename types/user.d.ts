@@ -11,3 +11,10 @@ export interface LoginUserType {
     email: string;
     password: string;
 }
+
+export interface UserType {
+    firstname: string;
+    lastname: string;
+    email: string;
+    instituition: string;
+}

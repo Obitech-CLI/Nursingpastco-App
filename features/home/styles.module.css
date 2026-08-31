@@ -46,8 +46,9 @@ section.offers > span {
     padding: 0.4rem 1rem;
 }
 
-section.offers h4 {
-    display: block;
+section.offers > h4 {
+    display: flex;
+    gap: 0.5rem;
     text-transform: capitalize;
     color: navy;
     font-size: 1.3rem;

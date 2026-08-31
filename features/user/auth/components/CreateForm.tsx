@@ -75,8 +75,9 @@ function CreateUserForm({formData, setFormData, loading, submit}: Props) {
                     login instead
                 </button>
             </div>
+            
             <h3>join in</h3>
-            <p>{JSON.stringify(formData)}</p>
+            
             <label><User size={30}/>
                 <input type="text" name="firstname" value={formData.firstname}
                 onFocus={() => {

@@ -69,7 +69,7 @@ function SelectInstituition({setSelectedInstituition, setSelectedLogo}:Props) {
         ) : (
             <>
             {FetchInstituitions.error && !FetchInstituitions.loading ? (
-                <div className={styles.retry}>
+                <div className="retry">
                     <h4>{FetchInstituitions.error}</h4>
                     <button onClick={HandleFetch}>
                      retry
@@ -80,7 +80,7 @@ function SelectInstituition({setSelectedInstituition, setSelectedLogo}:Props) {
         )}
         </>
         ) : (
-            <div className={styles.loading}>
+            <div className="loading">
                 <ClipLoader size={60} color="var(--bg-txt-color)"/>
             </div>
         )}

@@ -6,8 +6,13 @@ import styles from "../ui.module.css";
 import { usePathname } from "next/navigation";
 import { File, Heading, InboxIcon, School, Settings2, Sheet, User2 } from "lucide-react";
 import { UseAuthProvider } from "@/contexts/user/AuthFormProvider";
+import { useState } from "react";
+import { CreateUserType } from "@/types/user";
+import { UseUser } from "@/contexts/user/UserProvider";
 
 function MenuModal() {
+
+    const { user } = UseUser();
 
     const { showMenu, setShowMenu } = useMenu();
     const { setShowCreateForm, setShowLoginForm } = UseAuthProvider();
@@ -27,22 +32,31 @@ function MenuModal() {
             <>
             <nav className={styles.menu}>
                <>
+                {user && (
+                    <Link onClick={ResetMenu} href="/user/profile" 
+                    className={pathname === "/user/profile" ? "active" : ""}>
+                        <span><User2 size={25}/></span>my profile
+                    </Link>
+                )}
 
                {(!pathname.startsWith("/admin")) && (
                 <>
-                {(!pathname.startsWith("/user")) && (
-                    <>
-                    {pathname !== "/instituitions" && (
-                     <Link onClick={ResetMenu} href="/instituitions"><School size={30}/>instituitions</Link>
-                    )}
-                    {pathname !== "/courses" && (
-                    <Link onClick={ResetMenu} href="/courses"><Sheet size={30}/>courses</Link>
-                    )}
-                   {pathname !== "/past-questions" && (
-                   <Link onClick={ResetMenu} href="/past-questions"><File size={30}/>past questions</Link>
-                   )}
-                    </>
-                )}
+
+                <Link onClick={ResetMenu} href="/instituitions" 
+                className={pathname === "/instituitions" ? "active" : ""}>
+                   <span><School size={25}/></span>instituitions
+                </Link>
+
+                <Link onClick={ResetMenu} href="/courses"
+                className={pathname === "/courses" ? "active" : ""}>
+                   <span><Sheet size={25}/></span>courses
+                </Link>
+
+                <Link onClick={ResetMenu} href="/past-questions"
+                className={pathname === "/past-questions" ? "active" : ""}>
+                   <span><File size={25}/></span>past questions
+                </Link>
+
                 </>
                )}
 
