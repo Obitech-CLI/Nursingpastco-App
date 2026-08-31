@@ -5,8 +5,6 @@ import AdminAuth from "./admin.auth";
 
 export const FetchAdmin = async (adminId:number) =>
 {
-    await AdminAuth();
-
     const { data: admin, error } = await supabase
     .from("nursingpastco_admin")
     .select("id, firstname, lastname, email")

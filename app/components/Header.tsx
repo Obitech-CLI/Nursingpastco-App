@@ -7,11 +7,13 @@ import { useState } from "react";
 import { LoginUserButton } from "@/ui/buttons/Login";
 import { MenuButton } from "@/ui/buttons/Menu";
 import { usePathname, useRouter } from "next/navigation";
+import { UseAuthProvider } from "@/contexts/user/AuthFormProvider";
 
 
 function Header() {
 
     const [showNav, setShowNav] = useState(true);
+    const { setShowCreateForm, setShowLoginForm } = UseAuthProvider();
     const pathname = usePathname();
     const router = useRouter();
 
@@ -25,6 +27,8 @@ function Header() {
 
     const GoBack = () => {
         history.back();
+        setShowCreateForm(false);
+        setShowLoginForm(false);
     }
 
     return (

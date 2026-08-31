@@ -5,16 +5,20 @@ import Link from "next/link";
 import styles from "../ui.module.css";
 import { usePathname } from "next/navigation";
 import { File, Heading, InboxIcon, School, Settings2, Sheet, User2 } from "lucide-react";
+import { UseAuthProvider } from "@/contexts/user/AuthFormProvider";
 
 function MenuModal() {
 
     const { showMenu, setShowMenu } = useMenu();
+    const { setShowCreateForm, setShowLoginForm } = UseAuthProvider();
 
     const pathname = usePathname();
 
     {/*closes the menu modal on link navigation */}
     const ResetMenu = () => {
         setShowMenu(false);
+        setShowCreateForm(false)
+        setShowLoginForm(false);
     }
 
     return (

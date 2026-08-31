@@ -5,25 +5,25 @@ import { LogOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { ClipLoader } from "react-spinners";
 
-function LogoutAdminButton() {
+function LogoutUserButton() {
 
-    const PostLogoutAdmin = UsePost();
+    const PostLogoutUser = UsePost();
 
     const router = useRouter();
 
-    const loading = PostLogoutAdmin.loading;
+    const loading = PostLogoutUser.loading;
 
     const HandleLogout = async () =>
     {
-        const res = await PostLogoutAdmin.Post("/admin/logout", {});
+        const res = await PostLogoutUser.Post("/user/logout", {});
 
         if (!res) return;
 
         if (res.success) {
 
-            localStorage.removeItem("admin");
+            localStorage.removeItem("user");
 
-            router.replace("/admin/login");
+            router.replace("/");
 
         }
         
@@ -38,4 +38,4 @@ function LogoutAdminButton() {
     )
 }
 
-export { LogoutAdminButton }
+export { LogoutUserButton }

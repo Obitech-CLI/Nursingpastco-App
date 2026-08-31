@@ -39,7 +39,17 @@ export const LoginAdmin = async ({email, password}:LoginAdminType) =>
         return { success: false, error: "an unexpected error occured. please try again", status: 500 }
     }
 
-    return { success: true, message: "login success", status: 200, token: adminToken }
+    return { 
+        success: true, 
+        message: "login success", 
+        status: 200, token: 
+        adminToken, 
+        admin: {
+            firstname: admin.firstname,
+            lastname: admin.lastname,
+            email: admin.email
+        }
+    }
 }
 
 export default LoginAdmin;

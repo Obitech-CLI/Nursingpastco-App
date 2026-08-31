@@ -5,33 +5,32 @@ import { CreateAdminType } from "@/types/admin";
 import { LogoutAdminButton } from "@/ui/logouts/LogoutAdmin";
 import { useEffect, useState } from "react";
 import styles from '../styles.module.css';
+import { ClipLoader } from "react-spinners";
+
+type AdminType = {
+    firstname: string;
+    lastname: string;
+    email: string;
+}
 
 function AdminCard() {
 
-    const [admin, setAdmin] = useState<CreateAdminType | null>(null);
-
-    const FetchAdmin = UseFetch();
-
-    const HandleFetch = async () =>
-    {
-        const res = await FetchAdmin.Fetch("/admin");
-        if (!res) return;
-        setAdmin(res.admin)
-    }
-
-    useEffect(() => {
-        HandleFetch();
-    }, []);
+    const [admin, setAdmin] = useState<AdminType | null>(() => {
+        const storedAdmin = localStorage.getItem("admin");
+        return storedAdmin ? JSON.parse(storedAdmin) : null;
+    })
 
     return (
         <div className={styles.card}>
             <h2>admin dashboard</h2>
+            
             <div className={styles.image}>
                 {admin?.firstname.slice(0, 1)} 
                 {admin?.lastname.slice(0, 1)}
             </div>
+
+            <h3>{admin?.firstname} {admin?.lastname}</h3>
             
-            <h3>{admin?.firstname ?? "loading...."} {admin?.lastname ?? "loading..."}</h3>
             <LogoutAdminButton />
         </div>
     )

@@ -431,7 +431,6 @@ form.auth .select-overlay > ul {
 form.auth .select-overlay {
     position: fixed;
     background-color: var(--div-color);
-    backdrop-filter: blur(20px);
     height: 300px;
     width: 90%;
     left: 50%;
@@ -444,6 +443,7 @@ form.auth .select-overlay {
     flex-direction: column;
     align-items: center;
     padding: 2rem;
+    overflow: auto;
 }
 
 form.auth .select-overlay > span {

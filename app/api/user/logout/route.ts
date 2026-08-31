@@ -5,7 +5,7 @@ export async function POST() {
     const cookieStore = await cookies();
 
     try {
-        cookieStore.delete("adminToken");
+        cookieStore.delete("userToken");
 
         return Response.json({
             sucess: true,

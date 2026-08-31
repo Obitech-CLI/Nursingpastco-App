@@ -26,6 +26,8 @@ function LoginAdmin() {
 
             if (!res.success) return;
 
+            localStorage.setItem("admin", JSON.stringify(res.admin));
+
             setFormData({
             email: "",
             password: ""

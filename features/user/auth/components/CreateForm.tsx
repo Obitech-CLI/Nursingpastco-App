@@ -1,24 +1,22 @@
 "use client";
 
 import { UseAuthProvider } from "@/contexts/user/AuthFormProvider";
-import styles from "../styles.module.css";
 import { ChevronDown, Lock, Mail, RotateCcw, School2, User, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import Link from "next/link";
 import { UseFetch } from "@/hooks/useFetch";
 import { ClipLoader } from "react-spinners";
 import { InstituitionDataTypes } from "@/types/types";
+import { CreateUserType } from "@/types/user";
 
-function CreateUserForm() {
+type Props = {
+    formData: CreateUserType;
+    setFormData: React.Dispatch<SetStateAction<CreateUserType>>;
+    loading: boolean;
+    submit: React.FormEventHandler<HTMLFormElement>;
+}
 
-    const [formData, setFormData] = useState({
-        firstname: "",
-        lastname: "",
-        email: "",
-        instituition: "",
-        password: "",
-        terms: false
-    });
+function CreateUserForm({formData, setFormData, loading, submit}: Props) {
 
     const { setShowCreateForm, setShowLoginForm, showCreateForm } = UseAuthProvider();
 
@@ -65,7 +63,7 @@ function CreateUserForm() {
         }
 
     return (
-        <form className="auth">
+        <form className="auth" onSubmit={submit}>
             <h2>create account</h2>
             <div className="change">
                 <h4>already have an account?</h4>
@@ -192,8 +190,13 @@ function CreateUserForm() {
                 <Link href="/terms">terms and conditions</Link>
             </div>
 
-            <button>
-                create
+            <button type="submit" disabled={loading || !formData.terms}>
+                {loading ? (
+                    <>
+                    <ClipLoader size={25} color="black"/>
+                    {"creating..."}
+                    </>
+                ) : "create"}
             </button>
         </form>
     )

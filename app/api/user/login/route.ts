@@ -1,18 +1,18 @@
-import LoginAdmin from "@/lib/admin/login.service";
-import { LoginAdminType } from "@/types/admin";
+import LoginUser from "@/lib/user/login.service";
+import { LoginUserType } from "@/types/user";
 import { cookies } from "next/headers";
 
 export async function POST(req:Request) {
 
     const cookieStore = await cookies();
 
-    const body:LoginAdminType = await req.json();
+    const body:LoginUserType = await req.json();
 
     const email = body.email;
     const password = body.password;
 
     try {
-        const res = await LoginAdmin({email, password});
+        const res = await LoginUser({email, password});
 
         if (!res?.success) {
             return Response.json({
@@ -21,7 +21,7 @@ export async function POST(req:Request) {
             },{status: res.status})
         }
 
-        cookieStore.set("adminToken", res?.token as string, {
+        cookieStore.set("userToken", res?.token as string, {
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "lax",
@@ -31,7 +31,6 @@ export async function POST(req:Request) {
         return Response.json({
             success: res.success,
             message: res.message,
-            admin: res.admin
         },{ status: res.status})
 
     } catch (err) {
