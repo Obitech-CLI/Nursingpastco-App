@@ -1,4 +1,5 @@
 import { UserProfile } from "./UserProfile";
+import "../user.css";
 
 export default function Page() {
     return (

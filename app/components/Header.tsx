@@ -24,6 +24,8 @@ function Header() {
         } else {
             router.replace("/");
         }
+        setShowCreateForm(false);
+        setShowLoginForm(false);
     }
 
     const GoBack = () => {
@@ -31,8 +33,6 @@ function Header() {
         setShowCreateForm(false);
         setShowLoginForm(false);
     }
-
-    const { user } = UseUser();
 
     return (
         <header>

@@ -36,6 +36,7 @@ function LogoutUserButton() {
         onClick={HandleLogout} 
         disabled={loading}>
             {!loading ? <LogOut size={30}/> : <ClipLoader size={20}/>}
+            {!loading ? "logout" : "logging out..."}
         </button>
     )
 }

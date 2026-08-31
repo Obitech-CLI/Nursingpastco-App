@@ -728,3 +728,16 @@ span {
 .active > span {
     display: none;
 }
+
+.head-user {
+    background-color: var(--secondary-color);
+    color: white;
+    font-size: 1.4rem;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: var(--border);
+}

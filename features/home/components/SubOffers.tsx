@@ -1,17 +1,11 @@
 "use client";
 import { BadgeCheck, Bolt, BookOpen, Brain, CalendarCheck2, ChartColumnIncreasingIcon, ClipboardList, Clock3, FileCheck2, Target, Unlock } from "lucide-react";
 import styles from "../styles.module.css";
-import { Logo } from "@/ui/Logo";
-import PImage from "@/public/RealQuestions.png";
-import TImage from "@/public/StudyMaterials.png";
-import CImage from "@/public/UpdatedContent.png";
-import Image from "next/image";
 
 function SubOffers() {
     return (
         <div className={styles.sub_offers}>
             <section>
-            <Logo />
             <p>Our site provides verified, legitimate and accurate data to help and guide you
             on your path towards a successful nursing career.</p>
             </section>
