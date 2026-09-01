@@ -73,13 +73,13 @@ button.login {
 
 .select_theme > button {
     padding: 0.4rem 1rem;
-    border-radius: 5px;
-    color: #002b4c;
+    border-radius: 50px;
     text-transform: capitalize;
     display: flex;
     align-items: center;
     gap: 0.5rem;
     color: white;
+    box-shadow: 1px 1px black;
 }
 
 .app_theme > button {

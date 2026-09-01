@@ -4,7 +4,7 @@ import { useMenu } from "@/contexts/modals/MenuContext";
 import Link from "next/link";
 import styles from "../ui.module.css";
 import { usePathname } from "next/navigation";
-import { File, Heading, InboxIcon, School, Settings2, Sheet, User2 } from "lucide-react";
+import { File, Heading, InboxIcon, School, Settings2, Settings2Icon, Sheet, User2 } from "lucide-react";
 import { UseAuthProvider } from "@/contexts/user/AuthFormProvider";
 import { useState } from "react";
 import { CreateUserType } from "@/types/user";
@@ -33,10 +33,17 @@ function MenuModal() {
             <nav className={styles.menu}>
                <>
                 {user && (
+                    <>
                     <Link onClick={ResetMenu} href="/user/profile" 
                     className={pathname === "/user/profile" ? "active" : ""}>
                         <span><User2 size={25}/></span>my profile
                     </Link>
+
+                    <Link onClick={ResetMenu} href="/user/settings" 
+                    className={pathname === "/user/settings" ? "active" : ""}>
+                        <span><Settings2Icon size={25}/></span>settings
+                    </Link>
+                    </>
                 )}
 
                {(!pathname.startsWith("/admin")) && (

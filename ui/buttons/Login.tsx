@@ -26,10 +26,12 @@ function LoginUserButton() {
               login
             </button>
         ) : (
+            <>
             <div className="head-user">
                 {user.firstname.slice(0, 1).toUpperCase()}
                 {user.lastname.slice(0, 1).toUpperCase()}
             </div>
+            </>
         )}
         </>
     )

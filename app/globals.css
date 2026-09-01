@@ -200,6 +200,8 @@ footer > .info .sponsor > span em {
 footer > .info .sponsor > span {
     border-right: var(--border);
     padding-right: 1rem;
+    display: flex;
+    flex-direction: column;
 }
 
 footer > .info {

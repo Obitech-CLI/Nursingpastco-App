@@ -30,6 +30,7 @@
     border-radius: 50px;
     background-color: #c0ebff;
     box-shadow: 1px 1px black;
+    color: black;
 }
 
 .user-profile > .details > h4 {
