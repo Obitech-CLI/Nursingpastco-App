@@ -289,7 +289,16 @@ function AddForm({formData, setFormData, pdf, setPDF, loading, onSubmit, fileRef
 
                 <button 
                 type="submit">
-                    {!loading ? "add pdf" : <ClipLoader color="white" size={20} />}
+                    {!loading ? (
+                        <>
+                        { edit ? "update": "add" }
+                        </>
+                    ) : (
+                        <>
+                        <ClipLoader color="white" size={20} />
+                        {edit ? "updating..." : "adding..."}
+                        </>
+                    )}
                 </button>
 
         </form>

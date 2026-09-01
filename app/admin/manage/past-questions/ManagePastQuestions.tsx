@@ -31,7 +31,7 @@ function AdminManagePastQuestions() {
             style={{
                 border: navManagePastQuestions.add ? "none" : "",
                 gridArea: navManagePastQuestions.add ? "2/ 1/ 2/ 2" : "",
-                fontSize: navManagePastQuestions.add ? "1.3rem" : "",
+                fontSize: navManagePastQuestions.add ? "1.1rem" : "",
             }}>
                 {!navManagePastQuestions.add ? (
                     <>
@@ -60,7 +60,7 @@ function AdminManagePastQuestions() {
             style={{
                 border: navManagePastQuestions.view ? "none" : "",
                 gridArea: navManagePastQuestions.view ? "2/ 1/ 2/ 2" : "",
-                fontSize: navManagePastQuestions.view ? "1.3rem" : "",
+                fontSize: navManagePastQuestions.view ? "1.1rem" : "",
             }}>
                 {!navManagePastQuestions.view ? "modify" : "modify past-questions"}
                 {!navManagePastQuestions.view ? <Settings2 /> : ""}

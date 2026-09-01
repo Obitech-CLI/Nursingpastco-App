@@ -30,7 +30,7 @@ function AdminManageCourses() {
             style={{
                 border: navManageCourses.add ? "none" : "",
                 gridArea: navManageCourses.add ? "2/ 1/ 2/ 2" : "",
-                fontSize: navManageCourses.add ? "1.3rem" : "",
+                fontSize: navManageCourses.add ? "1.1rem" : "",
             }}>
                 {!navManageCourses.add ? (
                     <>
@@ -58,7 +58,7 @@ function AdminManageCourses() {
             style={{
                 border: navManageCourses.view ? "none" : "",
                 gridArea: navManageCourses.view ? "2/ 1/ 2/ 2" : "",
-                fontSize: navManageCourses.view ? "1.3rem" : "",
+                fontSize: navManageCourses.view ? "1.1rem" : "",
             }}>
                 {!navManageCourses.view ? "modify" : "modify courses"}
                 {!navManageCourses.view ? <Settings2 /> : ""}

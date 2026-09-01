@@ -3,7 +3,7 @@
 import { UseManageNav } from "@/contexts/admin/ManageNavProvider";
 import { AddInstituition } from "@/features/admin/manage/instituitions/components/AddInstituition";
 import { ModifyInstituitions } from "@/features/admin/manage/instituitions/components/Modify";
-import { Eye, Plus, Settings2 } from "lucide-react";
+import { Plus, Settings2 } from "lucide-react";
 import { useState } from "react";
 
 function AdminManageInstituitions() {
@@ -13,8 +13,10 @@ function AdminManageInstituitions() {
     const [ editData, setEditData ] = useState({
         id: "",
         instituition_name: "",
-        instituition_abbr: "",
+        instituition_abbr: ""
     });
+
+    const [editLogo, setEditLogo] = useState<File | null>(null);
 
     return (
         <>
@@ -28,7 +30,7 @@ function AdminManageInstituitions() {
             style={{
                 border: navManageInstituitions.add ? "none" : "",
                 gridArea: navManageInstituitions.add ? "2/ 1/ 2/ 2" : "",
-                fontSize: navManageInstituitions.add ? "1.3rem" : "",
+                fontSize: navManageInstituitions.add ? "1.1rem" : "",
             }}>
                 {!navManageInstituitions.add ? (
                     <>
@@ -52,11 +54,12 @@ function AdminManageInstituitions() {
                     instituition_abbr: "",
                 })
                 setEdit(false);
+                setEditLogo(null);
             }}
             style={{
                 border: navManageInstituitions.view ? "none" : "",
                 gridArea: navManageInstituitions.view ? "2/ 1/ 2/ 2" : "",
-                fontSize: navManageInstituitions.view ? "1.3rem" : "",
+                fontSize: navManageInstituitions.view ? "1.1rem" : "",
             }}>
                 {!navManageInstituitions.view ? "modify" : "modify instituitions"}
                 {!navManageInstituitions.view ? <Settings2 /> : ""}
@@ -69,6 +72,8 @@ function AdminManageInstituitions() {
             setEdit={setEdit}
             editData={editData}
             setEditData={setEditData}
+            editLogo={editLogo}
+            setEditLogo={setEditLogo}
             />
         )}
         {navManageInstituitions.view && (
@@ -77,6 +82,8 @@ function AdminManageInstituitions() {
             setEdit={setEdit}
             setNav={setNavManageInstituitions}
             setEditData={setEditData}
+            editLogo={editLogo}
+            setEditLogo={setEditLogo}
             />
         )}
         </>

@@ -39,7 +39,7 @@ export async function POST(req: Request) {
     }
 }
 
-export async function Patch(req: Request) {
+export async function PATCH(req: Request) {
 
     const editData = await req.formData();
 

@@ -39,8 +39,8 @@ function MenuModal() {
                         <span><User2 size={25}/></span>my profile
                     </Link>
 
-                    <Link onClick={ResetMenu} href="/user/settings" 
-                    className={pathname === "/user/settings" ? "active" : ""}>
+                    <Link onClick={ResetMenu} href="/user/setting" 
+                    className={pathname === "/user/setting" ? "active" : ""}>
                         <span><Settings2Icon size={25}/></span>settings
                     </Link>
                     </>

@@ -51,6 +51,7 @@ function AddCourse({edit, setEdit, editData, setEditData} : Props) {
 
             setFocusInput(false);
             }
+
         } else if (edit) {
             const res = await PatchData.Patch("/courses", editData);
 
@@ -66,6 +67,8 @@ function AddCourse({edit, setEdit, editData, setEditData} : Props) {
             });
 
             setFocusInput(false);
+
+            setEdit(false);
             }
         }
     }

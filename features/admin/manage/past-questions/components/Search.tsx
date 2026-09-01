@@ -214,8 +214,13 @@ function Search({searchData, setSearchData, search, loading}:Props) {
                 )}
             </div>
 
-            <button onClick={search} type="button">
-                {!loading ? <SearchIcon /> : <ClipLoader size={20} color="black"/>}
+            <button onClick={search}>
+                {!loading ? <SearchIcon /> : (
+                    <>
+                    <ClipLoader size={25} color="black"/>
+                    searching...
+                    </>
+                )}
             </button>
         </fieldset>
     )

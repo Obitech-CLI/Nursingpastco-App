@@ -19,9 +19,6 @@ function UserProvider({children}:{children:ReactNode}) {
         const getUser = async () =>
             {
                 const user = await UserAuth();
-                if (!user) {
-                    alert("no user")
-                }
                 setUser(user);
             }
             getUser();

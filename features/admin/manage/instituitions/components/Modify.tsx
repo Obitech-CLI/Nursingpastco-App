@@ -26,6 +26,8 @@ type Props = {
     setEdit: React.Dispatch<SetStateAction<boolean>>;
     setNav: React.Dispatch<SetStateAction<Nav>>;
     setEditData: React.Dispatch<SetStateAction<editData>>;
+    editLogo: File | null;
+    setEditLogo: React.Dispatch<SetStateAction<File | null>>;
 }
 
 function ModifyInstituitions({edit, setEdit, setNav, setEditData} : Props) {
@@ -74,8 +76,6 @@ function ModifyInstituitions({edit, setEdit, setNav, setEditData} : Props) {
         HandleFetch();
     }, [reload]);
 
-    const { theme } = useTheme();
-
     return (
         <div className="modify">
 
@@ -92,8 +92,8 @@ function ModifyInstituitions({edit, setEdit, setNav, setEditData} : Props) {
                             <Image 
                                 alt="" 
                                 src={instituition.instituition_logo} 
-                                height={150} 
-                                width={150}
+                                height={100} 
+                                width={100}
                                 style={{
                                     alignSelf: "center",
                                     objectFit: "contain"
@@ -102,9 +102,9 @@ function ModifyInstituitions({edit, setEdit, setNav, setEditData} : Props) {
 
                             <div>
 
-                            <span style={{textTransform: "uppercase"}}>
+                            <h3 style={{textTransform: "uppercase"}}>
                                 {instituition.instituition_abbr}
-                            </span>
+                            </h3>
                             <h4>{instituition.instituition_name}</h4>
 
                             <div className="btns">

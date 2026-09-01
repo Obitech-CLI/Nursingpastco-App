@@ -376,7 +376,8 @@ form > label > span {
 form .select {
     box-shadow: var(--box-shadow);
     border-radius: 10px;
-    padding: 0.7rem;
+    height: 50px;
+    padding: 0 1rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -537,7 +538,7 @@ fieldset.search > div ul {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    padding: 7.5rem 1rem;
+    padding: 8rem 1rem 5rem;
     border-radius: 10px;
     overflow: auto;
     text-align: center;
@@ -551,7 +552,8 @@ fieldset.search > div {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.6rem 0.7rem;
+    padding: 0 0.7rem;
+    height: 45px;
     white-space: nowrap;
     gap: 1rem;
     width: 100%;
@@ -573,13 +575,18 @@ fieldset.search > button {
     border-radius: 50px;
     background-color: #c0ebff;
     box-shadow: 1px 1px black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    text-transform: capitalize;
 }
 
 .modify {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
     text-transform: capitalize;
     text-align: center;
     margin: 1rem 0;
@@ -588,10 +595,12 @@ fieldset.search > button {
 .modify .results {
     box-shadow: var(--box-shadow);
     width: 100%;
-    border-radius: 10px;
+    border-radius: 50px;
     padding: 1rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .modify .results .btns {
@@ -725,6 +734,7 @@ fieldset.search > button {
 span {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .active > span {

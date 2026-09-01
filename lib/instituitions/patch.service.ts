@@ -23,9 +23,24 @@ async ({id, instituition_name, instituition_abbr, instituition_logo}:Instituitio
         return { success: false, error: "empty input field", status: 400 }
     }
 
+    {/* updating instituition without a new logo file */}
     if (!file) {
+
+        const { data: instituition, error: instituitionError } = await supabase
+    .from("nursingpastco_instituitions")
+    .select("instituition_name")
+    .eq("id", id)
+    .single();
+
+    if (!instituition || instituitionError) {
+        return {
+            success: false,
+            status: 500,
+            error: "failed to fetch instituition for courses and pastquestions"
+        }
+    }
         
-        const { error: updateError } = await supabase
+        const { error: updateInstituitionError } = await supabase
         .from("nursingpastco_instituitions")
         .update({
         instituition_name: instituition_name,
@@ -33,11 +48,43 @@ async ({id, instituition_name, instituition_abbr, instituition_logo}:Instituitio
         })
         .eq("id", id);
 
-        if (updateError) {
+        if (updateInstituitionError) {
             return {
                 success: false,
                 error: "failed to update instuition, try again",
                 status: 500
+            }
+        }
+
+        //updating instituition names for courses
+        const { error: updateCourseError } = await supabase
+        .from("nursingpastco_courses")
+        .update({
+        instituition: instituition_name,
+        })
+        .eq("instituition", instituition.instituition_name);
+
+        if (updateCourseError) {
+            return {
+             success: true,
+             message: "failed to update courses instuitions, try again",
+             status: 500
+            }
+        }
+
+        //updating instituition names for past-questions
+        const { error: updatePastQuestionsError } = await supabase
+        .from("nursingpastco_pastQuestions")
+        .update({
+        instituition: instituition_name,
+        })
+        .eq("instituition", instituition.instituition_name);
+
+        if (updatePastQuestionsError) {
+            return {
+             success: true,
+             message: "failed to update past-questions instuitions, try again",
+             status: 500
             }
         }
 
@@ -47,23 +94,25 @@ async ({id, instituition_name, instituition_abbr, instituition_logo}:Instituitio
         status: 201
         }
 
-    }   
+    }
 
-    const { data: instituition, error: instituitionError } = await supabase
+    //fetch the logo file path
+    const { data: instituitionLogoUrl, error: instituitionLogoUrlError } = await supabase
     .from("nursingpastco_instituitions")
-    .select("instituition_name, instituition_logo")
+    .select("instituition_logo, instituition_name")
     .eq("id", id)
     .single();
 
-    if (!instituition || instituitionError) {
+    if (!instituitionLogoUrl || instituitionLogoUrlError) {
         return {
             success: false,
             status: 500,
-            error: "failed to get instituition"
+            error: "failed to fetch logo url"
         }
     }
 
-    const deleteUrl = instituition.instituition_logo;
+    //delete the old logo from both db and storage
+    const deleteUrl = instituitionLogoUrl.instituition_logo;
     const path = deleteUrl.split("/Logos")[1];
 
     const { error: storageDeleteError } = await supabase.storage
@@ -74,9 +123,11 @@ async ({id, instituition_name, instituition_abbr, instituition_logo}:Instituitio
         return {
             success: false,
             status: 500,
-            error: "storage failed to remove old logo"
+            error: "failed to remove previous logo url from storage"
         }
     }
+
+        //Updating instituition with a new file logo
 
         const fileName = `${Date.now()}-${file.name}`;
 
@@ -86,13 +137,19 @@ async ({id, instituition_name, instituition_abbr, instituition_logo}:Instituitio
         contentType: file.type
         });
 
-        if (storageError) throw new Error("storage failed to save file");
+        if (storageError) {
+            return {
+             success: true,
+             message: "failed to save new logo to storage, try again",
+             status: 500
+            }
+        }
 
         const { data: logoUrl } = supabase.storage
         .from("nursingpastco_images")
         .getPublicUrl(`Logos/${fileName}`);
 
-        const { error: updateError } = await supabase
+        const { error: updateInstituitionError } = await supabase
         .from("nursingpastco_instituitions")
         .update({
         instituition_name: instituition_name,
@@ -101,10 +158,42 @@ async ({id, instituition_name, instituition_abbr, instituition_logo}:Instituitio
         })
         .eq("id", id);
 
-        if (updateError) {
+        if (updateInstituitionError) {
             return {
              success: true,
              message: "failed to update instuition, try again",
+             status: 500
+            }
+        }
+
+        //updating instituition names for courses
+        const { error: updateCourseError } = await supabase
+        .from("nursingpastco_courses")
+        .update({
+        instituition: instituition_name,
+        })
+        .eq("instituition", instituitionLogoUrl.instituition_name);
+
+        if (updateCourseError) {
+            return {
+             success: true,
+             message: "failed to update courses instuitions, try again",
+             status: 500
+            }
+        }
+
+        //updating instituition names for past-questions
+        const { error: updatePastQuestionsError } = await supabase
+        .from("nursingpastco_pastQuestions")
+        .update({
+        instituition: instituition_name,
+        })
+        .eq("instituition", instituitionLogoUrl.instituition_name);
+
+        if (updatePastQuestionsError) {
+            return {
+             success: true,
+             message: "failed to update past-questions instuitions, try again",
              status: 500
             }
         }

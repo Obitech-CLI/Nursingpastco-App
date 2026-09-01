@@ -34,10 +34,13 @@ type Props = {
     setEditData: React.Dispatch<React.SetStateAction<editData>>;
     focusInput: FocusTypes;
     setFocusInput: React.Dispatch<React.SetStateAction<FocusTypes>>;
+    editLogo: File | null;
+    setEditLogo: React.Dispatch<SetStateAction<File | null>>;
+    updateLoading: boolean;
 }
 
 function AddForm(
-    {formData, setFormData, setLogo, logo, onSubmit, loading, fileRef, edit, setEdit, editData, setEditData, focusInput, setFocusInput}:Props
+    {formData, setFormData, setLogo, logo, onSubmit, loading, fileRef, edit, setEdit, editData, setEditData, focusInput, setFocusInput, editLogo, setEditLogo, updateLoading}:Props
     ) {
 
     const HandleFormChange = (e:React.ChangeEvent<HTMLInputElement>) =>
@@ -56,7 +59,10 @@ function AddForm(
             instituition_name: "",
             instituition_abbr: "",
         })
+        setEditLogo(null);
     }
+
+    console.log(updateLoading)
 
     return (
         <form onSubmit={onSubmit}>
@@ -114,21 +120,47 @@ function AddForm(
                      accept="image/*"
                     onChange={(e) => {
                         if (e.target.files) {
+                            if (edit) {
+                                setEditLogo(e.target.files?.[0] ?? null);
+                                return;
+                            }
                             setLogo(e.target.files?.[0] ?? null)
                         }
                     }}/>
                     <span>
-                        {logo ? "logo selected" : "select logo"} 
-                        {logo ? <Check color="green" size={20}/> : ""}
+                        {logo || editLogo ? (
+                            <>logo selected</>
+                        ) : (
+                            <>
+                            {edit ? "update logo" : "select logo"}
+                            </>
+                        )}
+                        {logo || editLogo ? <Check color="green" size={20}/> : ""}
                     </span>
                 </label>
 
                 <button type="submit">
-                    {!loading ? (
+                    <>
+                    {!edit ? (
                         <>
-                        {edit ? "update" : "add"}
+                        {!loading ? "add" : (
+                            <>
+                            <ClipLoader size={20} color="black"/>
+                            adding...
+                            </>
+                        )}
                         </>
-                    ) : <ClipLoader size={20} color="black"/>}
+                    ) : (
+                        <>
+                        {!updateLoading ? "update" : (
+                            <>
+                            <ClipLoader size={20} color="black"/>
+                            updating...
+                            </>
+                        )}
+                        </>
+                    )}
+                    </>
                 </button>
         </form>
     )

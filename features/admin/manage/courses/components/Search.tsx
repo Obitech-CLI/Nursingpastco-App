@@ -132,8 +132,13 @@ function SearchCourses({searchData, setSearchData, search, loading}:Props) {
                     )}
                 </div>
 
-                <button onClick={search}>
-                    {!loading ? <Search /> : <ClipLoader size={30} color="black"/>}
+                <button onClick={search} disabled={loading}>
+                    {!loading ? <Search /> : (
+                        <>
+                        <ClipLoader size={25} color="black"/>
+                        searching...
+                        </>
+                    )}
                 </button>
         </fieldset>
     )

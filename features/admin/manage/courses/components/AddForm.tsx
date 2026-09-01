@@ -210,7 +210,12 @@ function AddForm({formData, setFormData, onSubmit, loading, edit, setEdit, editD
                         <>
                         {edit ? "update" : "add"}
                         </>
-                ) : <ClipLoader size={20} color="black"/>}
+                ) : (
+                    <>
+                    <ClipLoader size={20} color="black"/>
+                    {edit ? "updating..." : "adding..."}
+                    </>
+                )}
             </button>
         </form>
     )

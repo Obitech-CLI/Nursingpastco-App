@@ -1,11 +1,8 @@
 "use client";
 
-import { UseFetch } from "@/hooks/useFetch";
-import { CreateAdminType } from "@/types/admin";
 import { LogoutAdminButton } from "@/ui/logouts/LogoutAdmin";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from '../styles.module.css';
-import { ClipLoader } from "react-spinners";
 
 type AdminType = {
     firstname: string;
