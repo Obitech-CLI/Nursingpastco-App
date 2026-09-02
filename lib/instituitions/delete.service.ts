@@ -46,6 +46,7 @@ const DeleteInstituition = async (id: string) =>
        }
     }
 
+    //delete courses related to instituition
     const { error: deleteCoursesError } = await supabase
     .from("nursingpastco_courses")
     .delete()

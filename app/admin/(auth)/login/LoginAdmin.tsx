@@ -12,6 +12,8 @@ function LoginAdmin() {
         password: "",
     });
 
+    const [remember, setRemember] = useState(false);
+
     const router = useRouter();
 
     const PostLoginForm = UsePost();
@@ -25,6 +27,10 @@ function LoginAdmin() {
         if (res) {
 
             if (!res.success) return;
+
+            if (remember) {
+                localStorage.setItem("remember", JSON.stringify(formData));
+            }
 
             localStorage.setItem("admin", JSON.stringify(res.admin));
 
@@ -43,6 +49,8 @@ function LoginAdmin() {
         setFormData={setFormData}
         onSubmit={HandleFormSubmit}
         loading={PostLoginForm.loading}
+        remember={remember}
+        setRemember={setRemember}
         />
     )
 }

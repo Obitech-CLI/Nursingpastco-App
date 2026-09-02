@@ -44,6 +44,33 @@ function AdminManageNav() {
                       manage
                     </Link>
                 </div>
+
+                <div>
+                    <h3>contents and tutorials</h3>
+                    <h4>available: 8</h4>
+                    <Link href="/admin/manage/contents-tutorials">
+                    <Settings size={25} className={styles.icon}/>
+                      manage
+                    </Link>
+                </div>
+
+                <div>
+                    <h3>news and updates</h3>
+                    <h4>available: 8</h4>
+                    <Link href="/admin/manage/news-updates">
+                    <Settings size={25} className={styles.icon}/>
+                      manage
+                    </Link>
+                </div>
+
+                <div>
+                    <h3>recommendations</h3>
+                    <h4>available: 8</h4>
+                    <Link href="/admin/manage/recommendations">
+                    <Settings size={25} className={styles.icon}/>
+                      manage
+                    </Link>
+                </div>
             </nav>
         </div>
     )

@@ -139,6 +139,11 @@ form > button {
 button {
     border: none;
     background-color: transparent;
+    text-transform: capitalize;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 button.open {
@@ -235,11 +240,12 @@ footer .footer {
     position: fixed;
     width: 100%;
     bottom: 0;
-    border-top: 5px solid var(--secondary-color);
-    border-radius: 10px 10px 0 0;
-    padding: 1rem;
+    color: white;
+    border-radius: 5px 5px 0 0;
+    padding: 0.7rem;
     z-index: 1000;
-    background-color: var(--footer-bg);
+    background-color: var(--secondary-color);
+    text-align: right;
 }
 
 footer > .socials span {
@@ -752,4 +758,55 @@ span {
     align-items: center;
     justify-content: center;
     border: var(--border);
+}
+
+.modify-category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    text-transform: capitalize;
+    padding: 1rem;
+}
+
+.modify-category > .categories {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+}
+
+.modify-category > .categories .category {
+    padding: 0.7rem;
+    box-shadow: var(--box-shadow);
+    border-radius: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.modify-category > .categories .category > div {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+form.auth .remember_me {
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+    margin-left: 2.5rem;
+    width: fit-content;
+    gap: 1rem;
+    margin-top: -0.5rem;
+}
+
+form.auth .remember_me > span {
+    padding: 0.3rem 0.7rem;
+    border: var(--border);
+    border-radius: 20px;
 }

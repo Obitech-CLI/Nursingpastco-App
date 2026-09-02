@@ -14,8 +14,12 @@ type ContextProps = {
     setNavManageCourses: React.Dispatch<SetStateAction<ShowProps>>;
     navManagePastQuestions: ShowProps;
     setNavManagePastQuestions: React.Dispatch<SetStateAction<ShowProps>>;
-    navManageSiteInfo: ShowProps;
-    setNavManageSiteInfo: React.Dispatch<SetStateAction<ShowProps>>;
+    navManageContents: ShowProps;
+    setNavManageContents: React.Dispatch<SetStateAction<ShowProps>>;
+    navManageNews: ShowProps;
+    setNavManageNews: React.Dispatch<SetStateAction<ShowProps>>;
+    navManageRecommend: ShowProps;
+    setNavManageRecommend: React.Dispatch<SetStateAction<ShowProps>>;
 }
 
 const ManageNavContext = createContext<ContextProps | null>(null);
@@ -37,7 +41,17 @@ function ManageNavProvider({children}:{children: ReactNode}) {
         view: false,
     });
 
-    const [navManageSiteInfo, setNavManageSiteInfo] = useState({
+    const [navManageContents, setNavManageContents] = useState({
+        add: false,
+        view: false,
+    });
+
+    const [navManageNews, setNavManageNews] = useState({
+        add: false,
+        view: false,
+    });
+
+    const [navManageRecommend, setNavManageRecommend] = useState({
         add: false,
         view: false,
     });
@@ -47,7 +61,9 @@ function ManageNavProvider({children}:{children: ReactNode}) {
             navManageInstituitions, setNavManageInstituitions,
             navManageCourses, setNavManageCourses,
             navManagePastQuestions, setNavManagePastQuestions,
-            navManageSiteInfo, setNavManageSiteInfo
+            navManageContents, setNavManageContents,
+            navManageNews, setNavManageNews,
+            navManageRecommend, setNavManageRecommend
         }}>
             {children}
         </ManageNavContext.Provider>
