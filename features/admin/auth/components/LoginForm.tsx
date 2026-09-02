@@ -14,14 +14,11 @@ type FormDataProps = {
     loading: boolean;
     remember: boolean;
     setRemember: React.Dispatch<SetStateAction<boolean>>;
+    checked: boolean;
+    setChecked: React.Dispatch<SetStateAction<boolean>>;
 }
 
-type storedDataType = {
-    email: string;
-    password: string;
-}
-
-function LoginForm({formData, setFormData, onSubmit, loading, remember, setRemember}:FormDataProps) {
+function LoginForm({formData, setFormData, onSubmit, loading, remember, setRemember, checked, setChecked}:FormDataProps) {
 
     const HandleFormChange = (e:React.ChangeEvent<HTMLInputElement>) =>
     {
@@ -33,60 +30,71 @@ function LoginForm({formData, setFormData, onSubmit, loading, remember, setRemem
         password: false,
     });
 
-    const [storedData, setStoredData] = useState<storedDataType | null>(() => {
+    useEffect(() => {
         const stored = localStorage.getItem("remember");
-        return stored ? JSON.parse(stored) : null;
-    });
 
-    console.log(JSON.stringify(formData))
+        if (stored) {
+            const res = JSON.parse(stored);
+            setFormData({
+                email: res.email,
+                password: res.password
+            })
+            setChecked(true);
+        }
+    }, [])
 
     return (
         <form onSubmit={onSubmit} className="auth">
 
-                <h3>welcome back</h3>
+            <h3>welcome back</h3>
 
             <label><Mail size={30}/>
-                <input type="email" value={storedData?.email} name="email" 
+                <input type="email" value={formData.email} name="email" 
                 onChange={HandleFormChange} onFocus={() => {
                     setFocusInput(prev => ({...prev, email: true}))
                 }}
                 onBlur={() => {
-                    if (!formData.email || storedData?.email) {
+                    if (!formData.email) {
                         setFocusInput(prev => ({...prev, email: false}))
                     }
                 }}
                 />
                 <span style={{
-                    top: focusInput.email || storedData?.email ? "-1rem" : "",
-                    border: focusInput.email || storedData?.email ? "var(--border)" : ""
-                }}>{focusInput.email ? "enter your email" : "email"}</span>
-            </label>
+                    top: focusInput.email || formData.email? "-1rem" : "",
+                    border: focusInput.email || formData.email ? "var(--border)" : ""
+                }}>{focusInput.email || formData.email ? "enter your email" : "email"}</span>
+            </label> 
 
             <label><Lock size={30}/>
-                <input type="password" value={storedData?.password}
+                <input type="password" value={formData.password}
                 name="password" 
                 onChange={HandleFormChange} onFocus={() => {
                     setFocusInput(prev => ({...prev, password: true}));
                 }}
                 onBlur={() => {
-                    if (!formData.password || !storedData?.password) {
+                    if (!formData.password) {
                        setFocusInput(prev => ({...prev, password: false}))
                     }
                 }}
                 />
                 <span style={{
-                    top: focusInput.password ? "-1rem" : "",
-                    border: focusInput.password ? "var(--border)" : ""
-                }}>{focusInput.password ? "enter your password" : "password"}</span>
+                    top: focusInput.password || formData.password ? "-1rem" : "",
+                    border: focusInput.password || formData.password ? "var(--border)" : ""
+                }}>{focusInput.password || formData.password ? "enter your password" : "password"}</span>
             </label>
 
             <div className="remember_me">
                 <span>remember me</span>
-                <input type="checkbox" onChange={(e) => setRemember(e.target.checked)}/>
+                <input type="checkbox" checked={checked} onChange={(e) => setRemember(e.target.checked)}/>
             </div>
 
             <button type="submit" disabled={loading}>
-                {!loading ? "login" : <ClipLoader size={20} color="black"/> }
+                {!loading ? "login" : (
+                    <>
+                    <ClipLoader size={20} color="black"/>
+                    {"logging..."}
+                    </>
+                )}
             </button>
         </form>
     )

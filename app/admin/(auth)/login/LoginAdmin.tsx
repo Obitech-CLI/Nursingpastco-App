@@ -14,6 +14,8 @@ function LoginAdmin() {
 
     const [remember, setRemember] = useState(false);
 
+    const [checked, setChecked] = useState(false);
+
     const router = useRouter();
 
     const PostLoginForm = UsePost();
@@ -29,7 +31,10 @@ function LoginAdmin() {
             if (!res.success) return;
 
             if (remember) {
+                if (checked) return;
                 localStorage.setItem("remember", JSON.stringify(formData));
+            } else {
+                localStorage.removeItem("remember");
             }
 
             localStorage.setItem("admin", JSON.stringify(res.admin));
@@ -51,6 +56,8 @@ function LoginAdmin() {
         loading={PostLoginForm.loading}
         remember={remember}
         setRemember={setRemember}
+        checked={checked}
+        setChecked={setChecked}
         />
     )
 }
