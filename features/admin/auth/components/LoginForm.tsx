@@ -14,11 +14,9 @@ type FormDataProps = {
     loading: boolean;
     remember: boolean;
     setRemember: React.Dispatch<SetStateAction<boolean>>;
-    checked: boolean;
-    setChecked: React.Dispatch<SetStateAction<boolean>>;
 }
 
-function LoginForm({formData, setFormData, onSubmit, loading, remember, setRemember, checked, setChecked}:FormDataProps) {
+function LoginForm({formData, setFormData, onSubmit, loading, remember, setRemember}:FormDataProps) {
 
     const HandleFormChange = (e:React.ChangeEvent<HTMLInputElement>) =>
     {
@@ -39,7 +37,7 @@ function LoginForm({formData, setFormData, onSubmit, loading, remember, setRemem
                 email: res.email,
                 password: res.password
             })
-            setChecked(true);
+            setRemember(true);
         }
     }, [])
 
@@ -85,7 +83,7 @@ function LoginForm({formData, setFormData, onSubmit, loading, remember, setRemem
 
             <div className="remember_me">
                 <span>remember me</span>
-                <input type="checkbox" checked={checked} onChange={(e) => setRemember(e.target.checked)}/>
+                <input type="checkbox" checked={remember} onChange={(e) => setRemember(e.target.checked)}/>
             </div>
 
             <button type="submit" disabled={loading}>
