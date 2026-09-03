@@ -20,6 +20,12 @@ function ManageContentTutorials() {
             content: ""
     });
 
+    const [ editCategory, setEditCategory ] = useState(false);
+    const [ editCategoryData, setEditCategoryData ] = useState({
+            id: "",
+            category: "",
+    });
+
     const [editFile, setEditFile] = useState<File | null>(null);
 
     return (
@@ -32,7 +38,15 @@ function ManageContentTutorials() {
                 setNavManageContents({view: false, add: false})
             }}>manage</h2>
             <button type="button"
-            onClick={() => setNavManageContents({add: true, view: false})}
+            onClick={() => { 
+                setNavManageContents({add: true, view: false})
+                setShowCategories(false);
+                setEditCategory(false);
+                setEditCategoryData({
+                    id: "",
+                    category: ""
+                })
+            }}
             style={{
                 border: navManageContents.add ? "none" : "",
                 gridArea: navManageContents.add ? "2/ 1/ 2/ 2" : "",
@@ -54,6 +68,12 @@ function ManageContentTutorials() {
             <button type="button"
             onClick={() => {
                 setNavManageContents({add: false, view: true});
+                setShowCategories(false);
+                setEditCategory(false);
+                setEditCategoryData({
+                    id: "",
+                    category: ""
+                });
                 setEditData({
                     id: "",
                     category: "",
@@ -75,7 +95,13 @@ function ManageContentTutorials() {
 
         {!navManageContents.add && !navManageContents.view ? (
             <>
-            <AddContentCategory />
+            <AddContentCategory
+            editCategory={editCategory}
+            setEditCategory={setEditCategory}
+            editCategoryData={editCategoryData}
+            setEditCategoryData={setEditCategoryData}
+            />
+
             <button type="button" style={{
                 border: "var(--border)",
                 padding: "1rem 3rem",
@@ -100,7 +126,12 @@ function ManageContentTutorials() {
         ) : (null)}
 
         {showCategories && (
-            <ModifyContentsCategories />
+            <ModifyContentsCategories
+            editCategory={editCategory}
+            setEditCategory={setEditCategory}
+            editCategoryData={editCategoryData}
+            setEditCategoryData={setEditCategoryData}
+            />
         )}
 
         </>

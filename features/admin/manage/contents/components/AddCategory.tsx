@@ -1,58 +1,111 @@
 "use client";
 
 import { UsePost } from "@/hooks/usePost";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { ClipLoader } from "react-spinners";
+import { CategoryType } from "./Categories";
+import { X } from "lucide-react";
+import { UsePatch } from "@/hooks/usePatch";
 
-function AddContentCategory() {
+type Props = {
+    editCategory: boolean;
+    setEditCategory: React.Dispatch<SetStateAction<boolean>>;
+    editCategoryData: CategoryType;
+    setEditCategoryData: React.Dispatch<SetStateAction<CategoryType>>;
+}
+
+function AddContentCategory({editCategory, setEditCategory, setEditCategoryData, editCategoryData} : Props) {
 
     const [ category, setCategory ] = useState("");
 
     const [ focus, setFocus ] = useState(false);
 
     const PostFormData = UsePost();
+    const PatchFormData = UsePatch();
 
     const HandleSubmitForm = async (e:React.FormEvent<HTMLFormElement>) =>
     {
         e.preventDefault();
 
-        const res = await PostFormData.Post("/contents/categories", {category:category});
+        if (editCategory) {
+            const res = await PatchFormData.Patch("/contents/categories", editCategoryData);
 
-        if (!res) return;
+            if (!res) return;
 
-        if (res.success) {
-            setCategory("");
-            setFocus(false);
+            if (res.success) {
+               setEditCategoryData({
+                id: "",
+                category: ""
+               })
+               setFocus(false);
+               setEditCategory(false);
+            }
+
+        } else {
+            const res = await PostFormData.Post("/contents/categories", {category: category});
+
+            if (!res) return;
+
+            if (res.success) {
+               setCategory("");
+               setFocus(false);
+            }
         }
+    }
+
+    const CancelEdit = () => {
+        setEditCategory(false);
+        setEditCategoryData({
+            id: "",
+            category: ""
+        })
     }
 
     return (
         <form className="add" onSubmit={HandleSubmitForm}>
 
-            <h3>add category</h3>
+            {editCategory && (
+                <span onClick={CancelEdit}>
+                    cancel update <X color="red"/>
+                </span>
+            )}
+
+            <h3>{editCategory ? "update category" : "add category"}</h3>
 
             <label>
                 <span style={{
-                    top: focus ? "-1rem" : ""
-                }}>{focus ? "enter a category" : "category"}</span>
-                <input type="text" value={category}
+                    top: focus || editCategory ? "-1rem" : ""
+                }}>
+                    {focus ? (
+                        "enter a category"
+                    ) : "category"}
+
+                </span>
+                <input type="text" value={editCategoryData.category ?? category}
                 onFocus={() => setFocus(true)}
                 onBlur={() => {
                     if (!category) {
                         setFocus(false)
                     }
                 }}
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) => {
+                    if (editCategory) {
+                        setEditCategoryData(prev => ({...prev, category: e.target.value}))
+                    }
+                    setCategory(e.target.value)
+                }}
                 />
             </label>
 
             <button type="submit" disabled={PostFormData.loading}>
-                {!PostFormData.loading ? (
-                    "add"
+                {!PostFormData.loading || !PatchFormData.loading ? (
+                    <>
+                    {editCategory ? "update" : "add"}
+                    </>
                 ) : (
                     <>
                     <ClipLoader size={25} color="black"/>
-                    {"adding..."}
+                    {editCategory ? "updating..." : "adding..."}
                     </>
                 )}
             </button>

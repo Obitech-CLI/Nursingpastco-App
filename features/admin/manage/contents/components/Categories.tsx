@@ -4,15 +4,22 @@ import { useConfirmModal } from "@/contexts/modals/FeedbackContext";
 import { UseDelete } from "@/hooks/useDelete";
 import { UseFetch } from "@/hooks/useFetch";
 import { PenBox, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 
-type CategoryType = {
-    id: number;
+export type CategoryType = {
+    id: string;
     category: string;
 }
 
-function ModifyContentsCategories () {
+type Props = {
+    editCategory: boolean;
+    setEditCategory: React.Dispatch<SetStateAction<boolean>>;
+    editCategoryData: CategoryType;
+    setEditCategoryData: React.Dispatch<SetStateAction<CategoryType>>;
+}
+
+function ModifyContentsCategories ({editCategory, setEditCategory, editCategoryData, setEditCategoryData} : Props) {
 
     const [ categories, setCategories ] = useState<CategoryType[]>([]);
 
@@ -78,7 +85,17 @@ function ModifyContentsCategories () {
 
                         <h4>{c.category}</h4>
                         <div>
-                            <button><PenBox color="blue"/></button>
+                            <button type="button"
+                            onClick={() => {
+                                setEditCategory(true);
+                                setEditCategoryData({
+                                    id: c.id,
+                                    category: c.category
+                                })
+                            }}>
+                                <PenBox color="blue"/>
+                            </button>
+
                             <button onClick={() => HandleDeleteClick(String(c.id))} 
                                 disabled={DeleteCategory.loading}>
                                 <X color="red"/>

@@ -62,8 +62,6 @@ function AddForm(
         setEditLogo(null);
     }
 
-    console.log(updateLoading)
-
     return (
         <form onSubmit={onSubmit}>
 
