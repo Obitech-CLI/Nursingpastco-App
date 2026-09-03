@@ -4,7 +4,7 @@ import { UseManageNav } from "@/contexts/admin/ManageNavProvider";
 import { AddNewsCategory } from "@/features/admin/manage/news/components/AddCategory";
 import { ModifyNewsCategories } from "@/features/admin/manage/news/components/Categories";
 import { Plus, Settings2, Settings2Icon, X } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 function ManageNewsUpdates() {
 
@@ -22,17 +22,42 @@ function ManageNewsUpdates() {
 
     const [editFile, setEditFile] = useState<File | null>(null);
 
+    const [ editCategory, setEditCategory ] = useState(false);
+    const [ editCategoryData, setEditCategoryData ] = useState({
+            id: "",
+            category: "",
+    });
+
+    const [reloadCategories, setReloadCategories] = useState(0);
+
+    const ref = useRef<HTMLDivElement>(null);
+    
+        const scrollToForm = () => {
+            ref.current?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        }
+
     return (
         <>
         <div className="switch" style={{
             gridTemplateColumns: navManageNews.add || navManageNews.view ?
             "1fr 1fr" : ""
-        }}>
+        }} ref={ref}>
             <h2 onClick={() => {
                 setNavManageNews({view: false, add: false})
             }}>manage</h2>
             <button type="button"
-            onClick={() => setNavManageNews({add: true, view: false})}
+            onClick={() => { 
+                setNavManageNews({add: true, view: false});
+                setShowCategories(false);
+                setEditCategory(false);
+                setEditCategoryData({
+                    id: "",
+                    category: ""
+                })
+            }}
             style={{
                 border: navManageNews.add ? "none" : "",
                 gridArea: navManageNews.add ? "2/ 1/ 2/ 2" : "",
@@ -54,6 +79,12 @@ function ManageNewsUpdates() {
             <button type="button"
             onClick={() => {
                 setNavManageNews({add: false, view: true});
+                setShowCategories(false);
+                setEditCategory(false);
+                setEditCategoryData({
+                    id: "",
+                    category: ""
+                });
                 setEditData({
                     id: "",
                     category: "",
@@ -75,7 +106,13 @@ function ManageNewsUpdates() {
 
         {!navManageNews.add && !navManageNews.view ? (
             <>
-            <AddNewsCategory />
+            <AddNewsCategory
+            editCategory={editCategory}
+            setEditCategory={setEditCategory}
+            editCategoryData={editCategoryData}
+            setEditCategoryData={setEditCategoryData}
+            setReloadCategories={setReloadCategories}
+            />
             <button type="button" style={{
                 border: "var(--border)",
                 padding: "1rem 3rem",
@@ -100,7 +137,14 @@ function ManageNewsUpdates() {
         ) : (null)}
 
         {showCategories && (
-            <ModifyNewsCategories />
+            <ModifyNewsCategories
+            editCategory={editCategory}
+            setEditCategory={setEditCategory}
+            editCategoryData={editCategoryData}
+            setEditCategoryData={setEditCategoryData}
+            reloadCategories={reloadCategories}
+            scroll={scrollToForm}
+            />
         )}
 
         </>

@@ -4,7 +4,7 @@ import { UseManageNav } from "@/contexts/admin/ManageNavProvider";
 import { AddRecommenationCategory } from "@/features/admin/manage/recommendations/components/AddCategory";
 import { ModifyRecommendationsCategories } from "@/features/admin/manage/recommendations/components/Categories";
 import { Plus, Settings2, Settings2Icon, X } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 function ManageRecommendations() {
 
@@ -20,17 +20,42 @@ function ManageRecommendations() {
             recommendation: ""
     });
 
+    const [ editCategory, setEditCategory ] = useState(false);
+    const [ editCategoryData, setEditCategoryData ] = useState({
+            id: "",
+            category: "",
+    });
+
+    const [reloadCategories, setReloadCategories] = useState(0);
+
+    const ref = useRef<HTMLDivElement>(null);
+
+    const scrollToForm = () => {
+        ref.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        });
+    }
+
     return (
         <>
         <div className="switch" style={{
             gridTemplateColumns: navManageRecommend.add || navManageRecommend.view ?
             "1fr 1fr" : ""
-        }}>
+        }} ref={ref}>
             <h2 onClick={() => {
                 setNavManageRecommend({view: false, add: false})
             }}>manage</h2>
             <button type="button"
-            onClick={() => setNavManageRecommend({add: true, view: false})}
+            onClick={() => { 
+                setNavManageRecommend({add: true, view: false});
+                setShowCategories(false);
+                setEditCategory(false);
+                setEditCategoryData({
+                    id: "",
+                    category: ""
+                })
+            }}
             style={{
                 border: navManageRecommend.add ? "none" : "",
                 gridArea: navManageRecommend.add ? "2/ 1/ 2/ 2" : "",
@@ -52,6 +77,12 @@ function ManageRecommendations() {
             <button type="button"
             onClick={() => {
                 setNavManageRecommend({add: false, view: true});
+                setShowCategories(false);
+                setEditCategory(false);
+                setEditCategoryData({
+                    id: "",
+                    category: ""
+                });
                 setEditData({
                     id: "",
                     category: "",
@@ -72,7 +103,13 @@ function ManageRecommendations() {
 
         {!navManageRecommend.add && !navManageRecommend.view ? (
             <>
-            <AddRecommenationCategory />
+            <AddRecommenationCategory
+            editCategory={editCategory}
+            setEditCategory={setEditCategory}
+            editCategoryData={editCategoryData}
+            setEditCategoryData={setEditCategoryData}
+            setReloadCategories={setReloadCategories}
+            />
             <button type="button" style={{
                 border: "var(--border)",
                 padding: "1rem 3rem",
@@ -97,7 +134,14 @@ function ManageRecommendations() {
         ) : (null)}
 
         {showCategories && (
-            <ModifyRecommendationsCategories />
+            <ModifyRecommendationsCategories
+            editCategory={editCategory}
+            setEditCategory={setEditCategory}
+            editCategoryData={editCategoryData}
+            setEditCategoryData={setEditCategoryData}
+            reloadCategories={reloadCategories}
+            scroll={scrollToForm}
+            />
         )}
 
         </>

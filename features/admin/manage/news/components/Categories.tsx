@@ -4,15 +4,24 @@ import { useConfirmModal } from "@/contexts/modals/FeedbackContext";
 import { UseDelete } from "@/hooks/useDelete";
 import { UseFetch } from "@/hooks/useFetch";
 import { PenBox, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 
-type CategoryType = {
-    id: number;
+export type CategoryType = {
+    id: string;
     category: string;
 }
 
-function ModifyNewsCategories () {
+type Props = {
+    editCategory: boolean;
+    setEditCategory: React.Dispatch<SetStateAction<boolean>>;
+    editCategoryData: CategoryType;
+    setEditCategoryData: React.Dispatch<SetStateAction<CategoryType>>;
+    reloadCategories: number;
+    scroll: () => void;
+}
+
+function ModifyNewsCategories ({scroll, editCategory, setEditCategory, editCategoryData, setEditCategoryData, reloadCategories} : Props) {
 
     const [ categories, setCategories ] = useState<CategoryType[]>([]);
 
@@ -36,7 +45,7 @@ function ModifyNewsCategories () {
 
     useEffect(() => {
         HandleFetchCategories();
-    }, []);
+    }, [reloadCategories]);
 
     const HandleDeleteClick = (id: string) =>
     {
@@ -58,6 +67,7 @@ function ModifyNewsCategories () {
 
         if (res.success) {
             setDeleteId("");
+            setCategories([]);
             HandleFetchCategories();
         }
     }
@@ -78,7 +88,15 @@ function ModifyNewsCategories () {
 
                         <h4>{c.category}</h4>
                         <div>
-                            <button>
+                            <button type="button"
+                            onClick={() => {
+                                setEditCategory(true);
+                                setEditCategoryData({
+                                    id: c.id,
+                                    category: c.category
+                                });
+                                scroll();
+                            }}>
                                 <PenBox color="blue"/>
                             </button>
 

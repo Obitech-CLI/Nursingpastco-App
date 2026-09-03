@@ -12,9 +12,10 @@ type Props = {
     setEditCategory: React.Dispatch<SetStateAction<boolean>>;
     editCategoryData: CategoryType;
     setEditCategoryData: React.Dispatch<SetStateAction<CategoryType>>;
+    setReloadCategories: React.Dispatch<SetStateAction<number>>;
 }
 
-function AddContentCategory({editCategory, setEditCategory, setEditCategoryData, editCategoryData} : Props) {
+function AddContentCategory({editCategory, setEditCategory, setEditCategoryData, editCategoryData, setReloadCategories} : Props) {
 
     const [ category, setCategory ] = useState("");
 
@@ -39,6 +40,7 @@ function AddContentCategory({editCategory, setEditCategory, setEditCategoryData,
                })
                setFocus(false);
                setEditCategory(false);
+               setReloadCategories(prev => (prev + 1));
             }
 
         } else {
@@ -49,6 +51,7 @@ function AddContentCategory({editCategory, setEditCategory, setEditCategoryData,
             if (res.success) {
                setCategory("");
                setFocus(false);
+               setReloadCategories(prev => (prev + 1));
             }
         }
     }
@@ -76,12 +79,18 @@ function AddContentCategory({editCategory, setEditCategory, setEditCategoryData,
                 <span style={{
                     top: focus || editCategory ? "-1rem" : ""
                 }}>
-                    {focus ? (
-                        "enter a category"
-                    ) : "category"}
-
+                    {!editCategory ? (
+                        <>
+                        {focus ? "enter a category" : "category"}
+                        </>
+                    ) : (
+                        <>
+                        {editCategoryData.category ? "update category" : "category"}
+                        </>
+                    )}
+                    
                 </span>
-                <input type="text" value={editCategoryData.category ?? category}
+                <input type="text" value={editCategoryData.category || category}
                 onFocus={() => setFocus(true)}
                 onBlur={() => {
                     if (!category) {
@@ -97,15 +106,28 @@ function AddContentCategory({editCategory, setEditCategory, setEditCategoryData,
                 />
             </label>
 
-            <button type="submit" disabled={PostFormData.loading}>
-                {!PostFormData.loading || !PatchFormData.loading ? (
+            <button type="submit" disabled={PostFormData.loading || PatchFormData.loading}>
+                {!editCategory ? (
                     <>
-                    {editCategory ? "update" : "add"}
+                    {!PostFormData.loading ? (
+                        <>add</>
+                    ) : (
+                        <>
+                        <ClipLoader size={25} color="black"/>
+                        {"adding..."}
+                        </>
+                    )}
                     </>
                 ) : (
                     <>
-                    <ClipLoader size={25} color="black"/>
-                    {editCategory ? "updating..." : "adding..."}
+                    {!PatchFormData.loading ? (
+                        <>update</>
+                    ) : (
+                        <>
+                        <ClipLoader size={25} color="black"/>
+                        {"updating..."}
+                        </>
+                    )}
                     </>
                 )}
             </button>

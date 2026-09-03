@@ -17,9 +17,11 @@ type Props = {
     setEditCategory: React.Dispatch<SetStateAction<boolean>>;
     editCategoryData: CategoryType;
     setEditCategoryData: React.Dispatch<SetStateAction<CategoryType>>;
+    reloadCategories: number;
+    scroll: () => void;
 }
 
-function ModifyContentsCategories ({editCategory, setEditCategory, editCategoryData, setEditCategoryData} : Props) {
+function ModifyContentsCategories ({scroll, editCategory, setEditCategory, editCategoryData, setEditCategoryData, reloadCategories} : Props) {
 
     const [ categories, setCategories ] = useState<CategoryType[]>([]);
 
@@ -43,7 +45,7 @@ function ModifyContentsCategories ({editCategory, setEditCategory, editCategoryD
 
     useEffect(() => {
         HandleFetchCategories();
-    }, []);
+    }, [reloadCategories]);
 
     const HandleDeleteClick = (id: string) =>
     {
@@ -65,6 +67,7 @@ function ModifyContentsCategories ({editCategory, setEditCategory, editCategoryD
 
         if (res.success) {
             setDeleteId("");
+            setCategories([]);
             HandleFetchCategories();
         }
     }
@@ -91,7 +94,8 @@ function ModifyContentsCategories ({editCategory, setEditCategory, editCategoryD
                                 setEditCategoryData({
                                     id: c.id,
                                     category: c.category
-                                })
+                                });
+                                scroll();
                             }}>
                                 <PenBox color="blue"/>
                             </button>

@@ -4,7 +4,7 @@ import { UseManageNav } from "@/contexts/admin/ManageNavProvider";
 import { AddContentCategory } from "@/features/admin/manage/contents/components/AddCategory";
 import { ModifyContentsCategories } from "@/features/admin/manage/contents/components/Categories";
 import { LogOutIcon, Plus, Settings2, Settings2Icon, X } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 function ManageContentTutorials() {
 
@@ -26,14 +26,25 @@ function ManageContentTutorials() {
             category: "",
     });
 
+    const [reloadCategories, setReloadCategories] = useState(0);
+
     const [editFile, setEditFile] = useState<File | null>(null);
+
+    const ref = useRef<HTMLDivElement>(null);
+    
+        const scrollToForm = () => {
+            ref.current?.scrollIntoView({
+                behavior: "smooth",
+                block: "start",
+            });
+        }
 
     return (
         <>
         <div className="switch" style={{
             gridTemplateColumns: navManageContents.add || navManageContents.view ?
             "1fr 1fr" : ""
-        }}>
+        }} ref={ref}>
             <h2 onClick={() => {
                 setNavManageContents({view: false, add: false})
             }}>manage</h2>
@@ -100,6 +111,7 @@ function ManageContentTutorials() {
             setEditCategory={setEditCategory}
             editCategoryData={editCategoryData}
             setEditCategoryData={setEditCategoryData}
+            setReloadCategories={setReloadCategories}
             />
 
             <button type="button" style={{
@@ -131,6 +143,8 @@ function ManageContentTutorials() {
             setEditCategory={setEditCategory}
             editCategoryData={editCategoryData}
             setEditCategoryData={setEditCategoryData}
+            reloadCategories={reloadCategories}
+            scroll={scrollToForm}
             />
         )}
 
