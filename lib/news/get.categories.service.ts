@@ -12,7 +12,7 @@ const GetNewsCategoriesService = async () =>
         return {
             success: false,
             error: "no category found",
-            status: 500
+            status: 404
         }
     }
 

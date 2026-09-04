@@ -2,8 +2,9 @@
 
 import { UseManageNav } from "@/contexts/admin/ManageNavProvider";
 import { AddContentCategory } from "@/features/admin/manage/contents/components/AddCategory";
+import { AddContents } from "@/features/admin/manage/contents/components/AddContents";
 import { ModifyContentsCategories } from "@/features/admin/manage/contents/components/Categories";
-import { LogOutIcon, Plus, Settings2, Settings2Icon, X } from "lucide-react";
+import { Plus, Settings2, Settings2Icon, X } from "lucide-react";
 import { useRef, useState } from "react";
 
 function ManageContentTutorials() {
@@ -146,6 +147,10 @@ function ManageContentTutorials() {
             reloadCategories={reloadCategories}
             scroll={scrollToForm}
             />
+        )}
+
+        {navManageContents.add && (
+            <AddContents />
         )}
 
         </>

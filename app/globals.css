@@ -423,6 +423,9 @@ form > label ul {
     overflow: auto;
     z-index: 200;
 }
+form > label ul > button {
+    align-self: center;
+}
 
 form > label ul li {
     text-align: center;

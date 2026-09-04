@@ -99,7 +99,8 @@ function AddNewsCategory({editCategory, setEditCategory, setEditCategoryData, ed
                 }}
                 onChange={(e) => {
                     if (editCategory) {
-                        setEditCategoryData(prev => ({...prev, category: e.target.value}))
+                        setEditCategoryData(prev => ({...prev, category: e.target.value}));
+                        return;
                     }
                     setCategory(e.target.value)
                 }}
