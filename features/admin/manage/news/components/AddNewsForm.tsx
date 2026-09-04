@@ -1,10 +1,10 @@
 "use client";
 
 import { UseFetch } from "@/hooks/useFetch";
-import { Check, ChevronDown, ChevronUp, Image, Video, X } from "lucide-react";
+import { Check, ChevronDown, ChevronUp, Image, X } from "lucide-react";
 import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
-import { AddContentsFormDataType } from "./AddContents";
+import { AddNewsFormDataType } from "./AddNews";
 
 export type CategoryType = {
     id: number;
@@ -17,31 +17,28 @@ export type FocusType = {
 }
 
 type Props = {
-    formData: AddContentsFormDataType;
-    setFormData: React.Dispatch<SetStateAction<AddContentsFormDataType>>;
+    formData: AddNewsFormDataType;
+    setFormData: React.Dispatch<SetStateAction<AddNewsFormDataType>>;
     focus: FocusType;
     setFocus: React.Dispatch<SetStateAction<FocusType>>;
     fileRef: React.RefObject<HTMLInputElement | null>;
-    file: File | null;
-    setFile: React.Dispatch<SetStateAction<File | null>>;
+    image: File | null;
+    setImage: React.Dispatch<SetStateAction<File | null>>;
     postLoading: boolean;
     submit: React.FormEventHandler<HTMLFormElement>;
 }
 
-function AddContentsForm({formData, setFormData, focus, setFocus, file, setFile, fileRef, postLoading, submit} : Props) {
+function AddNewsForm({formData, setFormData, focus, setFocus, image, setImage, fileRef, postLoading, submit} : Props) {
 
     const [ categories, setCategories ] = useState<CategoryType[]>([]);
 
     const [ showCategories, setShowCategories ] = useState(false);
 
     const FetchCategories = UseFetch();
-
-    const [ video, setVideo ] = useState(false);
-    const [ image, setImage ] = useState(false);
     
     const HandleFetchCategories = async () =>
     {
-        const res = await FetchCategories.Fetch("/contents/categories");
+        const res = await FetchCategories.Fetch("/news/categories");
 
         if (!res) return;
 
@@ -126,58 +123,22 @@ function AddContentsForm({formData, setFormData, focus, setFocus, file, setFile,
                 />
             </label>
 
-            <div className="video-image-switch">
-                {!image && (
-                    <button type="button" onClick={() => {
-                    setImage(true);
-                    setVideo(false);
-                    }}>add image</button>
-                )}
-
-                {!video && (
-                    <button type="button" onClick={() => {
-                    setVideo(true);
-                    setImage(false);
-                    }}>add video</button>
-                )}
-            </div>
-
             <label className="file">
-                {image && (
-                    <>
-                    <Image size={30}/>
-                    <span>
-                    {file ? "image selected" : "select an image"}
-                    {file && <Check />}
-                    </span>
-                     <input type="file" ref={fileRef} accept="image/*"
+                <Image size={30}/>
+                <span>
+                    {image ? "image selected" : "select an image"}
+                    {image && <Check />}
+                </span>
+                <input type="file" ref={fileRef} accept="image/*"
                     onChange={(e) => {
                     if (e.target.files) {
-                        setFile(e.target.files?.[0] ?? null)
+                        setImage(e.target.files?.[0] ?? null)
                     }
-                    }}/>
-                    </>
-                )}
-
-                {video && (
-                    <>
-                    <Video size={30}/>
-                    <span>
-                    {file ? "video selected" : "select a video"}
-                    {file && <Check />}
-                    </span>
-                     <input type="file" ref={fileRef} accept="video/*"
-                    onChange={(e) => {
-                    if (e.target.files) {
-                        setFile(e.target.files?.[0] ?? null)
-                    }
-                    }}/>
-                    </>
-                )}
+                }}/>
             </label>
 
             <label>
-                <textarea placeholder="enter content" value={formData.content}
+                <textarea placeholder="enter news/updates" value={formData.news}
                 onChange={(e) => {
                     setFormData(prev => ({...prev, content: e.target.value}));
                 }}/>
@@ -191,4 +152,4 @@ function AddContentsForm({formData, setFormData, focus, setFocus, file, setFile,
     )
 }
 
-export { AddContentsForm }
+export { AddNewsForm }

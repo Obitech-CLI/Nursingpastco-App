@@ -1,28 +1,31 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { AddContentsForm } from "./AddFormContents";
 import { UsePost } from "@/hooks/usePost";
+import { AddRecommendationsForm } from "./AddRecommendationsForm";
 
-export type AddContentsFormDataType = {
+export type AddRecommendationsFormDataType = {
     category: string;
     title: string;
-    content: string;
+    recommendation: string;
+    link: string;
 }
 
-function AddContents() {
+function AddRecommendations() {
 
     const [ formData, setFormData ] = useState({
         category: "",
         title: "",
-        content: ""
+        recommendation: "",
+        link: ""
     });
 
-    const [ file, setFile ] = useState<File | null>(null);
+    const [ image, setImage ] = useState<File | null>(null);
 
     const [ focus, setFocus ] = useState({
         title: false,
-        content: false
+        content: false,
+        link: false
     });
 
     const fileRef = useRef<HTMLInputElement>(null);
@@ -35,15 +38,16 @@ function AddContents() {
 
         const form_data = new FormData();
 
-        form_data.append("category", formData.category)
-        form_data.append("title", formData.title)
-        form_data.append("content", formData.content)
+        form_data.append("category", formData.category);
+        form_data.append("title", formData.title);
+        form_data.append("recommendation", formData.recommendation);
+        form_data.append("link", formData.link);
 
-        if (file) {
-            form_data.append("file", file);
+        if (image) {
+            form_data.append("image", image);
         }
 
-        const res = await PostFormData.Post("/contents", form_data);
+        const res = await PostFormData.Post("/recommendations", formData);
 
         if (!res) return;
 
@@ -51,27 +55,26 @@ function AddContents() {
             setFormData({
                 category: "",
                 title: "",
-                content: ""
+                recommendation: "",
+                link: ""
             });
 
             if (fileRef.current) {
                 fileRef.current.value = "";
             }
-
-            setFile(null);
         }
     }
 
     return (
         <>
-        <AddContentsForm
+        <AddRecommendationsForm
         formData={formData}
         setFormData={setFormData}
         focus={focus}
         setFocus={setFocus}
         fileRef={fileRef}
-        file={file}
-        setFile={setFile}
+        image={image}
+        setImage={setImage}
         postLoading={PostFormData.loading}
         submit={HandleFormSubmit}
         />
@@ -79,4 +82,4 @@ function AddContents() {
     )
 }
 
-export { AddContents }
+export { AddRecommendations }

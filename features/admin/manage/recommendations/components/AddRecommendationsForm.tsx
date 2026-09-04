@@ -1,10 +1,10 @@
 "use client";
 
 import { UseFetch } from "@/hooks/useFetch";
-import { Check, ChevronDown, ChevronUp, Image, Video, X } from "lucide-react";
+import { Check, ChevronDown, ChevronUp, Image, X } from "lucide-react";
 import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
-import { AddContentsFormDataType } from "./AddContents";
+import { AddRecommendationsFormDataType } from "./AddRecommendations";
 
 export type CategoryType = {
     id: number;
@@ -14,34 +14,32 @@ export type CategoryType = {
 export type FocusType = {
     title: boolean;
     content: boolean;
+    link: boolean;
 }
 
 type Props = {
-    formData: AddContentsFormDataType;
-    setFormData: React.Dispatch<SetStateAction<AddContentsFormDataType>>;
+    formData: AddRecommendationsFormDataType;
+    setFormData: React.Dispatch<SetStateAction<AddRecommendationsFormDataType>>;
     focus: FocusType;
     setFocus: React.Dispatch<SetStateAction<FocusType>>;
     fileRef: React.RefObject<HTMLInputElement | null>;
-    file: File | null;
-    setFile: React.Dispatch<SetStateAction<File | null>>;
+    image: File | null;
+    setImage: React.Dispatch<SetStateAction<File | null>>;
     postLoading: boolean;
     submit: React.FormEventHandler<HTMLFormElement>;
 }
 
-function AddContentsForm({formData, setFormData, focus, setFocus, file, setFile, fileRef, postLoading, submit} : Props) {
+function AddRecommendationsForm({formData, setFormData, focus, setFocus, image, setImage, fileRef, postLoading, submit} : Props) {
 
     const [ categories, setCategories ] = useState<CategoryType[]>([]);
 
     const [ showCategories, setShowCategories ] = useState(false);
 
     const FetchCategories = UseFetch();
-
-    const [ video, setVideo ] = useState(false);
-    const [ image, setImage ] = useState(false);
     
     const HandleFetchCategories = async () =>
     {
-        const res = await FetchCategories.Fetch("/contents/categories");
+        const res = await FetchCategories.Fetch("/recommendations/categories");
 
         if (!res) return;
 
@@ -126,61 +124,46 @@ function AddContentsForm({formData, setFormData, focus, setFocus, file, setFile,
                 />
             </label>
 
-            <div className="video-image-switch">
-                {!image && (
-                    <button type="button" onClick={() => {
-                    setImage(true);
-                    setVideo(false);
-                    }}>add image</button>
-                )}
-
-                {!video && (
-                    <button type="button" onClick={() => {
-                    setVideo(true);
-                    setImage(false);
-                    }}>add video</button>
-                )}
-            </div>
-
             <label className="file">
-                {image && (
-                    <>
-                    <Image size={30}/>
-                    <span>
-                    {file ? "image selected" : "select an image"}
-                    {file && <Check />}
-                    </span>
-                     <input type="file" ref={fileRef} accept="image/*"
+                <Image size={30}/>
+                <span>
+                    {image ? "image selected" : "select an image"}
+                    {image && <Check />}
+                </span>
+                <input type="file" ref={fileRef} accept="image/*"
                     onChange={(e) => {
                     if (e.target.files) {
-                        setFile(e.target.files?.[0] ?? null)
+                        setImage(e.target.files?.[0] ?? null)
                     }
-                    }}/>
-                    </>
-                )}
-
-                {video && (
-                    <>
-                    <Video size={30}/>
-                    <span>
-                    {file ? "video selected" : "select a video"}
-                    {file && <Check />}
-                    </span>
-                     <input type="file" ref={fileRef} accept="video/*"
-                    onChange={(e) => {
-                    if (e.target.files) {
-                        setFile(e.target.files?.[0] ?? null)
-                    }
-                    }}/>
-                    </>
-                )}
+                }}/>
             </label>
 
             <label>
-                <textarea placeholder="enter content" value={formData.content}
+                <textarea placeholder="enter content" value={formData.recommendation}
                 onChange={(e) => {
                     setFormData(prev => ({...prev, content: e.target.value}));
                 }}/>
+            </label>
+
+            <label>
+                <span style={{
+                    top: focus.link ? "-1rem" : ""
+                }}>
+                    {focus.link ? "enter link" : "link"}
+                </span>
+                <input type="text" value={formData.link}
+                onChange={(e) => {
+                    setFormData(prev => ({...prev, link: e.target.value}))
+                }}
+                onFocus={() => {
+                    setFocus(prev => ({...prev, link: true}));
+                }}
+                onBlur={() => {
+                    if (!formData.link) {
+                        setFocus(prev => ({...prev, link: false}));
+                    }
+                }}
+                />
             </label>
 
             <button type="submit" disabled={postLoading}>
@@ -191,4 +174,4 @@ function AddContentsForm({formData, setFormData, focus, setFocus, file, setFile,
     )
 }
 
-export { AddContentsForm }
+export { AddRecommendationsForm }

@@ -1,24 +1,24 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { AddContentsForm } from "./AddFormContents";
 import { UsePost } from "@/hooks/usePost";
+import { AddNewsForm } from "./AddNewsForm";
 
-export type AddContentsFormDataType = {
+export type AddNewsFormDataType = {
     category: string;
     title: string;
-    content: string;
+    news: string;
 }
 
-function AddContents() {
+function AddNews() {
 
     const [ formData, setFormData ] = useState({
         category: "",
         title: "",
-        content: ""
+        news: ""
     });
 
-    const [ file, setFile ] = useState<File | null>(null);
+    const [ image, setImage ] = useState<File | null>(null);
 
     const [ focus, setFocus ] = useState({
         title: false,
@@ -37,13 +37,13 @@ function AddContents() {
 
         form_data.append("category", formData.category)
         form_data.append("title", formData.title)
-        form_data.append("content", formData.content)
+        form_data.append("news", formData.news)
 
-        if (file) {
-            form_data.append("file", file);
+        if (image) {
+            form_data.append("image", image);
         }
 
-        const res = await PostFormData.Post("/contents", form_data);
+        const res = await PostFormData.Post("/news", form_data);
 
         if (!res) return;
 
@@ -51,27 +51,25 @@ function AddContents() {
             setFormData({
                 category: "",
                 title: "",
-                content: ""
+                news: ""
             });
 
             if (fileRef.current) {
                 fileRef.current.value = "";
             }
-
-            setFile(null);
         }
     }
 
     return (
         <>
-        <AddContentsForm
+        <AddNewsForm
         formData={formData}
         setFormData={setFormData}
         focus={focus}
         setFocus={setFocus}
         fileRef={fileRef}
-        file={file}
-        setFile={setFile}
+        image={image}
+        setImage={setImage}
         postLoading={PostFormData.loading}
         submit={HandleFormSubmit}
         />
@@ -79,4 +77,4 @@ function AddContents() {
     )
 }
 
-export { AddContents }
+export { AddNews }

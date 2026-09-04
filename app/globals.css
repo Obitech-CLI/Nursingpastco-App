@@ -813,3 +813,81 @@ form.auth .remember_me > span {
     border: var(--border);
     border-radius: 20px;
 }
+
+.video-image-switch {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.video-image-switch > button {
+    background-color: #c0ebff;
+    padding: 0.7rem 2rem;
+    border-radius: 50px;
+    box-shadow: 1px 1px black;
+    color: black;
+}
+
+.modify-section .change-btns {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem;
+    padding: 0 1rem 1rem;
+    width: 100%;
+}
+
+.modify-section section article span {
+    align-self: flex-start;
+    position: absolute;
+    top: -1.8rem;
+}
+
+.modify-section .change-btns button {
+    background-color: #c0ebff;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    text-transform: capitalize;
+    border-radius: 50px;
+    box-shadow: 1px 1px black;
+    color: black;
+}
+
+.modify-section section {
+    color: var(--bg-txt-color);
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.modify-section article {
+    display: flex;
+    flex-direction: column;
+    border-top: 4px solid var(--secondary-color);
+    border-bottom: 4px solid var(--secondary-color);
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 0 0.5rem;
+    position: relative;
+    border-radius: 10px;
+    gap: 0.5rem;
+    background-color: var(--modal);
+}
+
+.modify-section section h2 {
+    margin: 0;
+    text-transform: capitalize;
+    color: var(--bg-txt-color);
+    text-align: center;
+}
+
+.modify-section section article h3 {
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.modify-section article video {
+    width: 100%;
+    height: 200px;
+    box-shadow: var(--box-shadow);
+    border-radius: 10px;
+}
