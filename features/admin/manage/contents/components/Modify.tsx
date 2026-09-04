@@ -4,6 +4,7 @@ import { UseFetch } from "@/hooks/useFetch";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import { CategoryType } from "./Categories";
+import Image from "next/image";
 
 type ContentsType = {
     id: number;
@@ -58,6 +59,9 @@ function ModifyContents() {
         HandleFetchContents();
     },[category]);
 
+    const e = contents[0]?.file.slice(contents[0]?.file.lastIndexOf(".") + 1);
+    console.log(e)
+
     return (
         <div className="modify-section">
             <div className="change-btns">
@@ -66,7 +70,15 @@ function ModifyContents() {
                 {categories.length > 0 ? (
                     <>
                     {categories.map(c => (
-                        <button type="button" key={c.id} onClick={() => setCategory(c.category)}>
+                        <button type="button" key={c.id} onClick={() => {
+                            setContents([]);
+                            setCategory(c.category);
+                        }}
+                        style={{
+                            backgroundColor: category === c.category ? "transparent" : "",
+                            color: category === c.category ? "var(--bg-txt-color)" : "",
+                            border: category === c.category ? "var(--border)" : ""
+                        }}>
                             {c.category}
                         </button>
                     ))}
@@ -103,7 +115,13 @@ function ModifyContents() {
                                 year: "numeric"
                             })}</span>
                             <h3>{c.title}</h3>
-                            <video src={c.file} controls />
+
+                            {["mp4", "webm", "mov", "m4v"].includes(c.file.slice(c.file.lastIndexOf(".") + 1).toLowerCase()) && (
+                                <video src={c.file} controls />
+                            )}
+                            {["jpg", "jpeg", "png", "gif", "webp", "avif", "svg"].includes(c.file.slice(c.file.lastIndexOf(".") + 1).toLowerCase()) && (
+                                <Image alt="" src={c.file} width={500} height={300}/>
+                            )}
                             <p>{c.content}</p>
                         </article>
                     ))}
