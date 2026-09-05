@@ -4,7 +4,7 @@ import { useMenu } from "@/contexts/modals/MenuContext";
 import Link from "next/link";
 import styles from "../ui.module.css";
 import { usePathname } from "next/navigation";
-import { File, Heading, InboxIcon, School, Settings2, Settings2Icon, Sheet, User2 } from "lucide-react";
+import { BadgeCheck, BookOpen, ClipboardList, File, FileText, Heading, InboxIcon, RefreshCw, School, School2, Settings2, Settings2Icon, Sheet, User2 } from "lucide-react";
 import { UseAuthProvider } from "@/contexts/user/AuthFormProvider";
 import { useState } from "react";
 import { CreateUserType } from "@/types/user";
@@ -56,12 +56,27 @@ function MenuModal() {
 
                 <Link onClick={ResetMenu} href="/courses"
                 className={pathname === "/courses" ? "active" : ""}>
-                   <span><Sheet size={25}/></span>courses
+                   <span><BookOpen size={25}/></span>courses
                 </Link>
 
                 <Link onClick={ResetMenu} href="/past-questions"
                 className={pathname === "/past-questions" ? "active" : ""}>
-                   <span><File size={25}/></span>past questions
+                   <span><ClipboardList size={25}/></span>past questions
+                </Link>
+
+                <Link onClick={ResetMenu} href="/contents"
+                className={pathname === "/contents" ? "active" : ""}>
+                   <span><FileText size={25}/></span>contents
+                </Link>
+
+                <Link onClick={ResetMenu} href="/news"
+                className={pathname === "/news" ? "active" : ""}>
+                   <span><RefreshCw size={25}/></span>news / updates
+                </Link>
+
+                <Link onClick={ResetMenu} href="/recommendations"
+                className={pathname === "/recommendations" ? "active" : ""}>
+                   <span><BadgeCheck size={25}/></span>recommendations
                 </Link>
 
                 </>

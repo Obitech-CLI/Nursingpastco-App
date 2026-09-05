@@ -3,22 +3,27 @@
 import { UseFetch } from "@/hooks/useFetch";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
-import { CategoryType } from "./Categories";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, PenBox, Search, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search, X } from "lucide-react";
+import styles from "../public.module.css";
 
-type ContentsType = {
+type NewsType = {
     id: number;
     category: string;
     title: string;
-    content: string;
-    file: string;
+    news: string;
+    image: string;
     created_at: string;
 }
 
-function ModifyContents() {
+type CategoryType = {
+    id: number;
+    category: string;
+}
 
-    const [ contents, setContents ] = useState<ContentsType []>([]);
+function News() {
+
+    const [ news, setNews ] = useState<NewsType []>([]);
 
     const [ categories, setCategories ] = useState<CategoryType[]>([]);
 
@@ -26,7 +31,7 @@ function ModifyContents() {
     const [ search, setSearch ] = useState("");
     const [ page, setPage ] = useState(1);
 
-    const FetchContents = UseFetch();
+    const FetchNews = UseFetch();
     const FetchCategories = UseFetch();
 
     const HandleFetchCategories = async () =>
@@ -40,16 +45,19 @@ function ModifyContents() {
         }
     }
 
-    const HandleFetchContents = async () =>
+    const HandleFetchNews = async () =>
     {
-        if (!category) return;
+        const res = await FetchNews.Fetch(`/news?category=${category}&search=${search}&page=${page}`);
 
-        const res = await FetchContents.Fetch(`/contents?category=${category}&search=${search}&page=${page}`);
+        if (res) {
 
-        if (!res) return;
+            if (!res.success) {
+            setNews([]);
+            }
 
-        if (res.success) {
-            setContents(res.contents)
+            if (res.success) {
+            setNews(res.news)
+            }
         }
 
     }
@@ -59,26 +67,36 @@ function ModifyContents() {
     },[]);
 
     useEffect(() => {
-        HandleFetchContents();
+        HandleFetchNews();
     },[category, search, page]);
 
     return (
-        <div className="modify-section">
-            <div className="change-btns">
+        <div className={styles.contents}> 
+
+            <div className={styles.choose_categories}>
             {!FetchCategories.loading ? (
                 <>
                 {categories.length > 0 ? (
                     <>
                     <button type="button" onClick={() => {
-                        setCategory("");
-                        setContents([]);
+                        if (!category) return;
+                        setNews([]);
                         setPage(1);
-                    }}>
-                        <X color="red"/>
+                        setCategory("");
+                        setSearch("");
+                    }}
+                    style={{
+                            backgroundColor: !category ? "transparent" : "",
+                            border: !category ? "none" : ""
+                        }}
+                    >
+                        all
                     </button>
                     {categories.map(c => (
                         <button type="button" key={c.id} onClick={() => {
-                            setContents([]);
+                            setNews([]);
+                            setSearch("")
+                            setPage(1);
                             setCategory(c.category);
                         }}
                         style={{
@@ -106,66 +124,63 @@ function ModifyContents() {
             )}
             </div>
 
-            {contents.length > 0 && (
+            {categories.length > 0 && (
             <fieldset>
                 <Search size={25}/>
                 <input type="search" value={search} placeholder="enter title"
-                onChange={(e) => setSearch(e.target.value)}/>
+                onChange={(e) => {
+                    setSearch(e.target.value);
+                }}/>
             </fieldset>
             )}
             
-            {category && (
+            
                 <section>
-                {!FetchContents.loading ? (
+                {!FetchNews.loading ? (
                 <>
-                {contents.length > 0 ? (
+                {news.length > 0 ? (
                     <>
-                    <h2>{contents[0].category}</h2>
-                    {contents.map(c => (
-                        <article key={c.id}>
-                            <span>{new Date(c.created_at).toLocaleDateString("en-US", {
+                    {category && (<h2>{news[0].category}</h2>)}
+                    {news.map(n => (
+                        <div key={n.id}>
+                        {!category && (<h3>{n.category}</h3>)}
+                        <article>
+                            <span>{new Date(n.created_at).toLocaleDateString("en-US", {
                                 day: "numeric",
                                 weekday: "short",
                                 month: "short",
                                 year: "numeric"
                             })}</span>
-                            <h3>{c.title}</h3>
+                            <h3>{n.title}</h3>
 
-                            {["mp4", "webm", "mov", "m4v"].includes(c.file.slice(c.file.lastIndexOf(".") + 1).toLowerCase()) && (
-                                <video src={c.file} controls />
-                            )}
-                            {["jpg", "jpeg", "png", "gif", "webp", "avif", "svg"].includes(c.file.slice(c.file.lastIndexOf(".") + 1).toLowerCase()) && (
-                                <Image alt="" src={c.file} width={500} height={300}/>
-                            )}
-                            <p>{c.content}</p>
+                            <Image alt="" src={n.image} width={500} height={300}/>
+                            
+                            <p>{n.news}</p>
 
-                            <div className="btns">
-                                <button><X color="red" size={30}/></button>
-                                <button><PenBox color="blue" size={30}/></button>
-                            </div>
                         </article>
+                        </div>
                     ))}
                     </>
                 ) : (
                     <div className="retry">
-                    <p>{FetchContents.error}</p>
-                    <button type="button" onClick={HandleFetchContents}>
+                    <p>{FetchNews.error}</p>
+                    <button type="button" onClick={HandleFetchNews}>
                         retry
                     </button>
                     </div>
                 )}
 
                 <div className="pagination">
-                    {contents.length <= 3 && page > 1 ? (
+                    {news.length <= 3 && page > 1 ? (
                         <button type="button" onClick={() => {
-                            setContents([]);
+                            setNews([]);
                             setPage(prev => prev - 1);
                         }}><ChevronLeft /> </button>
                     ): (null)}
                     <>page {page}</>
-                    {contents.length == 3 && (
+                    {news.length == 3 && (
                         <button type="button" onClick={() => {
-                        setContents([]);
+                        setNews([]);
                         setPage(prev => prev + 1);
                         }}><ChevronRight /></button>
                     )}
@@ -178,8 +193,8 @@ function ModifyContents() {
               </div>
             )}
             </section>
-        )}
+        
     </div>
 )}
 
-export { ModifyContents }
+export { News }

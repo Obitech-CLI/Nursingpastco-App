@@ -37,15 +37,22 @@ export async function GET(req: NextRequest) {
 
     const searchParams = req.nextUrl.searchParams;
     const category = searchParams.get("category") as string;
+    const search = searchParams.get("search") as string;
+    const p = searchParams.get("page") as string;
+
+    const page = Number(p) || 1;
+
+    const from = Number(page - 1) * 3;
+    const to = from + 3 - 1;
 
     try {
-        const res = await GetContentsService(category);
+        const res = await GetContentsService(category, search, from, to);
 
-        if (!res.success) {
+        if (!res?.success) {
             return Response.json({
-                success: res.success,
-                error: res.error
-            },{status: res.status});
+                success: res?.success,
+                error: res?.error
+            },{status: res?.status});
         }
 
         return Response.json({

@@ -54,6 +54,11 @@ function AddContents() {
                 content: ""
             });
 
+            setFocus({
+                title: false,
+                content: false
+            })
+
             if (fileRef.current) {
                 fileRef.current.value = "";
             }

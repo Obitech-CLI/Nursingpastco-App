@@ -54,6 +54,13 @@ function AddNews() {
                 news: ""
             });
 
+            setFocus({
+                title: false,
+                content: false
+            });
+
+            setImage(null);
+
             if (fileRef.current) {
                 fileRef.current.value = "";
             }

@@ -4,6 +4,7 @@ import { UseManageNav } from "@/contexts/admin/ManageNavProvider";
 import { AddRecommenationCategory } from "@/features/admin/manage/recommendations/components/AddCategory";
 import { AddRecommendations } from "@/features/admin/manage/recommendations/components/AddRecommendations";
 import { ModifyRecommendationsCategories } from "@/features/admin/manage/recommendations/components/Categories";
+import { ModifyRecommendations } from "@/features/admin/manage/recommendations/components/Modify";
 import { Plus, Settings2, Settings2Icon, X } from "lucide-react";
 import { useRef, useState } from "react";
 
@@ -147,6 +148,10 @@ function ManageRecommendations() {
 
         {navManageRecommend.add && (
             <AddRecommendations />
+        )}
+
+        {navManageRecommend.view && (
+            <ModifyRecommendations />
         )}
 
         </>

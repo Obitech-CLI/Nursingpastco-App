@@ -3,22 +3,22 @@
 import { UseFetch } from "@/hooks/useFetch";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
-import { CategoryType } from "./Categories";
 import Image from "next/image";
+import { CategoryType } from "./Categories";
 import { ChevronLeft, ChevronRight, PenBox, Search, X } from "lucide-react";
 
-type ContentsType = {
+type NewsType = {
     id: number;
     category: string;
     title: string;
-    content: string;
-    file: string;
+    news: string;
+    image: string;
     created_at: string;
 }
 
-function ModifyContents() {
+function ModifyNews() {
 
-    const [ contents, setContents ] = useState<ContentsType []>([]);
+    const [ news, setNews ] = useState<NewsType []>([]);
 
     const [ categories, setCategories ] = useState<CategoryType[]>([]);
 
@@ -26,12 +26,12 @@ function ModifyContents() {
     const [ search, setSearch ] = useState("");
     const [ page, setPage ] = useState(1);
 
-    const FetchContents = UseFetch();
+    const FetchNews = UseFetch();
     const FetchCategories = UseFetch();
 
     const HandleFetchCategories = async () =>
     {
-        const res = await FetchCategories.Fetch("/contents/categories");
+        const res = await FetchCategories.Fetch("/news/categories");
 
         if (!res) return;
 
@@ -40,16 +40,16 @@ function ModifyContents() {
         }
     }
 
-    const HandleFetchContents = async () =>
+    const HandleFetchNews = async () =>
     {
         if (!category) return;
 
-        const res = await FetchContents.Fetch(`/contents?category=${category}&search=${search}&page=${page}`);
+        const res = await FetchNews.Fetch(`/news?category=${category}&search=${search}&page=${page}`);
 
         if (!res) return;
 
         if (res.success) {
-            setContents(res.contents)
+            setNews(res.news)
         }
 
     }
@@ -59,7 +59,7 @@ function ModifyContents() {
     },[]);
 
     useEffect(() => {
-        HandleFetchContents();
+        HandleFetchNews();
     },[category, search, page]);
 
     return (
@@ -71,14 +71,14 @@ function ModifyContents() {
                     <>
                     <button type="button" onClick={() => {
                         setCategory("");
-                        setContents([]);
+                        setNews([]);
                         setPage(1);
                     }}>
                         <X color="red"/>
                     </button>
                     {categories.map(c => (
                         <button type="button" key={c.id} onClick={() => {
-                            setContents([]);
+                            setNews([]);
                             setCategory(c.category);
                         }}
                         style={{
@@ -106,7 +106,7 @@ function ModifyContents() {
             )}
             </div>
 
-            {contents.length > 0 && (
+            {news.length > 0 && (
             <fieldset>
                 <Search size={25}/>
                 <input type="search" value={search} placeholder="enter title"
@@ -116,28 +116,24 @@ function ModifyContents() {
             
             {category && (
                 <section>
-                {!FetchContents.loading ? (
+                {!FetchNews.loading ? (
                 <>
-                {contents.length > 0 ? (
+                {news.length > 0 ? (
                     <>
-                    <h2>{contents[0].category}</h2>
-                    {contents.map(c => (
-                        <article key={c.id}>
-                            <span>{new Date(c.created_at).toLocaleDateString("en-US", {
+                    <h2>{news[0].category}</h2>
+                    {news.map(n => (
+                        <article key={n.id}>
+                            <span>{new Date(n.created_at).toLocaleDateString("en-US", {
                                 day: "numeric",
                                 weekday: "short",
                                 month: "short",
                                 year: "numeric"
                             })}</span>
-                            <h3>{c.title}</h3>
+                            <h3>{n.title}</h3>
 
-                            {["mp4", "webm", "mov", "m4v"].includes(c.file.slice(c.file.lastIndexOf(".") + 1).toLowerCase()) && (
-                                <video src={c.file} controls />
-                            )}
-                            {["jpg", "jpeg", "png", "gif", "webp", "avif", "svg"].includes(c.file.slice(c.file.lastIndexOf(".") + 1).toLowerCase()) && (
-                                <Image alt="" src={c.file} width={500} height={300}/>
-                            )}
-                            <p>{c.content}</p>
+                            <Image alt="" src={n.image} width={500} height={300}/>
+                            
+                            <p>{n.news}</p>
 
                             <div className="btns">
                                 <button><X color="red" size={30}/></button>
@@ -148,24 +144,24 @@ function ModifyContents() {
                     </>
                 ) : (
                     <div className="retry">
-                    <p>{FetchContents.error}</p>
-                    <button type="button" onClick={HandleFetchContents}>
+                    <p>{FetchNews.error}</p>
+                    <button type="button" onClick={HandleFetchNews}>
                         retry
                     </button>
                     </div>
                 )}
 
                 <div className="pagination">
-                    {contents.length <= 3 && page > 1 ? (
+                    {news.length <= 3 && page > 1 ? (
                         <button type="button" onClick={() => {
-                            setContents([]);
+                            setNews([]);
                             setPage(prev => prev - 1);
                         }}><ChevronLeft /> </button>
                     ): (null)}
                     <>page {page}</>
-                    {contents.length == 3 && (
+                    {news.length == 3 && (
                         <button type="button" onClick={() => {
-                        setContents([]);
+                        setNews([]);
                         setPage(prev => prev + 1);
                         }}><ChevronRight /></button>
                     )}
@@ -177,9 +173,10 @@ function ModifyContents() {
                 <ClipLoader size={50} color="var(--bg-txt-color)"/>
               </div>
             )}
+
             </section>
         )}
     </div>
 )}
 
-export { ModifyContents }
+export { ModifyNews }

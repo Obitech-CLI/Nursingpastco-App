@@ -50,7 +50,7 @@ async ({category, title, image: file, recommendation, link}: Props) =>
 
     return {
         success: true,
-        message: "content added success",
+        message: "recommendation added success",
         status: 201
     }
 }

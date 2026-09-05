@@ -3,22 +3,23 @@
 import { UseFetch } from "@/hooks/useFetch";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
-import { CategoryType } from "./Categories";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, PenBox, Search, X } from "lucide-react";
+import { CategoryType } from "./Categories";
+import { ChevronLeft, ChevronRight, Link2, PenBox, Search, X } from "lucide-react";
+import Link from "next/link";
 
-type ContentsType = {
+type RecommendationsType = {
     id: number;
     category: string;
     title: string;
-    content: string;
-    file: string;
-    created_at: string;
+    recommendation: string;
+    image: string;
+    link: string;
 }
 
-function ModifyContents() {
+function ModifyRecommendations() {
 
-    const [ contents, setContents ] = useState<ContentsType []>([]);
+    const [ recommendations, setRecommendations ] = useState<RecommendationsType []>([]);
 
     const [ categories, setCategories ] = useState<CategoryType[]>([]);
 
@@ -26,12 +27,12 @@ function ModifyContents() {
     const [ search, setSearch ] = useState("");
     const [ page, setPage ] = useState(1);
 
-    const FetchContents = UseFetch();
+    const FetchRecommendations = UseFetch();
     const FetchCategories = UseFetch();
 
     const HandleFetchCategories = async () =>
     {
-        const res = await FetchCategories.Fetch("/contents/categories");
+        const res = await FetchCategories.Fetch("/recommendations/categories");
 
         if (!res) return;
 
@@ -40,16 +41,16 @@ function ModifyContents() {
         }
     }
 
-    const HandleFetchContents = async () =>
+    const HandleFetchRecommendations = async () =>
     {
         if (!category) return;
 
-        const res = await FetchContents.Fetch(`/contents?category=${category}&search=${search}&page=${page}`);
+        const res = await FetchRecommendations.Fetch(`/recommendations?category=${category}&search=${search}&page=${page}`);
 
         if (!res) return;
 
         if (res.success) {
-            setContents(res.contents)
+            setRecommendations(res.recommendations)
         }
 
     }
@@ -59,7 +60,7 @@ function ModifyContents() {
     },[]);
 
     useEffect(() => {
-        HandleFetchContents();
+        HandleFetchRecommendations();
     },[category, search, page]);
 
     return (
@@ -71,14 +72,14 @@ function ModifyContents() {
                     <>
                     <button type="button" onClick={() => {
                         setCategory("");
-                        setContents([]);
+                        setRecommendations([]);
                         setPage(1);
                     }}>
                         <X color="red"/>
                     </button>
                     {categories.map(c => (
                         <button type="button" key={c.id} onClick={() => {
-                            setContents([]);
+                            setRecommendations([]);
                             setCategory(c.category);
                         }}
                         style={{
@@ -106,7 +107,7 @@ function ModifyContents() {
             )}
             </div>
 
-            {contents.length > 0 && (
+            {recommendations.length > 0 && (
             <fieldset>
                 <Search size={25}/>
                 <input type="search" value={search} placeholder="enter title"
@@ -116,28 +117,22 @@ function ModifyContents() {
             
             {category && (
                 <section>
-                {!FetchContents.loading ? (
+                {!FetchRecommendations.loading ? (
                 <>
-                {contents.length > 0 ? (
+                {recommendations.length > 0 ? (
                     <>
-                    <h2>{contents[0].category}</h2>
-                    {contents.map(c => (
-                        <article key={c.id}>
-                            <span>{new Date(c.created_at).toLocaleDateString("en-US", {
-                                day: "numeric",
-                                weekday: "short",
-                                month: "short",
-                                year: "numeric"
-                            })}</span>
-                            <h3>{c.title}</h3>
+                    <h2>{recommendations[0].category}</h2>
+                    {recommendations.map(r => (
+                        <article key={r.id}>
+                            <h3>{r.title}</h3>
 
-                            {["mp4", "webm", "mov", "m4v"].includes(c.file.slice(c.file.lastIndexOf(".") + 1).toLowerCase()) && (
-                                <video src={c.file} controls />
-                            )}
-                            {["jpg", "jpeg", "png", "gif", "webp", "avif", "svg"].includes(c.file.slice(c.file.lastIndexOf(".") + 1).toLowerCase()) && (
-                                <Image alt="" src={c.file} width={500} height={300}/>
-                            )}
-                            <p>{c.content}</p>
+                            <Image alt="" src={r.image} width={500} height={300}/>
+                            
+                            <pre style={{
+                                textAlign: "center"
+                            }}>{r.recommendation}</pre>
+
+                            <Link href={r.link}>goto recommendation <Link2 /></Link>
 
                             <div className="btns">
                                 <button><X color="red" size={30}/></button>
@@ -148,24 +143,24 @@ function ModifyContents() {
                     </>
                 ) : (
                     <div className="retry">
-                    <p>{FetchContents.error}</p>
-                    <button type="button" onClick={HandleFetchContents}>
+                    <p>{FetchRecommendations.error}</p>
+                    <button type="button" onClick={HandleFetchRecommendations}>
                         retry
                     </button>
                     </div>
                 )}
 
                 <div className="pagination">
-                    {contents.length <= 3 && page > 1 ? (
+                    {recommendations.length <= 3 && page > 1 ? (
                         <button type="button" onClick={() => {
-                            setContents([]);
+                            setRecommendations([]);
                             setPage(prev => prev - 1);
                         }}><ChevronLeft /> </button>
                     ): (null)}
                     <>page {page}</>
-                    {contents.length == 3 && (
+                    {recommendations.length == 3 && (
                         <button type="button" onClick={() => {
-                        setContents([]);
+                        setRecommendations([]);
                         setPage(prev => prev + 1);
                         }}><ChevronRight /></button>
                     )}
@@ -182,4 +177,4 @@ function ModifyContents() {
     </div>
 )}
 
-export { ModifyContents }
+export { ModifyRecommendations }

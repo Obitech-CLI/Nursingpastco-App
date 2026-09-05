@@ -141,7 +141,7 @@ function AddRecommendationsForm({formData, setFormData, focus, setFocus, image, 
             <label>
                 <textarea placeholder="enter content" value={formData.recommendation}
                 onChange={(e) => {
-                    setFormData(prev => ({...prev, content: e.target.value}));
+                    setFormData(prev => ({...prev, recommendation: e.target.value}));
                 }}/>
             </label>
 

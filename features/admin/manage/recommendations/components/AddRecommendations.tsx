@@ -47,7 +47,7 @@ function AddRecommendations() {
             form_data.append("image", image);
         }
 
-        const res = await PostFormData.Post("/recommendations", formData);
+        const res = await PostFormData.Post("/recommendations", form_data);
 
         if (!res) return;
 
@@ -62,6 +62,8 @@ function AddRecommendations() {
             if (fileRef.current) {
                 fileRef.current.value = "";
             }
+
+            setImage(null);
         }
     }
 

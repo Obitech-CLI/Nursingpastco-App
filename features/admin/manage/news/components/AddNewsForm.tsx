@@ -140,7 +140,7 @@ function AddNewsForm({formData, setFormData, focus, setFocus, image, setImage, f
             <label>
                 <textarea placeholder="enter news/updates" value={formData.news}
                 onChange={(e) => {
-                    setFormData(prev => ({...prev, content: e.target.value}));
+                    setFormData(prev => ({...prev, news: e.target.value}));
                 }}/>
             </label>
 

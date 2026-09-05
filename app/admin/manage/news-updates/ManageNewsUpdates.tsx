@@ -4,6 +4,7 @@ import { UseManageNav } from "@/contexts/admin/ManageNavProvider";
 import { AddNewsCategory } from "@/features/admin/manage/news/components/AddCategory";
 import { AddNews } from "@/features/admin/manage/news/components/AddNews";
 import { ModifyNewsCategories } from "@/features/admin/manage/news/components/Categories";
+import { ModifyNews } from "@/features/admin/manage/news/components/Modify";
 import { Plus, Settings2, Settings2Icon, X } from "lucide-react";
 import { useRef, useState } from "react";
 
@@ -150,6 +151,10 @@ function ManageNewsUpdates() {
 
         {navManageNews.add && (
             <AddNews />
+        )}
+
+        {navManageNews.view && (
+            <ModifyNews />
         )}
 
         </>

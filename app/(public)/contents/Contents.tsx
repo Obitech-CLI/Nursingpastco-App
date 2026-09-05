@@ -3,9 +3,9 @@
 import { UseFetch } from "@/hooks/useFetch";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
-import { CategoryType } from "./Categories";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, PenBox, Search, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search, X } from "lucide-react";
+import styles from "../public.module.css";
 
 type ContentsType = {
     id: number;
@@ -16,7 +16,12 @@ type ContentsType = {
     created_at: string;
 }
 
-function ModifyContents() {
+type CategoryType = {
+    id: number;
+    category: string;
+}
+
+function Contents() {
 
     const [ contents, setContents ] = useState<ContentsType []>([]);
 
@@ -42,14 +47,16 @@ function ModifyContents() {
 
     const HandleFetchContents = async () =>
     {
-        if (!category) return;
-
         const res = await FetchContents.Fetch(`/contents?category=${category}&search=${search}&page=${page}`);
+
+        setContents([]);
 
         if (!res) return;
 
         if (res.success) {
             setContents(res.contents)
+        } else {
+            setContents([]);
         }
 
     }
@@ -63,22 +70,32 @@ function ModifyContents() {
     },[category, search, page]);
 
     return (
-        <div className="modify-section">
-            <div className="change-btns">
+        <div className={styles.contents}> 
+
+            <div className={styles.choose_categories}>
             {!FetchCategories.loading ? (
                 <>
                 {categories.length > 0 ? (
                     <>
                     <button type="button" onClick={() => {
-                        setCategory("");
+                        if (!category) return;
                         setContents([]);
                         setPage(1);
-                    }}>
-                        <X color="red"/>
+                        setCategory("");
+                        setSearch("");
+                    }}
+                    style={{
+                            backgroundColor: !category ? "transparent" : "",
+                            border: !category ? "none" : ""
+                        }}
+                    >
+                        all
                     </button>
                     {categories.map(c => (
                         <button type="button" key={c.id} onClick={() => {
                             setContents([]);
+                            setSearch("")
+                            setPage(1);
                             setCategory(c.category);
                         }}
                         style={{
@@ -106,23 +123,27 @@ function ModifyContents() {
             )}
             </div>
 
-            {contents.length > 0 && (
+            {categories.length > 0 && (
             <fieldset>
                 <Search size={25}/>
                 <input type="search" value={search} placeholder="enter title"
-                onChange={(e) => setSearch(e.target.value)}/>
+                onChange={(e) => {
+                    setSearch(e.target.value);
+                }}/>
             </fieldset>
             )}
             
-            {category && (
+            
                 <section>
                 {!FetchContents.loading ? (
                 <>
                 {contents.length > 0 ? (
                     <>
-                    <h2>{contents[0].category}</h2>
+                    {category && (<h2>{contents[0].category}</h2>)}
                     {contents.map(c => (
-                        <article key={c.id}>
+                        <div key={c.id}>
+                        {!category && (<h3>{c.category}</h3>)}
+                        <article>
                             <span>{new Date(c.created_at).toLocaleDateString("en-US", {
                                 day: "numeric",
                                 weekday: "short",
@@ -139,11 +160,8 @@ function ModifyContents() {
                             )}
                             <p>{c.content}</p>
 
-                            <div className="btns">
-                                <button><X color="red" size={30}/></button>
-                                <button><PenBox color="blue" size={30}/></button>
-                            </div>
                         </article>
+                        </div>
                     ))}
                     </>
                 ) : (
@@ -178,8 +196,8 @@ function ModifyContents() {
               </div>
             )}
             </section>
-        )}
+        
     </div>
 )}
 
-export { ModifyContents }
+export { Contents }
