@@ -4,17 +4,14 @@ import { AppTheme } from "@/ui/Theme";
 import { LogoWithName } from "@/ui/Logo";
 import { ArrowLeft, ChevronDown, ChevronUp, HomeIcon, Search } from "lucide-react";
 import { useState } from "react";
-import { LoginUserButton } from "@/ui/buttons/Login";
 import { MenuButton } from "@/ui/buttons/Menu";
 import { usePathname, useRouter } from "next/navigation";
-import { UseAuthProvider } from "@/contexts/user/AuthFormProvider";
-import { UseUser } from "@/contexts/user/UserProvider";
 
 
 function Header() {
 
     const [showNav, setShowNav] = useState(true);
-    const { setShowCreateForm, setShowLoginForm } = UseAuthProvider();
+    
     const pathname = usePathname();
     const router = useRouter();
 
@@ -24,14 +21,10 @@ function Header() {
         } else {
             router.replace("/");
         }
-        setShowCreateForm(false);
-        setShowLoginForm(false);
     }
 
     const GoBack = () => {
         history.back();
-        setShowCreateForm(false);
-        setShowLoginForm(false);
     }
 
     return (
@@ -42,9 +35,6 @@ function Header() {
                     <button type="button" className="icon" onClick={() => setShowNav(!showNav)}>
                      {showNav ? <ChevronDown /> : <ChevronUp />}
                     </button>
-                    {!pathname.startsWith("/admin") && (
-                        <LoginUserButton />
-                    )}
                 </div>
             </div>
     
@@ -67,7 +57,6 @@ function Header() {
                     )}
                     <MenuButton />
                     <AppTheme />
-                    <Search size={25}/>
                 </div>
             </nav>
             )}

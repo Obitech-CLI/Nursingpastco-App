@@ -4,8 +4,8 @@ import { UseFetch } from "@/hooks/useFetch";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Search, X } from "lucide-react";
-import styles from "../public.module.css";
+import { ChevronLeft, ChevronRight, RotateCcw, Search, X } from "lucide-react";
+import styles from "./news.module.css";
 
 type NewsType = {
     id: number;
@@ -49,15 +49,14 @@ function News() {
     {
         const res = await FetchNews.Fetch(`/news?category=${category}&search=${search}&page=${page}`);
 
-        if (res) {
+        setNews([]);
 
-            if (!res.success) {
-            setNews([]);
-            }
+        if (!res) return;
 
-            if (res.success) {
+        if (res.success) {
             setNews(res.news)
-            }
+        } else {
+            setNews([]);
         }
 
     }
@@ -71,7 +70,7 @@ function News() {
     },[category, search, page]);
 
     return (
-        <div className={styles.contents}> 
+        <div className={styles.news}> 
 
             <div className={styles.choose_categories}>
             {!FetchCategories.loading ? (
@@ -108,18 +107,18 @@ function News() {
                     ))}
                     </>
                 ) : (
-                    <div className="retry">
+                    <div className={styles.categories_retry}>
                     <p>{FetchCategories.error}</p>
                     <button type="button" onClick={HandleFetchCategories}>
-                        retry
+                        <RotateCcw />
                     </button>
                     </div>
                 )}
                 </>
             ) : (
-                <div className="loading">
+                <div className={styles.categories_loading}>
                 <p>loading categories...</p>
-                <ClipLoader size={50} color="var(--bg-txt-color)"/>
+                <ClipLoader size={25} color="var(--bg-txt-color)"/>
                 </div>
             )}
             </div>
@@ -140,7 +139,7 @@ function News() {
                 <>
                 {news.length > 0 ? (
                     <>
-                    {category && (<h2>{news[0].category}</h2>)}
+                    {category && (<h3>{news[0].category}</h3>)}
                     {news.map(n => (
                         <div key={n.id}>
                         {!category && (<h3>{n.category}</h3>)}
@@ -162,10 +161,10 @@ function News() {
                     ))}
                     </>
                 ) : (
-                    <div className="retry">
+                    <div className={styles.news_retry}>
                     <p>{FetchNews.error}</p>
                     <button type="button" onClick={HandleFetchNews}>
-                        retry
+                        <RotateCcw />
                     </button>
                     </div>
                 )}
@@ -187,8 +186,8 @@ function News() {
                 </div>
                 </>
             ) : (
-              <div className="loading">
-                <p>loading...</p>
+              <div className={styles.news_loading}>
+                <p>loading news/updates...</p>
                 <ClipLoader size={50} color="var(--bg-txt-color)"/>
               </div>
             )}

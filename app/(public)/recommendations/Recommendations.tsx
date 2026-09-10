@@ -4,8 +4,9 @@ import { UseFetch } from "@/hooks/useFetch";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Search, X } from "lucide-react";
-import styles from "../public.module.css";
+import { ChevronLeft, ChevronRight, Link2, RotateCcw, Search, X } from "lucide-react";
+import styles from "./recommend.module.css";
+import Link from "next/link";
 
 type RecommendationsType = {
     id: number;
@@ -71,7 +72,7 @@ function Recommendations() {
     },[category, search, page]);
 
     return (
-        <div className={styles.contents}> 
+        <div className={styles.recommendations}> 
 
             <div className={styles.choose_categories}>
             {!FetchCategories.loading ? (
@@ -108,18 +109,18 @@ function Recommendations() {
                     ))}
                     </>
                 ) : (
-                    <div className="retry">
+                    <div className={styles.categories_retry}>
                     <p>{FetchCategories.error}</p>
                     <button type="button" onClick={HandleFetchCategories}>
-                        retry
+                        <RotateCcw />
                     </button>
                     </div>
                 )}
                 </>
             ) : (
-                <div className="loading">
+                <div className={styles.categories_loading}>
                 <p>loading categories...</p>
-                <ClipLoader size={50} color="var(--bg-txt-color)"/>
+                <ClipLoader size={25} color="var(--bg-txt-color)"/>
                 </div>
             )}
             </div>
@@ -140,7 +141,7 @@ function Recommendations() {
                 <>
                 {recommendations.length > 0 ? (
                     <>
-                    {category && (<h2>{recommendations[0].category}</h2>)}
+                    {category && (<h3>{recommendations[0].category}</h3>)}
                     {recommendations.map(r => (
                         <div key={r.id}>
                         {!category && (<h3>{r.category}</h3>)}
@@ -151,12 +152,14 @@ function Recommendations() {
                             
                             <p>{r.recommendation}</p>
 
+                            <Link href={r.link}>goto recommendation <Link2 /></Link>
+
                         </article>
                         </div>
                     ))}
                     </>
                 ) : (
-                    <div className="retry">
+                    <div className={styles.recommendations_retry}>
                     <p>{FetchRecommendations.error}</p>
                     <button type="button" onClick={HandleFetchRecommendations}>
                         retry
@@ -181,8 +184,8 @@ function Recommendations() {
                 </div>
                 </>
             ) : (
-              <div className="loading">
-                <p>loading...</p>
+              <div className={styles.recommendations_loading}>
+                <p>loading recommendations...</p>
                 <ClipLoader size={50} color="var(--bg-txt-color)"/>
               </div>
             )}

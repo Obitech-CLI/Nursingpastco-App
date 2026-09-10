@@ -4,26 +4,17 @@ import { useMenu } from "@/contexts/modals/MenuContext";
 import Link from "next/link";
 import styles from "../ui.module.css";
 import { usePathname } from "next/navigation";
-import { BadgeCheck, BookOpen, ClipboardList, File, FileText, Heading, InboxIcon, RefreshCw, School, School2, Settings2, Settings2Icon, Sheet, User2 } from "lucide-react";
-import { UseAuthProvider } from "@/contexts/user/AuthFormProvider";
-import { useState } from "react";
-import { CreateUserType } from "@/types/user";
-import { UseUser } from "@/contexts/user/UserProvider";
+import { BadgeCheck, BookOpen, ClipboardList, FileText, InboxIcon, RefreshCw, School, Settings2, Settings2Icon, User2 } from "lucide-react";
 
 function MenuModal() {
 
-    const { user } = UseUser();
-
     const { showMenu, setShowMenu } = useMenu();
-    const { setShowCreateForm, setShowLoginForm } = UseAuthProvider();
 
     const pathname = usePathname();
 
     {/*closes the menu modal on link navigation */}
     const ResetMenu = () => {
         setShowMenu(false);
-        setShowCreateForm(false)
-        setShowLoginForm(false);
     }
 
     return (
@@ -32,20 +23,6 @@ function MenuModal() {
             <>
             <nav className={styles.menu}>
                <>
-                {user && (
-                    <>
-                    <Link onClick={ResetMenu} href="/user/profile" 
-                    className={pathname === "/user/profile" ? "active" : ""}>
-                        <span><User2 size={25}/></span>my profile
-                    </Link>
-
-                    <Link onClick={ResetMenu} href="/user/setting" 
-                    className={pathname === "/user/setting" ? "active" : ""}>
-                        <span><Settings2Icon size={25}/></span>settings
-                    </Link>
-                    </>
-                )}
-
                {(!pathname.startsWith("/admin")) && (
                 <>
 

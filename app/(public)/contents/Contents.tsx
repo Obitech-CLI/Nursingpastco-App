@@ -4,8 +4,8 @@ import { UseFetch } from "@/hooks/useFetch";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Search, X } from "lucide-react";
-import styles from "../public.module.css";
+import { ChevronLeft, ChevronRight, RotateCcw, Search, X } from "lucide-react";
+import styles from "./contents.module.css";
 
 type ContentsType = {
     id: number;
@@ -107,18 +107,22 @@ function Contents() {
                     ))}
                     </>
                 ) : (
-                    <div className="retry">
-                    <p>{FetchCategories.error}</p>
-                    <button type="button" onClick={HandleFetchCategories}>
-                        retry
-                    </button>
-                    </div>
+                    <>
+                    {FetchCategories.error && (
+                        <div className={styles.categories_retry}>
+                          <p>{FetchCategories.error}</p>
+                          <button type="button" onClick={HandleFetchCategories}>
+                           <RotateCcw />
+                          </button>
+                        </div>
+                    )}
+                    </>
                 )}
                 </>
             ) : (
-                <div className="loading">
-                <p>loading categories...</p>
-                <ClipLoader size={50} color="var(--bg-txt-color)"/>
+                <div className={styles.categories_loading}>
+                    <p>loading categories...</p>
+                    <ClipLoader size={25} color="var(--bg-txt-color)"/>
                 </div>
             )}
             </div>
@@ -139,7 +143,7 @@ function Contents() {
                 <>
                 {contents.length > 0 ? (
                     <>
-                    {category && (<h2>{contents[0].category}</h2>)}
+                    {category && (<h3>{contents[0].category}</h3>)}
                     {contents.map(c => (
                         <div key={c.id}>
                         {!category && (<h3>{c.category}</h3>)}
@@ -165,10 +169,10 @@ function Contents() {
                     ))}
                     </>
                 ) : (
-                    <div className="retry">
+                    <div className={styles.contents_retry}>
                     <p>{FetchContents.error}</p>
                     <button type="button" onClick={HandleFetchContents}>
-                        retry
+                        <RotateCcw />
                     </button>
                     </div>
                 )}
@@ -190,8 +194,8 @@ function Contents() {
                 </div>
                 </>
             ) : (
-              <div className="loading">
-                <p>loading...</p>
+              <div className={styles.contents_loading}>
+                <p>loading contents...</p>
                 <ClipLoader size={50} color="var(--bg-txt-color)"/>
               </div>
             )}
