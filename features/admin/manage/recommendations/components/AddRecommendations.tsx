@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { SetStateAction, useRef, useState } from "react";
 import { UsePost } from "@/hooks/usePost";
 import { AddRecommendationsForm } from "./AddRecommendationsForm";
+import { EditRecommendationType } from "@/app/admin/manage/recommendations/ManageRecommendations";
 
 export type AddRecommendationsFormDataType = {
     category: string;
@@ -11,7 +12,16 @@ export type AddRecommendationsFormDataType = {
     link: string;
 }
 
-function AddRecommendations() {
+type Props = {
+    edit: boolean,
+    setEdit: React.Dispatch<SetStateAction<boolean>>;
+    editData: EditRecommendationType,
+    setEditData: React.Dispatch<SetStateAction<EditRecommendationType>>;
+    editImage: File | null;
+    setEditImage: React.Dispatch<SetStateAction<File | null>>;
+}
+
+function AddRecommendations({edit, setEdit, setEditData, editData, editImage, setEditImage}:Props) {
 
     const [ formData, setFormData ] = useState({
         category: "",
@@ -79,6 +89,12 @@ function AddRecommendations() {
         setImage={setImage}
         postLoading={PostFormData.loading}
         submit={HandleFormSubmit}
+        edit={edit}
+        setEdit={setEdit}
+        editData={editData}
+        setEditData={setEditData}
+        editImage={editImage}
+        setEditImage={setEditImage}
         />
         </>
     )

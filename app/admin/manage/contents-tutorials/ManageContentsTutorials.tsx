@@ -8,6 +8,13 @@ import { ModifyContents } from "@/features/admin/manage/contents/components/Modi
 import { Plus, Settings2, Settings2Icon, X } from "lucide-react";
 import { useRef, useState } from "react";
 
+export type EditContentType = {
+    id: string;
+    category: string;
+    title: string;
+    content: string;
+}
+
 function ManageContentTutorials() {
 
     const { navManageContents, setNavManageContents } = UseManageNav();
@@ -71,7 +78,7 @@ function ManageContentTutorials() {
                     </>
                 ) : (
                     <>
-                    {!edit ? "add contents & tutorials" : "update contents & tutorials"}
+                    {!edit ? "add contents" : "update contents"}
                     </>
                 )}
     
@@ -101,7 +108,7 @@ function ManageContentTutorials() {
                 gridArea: navManageContents.view ? "2/ 1/ 2/ 2" : "",
                 fontSize: navManageContents.view ? "1.1rem" : "",
             }}>
-                {!navManageContents.view ? "modify" : "modify contents & tutorials"}
+                {!navManageContents.view ? "modify" : "modify contents"}
                 {!navManageContents.view ? <Settings2 /> : ""}
             </button>
         </div>
@@ -151,11 +158,25 @@ function ManageContentTutorials() {
         )}
 
         {navManageContents.add && (
-            <AddContents />
+            <AddContents
+            edit={edit}
+            setEdit={setEdit}
+            editData={editData}
+            setEditData={setEditData}
+            editFile={editFile}
+            setEditFile={setEditFile}
+            />
         )}
 
         {navManageContents.view && (
-            <ModifyContents />
+            <ModifyContents
+            edit={edit}
+            setEdit={setEdit}
+            editData={editData}
+            setEditData={setEditData}
+            setNav={setNavManageContents}
+            scroll={scrollToForm}
+            />
         )}
 
         </>

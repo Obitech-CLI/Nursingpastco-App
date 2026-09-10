@@ -1,11 +1,14 @@
 "use client";
 
 import { UseFetch } from "@/hooks/useFetch";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import Image from "next/image";
 import { CategoryType } from "./Categories";
-import { ChevronLeft, ChevronRight, PenBox, Search, X } from "lucide-react";
+import { ChevronLeft, ChevronRight, Pen, PenBox, Search, X } from "lucide-react";
+import { EditNewsType } from "@/app/admin/manage/news-updates/ManageNewsUpdates";
+import { UseDelete } from "@/hooks/useDelete";
+import { useConfirmModal } from "@/contexts/modals/FeedbackContext";
 
 type NewsType = {
     id: number;
@@ -16,7 +19,21 @@ type NewsType = {
     created_at: string;
 }
 
-function ModifyNews() {
+type NavType = {
+    add: boolean,
+    view: boolean
+}
+
+type Props = {
+    edit: boolean,
+    setEdit: React.Dispatch<SetStateAction<boolean>>;
+    editData: EditNewsType,
+    setEditData: React.Dispatch<SetStateAction<EditNewsType>>;
+    setNav: React.Dispatch<SetStateAction<NavType>>;
+    scroll: () => void;
+}
+
+function ModifyNews({edit, setEdit, setEditData, editData, setNav, scroll}:Props) {
 
     const [ news, setNews ] = useState<NewsType []>([]);
 
@@ -25,6 +42,12 @@ function ModifyNews() {
     const [ category, setCategory ] = useState("");
     const [ search, setSearch ] = useState("");
     const [ page, setPage ] = useState(1);
+
+    const [deleteId, setDeleteId] = useState("");
+
+    const DeleteNews = UseDelete();
+
+    const { confirm, setShowConfirmModal, setConfirmMessage } = useConfirmModal();
 
     const FetchNews = UseFetch();
     const FetchCategories = UseFetch();
@@ -46,13 +69,41 @@ function ModifyNews() {
 
         const res = await FetchNews.Fetch(`/news?category=${category}&search=${search}&page=${page}`);
 
+        setNews([]);
+
         if (!res) return;
 
         if (res.success) {
             setNews(res.news)
+        } else {
+            setNews([]);
         }
 
     }
+
+    const HandleDeleteClick = (id: string) =>
+    {
+        if (!id) return;
+
+        setConfirmMessage("are you sure you want to delete this news?");
+        setShowConfirmModal(true);
+        setDeleteId(id);
+    }
+
+    const Delete = async () => {
+        if (!confirm && !deleteId) return;
+
+        const res = await DeleteNews.Delete(`/news/${deleteId}`);
+
+        if (res.success) {
+            setDeleteId("");
+            HandleFetchNews();
+        }
+    }
+
+    useEffect(() => {
+        Delete();
+    }, [confirm])
 
     useEffect(() => {
         HandleFetchCategories();
@@ -106,7 +157,7 @@ function ModifyNews() {
             )}
             </div>
 
-            {news.length > 0 && (
+            {categories.length > 0 && (
             <fieldset>
                 <Search size={25}/>
                 <input type="search" value={search} placeholder="enter title"
@@ -136,8 +187,37 @@ function ModifyNews() {
                             <p>{n.news}</p>
 
                             <div className="btns">
-                                <button><X color="red" size={30}/></button>
-                                <button><PenBox color="blue" size={30}/></button>
+
+                                <button type="button"
+                                onClick={() => {
+                                    setEdit(true);
+                                    setEditData({
+                                        id: String(n.id),
+                                        category: n.category,
+                                        title: n.title,
+                                        news: n.news
+                                    });
+                                    setNav({add: true, view: false});
+                                    scroll();
+                                }}>
+                                    <PenBox color="blue" size={25}/>
+                                    edit
+                                </button>
+
+                                <button onClick={() => HandleDeleteClick(String(n.id))}
+                                   disabled={DeleteNews.loading}>
+                                   <X color="red" size={25}/>
+                                   delete
+                                </button>
+
+                                {DeleteNews.loading && (
+                                <div className="delete-loading">
+                                  <ClipLoader size={40} color="var(--bg-txt-color)"/>
+                                  <p>deleting news...</p>
+                                  <p style={{textTransform: "lowercase"}}>hold on a bit</p>
+                                </div>
+                                )}
+
                             </div>
                         </article>
                     ))}
@@ -169,7 +249,7 @@ function ModifyNews() {
                 </>
             ) : (
               <div className="loading">
-                <p>loading...</p>
+                <p>loading news/updates...</p>
                 <ClipLoader size={50} color="var(--bg-txt-color)"/>
               </div>
             )}

@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { SetStateAction, useRef, useState } from "react";
 import { UsePost } from "@/hooks/usePost";
 import { AddNewsForm } from "./AddNewsForm";
+import { EditNewsType } from "@/app/admin/manage/news-updates/ManageNewsUpdates";
 
 export type AddNewsFormDataType = {
     category: string;
@@ -10,7 +11,16 @@ export type AddNewsFormDataType = {
     news: string;
 }
 
-function AddNews() {
+type Props = {
+    edit: boolean,
+    setEdit: React.Dispatch<SetStateAction<boolean>>;
+    editData: EditNewsType,
+    setEditData: React.Dispatch<SetStateAction<EditNewsType>>;
+    editImage: File | null;
+    setEditImage: React.Dispatch<SetStateAction<File | null>>;
+}
+
+function AddNews({edit, setEdit, setEditData, editData, setEditImage, editImage}:Props) {
 
     const [ formData, setFormData ] = useState({
         category: "",
@@ -79,6 +89,12 @@ function AddNews() {
         setImage={setImage}
         postLoading={PostFormData.loading}
         submit={HandleFormSubmit}
+        edit={edit}
+        setEdit={setEdit}
+        editData={editData}
+        setEditData={setEditData}
+        editImage={editImage}
+        setEditImage={setEditImage}
         />
         </>
     )

@@ -841,11 +841,12 @@ form.auth .remember_me > span {
 
 .modify-section .change-btns {
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     gap: 1rem;
     padding: 1rem;
     width: 100%;
     overflow: auto;
+    scrollbar-width: none;
 }
 
 .modify-section fieldset {
@@ -870,8 +871,17 @@ form.auth .remember_me > span {
     align-items: center;
     gap: 1rem;
     padding-top: 1rem;
-    margin-bottom: -3.7rem;
+    margin-bottom: -4rem;
+    margin-left: -1rem;
+}
 
+.modify-section article .btns > button {
+    background-color: #c0ebff;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.5rem 1rem;
+    box-shadow: 1px 1px black;
 }
 
 .pagination {
@@ -885,45 +895,50 @@ form.auth .remember_me > span {
 .modify-section section article span {
     align-self: flex-start;
     position: absolute;
-    top: -1.8rem;
+    top: -2.3rem;
+    box-shadow: var(--box-shadow);
+    padding: 0.4rem 1rem;
+    border-radius: 10px;
+    left: 0.5rem;
 }
 
 .modify-section .change-btns button {
-    padding: 0.8rem 1.5rem;
+    padding: 0.5rem 1.5rem;
     font-size: 1rem;
     text-transform: capitalize;
     border-radius: 10px;
     box-shadow: 1px 1px black;
     color: var(--bg-txt-color);
     border: var(--border);
+    white-space: nowrap;
 }
 
 .modify-section section {
     color: var(--bg-txt-color);
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: 5rem;
 }
 
 .modify-section article {
     display: flex;
     flex-direction: column;
-    border-top: 4px solid var(--secondary-color);
-    border-bottom: 4px solid var(--secondary-color);
+    box-shadow: var(--box-shadow);
     border-radius: 10px;
     padding: 1rem;
-    margin: 0 0.5rem 3rem;
+    margin: 0 1rem 3rem;
     position: relative;
     border-radius: 10px;
     gap: 0.5rem;
-    background-color: var(--div);
 }
 
 .modify-section section h2 {
-    margin: 0;
+    margin: 0 2rem;
+    padding: 0.5rem;
     text-transform: capitalize;
-    color: var(--bg-txt-color);
     text-align: center;
+    background-color: var(--secondary-color);
+    color: white;border-radius: 5px;
 }
 
 .modify-section section article h3 {

@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { SetStateAction, useRef, useState } from "react";
 import { AddContentsForm } from "./AddFormContents";
 import { UsePost } from "@/hooks/usePost";
+import { EditContentType } from "@/app/admin/manage/contents-tutorials/ManageContentsTutorials";
 
 export type AddContentsFormDataType = {
     category: string;
@@ -10,7 +11,16 @@ export type AddContentsFormDataType = {
     content: string;
 }
 
-function AddContents() {
+type Props = {
+    edit: boolean,
+    setEdit: React.Dispatch<SetStateAction<boolean>>;
+    editData: EditContentType,
+    setEditData: React.Dispatch<SetStateAction<EditContentType>>;
+    editFile: File | null,
+    setEditFile: React.Dispatch<SetStateAction<File | null>>;
+}
+
+function AddContents({edit, setEdit, setEditData, editData, editFile, setEditFile}:Props) {
 
     const [ formData, setFormData ] = useState({
         category: "",
@@ -79,6 +89,12 @@ function AddContents() {
         setFile={setFile}
         postLoading={PostFormData.loading}
         submit={HandleFormSubmit}
+        edit={edit}
+        setEdit={setEdit}
+        editData={editData}
+        setEditData={setEditData}
+        editFile={editFile}
+        setEditFile={setEditFile}
         />
         </>
     )

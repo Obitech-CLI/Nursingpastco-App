@@ -5,6 +5,7 @@ import { Check, ChevronDown, ChevronUp, Image, X } from "lucide-react";
 import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import { AddRecommendationsFormDataType } from "./AddRecommendations";
+import { EditRecommendationType } from "@/app/admin/manage/recommendations/ManageRecommendations";
 
 export type CategoryType = {
     id: number;
@@ -27,9 +28,15 @@ type Props = {
     setImage: React.Dispatch<SetStateAction<File | null>>;
     postLoading: boolean;
     submit: React.FormEventHandler<HTMLFormElement>;
+    edit: boolean,
+    setEdit: React.Dispatch<SetStateAction<boolean>>;
+    editData: EditRecommendationType,
+    setEditData: React.Dispatch<SetStateAction<EditRecommendationType>>;
+    editImage: File | null;
+    setEditImage: React.Dispatch<SetStateAction<File | null>>;
 }
 
-function AddRecommendationsForm({formData, setFormData, focus, setFocus, image, setImage, fileRef, postLoading, submit} : Props) {
+function AddRecommendationsForm({editImage, setEditImage, formData, setFormData, focus, setFocus, image, setImage, fileRef, postLoading, submit, edit, editData, setEditData, setEdit} : Props) {
 
     const [ categories, setCategories ] = useState<CategoryType[]>([]);
 
@@ -57,15 +64,36 @@ function AddRecommendationsForm({formData, setFormData, focus, setFocus, image, 
         HandleFetchCategories();
     }, []);
 
+    const CancelEdit = () => {
+        setEdit(false);
+        setEditData({
+            id: "",
+            category: "",
+            title: "",
+            recommendation: "",
+            link: ""
+        });
+        setEditImage(null);
+    }
+
     return (
         <form className="add" onSubmit={submit}>
+
+            {edit && (
+                <span onClick={CancelEdit}>
+                    cancel update <X color="red"/>
+                </span>
+            )}
+
             <label className="select">
                 <>
-                {formData.category ? formData.category : "select category"}
+                {!edit && (<>{formData.category ? formData.category : "select category"}</>)}
+                {edit && (<>{editData.category && editData.category}</>)}
+
                 <div onClick={() => {
                     setShowCategories(true);
                 }}>
-                    {showCategories ? <ChevronDown /> : <ChevronUp />}
+                    {showCategories ? <ChevronUp /> : <ChevronDown /> }
                 </div>
                 </>
 
@@ -80,7 +108,13 @@ function AddRecommendationsForm({formData, setFormData, focus, setFocus, image, 
                         {categories.length > 0 ? (
                             <>
                             {categories.map(c => (
-                                <li key={c.id} onClick={() => HandleSelect(c.category)}>
+                                <li key={c.id} onClick={() => {
+                                    if (!edit) {
+                                        HandleSelect(c.category);
+                                        return;
+                                    }
+                                    setEditData(prev => ({...prev, category: c.category}));
+                                }}>
                                     {c.category}
                                 </li>
                             ))}
@@ -105,16 +139,26 @@ function AddRecommendationsForm({formData, setFormData, focus, setFocus, image, 
 
             <label>
                 <span style={{
-                    top: focus.title ? "-1rem" : ""
+                    top: focus.title || edit ? "-1rem" : ""
                 }}>
-                    {focus.title ? "enter title" : "title"}
+                    <>
+                    {!edit && (<>{focus.title ? "enter title" : "title"}</>)}
+                    {edit && (<>{edit ? "update title" : "title"}</>)}
+                    </>
                 </span>
-                <input type="text" value={formData.title}
+
+                <input type="text" value={edit ? editData.title : formData.title}
                 onChange={(e) => {
-                    setFormData(prev => ({...prev, title: e.target.value}))
+                    if (!edit) {
+                        setFormData(prev => ({...prev, title: e.target.value}));
+                        return;
+                    }
+                    setEditData(prev => ({...prev, title: e.target.value}));
                 }}
                 onFocus={() => {
-                    setFocus(prev => ({...prev, title: true}));
+                    if (!edit) {
+                        setFocus(prev => ({...prev, title: true}));
+                    }
                 }}
                 onBlur={() => {
                     if (!formData.title) {
@@ -127,36 +171,66 @@ function AddRecommendationsForm({formData, setFormData, focus, setFocus, image, 
             <label className="file">
                 <Image size={30}/>
                 <span>
-                    {image ? "image selected" : "select an image"}
-                    {image && <Check />}
+                    <>
+                    {!edit && (
+                        <>
+                        {image ? "image selected" : "select an image"}
+                        {image && <Check color="green"/>}
+                        </>
+                    )}
+                    {edit && (
+                        <>
+                        {editImage ? "image selected" : "update image"}
+                        {editImage && <Check color="green"/>}
+                        </>
+                    )}
+                    </>
                 </span>
                 <input type="file" ref={fileRef} accept="image/*"
                     onChange={(e) => {
                     if (e.target.files) {
-                        setImage(e.target.files?.[0] ?? null)
+                        if (!edit) {
+                            setImage(e.target.files?.[0] ?? null);
+                            return;
+                        }
+                        setEditImage(e.target.files?.[0] ?? null);
                     }
                 }}/>
             </label>
 
             <label>
-                <textarea placeholder="enter content" value={formData.recommendation}
+                <textarea placeholder="enter content" 
+                value={edit ? editData.recommendation : formData.recommendation}
                 onChange={(e) => {
-                    setFormData(prev => ({...prev, recommendation: e.target.value}));
+                    if (!edit) {
+                        setFormData(prev => ({...prev, recommendation: e.target.value}));
+                        return
+                    }
+                    setEditData(prev => ({...prev, recommendation: e.target.value}));
                 }}/>
             </label>
 
             <label>
                 <span style={{
-                    top: focus.link ? "-1rem" : ""
+                    top: focus.link || edit ? "-1rem" : ""
                 }}>
-                    {focus.link ? "enter link" : "link"}
+                    <>
+                    {!edit && (<>{focus.link ? "enter link" : "link"}</>)}
+                    {edit && (<>{edit ? "update link" : "link"}</>)}
+                    </>
                 </span>
-                <input type="text" value={formData.link}
+                <input type="text" value={edit ? editData.link : formData.link}
                 onChange={(e) => {
-                    setFormData(prev => ({...prev, link: e.target.value}))
+                    if (!edit) {
+                        setFormData(prev => ({...prev, link: e.target.value}));
+                        return;
+                    }
+                    setEditData(prev => ({...prev, link: e.target.value}))
                 }}
                 onFocus={() => {
-                    setFocus(prev => ({...prev, link: true}));
+                    if (!edit) {
+                        setFocus(prev => ({...prev, link: true}));
+                    }
                 }}
                 onBlur={() => {
                     if (!formData.link) {
@@ -167,8 +241,20 @@ function AddRecommendationsForm({formData, setFormData, focus, setFocus, image, 
             </label>
 
             <button type="submit" disabled={postLoading}>
-                {postLoading ? "adding..." : "add"}
-                {postLoading && <ClipLoader size={30} color="black" />}
+                <>
+                {!edit && (
+                    <>
+                    {postLoading ? "adding..." : "add"}
+                    {postLoading && <ClipLoader size={30} color="black" />}
+                    </>
+                )}
+                {edit && (
+                    <>
+                    {postLoading ? "updating..." : "update"}
+                    {postLoading && <ClipLoader size={30} color="black" />}
+                    </>
+                )}
+                </>
             </button>
         </form>
     )

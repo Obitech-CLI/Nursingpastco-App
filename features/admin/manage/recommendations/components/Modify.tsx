@@ -1,12 +1,15 @@
 "use client";
 
 import { UseFetch } from "@/hooks/useFetch";
-import { useEffect, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import Image from "next/image";
 import { CategoryType } from "./Categories";
 import { ChevronLeft, ChevronRight, Link2, PenBox, Search, X } from "lucide-react";
 import Link from "next/link";
+import { EditRecommendationType } from "@/app/admin/manage/recommendations/ManageRecommendations";
+import { UseDelete } from "@/hooks/useDelete";
+import { useConfirmModal } from "@/contexts/modals/FeedbackContext";
 
 type RecommendationsType = {
     id: number;
@@ -17,7 +20,21 @@ type RecommendationsType = {
     link: string;
 }
 
-function ModifyRecommendations() {
+type NavType = {
+    add: boolean,
+    view: boolean
+}
+
+type Props = {
+    edit: boolean,
+    setEdit: React.Dispatch<SetStateAction<boolean>>;
+    editData: EditRecommendationType,
+    setEditData: React.Dispatch<SetStateAction<EditRecommendationType>>;
+    setNav: React.Dispatch<SetStateAction<NavType>>;
+    scroll: () => void;
+}
+
+function ModifyRecommendations({edit, setEdit, setEditData, editData, setNav, scroll}:Props) {
 
     const [ recommendations, setRecommendations ] = useState<RecommendationsType []>([]);
 
@@ -26,6 +43,12 @@ function ModifyRecommendations() {
     const [ category, setCategory ] = useState("");
     const [ search, setSearch ] = useState("");
     const [ page, setPage ] = useState(1);
+
+    const [deleteId, setDeleteId] = useState("");
+
+    const DeleteRecommendation = UseDelete();
+
+    const { confirm, setShowConfirmModal, setConfirmMessage } = useConfirmModal();
 
     const FetchRecommendations = UseFetch();
     const FetchCategories = UseFetch();
@@ -47,13 +70,41 @@ function ModifyRecommendations() {
 
         const res = await FetchRecommendations.Fetch(`/recommendations?category=${category}&search=${search}&page=${page}`);
 
+        setRecommendations([]);
+
         if (!res) return;
 
         if (res.success) {
             setRecommendations(res.recommendations)
+        } else {
+            setRecommendations([]);
         }
 
     }
+
+    const HandleDeleteClick = (id: string) =>
+    {
+        if (!id) return;
+
+        setConfirmMessage("are you sure you want to delete this recommendation?");
+        setShowConfirmModal(true);
+        setDeleteId(id);
+    }
+
+    const Delete = async () => {
+        if (!confirm && !deleteId) return;
+
+        const res = await DeleteRecommendation.Delete(`/recommendation/${deleteId}`);
+
+        if (res.success) {
+            setDeleteId("");
+            HandleFetchRecommendations();
+        }
+    }
+
+    useEffect(() => {
+        Delete();
+    }, [confirm])
 
     useEffect(() => {
         HandleFetchCategories();
@@ -107,7 +158,7 @@ function ModifyRecommendations() {
             )}
             </div>
 
-            {recommendations.length > 0 && (
+            {categories.length > 0 && (
             <fieldset>
                 <Search size={25}/>
                 <input type="search" value={search} placeholder="enter title"
@@ -128,15 +179,43 @@ function ModifyRecommendations() {
 
                             <Image alt="" src={r.image} width={500} height={300}/>
                             
-                            <pre style={{
-                                textAlign: "center"
-                            }}>{r.recommendation}</pre>
+                            <p>{r.recommendation}</p>
 
                             <Link href={r.link}>goto recommendation <Link2 /></Link>
 
                             <div className="btns">
-                                <button><X color="red" size={30}/></button>
-                                <button><PenBox color="blue" size={30}/></button>
+
+                                <button type="button"
+                                onClick={() => {
+                                    setEdit(true);
+                                    setEditData({
+                                        id: String(r.id),
+                                        category: r.category,
+                                        title: r.title,
+                                        recommendation: r.recommendation,
+                                        link: r.link
+                                    });
+                                    setNav({add: true, view: false});
+                                    scroll();
+                                }}>
+                                    <PenBox color="blue" size={25}/>
+                                    edit
+                                </button>
+
+                                <button onClick={() => HandleDeleteClick(String(r.id))}
+                                   disabled={DeleteRecommendation.loading}>
+                                   <X color="red" size={25}/>
+                                   delete
+                                </button>
+
+                                {DeleteRecommendation.loading && (
+                                <div className="delete-loading">
+                                  <ClipLoader size={40} color="var(--bg-txt-color)"/>
+                                  <p>deleting recommendation...</p>
+                                  <p style={{textTransform: "lowercase"}}>hold on a bit</p>
+                                </div>
+                                )}
+
                             </div>
                         </article>
                     ))}
@@ -168,7 +247,7 @@ function ModifyRecommendations() {
                 </>
             ) : (
               <div className="loading">
-                <p>loading...</p>
+                <p>loading recommendations...</p>
                 <ClipLoader size={50} color="var(--bg-txt-color)"/>
               </div>
             )}

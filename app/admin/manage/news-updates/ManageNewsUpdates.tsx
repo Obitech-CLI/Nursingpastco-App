@@ -8,6 +8,13 @@ import { ModifyNews } from "@/features/admin/manage/news/components/Modify";
 import { Plus, Settings2, Settings2Icon, X } from "lucide-react";
 import { useRef, useState } from "react";
 
+export type EditNewsType = {
+    id: string;
+    category: string;
+    title: string;
+    news: string;
+}
+
 function ManageNewsUpdates() {
 
     const { navManageNews, setNavManageNews } = UseManageNav();
@@ -22,7 +29,7 @@ function ManageNewsUpdates() {
             news: ""
     });
 
-    const [editFile, setEditFile] = useState<File | null>(null);
+    const [ editImage, setEditImage ] = useState<File | null>(null);
 
     const [ editCategory, setEditCategory ] = useState(false);
     const [ editCategoryData, setEditCategoryData ] = useState({
@@ -71,7 +78,7 @@ function ManageNewsUpdates() {
                     </>
                 ) : (
                     <>
-                    {!edit ? "add news & updates" : "update news & updates"}
+                    {!edit ? "add news" : "update news"}
                     </>
                 )}
     
@@ -94,14 +101,14 @@ function ManageNewsUpdates() {
                     news: "",
                 })
                 setEdit(false);
-                setEditFile(null);
+                setEditImage(null);
             }}
             style={{
                 border: navManageNews.view ? "none" : "",
                 gridArea: navManageNews.view ? "2/ 1/ 2/ 2" : "",
                 fontSize: navManageNews.view ? "1.1rem" : "",
             }}>
-                {!navManageNews.view ? "modify" : "modify news & updates"}
+                {!navManageNews.view ? "modify" : "modify news"}
                 {!navManageNews.view ? <Settings2 /> : ""}
             </button>
         </div>
@@ -150,11 +157,25 @@ function ManageNewsUpdates() {
         )}
 
         {navManageNews.add && (
-            <AddNews />
+            <AddNews
+            edit={edit}
+            setEdit={setEdit}
+            editData={editData}
+            setEditData={setEditData}
+            editImage={editImage}
+            setEditImage={setEditImage}
+            />
         )}
 
         {navManageNews.view && (
-            <ModifyNews />
+            <ModifyNews
+            edit={edit}
+            setEdit={setEdit}
+            editData={editData}
+            setEditData={setEditData}
+            setNav={setNavManageNews}
+            scroll={scrollToForm}
+            />
         )}
 
         </>

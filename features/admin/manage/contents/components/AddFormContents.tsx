@@ -5,6 +5,7 @@ import { Check, ChevronDown, ChevronUp, Image, Video, X } from "lucide-react";
 import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import { AddContentsFormDataType } from "./AddContents";
+import { EditContentType } from "@/app/admin/manage/contents-tutorials/ManageContentsTutorials";
 
 export type CategoryType = {
     id: number;
@@ -26,9 +27,15 @@ type Props = {
     setFile: React.Dispatch<SetStateAction<File | null>>;
     postLoading: boolean;
     submit: React.FormEventHandler<HTMLFormElement>;
+    edit: boolean,
+    setEdit: React.Dispatch<SetStateAction<boolean>>;
+    editData: EditContentType,
+    setEditData: React.Dispatch<SetStateAction<EditContentType>>;
+    editFile: File | null,
+    setEditFile: React.Dispatch<SetStateAction<File | null>>;
 }
 
-function AddContentsForm({formData, setFormData, focus, setFocus, file, setFile, fileRef, postLoading, submit} : Props) {
+function AddContentsForm({editFile, setEditFile, formData, setFormData, focus, setFocus, file, setFile, fileRef, postLoading, submit, edit, editData, setEditData, setEdit} : Props) {
 
     const [ categories, setCategories ] = useState<CategoryType[]>([]);
 
@@ -59,11 +66,33 @@ function AddContentsForm({formData, setFormData, focus, setFocus, file, setFile,
         HandleFetchCategories();
     }, []);
 
+    const CancelEdit = () => {
+        setEdit(false);
+        setEditData({
+            id: "",
+            category: "",
+            title: "",
+            content: ""
+        });
+        setEditFile(null);
+        setVideo(false);
+        setImage(false);
+    }
+
     return (
         <form className="add" onSubmit={submit}>
+
+            {edit && (
+                <span onClick={CancelEdit}>
+                    cancel update <X color="red"/>
+                </span>
+            )}
+
             <label className="select">
                 <>
-                {formData.category ? formData.category : "select category"}
+                {!edit && (<>{formData.category ? formData.category : "select category"}</>)}
+                {edit && (<>{editData.category && editData.category}</>)}
+
                 <div onClick={() => {
                     setShowCategories(true);
                 }}>
@@ -82,7 +111,13 @@ function AddContentsForm({formData, setFormData, focus, setFocus, file, setFile,
                         {categories.length > 0 ? (
                             <>
                             {categories.map(c => (
-                                <li key={c.id} onClick={() => HandleSelect(c.category)}>
+                                <li key={c.id} onClick={() => {
+                                    if (!edit) {
+                                        HandleSelect(c.category);
+                                        return;
+                                    }
+                                    setEditData(prev => ({...prev, category: c.category}));
+                                }}>
                                     {c.category}
                                 </li>
                             ))}
@@ -107,16 +142,26 @@ function AddContentsForm({formData, setFormData, focus, setFocus, file, setFile,
 
             <label>
                 <span style={{
-                    top: focus.title ? "-1rem" : ""
+                    top: focus.title || edit ? "-1rem" : ""
                 }}>
-                    {focus.title ? "enter title" : "title"}
+                    <>
+                    {!edit && (<>{focus.title ? "enter title" : "title"}</>)}
+                    {edit && (<>{edit ? "update title" : "title"}</>)}
+                    </>
                 </span>
-                <input type="text" value={formData.title}
+
+                <input type="text" value={edit ? editData.title : formData.title}
                 onChange={(e) => {
-                    setFormData(prev => ({...prev, title: e.target.value}))
+                    if (!edit) {
+                        setFormData(prev => ({...prev, title: e.target.value}));
+                        return;
+                    }
+                    setEditData(prev => ({...prev, title: e.target.value}));
                 }}
                 onFocus={() => {
-                    setFocus(prev => ({...prev, title: true}));
+                    if (!edit) {
+                        setFocus(prev => ({...prev, title: true}));
+                    }
                 }}
                 onBlur={() => {
                     if (!formData.title) {
@@ -131,14 +176,14 @@ function AddContentsForm({formData, setFormData, focus, setFocus, file, setFile,
                     <button type="button" onClick={() => {
                     setImage(true);
                     setVideo(false);
-                    }}>add image</button>
+                    }}>{edit ? "update image" : "add image"}</button>
                 )}
 
                 {!video && (
                     <button type="button" onClick={() => {
                     setVideo(true);
                     setImage(false);
-                    }}>add video</button>
+                    }}>{edit ? "update video" : "add video"}</button>
                 )}
             </div>
 
@@ -147,13 +192,28 @@ function AddContentsForm({formData, setFormData, focus, setFocus, file, setFile,
                     <>
                     <Image size={30}/>
                     <span>
-                    {file ? "image selected" : "select an image"}
-                    {file && <Check />}
+                        {!edit && (
+                            <>
+                            {file ? "image selected" : "select an image"}
+                            {file && <Check color="green"/>}
+                            </>
+                        )}
+                        {edit && (
+                            <>
+                            {editFile ? "image selected" : "update image"}
+                            {editFile && <Check color="green"/>}
+                            </>
+                        )}
                     </span>
+
                      <input type="file" ref={fileRef} accept="image/*"
                     onChange={(e) => {
                     if (e.target.files) {
-                        setFile(e.target.files?.[0] ?? null)
+                        if (!edit) {
+                            setFile(e.target.files?.[0] ?? null);
+                            return;
+                        }
+                        setEditFile(e.target.files?.[0] ?? null)
                     }
                     }}/>
                     </>
@@ -163,13 +223,28 @@ function AddContentsForm({formData, setFormData, focus, setFocus, file, setFile,
                     <>
                     <Video size={30}/>
                     <span>
-                    {file ? "video selected" : "select a video"}
-                    {file && <Check />}
+                        {!edit && (
+                            <>
+                            {file ? "video selected" : "select a video"}
+                            {file && <Check color="green"/>}
+                            </>
+                        )}
+                        {edit && (
+                            <>
+                            {editFile ? "video selected" : "update video"}
+                            {editFile && <Check color="green"/>}
+                            </>
+                        )}
                     </span>
+
                      <input type="file" ref={fileRef} accept="video/*"
                     onChange={(e) => {
                     if (e.target.files) {
-                        setFile(e.target.files?.[0] ?? null)
+                        if (!edit) {
+                            setFile(e.target.files?.[0] ?? null);
+                            return;
+                        }
+                        setEditFile(e.target.files?.[0] ?? null);
                     }
                     }}/>
                     </>
@@ -177,15 +252,32 @@ function AddContentsForm({formData, setFormData, focus, setFocus, file, setFile,
             </label>
 
             <label>
-                <textarea placeholder="enter content" value={formData.content}
+                <textarea placeholder="enter content" 
+                value={edit ? editData.content : formData.content}
                 onChange={(e) => {
-                    setFormData(prev => ({...prev, content: e.target.value}));
+                    if (!edit) {
+                        setFormData(prev => ({...prev, content: e.target.value}));
+                        return
+                    }
+                    setEditData(prev => ({...prev, content: e.target.value}));
                 }}/>
             </label>
 
             <button type="submit" disabled={postLoading}>
-                {postLoading ? "adding..." : "add"}
-                {postLoading && <ClipLoader size={30} color="black" />}
+                <>
+                {!edit && (
+                    <>
+                    {postLoading ? "adding..." : "add"}
+                    {postLoading && <ClipLoader size={30} color="black" />}
+                    </>
+                )}
+                {edit && (
+                    <>
+                    {postLoading ? "updating..." : "update"}
+                    {postLoading && <ClipLoader size={30} color="black" />}
+                    </>
+                )}
+                </>
             </button>
         </form>
     )

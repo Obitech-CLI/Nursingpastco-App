@@ -46,7 +46,7 @@ function AdminManageNav() {
                 </div>
 
                 <div>
-                    <h3>contents and tutorials</h3>
+                    <h3>contents</h3>
                     <h4>available: 8</h4>
                     <Link href="/admin/manage/contents-tutorials">
                     <Settings size={25} className={styles.icon}/>

@@ -8,6 +8,14 @@ import { ModifyRecommendations } from "@/features/admin/manage/recommendations/c
 import { Plus, Settings2, Settings2Icon, X } from "lucide-react";
 import { useRef, useState } from "react";
 
+export type EditRecommendationType = {
+    id: string;
+    category: string;
+    title: string;
+    recommendation: string;
+    link: string;
+}
+
 function ManageRecommendations() {
 
     const { navManageRecommend, setNavManageRecommend } = UseManageNav();
@@ -19,8 +27,11 @@ function ManageRecommendations() {
             id: "",
             category: "",
             title: "",
-            recommendation: ""
+            recommendation: "",
+            link: ""
     });
+
+    const [ editImage, setEditImage ] = useState<File | null>(null);
 
     const [ editCategory, setEditCategory ] = useState(false);
     const [ editCategoryData, setEditCategoryData ] = useState({
@@ -90,8 +101,10 @@ function ManageRecommendations() {
                     category: "",
                     title: "",
                     recommendation: "",
+                    link: ""
                 })
                 setEdit(false);
+                setEditImage(null);
             }}
             style={{
                 border: navManageRecommend.view ? "none" : "",
@@ -147,11 +160,25 @@ function ManageRecommendations() {
         )}
 
         {navManageRecommend.add && (
-            <AddRecommendations />
+            <AddRecommendations
+            edit={edit}
+            setEdit={setEdit}
+            editData={editData}
+            setEditData={setEditData}
+            editImage={editImage}
+            setEditImage={setEditImage}
+            />
         )}
 
         {navManageRecommend.view && (
-            <ModifyRecommendations />
+            <ModifyRecommendations 
+            edit={edit}
+            setEdit={setEdit}
+            editData={editData}
+            setEditData={setEditData}
+            setNav={setNavManageRecommend}
+            scroll={scrollToForm}
+            />
         )}
 
         </>

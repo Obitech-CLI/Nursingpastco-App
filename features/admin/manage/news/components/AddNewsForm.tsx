@@ -5,6 +5,7 @@ import { Check, ChevronDown, ChevronUp, Image, X } from "lucide-react";
 import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import { AddNewsFormDataType } from "./AddNews";
+import { EditNewsType } from "@/app/admin/manage/news-updates/ManageNewsUpdates";
 
 export type CategoryType = {
     id: number;
@@ -26,9 +27,15 @@ type Props = {
     setImage: React.Dispatch<SetStateAction<File | null>>;
     postLoading: boolean;
     submit: React.FormEventHandler<HTMLFormElement>;
+    edit: boolean,
+    setEdit: React.Dispatch<SetStateAction<boolean>>;
+    editData: EditNewsType,
+    setEditData: React.Dispatch<SetStateAction<EditNewsType>>;
+    editImage: File | null;
+    setEditImage: React.Dispatch<SetStateAction<File | null>>;
 }
 
-function AddNewsForm({formData, setFormData, focus, setFocus, image, setImage, fileRef, postLoading, submit} : Props) {
+function AddNewsForm({editImage, setEditImage, formData, setFormData, focus, setFocus, image, setImage, fileRef, postLoading, submit, edit, editData, setEditData, setEdit} : Props) {
 
     const [ categories, setCategories ] = useState<CategoryType[]>([]);
 
@@ -56,11 +63,31 @@ function AddNewsForm({formData, setFormData, focus, setFocus, image, setImage, f
         HandleFetchCategories();
     }, []);
 
+    const CancelEdit = () => {
+        setEdit(false);
+        setEditData({
+            id: "",
+            category: "",
+            title: "",
+            news: ""
+        });
+        setEditImage(null);
+    }
+
     return (
         <form className="add" onSubmit={submit}>
+
+            {edit && (
+                <span onClick={CancelEdit}>
+                    cancel update <X color="red"/>
+                </span>
+            )}
+
             <label className="select">
                 <>
-                {formData.category ? formData.category : "select category"}
+                {!edit && (<>{formData.category ? formData.category : "select category"}</>)}
+                {edit && (<>{editData.category && editData.category}</>)}
+
                 <div onClick={() => {
                     setShowCategories(true);
                 }}>
@@ -79,7 +106,13 @@ function AddNewsForm({formData, setFormData, focus, setFocus, image, setImage, f
                         {categories.length > 0 ? (
                             <>
                             {categories.map(c => (
-                                <li key={c.id} onClick={() => HandleSelect(c.category)}>
+                                <li key={c.id} onClick={() => {
+                                    if (!edit) {
+                                        HandleSelect(c.category);
+                                        return;
+                                    }
+                                    setEditData(prev => ({...prev, category: c.category}));
+                                }}>
                                     {c.category}
                                 </li>
                             ))}
@@ -104,16 +137,26 @@ function AddNewsForm({formData, setFormData, focus, setFocus, image, setImage, f
 
             <label>
                 <span style={{
-                    top: focus.title ? "-1rem" : ""
+                    top: focus.title || edit ? "-1rem" : ""
                 }}>
-                    {focus.title ? "enter title" : "title"}
+                    <>
+                    {!edit && (<>{focus.title ? "enter title" : "title"}</>)}
+                    {edit && (<>{edit ? "update title" : "title"}</>)}
+                    </>
                 </span>
-                <input type="text" value={formData.title}
+
+                <input type="text" value={edit ? editData.title : formData.title}
                 onChange={(e) => {
-                    setFormData(prev => ({...prev, title: e.target.value}))
+                    if (!edit) {
+                        setFormData(prev => ({...prev, title: e.target.value}));
+                        return;
+                    }
+                    setEditData(prev => ({...prev, title: e.target.value}));
                 }}
                 onFocus={() => {
-                    setFocus(prev => ({...prev, title: true}));
+                    if (!edit) {
+                        setFocus(prev => ({...prev, title: true}));
+                    }
                 }}
                 onBlur={() => {
                     if (!formData.title) {
@@ -126,27 +169,60 @@ function AddNewsForm({formData, setFormData, focus, setFocus, image, setImage, f
             <label className="file">
                 <Image size={30}/>
                 <span>
-                    {image ? "image selected" : "select an image"}
-                    {image && <Check />}
+                    <>
+                    {!edit && (
+                        <>
+                        {image ? "image selected" : "select an image"}
+                        {image && <Check />}
+                        </>
+                    )}
+                    {edit && (
+                        <>
+                        {editImage ? "image selected" : "update image"}
+                        {editImage && <Check />}
+                        </>
+                    )}
+                    </>
                 </span>
                 <input type="file" ref={fileRef} accept="image/*"
                     onChange={(e) => {
                     if (e.target.files) {
-                        setImage(e.target.files?.[0] ?? null)
+                        if (!edit) {
+                            setImage(e.target.files?.[0] ?? null);
+                            return;
+                        }
+                        setEditImage(e.target.files?.[0] ?? null)
                     }
                 }}/>
             </label>
 
             <label>
-                <textarea placeholder="enter news/updates" value={formData.news}
+                <textarea placeholder="enter news/updates" 
+                value={edit ? editData.news : formData.news}
                 onChange={(e) => {
-                    setFormData(prev => ({...prev, news: e.target.value}));
+                    if (!edit) {
+                        setFormData(prev => ({...prev, news: e.target.value}));
+                        return
+                    }
+                    setEditData(prev => ({...prev, news: e.target.value}));
                 }}/>
             </label>
 
             <button type="submit" disabled={postLoading}>
-                {postLoading ? "adding..." : "add"}
-                {postLoading && <ClipLoader size={30} color="black" />}
+                <>
+                {!edit && (
+                    <>
+                    {postLoading ? "adding..." : "add"}
+                    {postLoading && <ClipLoader size={30} color="black" />}
+                    </>
+                )}
+                {edit && (
+                    <>
+                    {postLoading ? "updating..." : "update"}
+                    {postLoading && <ClipLoader size={30} color="black" />}
+                    </>
+                )}
+                </>
             </button>
         </form>
     )
