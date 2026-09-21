@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaTiktok, FaWhatsapp, FaYoutube } from "react-icons/fa";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import ObitechLogo from "@/public/Obitech Logo.png";
@@ -52,12 +52,12 @@ function Footer() {
           <div className="socials">
             <span>20.1k</span>
             <div>
-              {/*<Link href="">
+              <Link href="">
                 <FaTiktok size={25} color="#000000" />
               </Link>
               <Link href="">
                 <FaYoutube size={25} color="red" />
-              </Link>*/}
+              </Link>
               <Link href="https://wa.me/2330592235166">
                 <FaWhatsapp size={30} color="#00ff00" />
               </Link>
