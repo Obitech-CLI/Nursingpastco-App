@@ -4,6 +4,7 @@ import { SetStateAction, useRef, useState } from "react";
 import { UsePost } from "@/hooks/usePost";
 import { AddNewsForm } from "./AddNewsForm";
 import { EditNewsType } from "@/app/admin/manage/news-updates/ManageNewsUpdates";
+import { UsePatch } from "@/hooks/usePatch";
 
 export type AddNewsFormDataType = {
     category: string;
@@ -38,6 +39,7 @@ function AddNews({edit, setEdit, setEditData, editData, setEditImage, editImage}
     const fileRef = useRef<HTMLInputElement>(null);
 
     const PostFormData = UsePost();
+    const PatchFormData = UsePatch();
 
     const HandleFormSubmit = async (e:React.FormEvent<HTMLFormElement>) =>
     {
@@ -45,34 +47,46 @@ function AddNews({edit, setEdit, setEditData, editData, setEditImage, editImage}
 
         const form_data = new FormData();
 
-        form_data.append("category", formData.category)
-        form_data.append("title", formData.title)
-        form_data.append("news", formData.news)
+        form_data.append("category", editData.category || formData.category)
+        form_data.append("title", editData.title || formData.title)
+        form_data.append("news", editData.news || formData.news)
 
         if (image) {
             form_data.append("image", image);
+        } else if (editImage) {
+            form_data.append("image", editImage);
         }
 
-        const res = await PostFormData.Post("/news", form_data);
+        let res;
 
-        if (!res) return;
+        if (!edit) {
+            res = await PostFormData.Post("/news", form_data);
+        } else if (edit) {
+            res = await PatchFormData.Patch("/news", form_data);
+        }
 
-        if (res.success) {
-            setFormData({
-                category: "",
-                title: "",
-                news: ""
-            });
+        if (res) {
+            if (res.success) {
+                if (!edit) {
+                    setFormData({
+                        category: "",
+                        title: "",
+                        news: "",
+                    })
+                    setImage(null);
+                } else {
+                    setEditData({
+                        id: "",
+                        category: "",
+                        title: "",
+                        news: ""
+                    })
+                    setEditImage(null)
+                }
 
-            setFocus({
-                title: false,
-                content: false
-            });
-
-            setImage(null);
-
-            if (fileRef.current) {
-                fileRef.current.value = "";
+                if (fileRef.current) {
+                    fileRef.current.value = "";
+                }
             }
         }
     }
@@ -87,7 +101,7 @@ function AddNews({edit, setEdit, setEditData, editData, setEditImage, editImage}
         fileRef={fileRef}
         image={image}
         setImage={setImage}
-        postLoading={PostFormData.loading}
+        loading={PostFormData.loading || PatchFormData.loading}
         submit={HandleFormSubmit}
         edit={edit}
         setEdit={setEdit}

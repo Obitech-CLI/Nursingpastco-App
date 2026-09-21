@@ -1,8 +1,12 @@
+import AdminAuth from "@/lib/admin/admin.auth";
 import ManageNewsUpdates from "./ManageNewsUpdates";
 
-export default function Page() {
+export default async function Page() {
+
+    await AdminAuth();
+    
     return (
-        <main>
+        <main className="manage">
             <h2>news and updates</h2>
             <ManageNewsUpdates />
         </main>

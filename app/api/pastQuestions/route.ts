@@ -1,7 +1,9 @@
 "use server";
 
+import AdminAuth from "@/lib/admin/admin.auth";
 import AddPastQuestionService from "@/lib/past-questions/add.service";
 import GetPastQuestions from "@/lib/past-questions/get.service";
+import UpdatePastQuestion from "@/lib/past-questions/patch.service";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req:NextRequest) {
@@ -14,9 +16,9 @@ export async function POST(req:NextRequest) {
     const pdf = formData.get("pdf") as File;
 
     try {
-        const res = await AddPastQuestionService({instituition, course, level, pdf});
+        await AdminAuth();
 
-        console.log(res)
+        const res = await AddPastQuestionService({instituition, course, level, pdf});
 
         if(!res.status) {
             return NextResponse.json({
@@ -67,5 +69,39 @@ export async function GET(req: NextRequest) {
             error: "server error",
             status: 500
         })
+    }
+}
+
+export async function PATCH(req: Request) {
+    const formData = await req.formData();
+
+    const id = formData.get("id") as string;
+    const instituition = formData.get("instituition") as string;
+    const course = formData.get("course") as string;
+    const level = formData.get("level") as string;
+    const pdf = formData.get("pdf") as File;
+
+    try {
+        await AdminAuth();
+        
+        const res = await UpdatePastQuestion({id, instituition, course, level, pdf});
+
+        if (!res.success) {
+            return Response.json({
+                success: res.success,
+                error: res.error
+            },{status: res.status});
+        }
+
+        return Response.json({
+            success: res.success,
+            message: res.message
+        },{status: res.status});
+
+    } catch (err) {
+        console.error(err);
+        return Response.json({
+            error: "server error"
+        },{status: 500})
     }
 }

@@ -1,0 +1,11 @@
+@media screen and (min-width: 500px) {
+
+    main.auth > h2 {
+        font-size: 2rem;
+    }
+
+    main.auth > form {
+        width: 500px;
+        margin: auto;
+    }
+}

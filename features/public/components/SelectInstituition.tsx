@@ -7,6 +7,7 @@ import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "../styles.module.css";
 import InstituitionHero from "@/public/InstituitionLogo.jpeg";
+import { RotateCcw } from "lucide-react";
 
 type Props = {
     setSelectedInstituition: React.Dispatch<SetStateAction<string>>;
@@ -37,8 +38,10 @@ function SelectInstituition({setSelectedInstituition, setSelectedLogo}:Props) {
         <>
         <div className={styles.hero}>
             <Image alt="" src={InstituitionHero} />
+            <div>
             <h2>school of nursing</h2>
             <h3>here are the list of instituitions with available past questions</h3>
+            </div>
         </div>
         {!FetchInstituitions.loading ? (
         <>
@@ -72,6 +75,7 @@ function SelectInstituition({setSelectedInstituition, setSelectedLogo}:Props) {
                 <div className="retry">
                     <h4>{FetchInstituitions.error}</h4>
                     <button onClick={HandleFetch}>
+                    <RotateCcw size={20}/>
                      retry
                     </button>
                 </div>
@@ -81,6 +85,7 @@ function SelectInstituition({setSelectedInstituition, setSelectedLogo}:Props) {
         </>
         ) : (
             <div className="loading">
+                <p>loading instituitions...</p>
                 <ClipLoader size={60} color="var(--bg-txt-color)"/>
             </div>
         )}

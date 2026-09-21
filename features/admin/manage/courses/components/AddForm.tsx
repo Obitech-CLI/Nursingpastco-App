@@ -34,7 +34,8 @@ type Props = {
     setFocusInput: React.Dispatch<SetStateAction<boolean>>;
 }
 
-function AddForm({formData, setFormData, onSubmit, loading, edit, setEdit, editData, setEditData, focusInput, setFocusInput}:Props) {
+function AddForm({formData, setFormData, onSubmit, loading, edit, 
+    setEdit, editData, setEditData, focusInput, setFocusInput}:Props) {
 
     const [instituitions, setInstituitions] = useState<InstituitionDataTypes []>([]);
 
@@ -165,6 +166,11 @@ function AddForm({formData, setFormData, onSubmit, loading, edit, setEdit, editD
                 }}
                 onFocus={() => {
                     setFocusInput(true);
+                }}
+                onBlur={() => {
+                    if (!formData.course) {
+                        setFocusInput(false);
+                    }
                 }}
                 />
             </label>

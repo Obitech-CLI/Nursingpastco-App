@@ -112,7 +112,8 @@ function Contents() {
                         <div className={styles.categories_retry}>
                           <p>{FetchCategories.error}</p>
                           <button type="button" onClick={HandleFetchCategories}>
-                           <RotateCcw />
+                           <RotateCcw size={20}/>
+                           retry
                           </button>
                         </div>
                     )}
@@ -122,7 +123,9 @@ function Contents() {
             ) : (
                 <div className={styles.categories_loading}>
                     <p>loading categories...</p>
+                    <div>
                     <ClipLoader size={25} color="var(--bg-txt-color)"/>
+                    </div>
                 </div>
             )}
             </div>
@@ -172,11 +175,13 @@ function Contents() {
                     <div className={styles.contents_retry}>
                     <p>{FetchContents.error}</p>
                     <button type="button" onClick={HandleFetchContents}>
-                        <RotateCcw />
+                        <RotateCcw size={20}/>
+                        retry
                     </button>
                     </div>
                 )}
 
+                {contents.length > 0 && (
                 <div className="pagination">
                     {contents.length <= 3 && page > 1 ? (
                         <button type="button" onClick={() => {
@@ -192,6 +197,7 @@ function Contents() {
                         }}><ChevronRight /></button>
                     )}
                 </div>
+                )}
                 </>
             ) : (
               <div className={styles.contents_loading}>

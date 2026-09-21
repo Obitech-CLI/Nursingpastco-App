@@ -7,6 +7,7 @@ export default async function Page() {
     
     return (
         <main className="manage">
+            <h2>past questions</h2>
             <AdminManagePastQuestions />
         </main>
     )

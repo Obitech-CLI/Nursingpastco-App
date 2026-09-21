@@ -1,3 +1,4 @@
+import AdminAuth from "@/lib/admin/admin.auth";
 import AddContentsCategoryService from "@/lib/contents/add.category.service";
 import GetContentCategoriesService from "@/lib/contents/get.categories.service";
 import UpdateContentsCategoryService from "@/lib/contents/update.category.service";
@@ -8,6 +9,8 @@ export async function POST(req: Request) {
     const category = body.category;
 
     try {
+        await AdminAuth();
+
         const res = await AddContentsCategoryService(category);
 
         if (!res.success) {
@@ -37,6 +40,8 @@ export async function PATCH(req: Request) {
     const category = body.category;
 
     try {
+        await AdminAuth();
+
         const res = await UpdateContentsCategoryService(id, category);
 
         if (!res.success) {
@@ -62,6 +67,7 @@ export async function PATCH(req: Request) {
 export async function GET() {
     
     try {
+        
         const res = await GetContentCategoriesService();
 
         if (!res.success) {

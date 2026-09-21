@@ -1,7 +1,7 @@
 "use client";
 
 import { CourseDataTypes, InstituitionDataTypes } from "@/types/types";
-import { Pen, Search, SquareArrowOutUpRight, X } from "lucide-react";
+import { Pen, RotateCcw, Search, SquareArrowOutUpRight, X } from "lucide-react";
 import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "../styles.module.css";
@@ -145,6 +145,7 @@ function SelectCourse({allCourses, loading, error, reFetch, filterLevel, search,
                 <div className="retry">
                     <h4>{error}</h4>
                     <button onClick={reFetch}>
+                        <RotateCcw size={20}/>
                         retry
                     </button>
                 </div>
@@ -152,7 +153,8 @@ function SelectCourse({allCourses, loading, error, reFetch, filterLevel, search,
                 </>
             ) : (
                 <div className="loading">
-                   <ClipLoader size={50}/>
+                    <p>loading courses...</p>
+                   <ClipLoader size={70} color="var(--bg-txt-color)"/>
                 </div>
             )}
 

@@ -1,3 +1,4 @@
+import AdminAuth from "@/lib/admin/admin.auth";
 import AddRecommendationsCategoryService from "@/lib/recommendations/add.category.service";
 import GetRecommendationsCategoriesService from "@/lib/recommendations/get.categories.service";
 import UpdateRecommendationsCategoryService from "@/lib/recommendations/update.category.service";
@@ -8,6 +9,8 @@ export async function POST(req: Request) {
     const category = body.category;
 
     try {
+        await AdminAuth();
+
         const res = await AddRecommendationsCategoryService(category);
 
         if (!res.success) {
@@ -37,6 +40,8 @@ export async function PATCH(req: Request) {
     const category = body.category;
 
     try {
+        await AdminAuth();
+        
         const res = await UpdateRecommendationsCategoryService(id, category);
 
         if (!res.success) {

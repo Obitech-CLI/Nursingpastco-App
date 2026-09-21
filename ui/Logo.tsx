@@ -7,43 +7,58 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 function Logo() {
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-    const { theme } = useTheme();
-    const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-    useEffect(() => {
-        setMounted(true);
-    }, [])
-    
-    if (!mounted) return null;
+  if (!mounted) return null;
 
-    return (
-        <div className="logo">
-            <Image src={theme === "light" ? DarkLogo : LightLogo} 
-            alt="" width={150} height={150} style={{objectFit: "contain"}}
-            />
-        </div>
-    )
+  return (
+    <Image
+      src={theme === "light" ? DarkLogo : LightLogo}
+      alt=""
+      width={150}
+      height={150}
+      style={{ objectFit: "contain" }}
+    />
+  );
 }
 
 function LogoWithName() {
+  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-    const { theme } = useTheme();
-    const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
-    useEffect(() => {
-        setMounted(true);
-    }, [])
-    
-    if (!mounted) return null;
-
+  if (!mounted)
     return (
-        <div className="logo">
-            <Image src={theme === "light" ? DarkLogo : LightLogo} 
-            alt="" width={70} height={70} style={{objectFit: "contain"}}
-            />
-        </div>
-    )
+      <div className="logo">
+        <Image
+          src={DarkLogo}
+          alt=""
+          width={70}
+          height={70}
+          style={{ objectFit: "contain" }}
+        />
+      </div>
+    );
+
+  return (
+    <div className="logo">
+      <Image
+        src={theme === "light" ? DarkLogo : LightLogo}
+        alt=""
+        width={70}
+        height={70}
+        style={{ objectFit: "contain" }}
+      />
+    </div>
+  );
 }
 
-export { Logo, LogoWithName }
+export { Logo, LogoWithName };

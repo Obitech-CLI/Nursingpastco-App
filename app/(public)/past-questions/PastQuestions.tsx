@@ -1,275 +1,312 @@
 "use client";
 
 import { UseFetch } from "@/hooks/useFetch";
-import { CourseDataTypes, InstituitionDataTypes, PastQuestionDataTypes } from "@/types/types";
+import {
+  CourseDataTypes,
+  InstituitionDataTypes,
+  PastQuestionDataTypes,
+} from "@/types/types";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import styles from "./styles.module.css";
-import { ChevronDown, ChevronUp, X } from "lucide-react";
+import { ChevronDown, ChevronUp, RotateCcw, X } from "lucide-react";
 import { LevelOptions } from "@/ui/AppContent";
 import { PiImageBrokenLight } from "react-icons/pi";
 
 function PastQuestions() {
+  const [courses, setCourses] = useState<CourseDataTypes[]>([]);
+  const [pdfs, setPDFs] = useState<PastQuestionDataTypes[]>([]);
+  const [instituitions, setInstituitions] = useState<InstituitionDataTypes[]>(
+    [],
+  );
 
-    const [courses, setCourses] = useState<CourseDataTypes[]>([]);
-    const [pdfs, setPDFs] = useState<PastQuestionDataTypes[]>([]);
-    const [instituitions, setInstituitions] = useState<InstituitionDataTypes[]>([])
+  const [showPDFs, setShowPDFs] = useState(0);
 
-    const [showPDFs, setShowPDFs] = useState(0);
+  const [selectedInstituition, setSelectedInstituition] = useState("");
+  const [selectedLevel, setSelectedLevel] = useState("");
+  const [selectedLogo, setSelectedLogo] = useState<string | null>(null);
 
-    const [selectedInstituition, setSelectedInstituition] = useState("");
-    const [selectedLevel, setSelectedLevel]= useState("");
-    const [selectedLogo, setSelectedLogo]= useState<string | null>(null);
+  const [selectedCourse, setSelectedCourse] = useState("");
 
-    const [selectedCourse, setSelectedCourse] = useState("");
+  const [change, setChange] = useState(0);
 
-    const [change, setChange] = useState(0);
+  const [showInstituitions, setShowInstituitions] = useState(false);
 
-    const [showInstituitions, setShowInstituitions] = useState(false);
+  useEffect(() => {
+    const storedInstituition = localStorage.getItem("selectedInstituition");
+    const storedLevel = localStorage.getItem("selectedLevel");
+    const storedLogo = localStorage.getItem("selectedLogo");
 
-    useEffect(() => {
-        const storedInstituition = localStorage.getItem("selectedInstituition");
-        const storedLevel = localStorage.getItem("selectedLevel");
-        const storedLogo = localStorage.getItem("selectedLogo");
-
-        if (storedInstituition && storedLevel && storedLogo) {
-            setSelectedInstituition(storedInstituition);
-            setSelectedLevel(storedLevel);
-            setSelectedLogo(storedLogo);
-        }
-        
-    }, [change]);
-
-    const FetchCourses = UseFetch();
-    const FetchPDFs = UseFetch();
-    const FetchInstituitions = UseFetch();
-
-    const HandleFetchInstituitions = async () =>
-    {
-        const res = await FetchInstituitions.Fetch("/instituitions");
-
-        if (!res) return;
-
-        setInstituitions(res.instituitions);
+    if (storedInstituition && storedLevel && storedLogo) {
+      setSelectedInstituition(storedInstituition);
+      setSelectedLevel(storedLevel);
+      setSelectedLogo(storedLogo);
     }
+  }, [change]);
 
-    const HandleFetchCourses = async () =>
-    {
-        if (!selectedLevel) return;
+  const FetchCourses = UseFetch();
+  const FetchPDFs = UseFetch();
+  const FetchInstituitions = UseFetch();
 
-        const res = await FetchCourses.Fetch(`/courses?instituition=${selectedInstituition}&level=${selectedLevel}`);
+  const HandleFetchInstituitions = async () => {
+    const res = await FetchInstituitions.Fetch("/instituitions");
 
-        if (!res) return;
+    if (!res) return;
 
-        setCourses(res.courses);
-    }
+    setInstituitions(res.instituitions);
+  };
 
-    const HandleFetchPDFs = async () =>
-    {
-        if (!selectedCourse) return;
+  const HandleFetchCourses = async () => {
+    if (!selectedLevel) return;
 
-        const res = await FetchPDFs.Fetch(
-            `/pastQuestions?instituition=${selectedInstituition}&level=${selectedLevel}&course=${selectedCourse}`
-        );
+    const res = await FetchCourses.Fetch(
+      `/courses?instituition=${selectedInstituition}&level=${selectedLevel}`,
+    );
 
-        if (!res) return;
+    if (!res) return;
 
-        setPDFs(res.pastQuestions);
-    }
+    setCourses(res.courses);
+  };
 
-    useEffect(() => {
-        HandleFetchCourses();
-    }, [selectedInstituition, selectedLevel]);
+  const HandleFetchPDFs = async () => {
+    if (!selectedCourse) return;
 
-    useEffect(() => {
-        HandleFetchPDFs();
-    }, [selectedCourse]);
+    const res = await FetchPDFs.Fetch(
+      `/pastQuestions?instituition=${selectedInstituition}&level=${selectedLevel}&course=${selectedCourse}`,
+    );
 
-    useEffect(() => {
-        HandleFetchInstituitions();
-    }, [])
+    if (!res) return;
 
-    useEffect(() => {
-        document.body.style.overflow = showInstituitions || showPDFs ? "hidden" : "";
+    setPDFs(res.pastQuestions);
+  };
 
-        return () => {
-            document.body.style.overflow = "auto";
-        }
-    }, [showInstituitions, showPDFs])
+  useEffect(() => {
+    HandleFetchCourses();
+  }, [selectedInstituition, selectedLevel]);
 
-    const HandleLevelChange = (level: string) =>
-    {
-        localStorage.setItem("selectedLevel", level);
-        setChange(prev => prev + 1)
-    }
+  useEffect(() => {
+    HandleFetchPDFs();
+  }, [selectedCourse]);
 
-    const HandleInstituitionChange = (instituition: string, logo: string) =>
-    {
-        localStorage.setItem("selectedInstituition", instituition);
-        localStorage.setItem("selectedLogo", logo);
-        localStorage.setItem("selectedLevel", "100 level");
-        setSelectedLevel("");
-        setCourses([]);
-        setChange(prev => prev + 1)
-    }
+  useEffect(() => {
+    HandleFetchInstituitions();
+  }, []);
 
-    return (
-        <>
-        <div className={styles.pastQuestions_hero}>
-            <h3 onClick={() => {
-                setShowInstituitions(!showInstituitions)
-            }}>
-                {selectedInstituition ? selectedInstituition : "select instituition"}
-                {showInstituitions ? <ChevronDown /> : <ChevronUp />}
-            </h3>
+  useEffect(() => {
+    document.body.style.overflow =
+      showInstituitions || showPDFs ? "hidden" : "";
 
-            {showInstituitions && (
-                <div className={styles.instituitions}>
-                    <button onClick={() => setShowInstituitions(false)}>
-                              <X />
-                        </button>
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [showInstituitions, showPDFs]);
 
-                {!FetchInstituitions.loading ? (
-                    <>
-                    {instituitions.length > 0 ? (
-                    
-                        <div className={styles.select}>
-                        <h2>select<br />instituition</h2>
-                        {instituitions.map(i => (
-                            <button key={i.id} onClick={() => {
-                                HandleInstituitionChange(i.instituition_name, i.instituition_logo);
-                                setShowInstituitions(false);
-                            }}>
-                                {i.instituition_name}
-                            </button>
-                        ))}
-                        </div>
-                        
-                    ) : (
-                        <div className="retry">
-                            <p>{FetchInstituitions.error}</p>
-                            <button onClick={HandleFetchInstituitions}>retry</button>
-                        </div>
-                    )}
-                    </>
-                ) : (
-                    <div className="loading">
-                        <ClipLoader size={50}/>
-                    </div>
-                )}
-                </div>
-            )}
-            
-            {selectedLogo && selectedInstituition ? (
-                <Image alt="" 
-                src={selectedLogo} width={100} height={100}/>
-            ) : (
-                <div style={{
-                    width: "100px", height: "100px", border: "var(--border)"
-                }}></div>
-            )}
-        </div>
+  const HandleLevelChange = (level: string) => {
+    localStorage.setItem("selectedLevel", level);
+    setChange((prev) => prev + 1);
+  };
 
-        <div className={styles.btns}>
-            {LevelOptions.map(level => (
-                <button key={level.id}
-                onClick={() => {
-                    HandleLevelChange(level.level);
-                }}
-                style={{
-                    backgroundColor: selectedLevel === level.level ? "transparent" : "",
-                    color: selectedLevel === level.level ? "var(--bg-txt-color)" : "",
-                    fontSize: selectedLevel === level.level ? "1rem" : "",
-                    border: selectedLevel === level.level ? "var(--border)" : "",
-                    marginBottom: selectedLevel === level.level ? "0.5rem" : "",
-                    borderRadius: selectedLevel === level.level ? "10px" : "",
-                    padding: selectedLevel === level.level ? "1rem 2rem" : ""
-                }}
-                >
-                    {level.level}
-                </button>
-            ))}
-        </div>
+  const HandleInstituitionChange = (instituition: string, logo: string) => {
+    localStorage.setItem("selectedInstituition", instituition);
+    localStorage.setItem("selectedLogo", logo);
+    localStorage.setItem("selectedLevel", "100 level");
+    setSelectedLevel("");
+    setCourses([]);
+    setChange((prev) => prev + 1);
+  };
 
-        <div className={styles.pastQuestions}>
+  return (
+    <>
+      <div className={styles.pastQuestions_hero}>
+        <h3
+          onClick={() => {
+            setShowInstituitions(!showInstituitions);
+          }}
+        >
+          {selectedInstituition ? selectedInstituition : "select instituition"}
+          {showInstituitions ? <ChevronUp /> : <ChevronDown />}
+        </h3>
 
-            {!FetchCourses.loading ? (
-                <>
-                {courses.length > 0 && !FetchCourses.error ? (
-                    <>
-                    {courses.map(course => (
-                        <div key={course.id}>
-                        <div className={styles.courses}>
-                            <h4
-                            onClick={() => {
-                                if (course.id === showPDFs) {
-                                    setShowPDFs(0);
-                                    setSelectedCourse("");
-                                    return;
-                                }
-                                setSelectedCourse(course.course);
-                                setShowPDFs(course.id);
-                            }}
-                            >{course.course} <span>{showPDFs ? <ChevronDown /> : <ChevronUp />}</span></h4>
-                        </div>
+        {showInstituitions && (
+          <div className={styles.instituitions}>
+            <button onClick={() => setShowInstituitions(false)}>
+              <X />
+            </button>
 
-                        {showPDFs === course.id && (
-                            <div className={styles.pdfs}>
-                            <button onClick={() => {
-                                if (course.id === showPDFs) {
-                                    setShowPDFs(0);
-                                    setSelectedCourse("");
-                                    return;
-                                }
-                            }}><X /></button>
-                            <h2>select<br />past question</h2>
-                            {!FetchPDFs.loading ? (
-                            <>
-                            {!FetchPDFs.error && pdfs.length > 0 ? (
-                                <ul>
-                                    {pdfs.map(pdf => (
-                                        <li key={pdf.id}>{pdf.title}</li>
-                                    ))}
-                                </ul>
-                            ):(
-                                <>
-                                {!FetchPDFs.error && !FetchPDFs.loading ? (
-                                    <p>no pdf found</p>
-                                ):(
-                                    <div className="retry">
-                                        <p>{FetchPDFs.error}</p>
-                                        <button onClick={HandleFetchPDFs}>
-                                            retry
-                                        </button>
-                                    </div>
-                                )}
-                                </>
-                            )}
-                            </>
-                            ) : (<div className="loading"><ClipLoader size={30} color="var(--bg-txt-color)"/></div>)}
-                            </div>
-                        )}
-                        </div>
+            {!FetchInstituitions.loading ? (
+              <>
+                {instituitions.length > 0 ? (
+                  <div className={styles.select}>
+                    <h2>select instituition</h2>
+                    {instituitions.map((i) => (
+                      <button
+                        key={i.id}
+                        onClick={() => {
+                          HandleInstituitionChange(
+                            i.instituition_name,
+                            i.instituition_logo,
+                          );
+                          setShowInstituitions(false);
+                        }}
+                      >
+                        {i.instituition_name}
+                      </button>
                     ))}
-                    </>
+                  </div>
                 ) : (
-                    <>
-                    {FetchCourses.error ? (
-                        <div className="retry">
-                            <p>{FetchCourses.error}</p>
-                            <button onClick={HandleFetchCourses}>
-                                retry
-                            </button>
-                        </div>
-                    ) : (null)}
-                    </>
+                  <div className="retry">
+                    <p>{FetchInstituitions.error}</p>
+                    <button onClick={HandleFetchInstituitions}>
+                      <RotateCcw size={20} />
+                      retry
+                    </button>
+                  </div>
                 )}
-                </>
-            ) : (<div className="loading"><ClipLoader size={40} color="var(--bg-txt-color)"/></div>)}
-        </div>
-        </>
-    )
+              </>
+            ) : (
+              <div className="loading">
+                <p>loading instituition...</p>
+                <ClipLoader size={50} />
+              </div>
+            )}
+          </div>
+        )}
+
+        {selectedLogo && selectedInstituition ? (
+          <Image alt="" src={selectedLogo} width={100} height={100} />
+        ) : (
+          <div
+            style={{
+              width: "100px",
+              height: "100px",
+              border: "var(--border)",
+            }}
+          ></div>
+        )}
+      </div>
+
+      <div className={styles.btns}>
+        {LevelOptions.map((level) => (
+          <button
+            key={level.id}
+            onClick={() => {
+              HandleLevelChange(level.level);
+            }}
+            style={{
+              backgroundColor:
+                selectedLevel === level.level ? "transparent" : "",
+              color: selectedLevel === level.level ? "var(--bg-txt-color)" : "",
+              fontSize: selectedLevel === level.level ? "1rem" : "",
+              border: selectedLevel === level.level ? "var(--border)" : "",
+              marginBottom: selectedLevel === level.level ? "0.5rem" : "",
+              borderRadius: selectedLevel === level.level ? "10px" : "",
+              padding: selectedLevel === level.level ? "1rem 2rem" : "",
+            }}
+          >
+            {level.level}
+          </button>
+        ))}
+      </div>
+
+      <div className={styles.pastQuestions}>
+        {!FetchCourses.loading ? (
+          <>
+            {courses.length > 0 && !FetchCourses.error ? (
+              <>
+                {courses.map((course) => (
+                  <div key={course.id}>
+                    <div className={styles.courses}>
+                      <h4
+                        onClick={() => {
+                          if (course.id === showPDFs) {
+                            setShowPDFs(0);
+                            setSelectedCourse("");
+                            return;
+                          }
+                          setSelectedCourse(course.course);
+                          setShowPDFs(course.id);
+                        }}
+                      >
+                        {course.course}{" "}
+                        <span>
+                          {showPDFs ? <ChevronUp /> : <ChevronDown />}
+                        </span>
+                      </h4>
+                    </div>
+
+                    {showPDFs === course.id && (
+                      <div className={styles.pdfs}>
+                        <button
+                          onClick={() => {
+                            if (course.id === showPDFs) {
+                              setShowPDFs(0);
+                              setSelectedCourse("");
+                              return;
+                            }
+                          }}
+                        >
+                          <X />
+                        </button>
+                        <h2>select past questions</h2>
+                        {!FetchPDFs.loading ? (
+                          <>
+                            {!FetchPDFs.error && pdfs.length > 0 ? (
+                              <ul>
+                                {pdfs.map((pdf) => (
+                                  <li key={pdf.id}>{pdf.title}</li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <>
+                                {!FetchPDFs.error && !FetchPDFs.loading ? (
+                                  <p>no pdf found</p>
+                                ) : (
+                                  <div className="retry">
+                                    <p>{FetchPDFs.error}</p>
+                                    <button onClick={HandleFetchPDFs}>
+                                      <RotateCcw size={20} />
+                                      retry
+                                    </button>
+                                  </div>
+                                )}
+                              </>
+                            )}
+                          </>
+                        ) : (
+                          <div className="loading">
+                            <p>loading pdfs...</p>
+                            <ClipLoader size={30} color="var(--bg-txt-color)" />
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </>
+            ) : (
+              <>
+                {FetchCourses.error ? (
+                  <div className="retry">
+                    <p>{FetchCourses.error}</p>
+                    <button onClick={HandleFetchCourses}>
+                      <RotateCcw size={20} />
+                      retry
+                    </button>
+                  </div>
+                ) : null}
+              </>
+            )}
+          </>
+        ) : (
+          <div className="loading">
+            <p>loading courses...</p>
+            <ClipLoader size={40} color="var(--bg-txt-color)" />
+          </div>
+        )}
+      </div>
+    </>
+  );
 }
 
-export { PastQuestions }
+export { PastQuestions };

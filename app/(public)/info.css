@@ -1,0 +1,53 @@
+.about > .head {
+  display: flex;
+  flex-direction: column;
+}
+
+main.info {
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+main.info h2 {
+  margin: 0;
+}
+
+main.info section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+main.info h4 {
+  margin: 1rem 1rem 0.5rem;
+}
+
+main.info > section p {
+  text-align: left;
+  text-transform: lowercase;
+  background-color: var(--div);
+  width: fit-content;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+}
+
+main.info > section ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  list-style-position: inside;
+}
+
+main.info > section ul {
+  background-color: var(--div);
+  width: fit-content;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+}

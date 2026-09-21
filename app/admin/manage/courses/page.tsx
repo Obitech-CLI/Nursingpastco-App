@@ -7,6 +7,7 @@ export default async function Page() {
     
     return (
         <main className="manage">
+            <h2>courses</h2>
             <AdminManageCourses />
         </main>
     )

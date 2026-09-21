@@ -93,6 +93,8 @@ function ModifyNews({edit, setEdit, setEditData, editData, setNav, scroll}:Props
     const Delete = async () => {
         if (!confirm && !deleteId) return;
 
+        setNews([]);
+
         const res = await DeleteNews.Delete(`/news/${deleteId}`);
 
         if (res.success) {
@@ -212,7 +214,9 @@ function ModifyNews({edit, setEdit, setEditData, editData, setNav, scroll}:Props
 
                                 {DeleteNews.loading && (
                                 <div className="delete-loading">
-                                  <ClipLoader size={40} color="var(--bg-txt-color)"/>
+                                  <div>
+                                    <ClipLoader size={70} color="var(--bg-txt-color)"/>
+                                  </div>
                                   <p>deleting news...</p>
                                   <p style={{textTransform: "lowercase"}}>hold on a bit</p>
                                 </div>

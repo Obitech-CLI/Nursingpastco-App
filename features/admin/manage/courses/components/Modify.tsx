@@ -5,7 +5,7 @@ import { SearchCourses } from "./Search";
 import { UseFetch } from "@/hooks/useFetch";
 import { ClipLoader } from "react-spinners";
 import { CourseDataTypes } from "@/types/types";
-import { Edit, X } from "lucide-react";
+import { Edit, RotateCcw, X } from "lucide-react";
 import { UseDelete } from "@/hooks/useDelete";
 import { useConfirmModal, useErrorModal } from "@/contexts/modals/FeedbackContext";
 
@@ -66,10 +66,11 @@ function ModifyCourses({edit, setEdit, setNav, setEditData} : Props) {
         
         const res = await FetchSearchData.Fetch(`/courses?instituition=${searchData.instituition}&level=${searchData.level}`);
         
-        if (res.success) {
-            setSearchCourses([]);
-            setSearchCourses(res.courses);
-            return;
+        if (res) {
+            if (res.success) {
+               setSearchCourses([]);
+               setSearchCourses(res.courses);
+            }
         }
     
     }
@@ -88,9 +89,11 @@ function ModifyCourses({edit, setEdit, setNav, setEditData} : Props) {
 
         const res = await DeleteCourse.Delete(`/courses/${deleteId}`);
 
-        if (res.success) {
-            setDeleteId("");
-            HandleSearch();
+        if (res) {
+            if (res.success) {
+               setDeleteId("");
+               HandleSearch();
+            }
         }
     }
 
@@ -134,18 +137,22 @@ function ModifyCourses({edit, setEdit, setNav, setEditData} : Props) {
                                     level: course.level
                                 })
                             }}>
-                                <Edit color="navy" size={30}/>
+                                <Edit color="navy" size={20}/>
+                                edit
                             </button>
 
                             <button onClick={() => HandleDeleteClick(String(course.id))}
                                 disabled={DeleteCourse.loading}>
-                                <X color="red" size={30}/>
+                                <X color="red" size={20}/>
+                                remove
                             </button>
 
                             {DeleteCourse.loading && (
                                 <div className="delete-loading">
-                                  <ClipLoader size={40} color="var(--bg-txt-color)"/>
-                                  <p>deleting instituition...</p>
+                                  <div>
+                                    <ClipLoader size={70} color="var(--bg-txt-color)"/>
+                                  </div>
+                                  <p>deleting course...</p>
                                   <p style={{textTransform: "lowercase"}}>hold on a bit</p>
                                 </div>
                             )}
@@ -163,6 +170,7 @@ function ModifyCourses({edit, setEdit, setNav, setEditData} : Props) {
                         <p>{FetchSearchData.error}</p>
                         <button type="button"
                         onClick={HandleSearch}>
+                            <RotateCcw size={20}/>
                             retry
                         </button>
                     </div>

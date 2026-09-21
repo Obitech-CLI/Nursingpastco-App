@@ -4,6 +4,7 @@ import { LoginForm } from "@/features/admin/auth/components/LoginForm";
 import { UsePost } from "@/hooks/usePost";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import "../auth.css";
 
 function LoginAdmin() {
 

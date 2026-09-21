@@ -112,7 +112,8 @@ function Recommendations() {
                     <div className={styles.categories_retry}>
                     <p>{FetchCategories.error}</p>
                     <button type="button" onClick={HandleFetchCategories}>
-                        <RotateCcw />
+                        <RotateCcw size={20}/>
+                        retry
                     </button>
                     </div>
                 )}
@@ -120,7 +121,9 @@ function Recommendations() {
             ) : (
                 <div className={styles.categories_loading}>
                 <p>loading categories...</p>
+                <div>
                 <ClipLoader size={25} color="var(--bg-txt-color)"/>
+                </div>
                 </div>
             )}
             </div>
@@ -162,11 +165,13 @@ function Recommendations() {
                     <div className={styles.recommendations_retry}>
                     <p>{FetchRecommendations.error}</p>
                     <button type="button" onClick={HandleFetchRecommendations}>
+                        <RotateCcw size={25}/>
                         retry
                     </button>
                     </div>
                 )}
 
+                {recommendations.length > 0 && (
                 <div className="pagination">
                     {recommendations.length <= 3 && page > 1 ? (
                         <button type="button" onClick={() => {
@@ -182,6 +187,7 @@ function Recommendations() {
                         }}><ChevronRight /></button>
                     )}
                 </div>
+                )}
                 </>
             ) : (
               <div className={styles.recommendations_loading}>

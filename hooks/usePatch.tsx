@@ -1,54 +1,59 @@
 "use client";
 
-import { useErrorModal, useSuccessModal } from "@/contexts/modals/FeedbackContext";
+import {
+  useErrorModal,
+  useSuccessModal,
+} from "@/contexts/modals/FeedbackContext";
 import { api } from "@/lib/axios";
 import axios from "axios";
 import { useState } from "react";
 
+type errorType = {
+  update?: boolean;
+};
+
 function UsePatch() {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<errorType | null>(null);
 
-    const [loading, setLoading] = useState(false);
+  const { setSuccessMessage, setShowSuccessModal } = useSuccessModal();
+  const { setErrorMessage, setShowErrorModal } = useErrorModal();
 
-    const { setSuccessMessage, setShowSuccessModal } = useSuccessModal();
-    const { setErrorMessage, setShowErrorModal } = useErrorModal();
+  const Patch = async (url: string, editData: any) => {
+    try {
+      if (!navigator.onLine) {
+        setShowErrorModal(true);
+        setErrorMessage("no internet connection");
+        return;
+      }
 
-    const Patch = async (url:string, editData:any) =>
-    {
-        try {
-            if (!navigator.onLine) {
-                setShowErrorModal(true);
-                setErrorMessage("no internet connection");
-                return;
-            }
+      setLoading(true);
 
-            setLoading(true);
+      const { data } = await api.patch(url, editData);
 
-            const { data } = await api.patch(url, editData);
+      setShowSuccessModal(true);
+      setSuccessMessage(data.message);
 
-            setShowSuccessModal(true);
-            setSuccessMessage(data.message);
-
-            return data;
-
-        } catch (err) {
-            if (axios.isAxiosError(err)) {
-                if (err.code === "ECONNABORTED") {
-                    setShowErrorModal(true);
-                    setErrorMessage("request timed out");
-                    return;
-                }
-                setShowErrorModal(true);
-                setErrorMessage(err.response?.data?.error ?? "something went wrong");
-            } else {
-                console.error(err);
-            }
-        } finally {
-            setLoading(false);
+      return data;
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        if (err.code === "ECONNABORTED") {
+          setShowErrorModal(true);
+          setErrorMessage("request timed out");
+          return;
         }
+        setError(err?.response?.data);
+        setShowErrorModal(true);
+        setErrorMessage(err.response?.data?.error ?? "something went wrong");
+      } else {
+        console.error(err);
+      }
+    } finally {
+      setLoading(false);
     }
+  };
 
-    return { Patch, loading }
-
+  return { Patch, loading, error };
 }
 
-export { UsePatch }
+export { UsePatch };

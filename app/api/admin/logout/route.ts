@@ -1,3 +1,4 @@
+import AdminAuth from "@/lib/admin/admin.auth";
 import { cookies } from "next/headers";
 
 export async function POST() {
@@ -5,6 +6,8 @@ export async function POST() {
     const cookieStore = await cookies();
 
     try {
+        await AdminAuth();
+
         cookieStore.delete("adminToken");
 
         return Response.json({

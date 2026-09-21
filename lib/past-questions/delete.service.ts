@@ -4,9 +4,17 @@ import { supabase } from "../supabase/supabase";
 
 const DeletePastQuestion = async (id: string) =>
 {
+    if (!id) {
+        return { 
+            success: false, 
+            error: "invalid request", 
+            status: 403 
+        }
+    }
+
     const { data: pastQuestion, error: pastQuestionError } = await supabase
     .from("nursingpastco_pastQuestions")
-    .select("id, instituition, course, level, pdf")
+    .select("pdf")
     .eq("id", id)
     .single();
 
@@ -14,12 +22,12 @@ const DeletePastQuestion = async (id: string) =>
         return {
             success: false,
             status: 500,
-            error: "failed to get past question"
+            error: "failed to fetch past question pdf url, try again"
         }
     }
 
     const pdfUrl = pastQuestion.pdf;
-    const path = pdfUrl.split(`PDFs/${pastQuestion.instituition}/${pastQuestion.level}/${pastQuestion.level}/`)[1];
+    const path = decodeURIComponent(pdfUrl.split("/nursingpastco_pdfs/")[1]);
 
     const { error: storageError } = await supabase.storage
     .from("nursingpastco_pdfs")
@@ -29,7 +37,7 @@ const DeletePastQuestion = async (id: string) =>
         return {
             success: false,
             status: 500,
-            error: "storage failed to remove logo"
+            error: "storage failed to remove past question pdf"
         }
     }
 
@@ -49,7 +57,7 @@ const DeletePastQuestion = async (id: string) =>
     return {
         success: true,
         status: 200,
-        message: "deleted success"
+        message: "past question deleted success"
     }
 }
 

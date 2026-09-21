@@ -110,7 +110,8 @@ function News() {
                     <div className={styles.categories_retry}>
                     <p>{FetchCategories.error}</p>
                     <button type="button" onClick={HandleFetchCategories}>
-                        <RotateCcw />
+                        <RotateCcw size={20}/>
+                        retry
                     </button>
                     </div>
                 )}
@@ -118,7 +119,9 @@ function News() {
             ) : (
                 <div className={styles.categories_loading}>
                 <p>loading categories...</p>
-                <ClipLoader size={25} color="var(--bg-txt-color)"/>
+                <div>
+                <ClipLoader size={30} color="var(--bg-txt-color)"/>
+                </div>
                 </div>
             )}
             </div>
@@ -164,11 +167,13 @@ function News() {
                     <div className={styles.news_retry}>
                     <p>{FetchNews.error}</p>
                     <button type="button" onClick={HandleFetchNews}>
-                        <RotateCcw />
+                        <RotateCcw size={20}/>
+                        retry
                     </button>
                     </div>
                 )}
 
+                {news.length > 0 && (
                 <div className="pagination">
                     {news.length <= 3 && page > 1 ? (
                         <button type="button" onClick={() => {
@@ -184,6 +189,7 @@ function News() {
                         }}><ChevronRight /></button>
                     )}
                 </div>
+                )}
                 </>
             ) : (
               <div className={styles.news_loading}>

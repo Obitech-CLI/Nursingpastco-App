@@ -59,7 +59,7 @@ function Courses() {
             <div onClick={() => {
                 setShowLevel(!showLevel);
             }}>{selectedLevel ? selectedLevel : "select level"}
-               {showLevel ? <ChevronDown /> : <ChevronUp />}
+               {showLevel ? <ChevronUp /> : <ChevronDown />}
                 {showLevel && (
                     <ul>
                         <button onClick={() => {
@@ -67,7 +67,7 @@ function Courses() {
                         }}>
                             <X />
                         </button>
-                        <h2>select</h2>
+                        <h2>select level</h2>
                        {LevelOptions.map(level => (
                        <li key={level.id} onClick={() => {
                         setSelectedLevel(level.level);

@@ -3,7 +3,7 @@ import { PastQuestionDataTypes } from "@/types/types";
 import { SetStateAction, useEffect, useState } from "react";
 import { Search } from "./Search";
 import { ClipLoader } from "react-spinners";
-import { Edit, X } from "lucide-react";
+import { Edit, RotateCcw, X } from "lucide-react";
 import { UseDelete } from "@/hooks/useDelete";
 import { useConfirmModal, useErrorModal } from "@/contexts/modals/FeedbackContext";
 
@@ -131,17 +131,21 @@ function ModifyPastQuestions({edit, setEdit, setNav, setEditData} : Props) {
                                     level: pastQuestion.level
                                 })
                             }}>
-                                <Edit color="navy" size={30}/>
+                                <Edit color="navy" size={20}/>
+                                edit
                             </button>
 
                             <button onClick={() => HandleDeleteClick(String(pastQuestion.id))}
                                 disabled={DeletePastQuestion.loading}>
-                                <X color="red" size={30}/>
+                                <X color="red" size={20}/>
+                                remove
                             </button>
 
                             {DeletePastQuestion.loading && (
                                 <div className="delete-loading">
-                                  <ClipLoader size={40} color="var(--bg-txt-color)"/>
+                                  <div>
+                                  <ClipLoader size={70} color="var(--bg-txt-color)"/>
+                                  </div>
                                   <p>deleting instituition...</p>
                                   <p style={{textTransform: "lowercase"}}>hold on a bit</p>
                                 </div>
@@ -161,6 +165,7 @@ function ModifyPastQuestions({edit, setEdit, setNav, setEditData} : Props) {
                         <button type="button"
                         onClick={HandleSearch}>
                             retry
+                            <RotateCcw size={20}/>
                         </button>
                     </div>
                 ) : (null)}

@@ -1,5 +1,7 @@
+import AdminAuth from "@/lib/admin/admin.auth";
 import AddNewsService from "@/lib/news/add.service";
 import GetNewsService from "@/lib/news/get.service";
+import UpdateNewsService from "@/lib/news/patch.service";
 import { NextRequest } from "next/server";
 
 export async function POST(req: Request) {
@@ -11,6 +13,8 @@ export async function POST(req: Request) {
     const image = formData.get("image") as File;
 
     try {
+        await AdminAuth();
+
         const res = await AddNewsService({category, title, news, image});
 
         if (!res.success) {
@@ -65,5 +69,39 @@ export async function GET(req: NextRequest) {
         return Response.json({
             error: "server error"
         })
+    }
+}
+
+export async function PATCH(req: Request) {
+    const formData = await req.formData();
+
+    const id = formData.get("id") as string;
+    const category = formData.get("category") as string;
+    const title = formData.get("title") as string;
+    const news = formData.get("news") as string;
+    const image = formData.get("image") as File;
+
+    try {
+        await AdminAuth();
+        
+        const res = await UpdateNewsService({id, category, title, news, image});
+
+        if (!res.success) {
+            return Response.json({
+                success: res.success,
+                error: res.error
+            },{status: res.status});
+        }
+
+        return Response.json({
+            success: res.success,
+            message: res.message
+        },{status: res.status});
+
+    } catch (err) {
+        console.error(err);
+        return Response.json({
+            error: "server error"
+        },{status: 500})
     }
 }

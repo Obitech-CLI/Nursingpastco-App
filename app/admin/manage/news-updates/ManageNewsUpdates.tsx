@@ -122,7 +122,7 @@ function ManageNewsUpdates() {
             setEditCategoryData={setEditCategoryData}
             setReloadCategories={setReloadCategories}
             />
-            <button type="button" style={{
+            <button className="close-categories" type="button" style={{
                 border: "var(--border)",
                 padding: "1rem 3rem",
                 fontSize: "1rem",

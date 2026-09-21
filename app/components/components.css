@@ -1,0 +1,79 @@
+@media screen and (min-width: 500px) {
+    p {
+        text-align: left;
+    }
+    .Subscribe > h3, p {
+        text-align: center;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .Subscribe {
+        width: 90%;
+        margin: auto;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    p {
+        text-align: left;
+    }
+    .Subscribe > h3, p {
+        text-align: center;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .Subscribe {
+        width: 80%;
+        margin: auto;
+    }
+}
+
+@media screen and (min-width: 750px) {
+    p {
+        text-align: left;
+    }
+    .Subscribe > h3, p {
+        text-align: center;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .Subscribe {
+        width: 70%;
+        margin: auto;
+    }
+}
+
+@media screen and (min-width: 850px) {
+    p {
+        text-align: left;
+    }
+    .Subscribe > h3, p {
+        text-align: center;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .Subscribe {
+        width: 60%;
+        margin: auto;
+    }
+}
+
+@media screen and (min-width: 1050px) {
+    p {
+        text-align: left;
+    }
+    .Subscribe > h3, p {
+        text-align: center;
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .Subscribe {
+        width: 50%;
+        margin: auto;
+    }
+}

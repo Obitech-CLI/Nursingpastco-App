@@ -4,10 +4,11 @@ import { LogoutAdminButton } from "@/ui/logouts/LogoutAdmin";
 import { useState } from "react";
 import styles from '../styles.module.css';
 
-type AdminType = {
+export type AdminType = {
     firstname: string;
     lastname: string;
     email: string;
+    image?:string;
 }
 
 function AdminCard() {

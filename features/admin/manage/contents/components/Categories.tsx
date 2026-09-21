@@ -87,7 +87,7 @@ function ModifyContentsCategories ({scroll, editCategory, setEditCategory, editC
                         <div className="category" key={c.id}>
 
                         <h4>{c.category}</h4>
-                        <div>
+                        <div className="btn">
                             <button type="button"
                             onClick={() => {
                                 setEditCategory(true);
@@ -97,12 +97,14 @@ function ModifyContentsCategories ({scroll, editCategory, setEditCategory, editC
                                 });
                                 scroll();
                             }}>
-                                <PenBox color="blue"/>
+                                <PenBox color="blue" size={20}/>
+                                edit
                             </button>
 
                             <button onClick={() => HandleDeleteClick(String(c.id))} 
                                 disabled={DeleteCategory.loading}>
-                                <X color="red"/>
+                                <X color="red" size={20}/>
+                                delete
                             </button>
 
                             {DeleteCategory.loading && (

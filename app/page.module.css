@@ -15,18 +15,3 @@
     align-items: center;
     gap: 0.3rem;
 }
-
-.text2 {
-    text-align: center;
-    font-size: 2rem;
-    text-transform: capitalize;
-    margin: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.text2 > span {
-    margin: 0;
-}

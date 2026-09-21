@@ -13,11 +13,13 @@
     padding: 0.5rem;
     gap: 0.5rem;
     overflow: auto;
+    scrollbar-width: none;
 }
 
 .news > .choose_categories button {
     border: var(--border);
     padding: 0.7rem 1rem;
+    color: black;
 }
 
 .news .categories_loading {
@@ -25,9 +27,10 @@
     text-transform: capitalize;
     display: flex;
     align-items: center;
-    justify-content: center;
     width: 100%;
     gap: 1rem;
+    width: fit-content;
+    margin: auto;
 }
 
 .news .categories_retry {
@@ -37,11 +40,15 @@
     justify-content: center;
     width: 100%;
     padding: 0.7rem 1rem;
+    width: fit-content;
+    margin: auto;
 }
 
 .news .categories_retry > button {
     border: none;
-    padding: 0;
+    padding: 0.5rem 1.5rem;
+    box-shadow: 1px 1px black;
+    background-color: var(--btn);
 }
 
 .news > section {
@@ -123,6 +130,7 @@
     border: none;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
 }
 
@@ -148,4 +156,70 @@
     border-top: 4px solid var(--secondary-color);
     border-bottom: 4px solid var(--secondary-color);
     border-radius: 10px;
+}
+
+.news .news_retry > button {
+    padding: 0.5rem 1.5rem;
+    box-shadow: 1px 1px black;
+    background-color: var(--btn);
+    color: black;
+}
+
+@media screen and (min-width: 550px) {
+
+    main.news > h2 {
+        text-align: center;
+    }
+
+    .news .choose_categories {
+        width: 90%;
+        margin: auto;
+    }
+
+    .news fieldset {
+        width: 500px;
+        margin: auto;
+    }
+
+    .news_loading, .news_retry {
+        width: 90%;
+        margin: auto;
+    }
+}
+
+@media screen and (min-width: 650px) {
+
+    .news .choose_categories {
+        width: 90%;
+        margin: auto;
+    }
+
+    .news fieldset {
+        width: 600px;
+        margin: auto;
+    }
+
+    .news_loading, .news_retry {
+        width: 80%;
+        margin: auto;
+    }
+}
+
+@media screen and (min-width: 800px) {
+
+    .news .choose_categories {
+        width: 750px;
+        margin: auto;
+        scrollbar-width: auto;
+    }
+
+    .news fieldset {
+        width: 600px;
+        margin: auto;
+    }
+
+    .news_loading, .news_retry {
+        width: 600px;
+        margin: auto;
+    }
 }

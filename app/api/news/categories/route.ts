@@ -1,3 +1,4 @@
+import AdminAuth from "@/lib/admin/admin.auth";
 import AddNewsCategoryService from "@/lib/news/add.category.service";
 import GetNewsCategoriesService from "@/lib/news/get.categories.service";
 import UpdateNewsCategoryService from "@/lib/news/update.category.service";
@@ -8,6 +9,8 @@ export async function POST(req: Request) {
     const category = body.category;
 
     try {
+        await AdminAuth();
+
         const res = await AddNewsCategoryService(category);
 
         if (!res.success) {
@@ -37,6 +40,8 @@ export async function PATCH(req: Request) {
     const category = body.category;
 
     try {
+        await AdminAuth();
+        
         const res = await UpdateNewsCategoryService(id, category);
 
         if (!res.success) {

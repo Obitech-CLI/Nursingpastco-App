@@ -26,7 +26,7 @@ type Props = {
     fileRef: React.RefObject<HTMLInputElement | null>;
     image: File | null;
     setImage: React.Dispatch<SetStateAction<File | null>>;
-    postLoading: boolean;
+    loading: boolean;
     submit: React.FormEventHandler<HTMLFormElement>;
     edit: boolean,
     setEdit: React.Dispatch<SetStateAction<boolean>>;
@@ -36,7 +36,7 @@ type Props = {
     setEditImage: React.Dispatch<SetStateAction<File | null>>;
 }
 
-function AddRecommendationsForm({editImage, setEditImage, formData, setFormData, focus, setFocus, image, setImage, fileRef, postLoading, submit, edit, editData, setEditData, setEdit} : Props) {
+function AddRecommendationsForm({editImage, setEditImage, formData, setFormData, focus, setFocus, image, setImage, fileRef, loading, submit, edit, editData, setEditData, setEdit} : Props) {
 
     const [ categories, setCategories ] = useState<CategoryType[]>([]);
 
@@ -240,18 +240,18 @@ function AddRecommendationsForm({editImage, setEditImage, formData, setFormData,
                 />
             </label>
 
-            <button type="submit" disabled={postLoading}>
+            <button type="submit" disabled={loading}>
                 <>
                 {!edit && (
                     <>
-                    {postLoading ? "adding..." : "add"}
-                    {postLoading && <ClipLoader size={30} color="black" />}
+                    {loading ? "adding..." : "add"}
+                    {loading && <ClipLoader size={30} color="black" />}
                     </>
                 )}
                 {edit && (
                     <>
-                    {postLoading ? "updating..." : "update"}
-                    {postLoading && <ClipLoader size={30} color="black" />}
+                    {loading ? "updating..." : "update"}
+                    {loading && <ClipLoader size={30} color="black" />}
                     </>
                 )}
                 </>

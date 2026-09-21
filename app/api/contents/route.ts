@@ -1,5 +1,7 @@
+import AdminAuth from "@/lib/admin/admin.auth";
 import AddContentService from "@/lib/contents/add.service";
 import GetContentsService from "@/lib/contents/get.service";
+import UpdateContentService from "@/lib/contents/patch.service";
 import { NextRequest } from "next/server";
 
 export async function POST(req: Request) {
@@ -11,6 +13,8 @@ export async function POST(req: Request) {
     const file = formData.get("file") as File;
 
     try {
+        await AdminAuth();
+        
         const res = await AddContentService({category, title, content, file});
 
         if (!res.success) {
@@ -46,6 +50,7 @@ export async function GET(req: NextRequest) {
     const to = from + 3 - 1;
 
     try {
+
         const res = await GetContentsService(category, search, from, to);
 
         if (!res?.success) {
@@ -65,5 +70,39 @@ export async function GET(req: NextRequest) {
         return Response.json({
             error: "server error"
         })
+    }
+}
+
+export async function PATCH(req: Request) {
+    const formData = await req.formData();
+
+    const id = formData.get("id") as string;
+    const category = formData.get("category") as string;
+    const title = formData.get("title") as string;
+    const content = formData.get("content") as string;
+    const file = formData.get("file") as File;
+
+    try {
+        await AdminAuth();
+        
+        const res = await UpdateContentService({id, category, title, content, file});
+
+        if (!res.success) {
+            return Response.json({
+                success: res.success,
+                error: res.error
+            },{status: res.status});
+        }
+
+        return Response.json({
+            success: res.success,
+            message: res.message
+        },{status: res.status});
+
+    } catch (err) {
+        console.error(err);
+        return Response.json({
+            error: "server error"
+        },{status: 500})
     }
 }

@@ -10,17 +10,7 @@ function AdminManageNav() {
         <div className={styles.manage_nav}>
             <nav>
                 <div>
-                    <h3>users</h3>
-                    <h4>available: 3</h4>
-                    <Link href="">
-                    <Settings size={25} className={styles.icon}/>
-                      manage
-                    </Link>
-                </div>
-                
-                <div>
                     <h3>instituitions</h3>
-                    <h4>available: 6</h4>
                     <Link href="/admin/manage/instituitions">
                     <Settings size={25} className={styles.icon}/>
                       manage
@@ -29,7 +19,6 @@ function AdminManageNav() {
 
                 <div>
                     <h3>courses</h3>
-                    <h4>available: 7</h4>
                     <Link href="/admin/manage/courses">
                     <Settings size={25} className={styles.icon}/>
                      manage
@@ -38,7 +27,6 @@ function AdminManageNav() {
 
                 <div>
                     <h3>past questions</h3>
-                    <h4>available: 8</h4>
                     <Link href="/admin/manage/past-questions">
                     <Settings size={25} className={styles.icon}/>
                       manage
@@ -47,7 +35,6 @@ function AdminManageNav() {
 
                 <div>
                     <h3>contents</h3>
-                    <h4>available: 8</h4>
                     <Link href="/admin/manage/contents-tutorials">
                     <Settings size={25} className={styles.icon}/>
                       manage
@@ -56,7 +43,6 @@ function AdminManageNav() {
 
                 <div>
                     <h3>news and updates</h3>
-                    <h4>available: 8</h4>
                     <Link href="/admin/manage/news-updates">
                     <Settings size={25} className={styles.icon}/>
                       manage
@@ -65,7 +51,6 @@ function AdminManageNav() {
 
                 <div>
                     <h3>recommendations</h3>
-                    <h4>available: 8</h4>
                     <Link href="/admin/manage/recommendations">
                     <Settings size={25} className={styles.icon}/>
                       manage

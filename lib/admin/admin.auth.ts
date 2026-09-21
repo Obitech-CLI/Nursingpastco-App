@@ -25,7 +25,6 @@ const AdminAuth = async () =>
     } catch (err) {
         console.error(err);
         return redirect("/admin/login");
-        
     }
 
     if (!decoded) return redirect("/admin/login");

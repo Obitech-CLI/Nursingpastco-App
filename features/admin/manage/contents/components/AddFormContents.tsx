@@ -25,7 +25,7 @@ type Props = {
     fileRef: React.RefObject<HTMLInputElement | null>;
     file: File | null;
     setFile: React.Dispatch<SetStateAction<File | null>>;
-    postLoading: boolean;
+    loading: boolean;
     submit: React.FormEventHandler<HTMLFormElement>;
     edit: boolean,
     setEdit: React.Dispatch<SetStateAction<boolean>>;
@@ -35,7 +35,7 @@ type Props = {
     setEditFile: React.Dispatch<SetStateAction<File | null>>;
 }
 
-function AddContentsForm({editFile, setEditFile, formData, setFormData, focus, setFocus, file, setFile, fileRef, postLoading, submit, edit, editData, setEditData, setEdit} : Props) {
+function AddContentsForm({editFile, setEditFile, formData, setFormData, focus, setFocus, file, setFile, fileRef, loading, submit, edit, editData, setEditData, setEdit} : Props) {
 
     const [ categories, setCategories ] = useState<CategoryType[]>([]);
 
@@ -263,18 +263,18 @@ function AddContentsForm({editFile, setEditFile, formData, setFormData, focus, s
                 }}/>
             </label>
 
-            <button type="submit" disabled={postLoading}>
+            <button type="submit" disabled={loading}>
                 <>
                 {!edit && (
                     <>
-                    {postLoading ? "adding..." : "add"}
-                    {postLoading && <ClipLoader size={30} color="black" />}
+                    {loading ? "adding..." : "add"}
+                    {loading && <ClipLoader size={30} color="black" />}
                     </>
                 )}
                 {edit && (
                     <>
-                    {postLoading ? "updating..." : "update"}
-                    {postLoading && <ClipLoader size={30} color="black" />}
+                    {loading ? "updating..." : "update"}
+                    {loading && <ClipLoader size={30} color="black" />}
                     </>
                 )}
                 </>

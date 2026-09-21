@@ -4,6 +4,7 @@ import { SetStateAction, useRef, useState } from "react";
 import { AddContentsForm } from "./AddFormContents";
 import { UsePost } from "@/hooks/usePost";
 import { EditContentType } from "@/app/admin/manage/contents-tutorials/ManageContentsTutorials";
+import { UsePatch } from "@/hooks/usePatch";
 
 export type AddContentsFormDataType = {
     category: string;
@@ -38,6 +39,7 @@ function AddContents({edit, setEdit, setEditData, editData, editFile, setEditFil
     const fileRef = useRef<HTMLInputElement>(null);
 
     const PostFormData = UsePost();
+    const PatchFormData = UsePatch();
 
     const HandleFormSubmit = async (e:React.FormEvent<HTMLFormElement>) =>
     {
@@ -45,35 +47,47 @@ function AddContents({edit, setEdit, setEditData, editData, editFile, setEditFil
 
         const form_data = new FormData();
 
-        form_data.append("category", formData.category)
-        form_data.append("title", formData.title)
-        form_data.append("content", formData.content)
+        form_data.append("category", editData.category || formData.category)
+        form_data.append("title", editData.title || formData.title)
+        form_data.append("content", editData.content || formData.content)
 
         if (file) {
             form_data.append("file", file);
+        } else if (editFile) {
+            form_data.append("file", editFile);
         }
 
-        const res = await PostFormData.Post("/contents", form_data);
+        let res;
 
-        if (!res) return;
+        if (!edit) {
+            res = await PostFormData.Post("/contents", form_data);
+        } else {
+            res = await PatchFormData.Patch("/contents", form_data);
+        }
 
-        if (res.success) {
-            setFormData({
-                category: "",
-                title: "",
-                content: ""
-            });
+        if (res) {
+            if (res.success) {
+                if (!edit) {
+                    setFormData({
+                        category: "",
+                        title: "",
+                        content: "",
+                    })
+                    setFile(null);
+                } else {
+                    setEditData({
+                        id: "",
+                        category: "",
+                        title: "",
+                        content: ""
+                    })
+                    setEditFile(null)
+                }
 
-            setFocus({
-                title: false,
-                content: false
-            })
-
-            if (fileRef.current) {
-                fileRef.current.value = "";
+                if (fileRef.current) {
+                    fileRef.current.value = "";
+                }
             }
-
-            setFile(null);
         }
     }
 
@@ -87,7 +101,7 @@ function AddContents({edit, setEdit, setEditData, editData, editFile, setEditFil
         fileRef={fileRef}
         file={file}
         setFile={setFile}
-        postLoading={PostFormData.loading}
+        loading={PostFormData.loading || PatchFormData.loading}
         submit={HandleFormSubmit}
         edit={edit}
         setEdit={setEdit}

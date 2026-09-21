@@ -25,7 +25,7 @@ function AdminManagePastQuestions() {
             gridTemplateColumns: navManagePastQuestions.add || navManagePastQuestions.view ?
             "1fr 1fr" : ""
         }}>
-            <h2>manage past questions</h2>
+            <h2>manage</h2>
             <button type="button"
             onClick={() => setNavManagePastQuestions({add: true, view: false})}
             style={{

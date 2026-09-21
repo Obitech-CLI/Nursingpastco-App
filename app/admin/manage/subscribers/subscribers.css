@@ -1,0 +1,41 @@
+main.subscribers {
+    display: flex;
+    flex-direction: column;
+}
+
+main.subscribers > h3 {
+    text-transform: capitalize;
+    text-align: center;
+    width: 100%;
+}
+
+@media screen and (min-width: 550px) {
+    main.subscribers {
+       display: flex;
+       flex-direction: column;
+    }
+
+    main.subscribers .retry {
+        width: 450px;
+    }
+
+    main.subscribers .loading {
+        width: 450px;
+        color: var(--bg-txt-color);
+    }
+
+    main.subscribers > h2 {
+        text-align: center;
+        width: 100%;
+        margin: 0;
+    }
+
+    main.subscribers .modify-subscribers {
+        width: fit-content;
+        margin: auto;
+    }
+
+    .search-subscribers {
+        width: 400px;
+    }
+}

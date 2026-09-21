@@ -4,7 +4,7 @@ import { useMenu } from "@/contexts/modals/MenuContext";
 import Link from "next/link";
 import styles from "../ui.module.css";
 import { usePathname } from "next/navigation";
-import { BadgeCheck, BookOpen, ClipboardList, FileText, InboxIcon, RefreshCw, School, Settings2, Settings2Icon, User2 } from "lucide-react";
+import { BadgeCheck, BookOpen, ClipboardList, FileText, InboxIcon, RefreshCw, School, Settings2, Settings2Icon, User2, UserCheck2 } from "lucide-react";
 
 function MenuModal() {
 
@@ -25,7 +25,6 @@ function MenuModal() {
                <>
                {(!pathname.startsWith("/admin")) && (
                 <>
-
                 <Link onClick={ResetMenu} href="/instituitions" 
                 className={pathname === "/instituitions" ? "active" : ""}>
                    <span><School size={25}/></span>instituitions
@@ -61,9 +60,15 @@ function MenuModal() {
 
                {pathname.startsWith("/admin") && (
                 <>
-                <Link href=""><User2 />my profile</Link>
-                <Link href=""><Settings2 />settings</Link>
-                <Link href=""><InboxIcon />messages</Link>
+                <Link onClick={ResetMenu} href="/admin/profile"
+                className={pathname === "/admin/profile" ? "active" : ""}>
+                  <User2 size={25}/>my profile
+                </Link>
+
+                <Link onClick={ResetMenu} href="/admin/manage/subscribers"
+                className={pathname === "/admin/manage/subscribers" ? "active" : ""}>
+                  <UserCheck2 size={25}/>subscribers
+                </Link>
                 </>
                )}
 

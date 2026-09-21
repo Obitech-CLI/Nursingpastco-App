@@ -18,14 +18,6 @@ function HomePage() {
 
       <InstuitionHero />
 
-      <div className={styles.text2}>
-        more than<br />
-        <span style={{color:"red"}}>200,000</span><br/>
-        monthly reads<br />
-        from thousands of<br />
-        <span style={{color:"lightblue"}}>students</span>
-      </div>
-
       <SubOffers />
     </main>
     </>

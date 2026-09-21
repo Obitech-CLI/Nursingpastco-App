@@ -34,6 +34,7 @@ function LogoutAdminButton() {
         onClick={HandleLogout} 
         disabled={loading}>
             {!loading ? <LogOut size={30}/> : <ClipLoader size={20}/>}
+            logout
         </button>
     )
 }

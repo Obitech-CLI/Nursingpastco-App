@@ -14,9 +14,9 @@ function Hero() {
             className={styles.image}
             loading="eager"
             />
-            <div>
+            <h1>
                 study for your nursing level exams with confidence.
-            </div>
+            </h1>
         </div>
     )
 }

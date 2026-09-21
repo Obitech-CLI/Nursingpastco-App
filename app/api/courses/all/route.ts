@@ -1,3 +1,4 @@
+import AdminAuth from "@/lib/admin/admin.auth";
 import GetAllCourses from "@/lib/courses/all.service";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -8,6 +9,7 @@ export async function GET(req: NextRequest) {
     const search = searchParams.get("search") as string;
     
     try {
+
         const res = await GetAllCourses(level, search);
 
         if (!res.success) {

@@ -1,6 +1,66 @@
+@media screen and (min-width: 550px) {
+    .pastQuestions_hero {
+        width: 500px;
+        margin: auto;
+    }
+
+    .past > h2 {
+        text-align: center;
+        padding: 0.5rem 0 1rem;
+    }
+
+    .btns {
+        justify-content: center;
+        width: fit-content;
+        margin: auto;
+    }
+
+    .pastQuestions_hero img {
+        width: 150px;
+    }
+
+    .pastQuestions_hero h3 {
+        font-size: 1.3rem;
+    }
+}
+
+@media screen and (min-width: 650px) {
+    .pastQuestions_hero {
+        width: 550px;
+    }
+
+    .pastQuestions_hero h3 {
+        font-size: 1.5rem;
+    }
+
+    .pastQuestions_hero img {
+        width: 200px;
+    }
+}
+
+@media screen and (min-width: 850px) {
+    .pastQuestions_hero {
+        width: 800px;
+    }
+
+    .pastQuestions_hero h3 {
+        font-size: 2rem;
+    }
+
+    .pastQuestions_hero img {
+        width: 300px;
+    }
+
+    .pastQuestions {
+        width: 800px;
+        margin: auto;
+        align-self: center;
+    }
+}
+
 .pastQuestions_hero {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 1rem;
@@ -57,6 +117,12 @@
     flex-direction: column;
 }
 
+.pastQuestions_hero > .instituitions > button {
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0;
+}
+
 .pastQuestions_hero > .instituitions .select {
     display: flex;
     flex-direction: column;
@@ -65,6 +131,7 @@
 
 .pastQuestions_hero > .instituitions .select > h2 {
     text-align: center;
+    white-space: nowrap;
 }
 
 .pastQuestions_hero > .instituitions .select > button {
@@ -73,6 +140,9 @@
     border-radius: 50px;
     font-size: 1rem;
     text-transform: capitalize;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
 }
 
 .pastQuestions {
@@ -121,10 +191,15 @@
     flex-direction: column;
     gap: 1rem;
     overflow: auto;
+    text-transform: capitalize;
 }
 
 .pastQuestions > div .pdfs > h2 {
     text-align: center;
+}
+.pastQuestions > div .pdfs > button {
+    align-items: center;
+    justify-content: center;
 }
 
 .pastQuestions > div .pdfs ul {
@@ -139,6 +214,7 @@
     padding: 0.8rem;
     text-transform: capitalize;
     font-size: 0.9rem;
+    text-align: center;
 }
 
 .pastQuestions .select_retry, .pastQuestions .select_loading {
@@ -151,6 +227,7 @@
     gap: 1rem;
     margin: 3rem 1rem;
     border: var(--border);
+    text-transform: capitalize;
 }
 
 .pastQuestions .retry, .pastQuestions .loading {
@@ -163,6 +240,7 @@
     gap: 1rem;
     margin: 1rem;
     border: var(--border);
+    text-transform: uppercase;
 }
 
 .pastQuestions > .retry button, .select_retry button {
@@ -191,22 +269,22 @@
 }
 
 .btns {
-    display: flex;
-    align-items: end;
-    justify-content: start;
-    gap: 0.5rem;
-    width: 90%;
-    margin: auto;
     overflow: auto;
     scrollbar-width: none;
-    padding: 0.2rem;
+    display: flex;
+    align-items: end;
+    gap: 0.5rem;
+    justify-content: start;
+    padding: 0.3rem 0.3rem 0.3rem 0.8rem;
+    margin-top: -1.5rem;
 }
 
 .btns > button {
     border: 1.5px solid #c0ebff;
-    padding: 0.6rem 1rem;
+    padding: 0.8rem 1.5rem;
     color: var(--bg-txt-color);
     border-radius: 10px;
     white-space: nowrap;
     box-shadow: var(--box-shadow);
+    font-size: 0.9rem;
 }

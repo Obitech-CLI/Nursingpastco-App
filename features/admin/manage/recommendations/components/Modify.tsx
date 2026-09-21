@@ -94,7 +94,9 @@ function ModifyRecommendations({edit, setEdit, setEditData, editData, setNav, sc
     const Delete = async () => {
         if (!confirm && !deleteId) return;
 
-        const res = await DeleteRecommendation.Delete(`/recommendation/${deleteId}`);
+        const res = await DeleteRecommendation.Delete(`/recommendations/${deleteId}`);
+
+        setRecommendations([]);
 
         if (res.success) {
             setDeleteId("");
@@ -210,9 +212,13 @@ function ModifyRecommendations({edit, setEdit, setEditData, editData, setNav, sc
 
                                 {DeleteRecommendation.loading && (
                                 <div className="delete-loading">
-                                  <ClipLoader size={40} color="var(--bg-txt-color)"/>
-                                  <p>deleting recommendation...</p>
-                                  <p style={{textTransform: "lowercase"}}>hold on a bit</p>
+                                  <div>
+                                    <div>
+                                    <ClipLoader size={70} color="var(--bg-txt-color)"/>
+                                    </div>
+                                    <p>deleting recommendation...</p>
+                                    <p style={{textTransform: "lowercase"}}>hold on a bit</p>
+                                  </div>
                                 </div>
                                 )}
 

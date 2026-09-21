@@ -25,17 +25,21 @@ const AddPastQuestionService = async ({instituition, course, level, pdf}:PastQue
 
     const { error: storageError } = await supabase.storage
     .from("nursingpastco_pdfs")
-    .upload(`PDFs/${instituition}/${level}/${level}/${pdfName}`, pdf, {
+    .upload(`PDFs/${instituition}/${level}/${course}/${pdfName}`, pdf, {
         contentType: pdf.type
     });
 
     if (storageError) {
-        return { success: false, error: "failed to save pdf file, try again", status: 500 }
+        return { 
+            success: false, 
+            error: "failed to save pdf, try again", 
+            status: 500 
+        }
     }
 
     const { data: pdfUrl } = supabase.storage
     .from("nursingpastco_pdfs")
-    .getPublicUrl(`PDFs/${instituition}/${level}/${level}/${pdfName}`)
+    .getPublicUrl(`PDFs/${instituition}/${level}/${course}/${pdfName}`)
 
     const { error: insertError } = await supabase
     .from("nursingpastco_pastQuestions")
@@ -48,7 +52,7 @@ const AddPastQuestionService = async ({instituition, course, level, pdf}:PastQue
     });
 
     if (insertError) {
-        return { success: false, error: "failed to add past question file, try again", status: 500 }
+        return { success: false, error: "failed to add past question, try again", status: 500 }
     }
 
     return {

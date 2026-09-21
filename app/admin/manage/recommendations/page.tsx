@@ -1,8 +1,12 @@
+import AdminAuth from "@/lib/admin/admin.auth";
 import ManageRecommendations from "./ManageRecommendations";
 
-export default function Page() {
+export default async function Page() {
+
+    await AdminAuth();
+
     return (
-        <main>
+        <main className="manage">
             <h2>recommendations</h2>
             <ManageRecommendations />
         </main>

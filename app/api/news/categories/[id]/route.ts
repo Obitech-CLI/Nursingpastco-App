@@ -1,3 +1,4 @@
+import AdminAuth from "@/lib/admin/admin.auth";
 import DeleteNewsCategoryService from "@/lib/news/delete.category.service";
 import { NextRequest } from "next/server";
 
@@ -6,6 +7,8 @@ export async function DELETE(req: NextRequest, {params}:{params: Promise<{id:str
     const { id } = await params;
 
     try {
+        await AdminAuth();
+
         const res = await DeleteNewsCategoryService(id);
 
         if (!res.success) {

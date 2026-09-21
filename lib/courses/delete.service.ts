@@ -1,86 +1,68 @@
 "use server";
 
+import { redis } from "../redis";
 import { supabase } from "../supabase/supabase";
 
-const DeleteCourse = async (id: string) =>
-{
-    const { data: course, error: courseError } = await supabase
-    .from("nursingpastco_courses")
-    .select("instituition, level, course")
-    .eq("id", id)
-    .single();
+export type Props = {
+  id: string;
+  instituition: string;
+  course: string;
+  level: string;
+};
 
-    if (!course || courseError) {
-        return {
-            success: false,
-            status: 500,
-            error: "failed to fetch courses"
-        }
-    }
+const DeleteCourse = async (id: string) => {
+  const deleted = await redis.get("deletedCourse");
 
-    const { error: deleteError } = await supabase
-    .from("nursingpastco_courses")
-    .delete()
-    .eq("id", id)
-
-    if (deleteError) {
-        return {
-          success: false,
-          status: 500,
-          error: "failed to delete course"
-       }
-    }
-
-    //delete past-question related to course
-    const { data: pastQuestion, error: pastQuestionError } = await supabase
-    .from("nursingpastco_pastQuestions")
-    .select("instituition, level, pdf")
-    .eq("instituition", course.instituition)
-    .eq("level", course.level)
-    .eq("course", course.course)
-    .single();
-
-    if (!pastQuestion || pastQuestionError) {
-        return {
-            success: false,
-            status: 500,
-            error: "failed to get instituition pastQuestion"
-        }
-    }
-
-    const pastQuestionUrl = pastQuestion.pdf;
-    const pastQuestionPath = pastQuestionUrl.split(`PDFs/${pastQuestion.instituition}/${pastQuestion.level}/${pastQuestion.level}/`)[1];
-
-    const { error: pastQuestionStorageError } = await supabase.storage
-    .from("nursingpastco_pdfs")
-    .remove([pastQuestionPath])
-
-    if (pastQuestionStorageError) {
-        return {
-            success: false,
-            status: 500,
-            error: "storage failed to remove course pdfs"
-        }
-    }
-
-    const { error: deletePastQuestionsError } = await supabase
-    .from("nursingpastco_pastQuestions")
-    .delete()
-    .eq("course", course.course )
-
-    if (deletePastQuestionsError) {
-        return {
-          success: false,
-          status: 500,
-          error: "failed to delete course past-questions"
-       }
-    }
-
+  if (deleted) {
     return {
-        success: true,
-        status: 200,
-        message: "course deleted success"
-    }
-}
+      success: false,
+      error: "fix previous delete to continue",
+      delete: true,
+      status: 500,
+    };
+  }
+  const { data, error: coursesError } = await supabase
+    .from("nursingpastco_courses")
+    .select("instituition, course, level")
+    .eq("id", id)
+    .single();
+
+  if (coursesError) {
+    return {
+      success: false,
+      error: "failed to fetch course, try again",
+      status: 500,
+    };
+  }
+
+  const { error: deleteCourseError } = await supabase
+    .from("nursingpastco_courses")
+    .delete()
+    .eq("id", id);
+
+  if (deleteCourseError) {
+    return {
+      success: false,
+      error: "failed to delete course. try again",
+      status: 500,
+    };
+  }
+
+  const oldData = {
+    instituition: data.instituition,
+    course: data.course,
+    level: data.level,
+  };
+
+  await redis.set("oldDeletedCourseData", JSON.stringify(oldData));
+
+  await redis.set("deletedCourse", true);
+
+  return {
+    success: true,
+    status: 200,
+    message: "course deleted success",
+  };
+};
 
 export default DeleteCourse;

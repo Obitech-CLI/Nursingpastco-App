@@ -1,8 +1,9 @@
 "use client";
 
-import { SetStateAction } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 import { Check, Image, Pen, X, } from "lucide-react";
+import { UseFetch } from "@/hooks/useFetch";
 
 interface FormDataTypes {
     instituition_name: string,
@@ -40,7 +41,10 @@ type Props = {
 }
 
 function AddForm(
-    {formData, setFormData, setLogo, logo, onSubmit, loading, fileRef, edit, setEdit, editData, setEditData, focusInput, setFocusInput, editLogo, setEditLogo, updateLoading}:Props
+    {formData, setFormData, setLogo, logo, onSubmit, loading, 
+        fileRef, edit, setEdit, editData, setEditData, focusInput, 
+        setFocusInput, editLogo, setEditLogo, updateLoading}
+        :Props
     ) {
 
     const HandleFormChange = (e:React.ChangeEvent<HTMLInputElement>) =>
@@ -63,6 +67,7 @@ function AddForm(
     }
 
     return (
+        <>
         <form onSubmit={onSubmit}>
 
                 {edit && (
@@ -73,9 +78,14 @@ function AddForm(
 
                 <label>
                     <input type="text" value={edit ? editData.instituition_name : formData.instituition_name}
-                    name="instituition_name" onChange={HandleFormChange} onFocus={() => {
-                    setFocusInput(prev => ({...prev, name: true}))
-                }}/>
+                    name="instituition_name" onChange={HandleFormChange} 
+                    onFocus={() => setFocusInput(prev => ({...prev, name: true}))}
+                    onBlur={() => {
+                        if (!formData.instituition_name) {
+                            setFocusInput(prev => ({...prev, name: false}))
+                        }
+                    }}
+                    />
                     <span style={{
                     top: focusInput.name || edit ? "-1.2rem" : "",
                     border: focusInput.name || edit ? "var(--border)" : ""
@@ -94,8 +104,12 @@ function AddForm(
 
                 <label>
                     <input type="text" value={edit ? editData.instituition_abbr : formData.instituition_abbr}
-                    name="instituition_abbr" onChange={HandleFormChange} onFocus={() => {
-                    setFocusInput(prev => ({...prev, abbr: true}))
+                    name="instituition_abbr" onChange={HandleFormChange} 
+                    onFocus={() => setFocusInput(prev => ({...prev, abbr: true}))}
+                    onBlur={() => {
+                        if (!formData.instituition_abbr) {
+                            setFocusInput(prev => ({...prev, abbr: false}))
+                        }
                     }}/>
                     <span style={{
                     top: focusInput.abbr || edit ? "-1.2rem" : "",
@@ -161,6 +175,7 @@ function AddForm(
                     </>
                 </button>
         </form>
+        </>
     )
 }
 

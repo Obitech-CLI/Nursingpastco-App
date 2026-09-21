@@ -13,6 +13,7 @@
     padding: 0.5rem;
     gap: 0.5rem;
     overflow: auto;
+    scrollbar-width: none;
 }
 
 .recommendations > .choose_categories button {
@@ -28,6 +29,8 @@
     justify-content: center;
     width: 100%;
     gap: 1rem;
+    width: fit-content;
+    margin: auto;
 }
 
 .recommendations .categories_retry {
@@ -37,11 +40,16 @@
     justify-content: center;
     width: 100%;
     padding: 0.7rem 1rem;
+    width: fit-content;
+    margin: auto;
 }
 
 .recommendations .categories_retry > button {
     border: none;
-    padding: 0;
+    padding: 0.5rem 1.5rem;
+    box-shadow: 1px 1px black;
+    background-color: var(--btn);
+    color: black;
 }
 
 .recommendations > section {
@@ -110,6 +118,7 @@
     border: none;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
 }
 
@@ -141,4 +150,70 @@
     gap: 1rem;
     border-radius: 10px;
     text-transform: capitalize;
+}
+
+.recommendations .recommendations_retry > button {
+    padding: 0.5rem 1.5rem;
+    box-shadow: 1px 1px black;
+    background-color: var(--btn);
+    color: black;
+}
+
+@media screen and (min-width: 550px) {
+
+    main.recommendation > h2 {
+        text-align: center;
+    }
+
+    .recommendations .choose_categories {
+        width: 90%;
+        margin: auto;
+    }
+
+    .recommendations fieldset {
+        width: 500px;
+        margin: auto;
+    }
+
+    .recommendations_loading, .recommendations_retry {
+        width: 90%;
+        margin: auto;
+    }
+}
+
+@media screen and (min-width: 650px) {
+
+    .recommendations .choose_categories {
+        width: 90%;
+        margin: auto;
+    }
+
+    .recommendations fieldset {
+        width: 600px;
+        margin: auto;
+    }
+
+    .recommendations_loading, .recommendations_retry {
+        width: 80%;
+        margin: auto;
+    }
+}
+
+@media screen and (min-width: 800px) {
+
+    .recommendations .choose_categories {
+        width: 750px;
+        margin: auto;
+        scrollbar-width: auto;
+    }
+
+    .recommendations fieldset {
+        width: 600px;
+        margin: auto;
+    }
+
+    .recommendations_loading, .recommendations_retry {
+        width: 600px;
+        margin: auto;
+    }
 }

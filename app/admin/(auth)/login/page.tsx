@@ -1,4 +1,5 @@
 import LoginAdmin from "./LoginAdmin";
+import "../auth.css";
 
 export default function Page() {
     return (

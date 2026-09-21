@@ -93,7 +93,9 @@ function ModifyContents({edit, setEdit, setEditData, editData, setNav, scroll}:P
     const Delete = async () => {
         if (!confirm && !deleteId) return;
 
-        const res = await DeleteContent.Delete(`/content/${deleteId}`);
+        setContents([]);
+
+        const res = await DeleteContent.Delete(`/contents/${deleteId}`);
 
         if (res.success) {
             setDeleteId("");
@@ -216,7 +218,9 @@ function ModifyContents({edit, setEdit, setEditData, editData, setNav, scroll}:P
 
                                 {DeleteContent.loading && (
                                 <div className="delete-loading">
-                                  <ClipLoader size={40} color="var(--bg-txt-color)"/>
+                                  <div>
+                                    <ClipLoader size={70} color="var(--bg-txt-color)"/>
+                                  </div>
                                   <p>deleting content...</p>
                                   <p style={{textTransform: "lowercase"}}>hold on a bit</p>
                                 </div>

@@ -1,0 +1,11 @@
+@media screen and (min-width: 500px) {
+
+    .admin-profile {
+        width: 500px;
+        margin: 8rem auto 4rem;
+    }
+
+    .admin-profile > h2 {
+        text-align: center;
+    }
+}

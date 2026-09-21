@@ -1,5 +1,7 @@
+import AdminAuth from "@/lib/admin/admin.auth";
 import AddRecommendationsService from "@/lib/recommendations/add.service";
 import GetRecommendationsService from "@/lib/recommendations/get.service";
+import UpdateRecommendationService from "@/lib/recommendations/patch.service";
 import { NextRequest } from "next/server";
 
 export async function POST(req: Request) {
@@ -12,6 +14,8 @@ export async function POST(req: Request) {
     const image = formData.get("image") as File;
 
     try {
+        await AdminAuth();
+
         const res = await AddRecommendationsService({category, title, recommendation, link, image});
 
         if (!res.success) {
@@ -66,5 +70,40 @@ export async function GET(req: NextRequest) {
         return Response.json({
             error: "server error"
         })
+    }
+}
+
+export async function PATCH(req: Request) {
+    const formData = await req.formData();
+
+    const id = formData.get("id") as string;
+    const category = formData.get("category") as string;
+    const title = formData.get("title") as string;
+    const recommendation = formData.get("recommendation") as string;
+    const image = formData.get("image") as File;
+    const link = formData.get("link") as string;
+
+    try {
+        await AdminAuth();
+        
+        const res = await UpdateRecommendationService({id, category, title, recommendation, image, link});
+
+        if (!res.success) {
+            return Response.json({
+                success: res.success,
+                error: res.error
+            },{status: res.status});
+        }
+
+        return Response.json({
+            success: res.success,
+            message: res.message
+        },{status: res.status});
+
+    } catch (err) {
+        console.error(err);
+        return Response.json({
+            error: "server error"
+        },{status: 500})
     }
 }

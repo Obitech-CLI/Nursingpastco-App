@@ -1,8 +1,8 @@
 .feedback_modal {
     position: fixed;
-    background-color: rgba(0, 0, 0, 0.6);
     inset: 0;
-    backdrop-filter: blur(5px);
+    background-color: var(--modal);
+    backdrop-filter: blur(2px);
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -22,7 +22,6 @@
 }
 
 .feedback_modal .success {
-    border: 1.5px solid green;
     padding: 2rem;
     width: 95%;
     border-radius: 10px;
@@ -33,11 +32,17 @@
     justify-content: center;
     gap: 1rem;
     text-transform: capitalize;
-    background-color: var(--bg-color);
+    background-color: var(--menu-bg);
+    box-shadow: var(--box-shadow);
+}
+
+.feedback_modal p {
+    text-transform: capitalize;
+    width: 70%;
+    text-align: center;
 }
 
 .feedback_modal .error {
-    border: 1.5px solid red;
     padding: 2rem;
     width: 95%;
     border-radius: 10px;
@@ -48,7 +53,8 @@
     justify-content: center;
     gap: 1rem;
     text-transform: capitalize;
-    background-color: var(--bg-color);
+    background-color: var(--menu-bg);
+    box-shadow: var(--box-shadow);
 }
 
 button.login {
@@ -97,7 +103,7 @@ button.login {
     background-color: var(--menu-bg);
     padding: 7.5rem 1rem 5rem;
     display: grid;
-    grid-template-rows: 60px 60px 60px 60px 60px;
+    grid-template-rows: 60px 60px 60px 60px 60px 60px;
     gap: 1rem;
     z-index: 888;
     overflow: auto;
@@ -124,4 +130,24 @@ button.login {
     inset: 0;
     backdrop-filter: blur(5px);
     z-index: 777;
+}
+
+@media screen and (min-width: 550px) {
+    .feedback_modal .success {
+        width: 450px;
+    }
+
+    .feedback_modal .error {
+        width: 450px;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    .menu {
+        width: 400px;
+    }
+
+    .overlay {
+        backdrop-filter: blur(1px);
+    }
 }

@@ -3,7 +3,7 @@
 import { useConfirmModal, useErrorModal, useSuccessModal } from "@/contexts/modals/FeedbackContext";
 import styles from "../ui.module.css";
 import { CircleAlert, CircleCheck } from "lucide-react";
-import { UseDelete } from "@/hooks/useDelete";
+import { useEffect } from "react";
 
 function SuccessModal() {
 
@@ -14,12 +14,20 @@ function SuccessModal() {
         setSuccessMessage("")
     }
 
+    useEffect(() => {
+        document.body.style.overflow = successMessage ? "hidden" : "";
+
+        return () => {
+            document.body.style.overflow = "auto";
+        }
+    }, [successMessage]);
+
     return (
         <>
         {successMessage && showSuccessModal ? (
             <div className={styles.feedback_modal}>
                 <div className={styles.success}>
-                    <h4>{successMessage}</h4>
+                    <p>{successMessage}</p>
                     <CircleCheck size={30}/>
                     <button onClick={dismissModal}>ok</button>
                 </div>
@@ -34,16 +42,24 @@ function ErrorModal() {
     const { errorMessage, setErrorMessage, showErrorModal, setShowErrorModal } = useErrorModal();
 
     const dismissModal = () => {
-        setShowErrorModal(false)
+        setShowErrorModal(false);
         setErrorMessage("")
     }
+
+    useEffect(() => {
+        document.body.style.overflow = errorMessage ? "hidden" : "";
+
+        return () => {
+            document.body.style.overflow = "auto";
+        }
+    }, [errorMessage]);
 
     return (
         <>
         {showErrorModal && errorMessage ? (
             <div className={styles.feedback_modal}>
                 <div className={styles.error}>
-                    <h4>{errorMessage}</h4>
+                    <p>{errorMessage}</p>
                     <CircleAlert size={30}/>
                     <button onClick={dismissModal}>ok</button>
                 </div>
@@ -64,6 +80,14 @@ function ConfirmModal() {
         setConfirm(false);
     }
 
+    useEffect(() => {
+        document.body.style.overflow = confirmMessage ? "hidden" : "";
+
+        return () => {
+            document.body.style.overflow = "auto";
+        }
+    }, [confirmMessage]);
+
     return (
         <>
         {showConfirmModal && confirmMessage ? (
@@ -71,7 +95,7 @@ function ConfirmModal() {
 
                 <div className={styles.error}>
 
-                    <h4>{confirmMessage}</h4>
+                    <p>{confirmMessage}</p>
                     <CircleAlert size={30}/>
                     <button onClick={dismissModal}>cancel</button>
 
@@ -80,7 +104,7 @@ function ConfirmModal() {
                         setShowConfirmModal(false);
                         setConfirmMessage("");
                     }} style={{backgroundColor: "red"}}>
-                        delete
+                        continue
                     </button>
                     
                 </div>

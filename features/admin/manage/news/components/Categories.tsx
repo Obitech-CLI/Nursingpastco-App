@@ -3,7 +3,7 @@
 import { useConfirmModal } from "@/contexts/modals/FeedbackContext";
 import { UseDelete } from "@/hooks/useDelete";
 import { UseFetch } from "@/hooks/useFetch";
-import { PenBox, X } from "lucide-react";
+import { PenBox, RotateCcw, X } from "lucide-react";
 import { SetStateAction, useEffect, useState } from "react";
 import { ClipLoader } from "react-spinners";
 
@@ -53,7 +53,7 @@ function ModifyNewsCategories ({scroll, editCategory, setEditCategory, editCateg
 
         setDeleteId(id);
 
-        setConfirmMessage("are you sure you want to delete this category?");
+        setConfirmMessage("Are you sure you want to delete this category?");
         setShowConfirmModal(true);
     }
 
@@ -87,7 +87,7 @@ function ModifyNewsCategories ({scroll, editCategory, setEditCategory, editCateg
                         <div className="category" key={c.id}>
 
                         <h4>{c.category}</h4>
-                        <div>
+                        <div className="btn">
                             <button type="button"
                             onClick={() => {
                                 setEditCategory(true);
@@ -97,12 +97,14 @@ function ModifyNewsCategories ({scroll, editCategory, setEditCategory, editCateg
                                 });
                                 scroll();
                             }}>
-                                <PenBox color="blue"/>
+                                <PenBox color="blue" size={20}/>
+                                edit
                             </button>
 
                             <button onClick={() => HandleDeleteClick(String(c.id))} 
                                 disabled={DeleteCategory.loading}>
-                                    <X color="red"/>
+                                    <X color="red" size={20}/>
+                                    remove
                             </button>
 
                             {DeleteCategory.loading && (
@@ -122,6 +124,7 @@ function ModifyNewsCategories ({scroll, editCategory, setEditCategory, editCateg
                         <p>{FetchCategories.error}</p>
                         <button type="button" onClick={HandleFetchCategories}>
                             retry
+                            <RotateCcw size={20}/>
                         </button>
                     </div>
                 )}
