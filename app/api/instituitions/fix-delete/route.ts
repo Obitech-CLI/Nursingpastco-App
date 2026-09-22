@@ -12,7 +12,7 @@ export async function GET() {
       return Response.json(
         {
           success: false,
-          error: "no fix found",
+          error: "no delete fix found",
         },
         { status: 500 },
       );

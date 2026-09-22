@@ -64,8 +64,6 @@ function ModifyInstituitions({ edit, setEdit, setNav, setEditData }: Props) {
   const Delete = async () => {
     if (!confirm && !deleteId) return;
 
-    setInstituitions([]);
-
     const res = await DeleteInstituition.Delete(`/instituitions/${deleteId}`);
 
     if (DeleteInstituition.error?.delete) {
@@ -74,6 +72,7 @@ function ModifyInstituitions({ edit, setEdit, setNav, setEditData }: Props) {
 
     if (res) {
       if (res.success) {
+        setInstituitions([]);
         setDeleteId("");
         HandleFetch();
       }

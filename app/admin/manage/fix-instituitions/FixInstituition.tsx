@@ -1,5 +1,6 @@
 "use client";
 
+import { useConfirmModal } from "@/contexts/modals/FeedbackContext";
 import { UseDelete } from "@/hooks/useDelete";
 import { UseFetch } from "@/hooks/useFetch";
 import { UsePatch } from "@/hooks/usePatch";
@@ -16,6 +17,8 @@ function FixInstituition() {
 
   const FixUpdate = UsePatch();
   const FixDelete = UseDelete();
+
+  const { confirm, setConfirmMessage, setShowConfirmModal } = useConfirmModal();
 
   const HandleFetchFixUpdate = async () => {
     const res = await FetchFixUpdate.Fetch("/instituitions/fix-update");
@@ -46,12 +49,20 @@ function FixInstituition() {
     }
   };
 
+  const ConfirmDeleteFix = () => {
+    setConfirmMessage("are you sure you want to fix deleted instituition?");
+    setShowConfirmModal(true);
+  };
+
   const HandleFixDelete = async () => {
+    if (!confirm) return;
+
     const res = await FixDelete.Delete("/instituitions/fix-delete");
 
     if (res) {
       if (res.success) {
         setFixDelete(false);
+        HandleFetchFixDelete();
       }
     }
   };
@@ -60,6 +71,10 @@ function FixInstituition() {
     HandleFetchFixUpdate();
     HandleFetchFixDelete();
   }, []);
+
+  useEffect(() => {
+    HandleFixDelete();
+  }, [confirm]);
   return (
     <div>
       {!FetchFixUpdate.loading ? (
@@ -97,7 +112,7 @@ function FixInstituition() {
           {fixDelete ? (
             <div>
               <h4>incomplete instituition delete found</h4>
-              <button type="button" onClick={HandleFixDelete}>
+              <button type="button" onClick={ConfirmDeleteFix}>
                 {FixDelete.loading ? "fixing..." : "fix now"}
               </button>
             </div>

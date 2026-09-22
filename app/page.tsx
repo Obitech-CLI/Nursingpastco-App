@@ -8,20 +8,22 @@ import { SubOffers } from "@/features/home/components/SubOffers";
 function HomePage() {
   return (
     <>
-    <main>
-      <Hero />
-      <Offers />
+      <main>
+        <Hero />
+        <Offers />
 
-      <div className={styles.text1}>
-        <h4><CheckCircle2 size={50} color="green" /> verified</h4>
-      </div>
+        <div className={styles.text1}>
+          <h4>
+            <CheckCircle2 size={40} color="green" /> verified
+          </h4>
+        </div>
 
-      <InstuitionHero />
+        <InstuitionHero />
 
-      <SubOffers />
-    </main>
+        <SubOffers />
+      </main>
     </>
-  )
+  );
 }
 
 export default HomePage;

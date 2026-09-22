@@ -50,7 +50,6 @@ function Footer() {
       {!pathname.startsWith("/admin") ? (
         <>
           <div className="socials">
-            <span>20.1k</span>
             <div>
               <Link href="">
                 <FaTiktok size={25} color="#000000" />

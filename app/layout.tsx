@@ -13,6 +13,7 @@ import { MenuProvider } from "@/contexts/modals/MenuContext";
 import { MenuModal } from "@/ui/modals/Menu";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
+import "./responsive.css";
 import { ManageNavProvider } from "@/contexts/admin/ManageNavProvider";
 import {
   Poppins,

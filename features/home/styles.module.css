@@ -243,7 +243,7 @@ section.offers > div {
 }
 
 .sub_offers > div > div {
-  min-width: 400px;
+  min-width: 90%;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -332,6 +332,157 @@ section.offers > div {
   align-items: center;
   gap: 0.5rem;
   color: white;
+}
+
+@media screen and (min-width: 300px) and (max-width: 400px) {
+  section.offers > div > div > div {
+    font-size: 0.8rem;
+    padding: 1rem;
+    gap: 0.4rem;
+    border-radius: 40px;
+  }
+
+  section.offers > div > div > div h3 {
+    font-size: 0.9rem;
+  }
+
+  section.offers > div > div > a {
+    font-size: 0.7rem;
+    padding: 0.5rem;
+  }
+
+  section.offers > span {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  section.offers > h4 {
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  .instituitionHero > img {
+    height: 200px;
+  }
+
+  .instituitionHero > .text1 > div span {
+    font-size: 0.8rem;
+  }
+
+  .instituitionHero > .text1 a {
+    display: none;
+  }
+
+  .instituitionHero > .text2 > div {
+    font-size: 1.4rem;
+  }
+
+  .sub_offers section > p {
+    font-size: 1rem;
+  }
+
+  .sub_offers > div > div {
+    padding: 0;
+    min-width: 100%;
+    border-radius: 30px;
+  }
+
+  .sub_offers > div > div > p {
+    font-size: 0.9rem;
+    padding: 0 1rem 1rem;
+    margin: 0;
+  }
+
+  .sub_offers > div > div > div {
+    border-radius: 30px;
+    height: 180px;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .sub_offers > div > div > div h2 {
+    font-size: 1rem;
+  }
+
+  .sub_offers > div > div > div ul li > h4 {
+    font-size: 0.6rem;
+  }
+}
+
+@media screen and (min-width: 401px) and (max-width: 500px) {
+  section.offers > div > div > div {
+    font-size: 0.9rem;
+    padding: 1.5rem;
+  }
+
+  section.offers > div > div > a {
+    font-size: 0.9rem;
+  }
+
+  section.offers > span {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  section.offers > h4 {
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .instituitionHero > img {
+    height: 250px;
+  }
+
+  .instituitionHero > .text1 {
+    justify-content: center;
+    height: 250px;
+  }
+
+  .instituitionHero > .text1 > div span {
+    font-size: 1rem;
+  }
+
+  .instituitionHero > .text1 a {
+    display: none;
+  }
+
+  .instituitionHero > .text2 > div {
+    font-size: 1.7rem;
+  }
+
+  .sub_offers section > p {
+    font-size: 1.3rem;
+  }
+
+  .sub_offers > div > div {
+    padding: 0;
+    min-width: 80%;
+    border-radius: 30px;
+  }
+
+  .sub_offers > div > div > p {
+    font-size: 1rem;
+    padding: 0 1rem 1rem;
+    margin: 0;
+  }
+
+  .sub_offers > div > div > div {
+    border-radius: 30px;
+    height: 180px;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .sub_offers > div > div > div h2 {
+    font-size: 1rem;
+  }
+
+  .sub_offers > div > div > div ul li > h4 {
+    font-size: 0.6rem;
+  }
 }
 
 @media screen and (min-width: 500px) {

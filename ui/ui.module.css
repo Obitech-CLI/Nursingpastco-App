@@ -1,153 +1,179 @@
 .feedback_modal {
-    position: fixed;
-    inset: 0;
-    background-color: var(--modal);
-    backdrop-filter: blur(2px);
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    z-index: 999;
+  position: fixed;
+  inset: 0;
+  background-color: var(--modal);
+  backdrop-filter: blur(2px);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 999;
 }
 
 .feedback_modal button {
-    padding: 0.8rem 2rem;
-    border-radius: 50px;
-    border: none;
-    background-color: #002b4c;
-    color: white;
-    text-transform: capitalize;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  border: none;
+  background-color: #002b4c;
+  color: white;
+  text-transform: capitalize;
 }
 
 .feedback_modal .success {
-    padding: 2rem;
-    width: 95%;
-    border-radius: 10px;
-    color: green;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    text-transform: capitalize;
-    background-color: var(--menu-bg);
-    box-shadow: var(--box-shadow);
+  padding: 2rem;
+  width: 95%;
+  border-radius: 10px;
+  color: green;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-transform: capitalize;
+  background-color: var(--menu-bg);
+  box-shadow: var(--box-shadow);
 }
 
 .feedback_modal p {
-    text-transform: capitalize;
-    width: 70%;
-    text-align: center;
+  text-transform: capitalize;
+  width: 70%;
+  text-align: center;
 }
 
 .feedback_modal .error {
-    padding: 2rem;
-    width: 95%;
-    border-radius: 10px;
-    color: red;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    text-transform: capitalize;
-    background-color: var(--menu-bg);
-    box-shadow: var(--box-shadow);
+  padding: 2rem;
+  width: 95%;
+  border-radius: 10px;
+  color: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  text-transform: capitalize;
+  background-color: var(--menu-bg);
+  box-shadow: var(--box-shadow);
 }
 
 button.login {
-    display: flex;
-    align-items: center;
-    padding: 0.7rem 1.5rem;
+  display: flex;
+  align-items: center;
+  padding: 0.7rem 1.5rem;
 }
 
 .select_theme {
-    position: absolute;
-    z-index: 10;
-    background-color: var(--nav-bg);
-    display: flex;
-    gap: 0.5rem;
-    top: 3rem;
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    left: 50%;
-    transform: translateX(-50%);
-    box-shadow: var(--box-shadow);
+  position: absolute;
+  z-index: 10;
+  background-color: var(--nav-bg);
+  display: flex;
+  gap: 0.5rem;
+  top: 3rem;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: var(--box-shadow);
 }
 
 .select_theme > button {
-    padding: 0.4rem 1rem;
-    border-radius: 50px;
-    text-transform: capitalize;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: white;
-    box-shadow: 1px 1px black;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+  box-shadow: 1px 1px black;
 }
 
 .app_theme > button {
-    background-color: transparent;
-    color: var(--bg-txt-color);
-    box-shadow: none;
-    border: none;
+  background-color: transparent;
+  color: var(--bg-txt-color);
+  box-shadow: none;
+  border: none;
 }
 
 .menu {
-    position: fixed;
-    height: 100dvh;
-    width: 85%;
-    inset: 0;
-    background-color: var(--menu-bg);
-    padding: 7.5rem 1rem 5rem;
-    display: grid;
-    grid-template-rows: 60px 60px 60px 60px 60px 60px;
-    gap: 1rem;
-    z-index: 888;
-    overflow: auto;
+  position: fixed;
+  height: 100dvh;
+  width: 85%;
+  inset: 0;
+  background-color: var(--menu-bg);
+  padding: 7.5rem 1rem 5rem;
+  display: grid;
+  grid-template-rows: 60px 60px 60px 60px 60px 60px;
+  gap: 1rem;
+  z-index: 888;
+  overflow: auto;
 }
 
 .menu > a {
-    color: var(--bg-txt-color);
-    border-radius: 30px;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem;
+  color: var(--bg-txt-color);
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
 }
 
 .menu > a:hover {
-    background-color: rgba(0, 100, 0, 0.1);
-    color: var(--bg-txt-color);
-    border: none;
+  background-color: rgba(0, 100, 0, 0.1);
+  color: var(--bg-txt-color);
+  border: none;
 }
 
 .overlay {
-    background-color: var(--modal);
-    position: fixed;
-    inset: 0;
-    backdrop-filter: blur(5px);
-    z-index: 777;
+  background-color: var(--modal);
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(5px);
+  z-index: 777;
+}
+
+@media screen and (min-width: 300px) and (max-width: 400px) {
+  .feedback_modal p {
+    font-size: 0.8rem;
+    align-self: center;
+    margin: 0;
+  }
+
+  .menu {
+    gap: 0.5rem;
+  }
+
+  .menu a {
+    font-size: 0.8rem;
+    padding: 0 1rem;
+    height: 50px;
+  }
+}
+
+@media screen and (min-width: 401px) and (max-width: 500px) {
+  .feedback_modal p {
+    font-size: 0.9rem;
+    align-self: center;
+    margin: 0;
+  }
 }
 
 @media screen and (min-width: 550px) {
-    .feedback_modal .success {
-        width: 450px;
-    }
+  .feedback_modal .success {
+    width: 450px;
+  }
 
-    .feedback_modal .error {
-        width: 450px;
-    }
+  .feedback_modal .error {
+    width: 450px;
+  }
 }
 
 @media screen and (min-width: 500px) {
-    .menu {
-        width: 400px;
-    }
+  .menu {
+    width: 400px;
+  }
 
-    .overlay {
-        backdrop-filter: blur(1px);
-    }
+  .overlay {
+    backdrop-filter: blur(1px);
+  }
 }

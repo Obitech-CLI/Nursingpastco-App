@@ -559,6 +559,7 @@ h1 {
   backdrop-filter: blur(10px);
   position: fixed;
   inset: 0;
+  z-index: 800;
 }
 
 .delete-loading > div {

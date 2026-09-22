@@ -1,79 +1,200 @@
-@media screen and (min-width: 500px) {
-    p {
-        text-align: left;
-    }
-    .Subscribe > h3, p {
-        text-align: center;
-        width: 100%;
-        margin-left: 0;
-    }
+@media screen and (min-width: 300px) and (max-width: 400px) {
+  .Subscribe > h3 {
+    font-size: 1rem;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+  }
 
-    .Subscribe {
-        width: 90%;
-        margin: auto;
-    }
+  .Subscribe > p {
+    font-size: 0.8rem;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+  }
+
+  .Subscribe {
+    width: 100%;
+  }
+
+  .Subscribe .subscribe label span {
+    font-size: 0.7rem;
+  }
+
+  .Subscribe .subscribe input {
+    font-size: 0.9rem;
+    padding: 0.7rem;
+  }
+
+  .Subscribe .subscribe .btns {
+    align-items: center;
+    width: fit-content;
+    padding: 0;
+    margin: 0;
+    align-self: center;
+  }
+
+  .Subscribe .subscribe .btns button {
+    font-size: 0.7rem;
+    height: 35px;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+  }
+
+  footer a {
+    font-size: 0.8rem;
+  }
+
+  footer .sponsor span {
+    font-size: 0.9rem;
+  }
+
+  footer .sponsor em {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (min-width: 401px) and (max-width: 500px) {
+  .Subscribe > h3 {
+    font-size: 1.2rem;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+  }
+
+  .Subscribe > p {
+    font-size: 0.9rem;
+    text-align: center;
+    width: 100%;
+    margin: 0;
+  }
+
+  .Subscribe {
+    width: 100%;
+  }
+
+  .Subscribe .subscribe label span {
+    font-size: 0.8rem;
+  }
+
+  .Subscribe .subscribe input {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+
+  .Subscribe .subscribe .btns {
+    align-items: center;
+    width: fit-content;
+    padding: 0;
+    margin: 0;
+    align-self: center;
+  }
+
+  .Subscribe .subscribe .btns button {
+    font-size: 0.8rem;
+    height: 40px;
+  }
+
+  footer p {
+    font-size: 0.9rem;
+  }
+
+  footer a {
+    font-size: 0.9rem;
+  }
+
+  footer .sponsor span {
+    font-size: 1rem;
+  }
+
+  footer .sponsor em {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (min-width: 500px) {
+  p {
+    text-align: left;
+  }
+  .Subscribe > h3,
+  p {
+    text-align: center;
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .Subscribe {
+    width: 90%;
+    margin: auto;
+  }
 }
 
 @media screen and (min-width: 600px) {
-    p {
-        text-align: left;
-    }
-    .Subscribe > h3, p {
-        text-align: center;
-        width: 100%;
-        margin-left: 0;
-    }
+  p {
+    text-align: left;
+  }
+  .Subscribe > h3,
+  p {
+    text-align: center;
+    width: 100%;
+    margin-left: 0;
+  }
 
-    .Subscribe {
-        width: 80%;
-        margin: auto;
-    }
+  .Subscribe {
+    width: 80%;
+    margin: auto;
+  }
 }
 
 @media screen and (min-width: 750px) {
-    p {
-        text-align: left;
-    }
-    .Subscribe > h3, p {
-        text-align: center;
-        width: 100%;
-        margin-left: 0;
-    }
+  p {
+    text-align: left;
+  }
+  .Subscribe > h3,
+  p {
+    text-align: center;
+    width: 100%;
+    margin-left: 0;
+  }
 
-    .Subscribe {
-        width: 70%;
-        margin: auto;
-    }
+  .Subscribe {
+    width: 70%;
+    margin: auto;
+  }
 }
 
 @media screen and (min-width: 850px) {
-    p {
-        text-align: left;
-    }
-    .Subscribe > h3, p {
-        text-align: center;
-        width: 100%;
-        margin-left: 0;
-    }
+  p {
+    text-align: left;
+  }
+  .Subscribe > h3,
+  p {
+    text-align: center;
+    width: 100%;
+    margin-left: 0;
+  }
 
-    .Subscribe {
-        width: 60%;
-        margin: auto;
-    }
+  .Subscribe {
+    width: 60%;
+    margin: auto;
+  }
 }
 
 @media screen and (min-width: 1050px) {
-    p {
-        text-align: left;
-    }
-    .Subscribe > h3, p {
-        text-align: center;
-        width: 100%;
-        margin-left: 0;
-    }
+  p {
+    text-align: left;
+  }
+  .Subscribe > h3,
+  p {
+    text-align: center;
+    width: 100%;
+    margin-left: 0;
+  }
 
-    .Subscribe {
-        width: 50%;
-        margin: auto;
-    }
+  .Subscribe {
+    width: 50%;
+    margin: auto;
+  }
 }
